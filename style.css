@@ -1,0 +1,24 @@
+button {
+    margin: 10px auto auto auto;
+    height: 40px;
+    width: 200px;
+    color: white;
+    background-color: #b8c8d6;
+    border-color: #b8c8d6;
+    border-radius: 8px;
+    font-size: 20px;
+}
+
+button:hover {
+    background: #276a9f;
+}
+
+h1 {
+    color: #ffffff;
+    font-size: 3em;
+    text-align: center;
+    grid-column-start: 1;
+    grid-row-start: 1;
+    margin: 0 0;
+}
+

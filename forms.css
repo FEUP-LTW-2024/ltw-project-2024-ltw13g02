@@ -34,89 +34,12 @@ label * {
     padding: 0 0;
 }
 
-h1 {
-    color: #ffffff;
-    font-size: 3em;
-    text-align: center;
-    grid-column-start: 1;
-    grid-row-start: 1;
-    margin: 0 0;
-}
-
-#name {
-    grid-row-start: 2;
-}
-
-#email {
-    grid-row-start: 3;
-}
-
-#phoneNumber {
-    grid-row-start: 4;
-}
-
-#password {
-    grid-row-start: 5;
-}
-
-#confirmPassword {
-    grid-row-start: 6;
-}
-
-#country {
-    grid-row-start: 7;
-}
-
-#city {
-    grid-row-start: 8;
-}
-
-#address {
-    grid-row-start: 9;
-}
-
-#zipCode {
-    grid-row-start: 10;
-}
-
-
-button {
-    margin: 10px auto auto auto;
-  	height: 40px;
-	width: 200px;
-    color: white;
-    background-color: #b8c8d6;
-    border-color: #b8c8d6;
-    border-radius: 8px;
-    font-size: 20px;
-}
-
-button:hover {
-    background: #276a9f;
-}
-
-#register {
-    grid-row-start: 11;
-}
-
 .login form {
-    grid-template-rows: repeat(6, 5.5em);
+    padding: 2em 0;
+    grid-template-rows: repeat(4, 7em);
     margin: 10em auto;
 }
 
-.login h1 {
-    grid-row-start: 2;
-}
-
 .login #email {
-    grid-row-start: 3;
     padding: 0 0 30px 0;
-}
-
-.login #password {
-    grid-row-start: 4;
-}
-
-#login {
-    grid-row-start: 5;
 }
