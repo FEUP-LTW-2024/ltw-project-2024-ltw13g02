@@ -1,0 +1,171 @@
+@import url('https://fonts.googleapis.com/css2?family=Didact+Gothic&display=swap');
+
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+form{
+    display: flex;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    margin: auto;
+
+    margin-top: 0.5em;
+}
+
+form *{
+    border-color: gray;
+    border-style: solid;
+}
+
+form input{
+    margin: auto;
+    width: 95%;
+    border-radius: 1em;
+    padding-left: 1em;
+}
+
+form input:focus{
+    background-color: lightgrey;
+}
+
+form select{
+    border-radius: 1em;
+}
+
+.Products
+{
+    width: 99%;
+    margin-top: 10px;
+    margin-left: 0.5%;
+    margin-right: 0.5%;
+}
+
+.Products article
+{
+    border-radius: 12px;
+    height: 22em;
+    position: relative;
+
+    outline: solid;
+    outline-color: lightblue;
+
+    display: flex;
+    overflow: hidden;
+
+}
+
+.Products .offers_container {
+    display: flex;
+    width: 100%;
+    overflow-y: hidden;
+}
+
+.Products h2 {
+    color: gray;
+    font-size: 2em;
+    font-family: "Didact Gothic", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    margin: 0;
+}
+
+.Products input{
+    border-radius: 100%;
+    height: fit-content;
+    width: fit-content;
+}
+
+.Products input:first-of-type{
+    position: absolute;
+    left: 0;
+    top: 50%;
+    bottom: 50%;
+
+}
+
+.Products input:last-of-type{
+    position: absolute;
+    right: 0;
+    top: 50%;
+    bottom: 50%;
+}
+
+.offer {
+    height: 100%; 
+    border: 1px solid lightgray;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    flex-basis: 17%;  
+    flex-shrink: 0;
+    position: relative;
+    border-style: none;
+}
+
+body > header{
+    height: 3em;
+    background-color: lightblue;
+    display: flex;
+    position: relative;
+    justify-content: flex-end;
+}
+
+#mainLogo{
+    position: absolute;
+    left: 0;
+}
+
+
+header > a > img{
+    height: 100%;
+}
+
+.offers_container::-webkit-scrollbar {
+    display: none;
+}
+
+body {
+    margin: 0;
+}
+
+.offer_info{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+
+    font-family: Roboto;
+
+}
+
+.offer h4{
+    position: relative;
+    margin: 0.5em 0 0 0.5em;
+}
+
+.offer h5{
+    position: relative;
+    margin: 0.5em 0 0 0.5em;    
+    
+}
+
+.offer p{
+    margin-top: 0;
+    position: relative;
+    align-self: flex-end;
+    margin-right: 5%;
+    font-weight: bold;
+    font-size: large;
+
+    }
+
+.offer .offer_img{
+    object-fit: cover;
+
+    width: 95%;
+    height: 75%;
+    position: relative;
+    left: 2.5%;
+    top: 2.5%;
+
+    border-radius: 10%;
+}
