@@ -3,6 +3,9 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
+
+
+
 form{
     display: flex;
     padding-left: 0.5em;
@@ -43,7 +46,7 @@ form select{
 .Products article
 {
     border-radius: 12px;
-    height: 22em;
+    height: 25em;
     position: relative;
 
     outline: solid;
@@ -90,16 +93,41 @@ form select{
     bottom: 50%;
 }
 
+@media (max-width: 100em){
 .offer {
     height: 100%; 
     border: 1px solid lightgray;
-    display: block;
-    justify-content: center;
+
     align-items: center;
-    flex-basis: 17%;  
+    flex-basis: 20%;
     flex-shrink: 0;
     position: relative;
     border-style: none;
+
+    display: grid;
+    grid-template-rows: 2.5em auto 2.5em;
+}
+}
+
+@media (max-width: 60em){
+    .offer {
+        height: 100%; 
+        border: 1px solid lightgray;
+        overflow-y: auto;
+        align-items: center;
+        flex-basis: 40%;
+        flex-shrink: 0;
+        position: relative;
+        border-style: none;
+    
+        display: grid;
+        grid-template-rows: 2.5em auto 2.5em;
+    }
+    }
+
+
+.offer a{
+    text-decoration: none;
 }
 
 body > header{
@@ -130,42 +158,58 @@ body {
 
 .offer_info{
     position: relative;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: 50% 50%;
 
     font-family: Roboto;
-
+    height:max-content;
 }
 
-.offer h4{
+.offer_info h4{
     position: relative;
     margin: 0.5em 0 0 0.5em;
+    grid-column-end: span 2;
 }
 
-.offer h5{
+.offer_info h5{
     position: relative;
     margin: 0.5em 0 0 0.5em;    
     
 }
 
-.offer p{
+.offer_info p {
     margin-top: 0;
-    position: relative;
-    align-self: flex-end;
     margin-right: 5%;
+
     font-weight: bold;
     font-size: large;
 
-    }
+}
 
 .offer .offer_img{
-    object-fit: cover;
+    object-fit: scale-down;
 
     width: 95%;
-    height: 75%;
-    position: relative;
-    left: 2.5%;
-    top: 2.5%;
-
+    height: auto;
     border-radius: 10%;
+}
+
+.user_small_card p{
+    margin-top:auto;
+    margin-bottom: auto;
+
+}
+
+.user_small_card{
+    display: flex;
+    margin-left: 0.5em;
+    margin-top: auto;
+}
+
+.user_small_card .user_small_pfp{
+    border-radius: 100%;
+    height: 2em;
+    width: 2em;
+
 }
