@@ -1,6 +1,7 @@
 <?php
-function draw_header(){
-
+function output_header(){
+    session_start();
+    $_SESSION['idUser'] = 1;
     ?>
     <!DOCTYPE html>
     <html lang="en-US">
@@ -22,7 +23,7 @@ function draw_header(){
 ?>
 
 <?php
-function draw_footer(){ ?>
+function output_footer(){ ?>
     <footer>
             <p>&copy; Pre Looved Bazaar </p>
     </footer>
