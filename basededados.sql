@@ -1,9 +1,131 @@
--- Table: City
+/*******************************************************************************
+   Database - Version 0.1
+********************************************************************************/
+
 DROP TABLE IF EXISTS Country;
+DROP TABLE IF EXISTS User;
+DROP TABLE IF EXISTS UserAdmin;
+DROP TABLE IF EXISTS Reviews;
+DROP TABLE IF EXISTS Condition;
+DROP TABLE IF EXISTS Category;
+DROP TABLE IF EXISTS Sizes;
+DROP TABLE IF EXISTS Product;
+DROP TABLE IF EXISTS Chat;
+DROP TABLE IF EXISTS Messages;
+DROP TABLE IF EXISTS ShoppingCart;
+DROP TABLE IF EXISTS Favorites;
+DROP TABLE IF EXISTS Recent;
+DROP TABLE IF EXISTS Shipping;
+DROP TABLE IF EXISTS Photo;
+
+/*******************************************************************************
+   Create Tables
+********************************************************************************/
+
 CREATE TABLE IF NOT EXISTS Country (
     idCountry INTEGER PRIMARY KEY NOT NULL , 
     country TEXT NOT NULL
 );
+
+CREATE TABLE IF NOT EXISTS User (
+  idUser INTEGER PRIMARY KEY NOT NULL ,
+  firstName VARCHAR NOT NULL,
+  lastName VARCHAR NOT NULL,
+  phone INTEGER CHECK (phone >= 200000000 AND phone <= 999999999) NOT NULL,
+  email TEXT NOT NULL,
+  userPassword VARCHAR NOT NULL,
+  stars INTEGER DEFAULT "0",
+  idCountry TEXT REFERENCES Country (idCountry) ON DELETE SET NULL,
+  city TEXT NOT NULL,
+  userAddress TEXT NOT NULL,
+  zipCode TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS UserAdmin (
+    idUser INTEGER REFERENCES User (idUser) ON DELETE CASCADE PRIMARY KEY NOT NULL 
+);
+
+CREATE TABLE IF NOT EXISTS Reviews (
+    idReviews INTEGER PRIMARY KEY NOT NULL ,
+    stars INTEGER,
+    idUser INTEGER REFERENCES User (idUser) NOT NULL,
+    reviewsDescription TEXT
+);
+
+CREATE TABLE IF NOT EXISTS Condition (
+    idCondition INTEGER PRIMARY KEY NOT NULL,
+    condition TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS Category (
+    idCategory INTEGER PRIMARY KEY NOT NULL,
+    category TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS Sizes (
+    idSize INTEGER PRIMARY KEY NOT NULL,
+    tamanho TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS Product (
+    idProduct INTEGER PRIMARY KEY NOT NULL,
+    prodName TEXT NOT NULL,
+    prodDescription TEXT,
+    price INTEGER NOT NULL,
+    condition INTEGER REFERENCES Condition (idCondition) NOT NULL,
+    category INTEGER REFERENCES Category (idCategory) NOT NULL,
+    prodsize INTEGER REFERENCES Sizes (idSize) NOT NULL,
+    seller INTEGER REFERENCES User (idUser) NOT NULL,
+    buyer INTEGER REFERENCES User(idUser) DEFAULT NULL,
+    purchaseDate TEXT DEFAULT NULL
+);
+
+CREATE TABLE IF NOT EXISTS Chat (
+    idChat INTEGER PRIMARY KEY NOT NULL,
+    product INTEGER REFERENCES Product (idProduct) NOT NULL,
+    possibleBuyer INTEGER REFERENCES User (idUser) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS Messages (
+    idMessage INTEGER PRIMARY KEY NOT NULL, 
+    messageDate TEXT,
+    sender INTEGER REFERENCES Chat (idChat) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS ShoppingCart (
+    user INTEGER REFERENCES User (idUser) NOT NULL,
+    product INTEGER REFERENCES Product (idProduct) NOT NULL,
+    PRIMARY KEY(product, user)
+);
+
+CREATE TABLE IF NOT EXISTS Favorites (
+    user INTEGER REFERENCES User (idUser) NOT NULL,
+    product INTEGER REFERENCES Product (idProduct) NOT NULL,
+    PRIMARY KEY(product, user)
+);
+
+CREATE TABLE IF NOT EXISTS Recent (
+    user INTEGER REFERENCES User (idUser) NOT NULL,
+    product INTEGER REFERENCES Product (idProduct) NOT NULL,
+    PRIMARY KEY(product, user)
+);
+
+CREATE TABLE IF NOT EXISTS Shipping (
+    product INTEGER REFERENCES Product (idProduct) NOT NULL PRIMARY KEY,
+    buyer INTEGER REFERENCES User (idUser) NOT NULL,
+    seller INTEGER REFERENCES User (idUser) NOT NULL,
+    purchaseDate TEXT REFERENCES Product (purchaseDate) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS Photo (
+    idPhoto INTEGER PRIMARY KEY NOT NULL , 
+    idProduct INTEGER REFERENCES Product (idProduct) NOT NULL,
+    photo TEXT NOT NULL
+)
+
+/*******************************************************************************
+   Populate Tables
+********************************************************************************/
 
 INSERT OR REPLACE INTO Country(country)
 VALUES ('Afghanistan'), ('Albania'),
@@ -41,23 +163,6 @@ VALUES ('Afghanistan'), ('Albania'),
 ('United Kingdom'),('United States'),('Uruguay'),('Uzbekistan'),('Vanuatu'),('Vatican City'),
 ('Venezuela'),('Vietnam'),('Yemen'),('Zambia'),('Zimbabwe');
 
-
---Table: User
-DROP TABLE IF EXISTS User;
-CREATE TABLE IF NOT EXISTS User (
-  idUser INTEGER PRIMARY KEY NOT NULL ,
-  firstName VARCHAR NOT NULL,
-  lastName VARCHAR NOT NULL,
-  phone INTEGER CHECK (phone >= 200000000 AND phone <= 999999999) NOT NULL,
-  email TEXT NOT NULL,
-  userPassword VARCHAR NOT NULL,
-  stars INTEGER DEFAULT "0",
-  idCountry TEXT REFERENCES Country (idCountry) ON DELETE SET NULL,
-  city TEXT NOT NULL,
-  userAddress TEXT NOT NULL,
-  zipCode TEXT NOT NULL
-);
-
 INSERT OR REPLACE INTO User(firstName, lastName, phone, email, userPassword, idCountry, city, userAddress, zipCode)
 VALUES ('Leonor', 'Couto', 987654321 , 'leonoremail@fake.com','nonoPassword', 139, 'Porto', 'Rua de camões', '2000-100'),
 ('Filipa', 'Fidalgo', 975318642, 'filipaemail@fake.com', 'filipaPassword', 17, 'Gante', 'Rua da exAlbania', '1000'),
@@ -84,24 +189,8 @@ VALUES ('Leonor', 'Couto', 987654321 , 'leonoremail@fake.com','nonoPassword', 13
 ('Taylor', 'Brown', 987654318, 'taylor.brown.thatIsMe@email.com', 'thatIsMe2005', 185, 'London', '123 Maple St', 'WC2N 5DU'),
 ('William', 'Lee', 962304319, 'william.lee@email.com', 'jp2000', 83, 'Osaka', '456 Cedar St', '550-0012');
 
-
--- Table: UserAdmin
-DROP TABLE IF EXISTS UserAdmin;
-CREATE TABLE IF NOT EXISTS UserAdmin (
-    idUser INTEGER REFERENCES User (idUser) ON DELETE CASCADE PRIMARY KEY NOT NULL 
-);
-
 INSERT OR REPLACE INTO UserAdmin(idUser)
 VALUES(1),(2),(3),(4);
-
---Table: Reviews
-DROP TABLE IF EXISTS Reviews;
-CREATE TABLE IF NOT EXISTS Reviews (
-    idReviews INTEGER PRIMARY KEY NOT NULL ,
-    stars INTEGER,
-    idUser INTEGER REFERENCES User (idUser) NOT NULL,
-    reviewsDescription TEXT
-);
 
 INSERT INTO Reviews (stars, idUser, reviewsDescription)
 VALUES (3, 5, 'Nice service!'),(5, 12, 'Excellent experience.'),
@@ -139,53 +228,17 @@ VALUES (3, 5, 'Nice service!'),(5, 12, 'Excellent experience.'),
 (5, 6, 'Great value for money!'),(4, 8, 'Friendly and helpful service.'),
 (3, 13, 'Somewhat underwhelming.'),(2, 19, 'Below standard quality.');
 
---Table: Condition
-DROP TABLE IF EXISTS Condition;
-CREATE TABLE IF NOT EXISTS Condition (
-    idCondition INTEGER PRIMARY KEY NOT NULL,
-    condition TEXT NOT NULL
-);
-
 INSERT INTO Condition (condition)
 VALUES ('New with tags'),('New without tags'), ('Very Good'), ('Good'), ('Satisfactory');
 
---Table: Category
-DROP TABLE IF EXISTS Category;
-CREATE TABLE IF NOT EXISTS Category (
-    idCategory INTEGER PRIMARY KEY NOT NULL,
-    category TEXT NOT NULL
-);
-
 INSERT INTO Category (category)
-VALUES ('Sports'),('Tecnology'),('Books'), ('Games'), ('Cars'), ('Kids'), ('Animals');    
-
---Table: Sizes
-DROP TABLE IF EXISTS Sizes;
-CREATE TABLE IF NOT EXISTS Sizes (
-    idSize INTEGER PRIMARY KEY NOT NULL,
-    tamanho TEXT NOT NULL
-);
+VALUES ('Sports'),('Tecnology'),('Books'), ('Games'), ('Cars'), ('Kids'), ('Animals');   
 
 INSERT INTO Sizes (tamanho)
 VALUES ('Homem - XS'), ('Homem - S'), ('Homem - M'), ('Homem - L'), ('Homem - XL'), ('Homem - XXL'), 
 ('Mulher - XS'), ('Mulher - S'), ('Mulher - M'), ('Mulher - L'), ('Mulher - XL'), ('Mulher - XXL'), 
 ('Criança - 1 ano'), ('Criança - 2 anos'), ('Criança - 3-4 anos'), ('Criança - 5-6 anos'), ('Criança - 7-8 anos'), ('Criança - 9-10 anos'), ('Criança - 11-12 anos'), ('Criança - 13-14 anos'), ('Criança - 15-16 anos'),
 ('Tamanho unico');
-
---Table: Product
-DROP TABLE IF EXISTS Product;
-CREATE TABLE IF NOT EXISTS Product (
-    idProduct INTEGER PRIMARY KEY NOT NULL,
-    prodName TEXT NOT NULL,
-    prodDescription TEXT,
-    price INTEGER NOT NULL,
-    condition INTEGER REFERENCES Condition (idCondition) NOT NULL,
-    category INTEGER REFERENCES Category (idCategory) NOT NULL,
-    prodsize INTEGER REFERENCES Sizes (idSize) NOT NULL,
-    seller INTEGER REFERENCES User (idUser) NOT NULL,
-    buyer INTEGER REFERENCES User(idUser) DEFAULT NULL,
-    purchaseDate TEXT DEFAULT NULL
-);
 
 INSERT INTO Product (prodName, prodDescription, price, condition, category, prodsize, seller)
 VALUES ('Computer', 'Asus computer 2003', 40, 3, 2, 22, 6),
@@ -215,71 +268,14 @@ VALUES ('Computer', 'Asus computer 2003', 40, 3, 2, 22, 6),
 ('Used Xbox One', 'Pre-owned Xbox One console with controller', 80, 3, 4, 21, 11),
 ('DVD Movie Collection', 'Assorted collection of classic movies on DVD', 15, 2, 4, 21, 23);
 
---Table: Chat
-DROP TABLE IF EXISTS Chat;
-CREATE TABLE IF NOT EXISTS Chat (
-    idChat INTEGER PRIMARY KEY NOT NULL,
-    product INTEGER REFERENCES Product (idProduct) NOT NULL,
-    possibleBuyer INTEGER REFERENCES User (idUser) NOT NULL
-);
-
---Table: Message
-DROP TABLE IF EXISTS Messages;
-CREATE TABLE IF NOT EXISTS Messages (
-    idMessage INTEGER PRIMARY KEY NOT NULL, 
-    messageDate TEXT,
-    sender INTEGER REFERENCES Chat (idChat) NOT NULL
-);
-
---Table: ShoppingCart
-DROP TABLE IF EXISTS ShoppingCart;
-CREATE TABLE IF NOT EXISTS ShoppingCart (
-    user INTEGER REFERENCES User (idUser) NOT NULL,
-    product INTEGER REFERENCES Product (idProduct) NOT NULL,
-    PRIMARY KEY(product, user)
-);
-
 INSERT INTO ShoppingCart (user, product)
 VALUES (1, 10), (1,24), (1,3);
-
---Table: Favorites
-DROP TABLE IF EXISTS Favorites;
-CREATE TABLE IF NOT EXISTS Favorites (
-    user INTEGER REFERENCES User (idUser) NOT NULL,
-    product INTEGER REFERENCES Product (idProduct) NOT NULL,
-    PRIMARY KEY(product, user)
-);
 
 INSERT INTO Favorites (user, product)
 VALUES (1, 10), (1,4), (1,24), (1,3), (1,9), (1,17);
 
---Table: Recent
-DROP TABLE IF EXISTS Recent;
-CREATE TABLE IF NOT EXISTS Recent (
-    user INTEGER REFERENCES User (idUser) NOT NULL,
-    product INTEGER REFERENCES Product (idProduct) NOT NULL,
-    PRIMARY KEY(product, user)
-);
-
 INSERT INTO Recent (user, product)
 VALUES (1,9), (1,17);
-
---Table: Shipping
-DROP TABLE IF EXISTS Shipping;
-CREATE TABLE IF NOT EXISTS Shipping (
-    product INTEGER REFERENCES Product (idProduct) NOT NULL PRIMARY KEY,
-    buyer INTEGER REFERENCES User (idUser) NOT NULL,
-    seller INTEGER REFERENCES User (idUser) NOT NULL,
-    purchaseDate TEXT REFERENCES Product (purchaseDate) NOT NULL
-);
-
---Table: Photo
-DROP TABLE IF EXISTS Photo;
-CREATE TABLE IF NOT EXISTS Photo (
-    idPhoto INTEGER PRIMARY KEY NOT NULL , 
-    idProduct INTEGER REFERENCES Product (idProduct) NOT NULL,
-    photo TEXT NOT NULL
-)
 
 INSERT INTO Photo (idProduct, photo)
 VALUES (6,'photo de um Toyota'), (6,'photo de um Toyota 2');
