@@ -2,7 +2,7 @@
 <html lang="en-US">
 <head>
     <title>Login</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../css/style.css">
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +13,7 @@
 </head>
     <body class="log">
         <div class="login">
-
+            
         </div>
     </body>
 </html>
