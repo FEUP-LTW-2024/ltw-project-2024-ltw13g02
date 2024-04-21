@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="../css/style.css">
     <title>Pre Loved Bazaar</title>
     <meta charset="utf-8">
 </head>
 <body>
     <header>
-        <a href="main.html"><img class="logo" id="mainLogo" src="imagens/logo.png" alt="ON Logo"></a>
-        <a href="main.html"><img class="logo" id="chatLogo" src="imagens/message.png" alt="ON Messages"></a>
-        <a href="main.html"><img class="logo" id="settingsLogo" src="imagens/settings.png" alt="ON Settings" ></a>
+        <a href="index.php"><img class="logo" id="mainLogo" src="../imagens/logo.png" alt="ON Logo"></a>
+        <a href="index.php"><img class="logo" id="chatLogo" src="../imagens/message.png" alt="ON Messages"></a>
+        <a href="index.php"><img class="logo" id="settingsLogo" src="../imagens/settings.png" alt="ON Settings" ></a>
 
     </header>
     <main>
@@ -28,8 +28,8 @@
                 <!-- PHP fica aqui -->
                 <div class="offers_container">
                     <div class="offer">
-                        <a href="main.html" class="user_small_card"><img class="user_small_pfp" src="imagens/randomImage.jpg"> <p>Cute User</p></a>
-                        <a href="main.html"><img class="offer_img" src="imagens/randomImage.jpg"></a>
+                        <a href="main.html" class="user_small_card"><img class="user_small_pfp" src="../imagens/randomImage.jpg"> <p>Cute User</p></a>
+                        <a href="main.html"><img class="offer_img" src="../imagens/randomImage.jpg"></a>
                         <div class="offer_info">
                             <h4>A minha dignidade</h4> <!-- TODO adicionar size restriction-->
                             <h5>Porto, Portugal</h5>
@@ -37,8 +37,8 @@
                         </div>
                     </div>
                     <div class="offer">
-                        <a href="main.html" class="user_small_card"><img class="user_small_pfp" src="imagens/randomImage.jpg"> <p>Cute User</p></a>
-                        <a href="main.html"><img class="offer_img" src="imagens/randomImage.jpg"></a>
+                        <a href="main.html" class="user_small_card"><img class="user_small_pfp" src="../imagens/randomImage.jpg"> <p>Cute User</p></a>
+                        <a href="main.html"><img class="offer_img" src="../imagens/randomImage.jpg"></a>
                         <div class="offer_info">
                             <h4>A minha dignidade</h4> <!-- TODO adicionar size restriction-->
                             <h5>Porto, Portugal</h5>
@@ -46,8 +46,8 @@
                         </div>
                     </div>
                     <div class="offer">
-                        <a href="main.html" class="user_small_card"><img class="user_small_pfp" src="imagens/randomImage.jpg"> <p>Cute User</p></a>
-                        <a href="main.html"><img class="offer_img" src="imagens/randomImage.jpg"></a>
+                        <a href="main.html" class="user_small_card"><img class="user_small_pfp" src="../imagens/randomImage.jpg"> <p>Cute User</p></a>
+                        <a href="main.html"><img class="offer_img" src="../imagens/randomImage.jpg"></a>
                         <div class="offer_info">
                             <h4>A minha dignidade</h4> <!-- TODO adicionar size restriction-->
                             <h5>Porto, Portugal</h5>
@@ -55,8 +55,8 @@
                         </div>
                     </div>
                     <div class="offer">
-                        <a href="main.html" class="user_small_card"><img class="user_small_pfp" src="imagens/randomImage.jpg"> <p>Cute User</p></a>
-                        <a href="main.html"><img class="offer_img" src="imagens/randomImage.jpg"></a>
+                        <a href="main.html" class="user_small_card"><img class="user_small_pfp" src="../imagens/randomImage.jpg"> <p>Cute User</p></a>
+                        <a href="main.html"><img class="offer_img" src="../imagens/randomImage.jpg"></a>
                         <div class="offer_info">
                             <h4>A minha dignidade</h4> <!-- TODO adicionar size restriction-->
                             <h5>Porto, Portugal</h5>
@@ -64,8 +64,8 @@
                         </div>
                     </div>
                     <div class="offer">
-                        <a href="main.html" class="user_small_card"><img class="user_small_pfp" src="imagens/randomImage.jpg"> <p>Cute User</p></a>
-                        <a href="main.html"><img class="offer_img" src="imagens/randomImage.jpg"></a>
+                        <a href="main.html" class="user_small_card"><img class="user_small_pfp" src="../imagens/randomImage.jpg"> <p>Cute User</p></a>
+                        <a href="main.html"><img class="offer_img" src="../imagens/randomImage.jpg"></a>
                         <div class="offer_info">
                             <h4>A minha dignidade</h4> <!-- TODO adicionar size restriction-->
                             <h5>Porto, Portugal</h5>
@@ -73,8 +73,8 @@
                         </div>
                     </div>
                     <div class="offer">
-                        <a href="main.html" class="user_small_card"><img class="user_small_pfp" src="imagens/randomImage.jpg"> <p>Cute User</p></a>
-                        <a href="main.html"><img class="offer_img" src="imagens/randomImage.jpg"></a>
+                        <a href="main.html" class="user_small_card"><img class="user_small_pfp" src="../imagens/randomImage.jpg"> <p>Cute User</p></a>
+                        <a href="main.html"><img class="offer_img" src="../imagens/randomImage.jpg"></a>
                         <div class="offer_info">
                             <h4>A minha dignidade</h4> <!-- TODO adicionar size restriction-->
                             <h5>Porto, Portugal</h5>
@@ -82,8 +82,8 @@
                         </div>
                     </div>
                     <div class="offer">
-                        <a href="main.html" class="user_small_card"><img class="user_small_pfp" src="imagens/randomImage.jpg"> <p>Cute User</p></a>
-                        <a href="main.html"><img class="offer_img" src="imagens/randomImage.jpg"></a>
+                        <a href="main.html" class="user_small_card"><img class="user_small_pfp" src="../imagens/randomImage.jpg"> <p>Cute User</p></a>
+                        <a href="main.html"><img class="offer_img" src="../imagens/randomImage.jpg"></a>
                         <div class="offer_info">
                             <h4>A minha dignidade</h4> <!-- TODO adicionar size restriction-->
                             <h5>Porto, Portugal</h5>
@@ -91,8 +91,8 @@
                         </div>
                     </div>
                     <div class="offer">
-                        <a href="main.html" class="user_small_card"><img class="user_small_pfp" src="imagens/randomImage.jpg"> <p>Cute User</p></a>
-                        <a href="main.html"><img class="offer_img" src="imagens/randomImage.jpg"></a>
+                        <a href="main.html" class="user_small_card"><img class="user_small_pfp" src="../imagens/randomImage.jpg"> <p>Cute User</p></a>
+                        <a href="main.html"><img class="offer_img" src="../imagens/randomImage.jpg"></a>
                         <div class="offer_info">
                             <h4>A minha dignidade</h4> <!-- TODO adicionar size restriction-->
                             <h5>Porto, Portugal</h5>

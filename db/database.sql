@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS Product (
     idProduct INTEGER PRIMARY KEY NOT NULL,
     prodName TEXT NOT NULL,
     prodDescription TEXT,
-    price INTEGER NOT NULL,
+    price DOUBLE NOT NULL,
     condition INTEGER REFERENCES Condition (idCondition) NOT NULL,
     category INTEGER REFERENCES Category (idCategory) NOT NULL,
     prodsize INTEGER REFERENCES Sizes (idSize) NOT NULL,
