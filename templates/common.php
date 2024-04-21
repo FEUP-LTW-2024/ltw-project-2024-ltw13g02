@@ -1,7 +1,5 @@
 <?php
 function output_header(){
-    session_start();
-    $_SESSION['idUser'] = 1;
     ?>
     <!DOCTYPE html>
     <html lang="en-US">

@@ -22,3 +22,20 @@
     $result = $stmt->fetchAll();
     return $result;
   }
+
+  function getUserAddress( $db, $user_id ) {
+    $stmt = $db->prepare('SELECT U.userAddress, U.city, C.country, U.zipCode
+                          FROM User U JOIN Country C ON C.idCountry = U.idCountry
+                          WHERE U.idUser = ? ');
+    $stmt->execute(array( $_SESSION['idUser']) );
+    $result = $stmt->fetch();
+    return $result;
+  }
+
+  function getAllCountries( $db ) {
+    $stmt = $db->prepare('SELECT C.country 
+                          FROM Country C');
+    $stmt->execute();
+    $result = $stmt->fetchAll();
+    return $result;
+  }
