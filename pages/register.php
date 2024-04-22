@@ -1,7 +1,4 @@
 <!DOCTYPE html>
-<?php
-session_start();
-?>
 <html lang="en-US">
     <head>
         <title>Register</title>
@@ -17,7 +14,7 @@ session_start();
     </head>
     <body class="reg">
         <div class="register">
-            <form id="register">
+            <form action="../actions/registerAction.php" id="register" method="post">
                 <h1>Register</h1>
                 <label id="name" class="required">
                     <input type="text" name="username" placeholder=" Name..." required>
@@ -243,45 +240,15 @@ session_start();
                     <input type="text" name="zipCode" placeholder=" Zip Code..." required>
                 </label>
                 <?php
-                if(ISSET($_SESSION['success'])){
-                    ?>
-                    <div class="alert alert-success"><?php echo $_SESSION['success']?></div>
-                    <?php
-                    unset($_SESSION['success']);
-                }
+                    if(ISSET($_SESSION['success'])){
                 ?>
-                <a href="index.php"><button id="register" type="submit">Register</button></a>
+                <div class="alert alert-success"><?php echo $_SESSION['success']?></div>
+                <?php
+                    unset($_SESSION['success']);
+                    }
+                ?>
+                <button id="register" type="submit">Register</button>
             </form>
-            <script>
-                document.getElementById('register').addEventListener('submit', function(event) {
-                    event.preventDefault();
-
-                    const formData = new FormData(this);
-
-                    const jsonData = {};
-                    formData.forEach((value, key) => {
-                        jsonData[key] = value;
-                    });
-
-                    fetch('../actions/registerAction.php', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(jsonData)
-                    })
-                        .then(response => {
-                            if (response.ok) {
-                                window.location.href = 'index.php';
-                            } else {
-                                throw new Error('Failed to register user');
-                            }
-                        })
-                        .catch(error => {
-                            console.error('Error:', error);
-                        });
-                });
-            </script>
         </div>
     </body>
 </html>

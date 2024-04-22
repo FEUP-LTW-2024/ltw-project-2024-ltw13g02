@@ -1,20 +1,21 @@
-<!DOCTYPE html>
 <?php
-session_start();
-?>
-<html lang="en-US">
-<head>
-    <link rel="stylesheet" href="../css/style.css">
-    <title>Pre Loved Bazaar</title>
-    <meta charset="utf-8">
-</head>
-<body>
-    <header>
-        <a href="index.php"><img class="logo" id="mainLogo" src="../imagens/logo.png" alt="ON Logo"></a>
-        <a href="index.php"><img class="logo" id="chatLogo" src="../imagens/message.png" alt="ON Messages"></a>
-        <a href="pages/login.php"><img class="logo" id="settingsLogo" src="../imagens/settings.png" alt="ON Settings" ></a>
+  declare(strict_types = 1);
 
-    </header>
+  require_once(__DIR__ . '/../sessions/session.php');
+  $session = new Session();
+
+  require_once(__DIR__ . '/../database/connection_to_db.php');
+
+  require_once(__DIR__ . '/../templates/common.php');
+
+  $db = getDatabaseConnection();
+
+  drawHeader($session);
+?>
+
+<!DOCTYPE html>
+<html lang="en-US">
+<body>
     <main>
         <form id="search">
             <select name="fruit">
