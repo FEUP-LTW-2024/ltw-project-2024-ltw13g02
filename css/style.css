@@ -3,7 +3,7 @@
 
 
 button {
-    margin: 10px auto auto auto;
+    margin: 0 auto auto auto;
     height: 40px;
     width: 200px;
     color: white;
@@ -26,7 +26,7 @@ h1 {
     margin: 0 0;
 }
 
-form{
+#search {
     display: flex;
     padding-left: 0.5em;
     padding-right: 0.5em;
@@ -35,23 +35,23 @@ form{
     margin-top: 0.5em;
 }
 
-form *{
+#search *{
     border-color: gray;
     border-style: solid;
 }
 
-form input{
+#search input{
     margin: auto;
     width: 95%;
     border-radius: 1em;
     padding-left: 1em;
 }
 
-form input:focus{
+#search input:focus{
     background-color: lightgrey;
 }
 
-form select{
+#search select{
     border-radius: 1em;
 }
 

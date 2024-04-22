@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<?php
+session_start();
+?>
 <html lang="en-US">
 <head>
     <link rel="stylesheet" href="../css/style.css">
@@ -9,11 +12,11 @@
     <header>
         <a href="index.php"><img class="logo" id="mainLogo" src="../imagens/logo.png" alt="ON Logo"></a>
         <a href="index.php"><img class="logo" id="chatLogo" src="../imagens/message.png" alt="ON Messages"></a>
-        <a href="index.php"><img class="logo" id="settingsLogo" src="../imagens/settings.png" alt="ON Settings" ></a>
+        <a href="pages/login.php"><img class="logo" id="settingsLogo" src="../imagens/settings.png" alt="ON Settings" ></a>
 
     </header>
     <main>
-        <form class="search">
+        <form id="search">
             <select name="fruit">
                 <option value="All" selected>All</option>
                 <option value="Roupa">Roupa</option>

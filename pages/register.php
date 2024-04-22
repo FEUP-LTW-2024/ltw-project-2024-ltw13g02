@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<?php
+session_start();
+?>
 <html lang="en-US">
     <head>
         <title>Register</title>
@@ -14,16 +17,16 @@
     </head>
     <body class="reg">
         <div class="register">
-            <form>
+            <form id="register">
                 <h1>Register</h1>
                 <label id="name" class="required">
                     <input type="text" name="username" placeholder=" Name..." required>
                 </label>
-                <label id="phoneNumber" class="required">
-                    <input type="text" name="username" placeholder=" Phone Number..." required>
+                <label id="phone" class="required">
+                    <input type="text" name="phone" placeholder=" Phone Number..." required>
                 </label>
                 <label id="email" class="required">
-                    <input type="text" name="username" placeholder=" Email..." required>
+                    <input type="text" name="email" placeholder=" Email..." required>
                 </label>
                 <label id="password" class="required">
                     <input type="password" name="password" placeholder=" Password..." required>
@@ -239,8 +242,46 @@
                 <label id="zipCode" class="required">
                     <input type="text" name="zipCode" placeholder=" Zip Code..." required>
                 </label>
-                <button id="register" type="submit">Register</button>
+                <?php
+                if(ISSET($_SESSION['success'])){
+                    ?>
+                    <div class="alert alert-success"><?php echo $_SESSION['success']?></div>
+                    <?php
+                    unset($_SESSION['success']);
+                }
+                ?>
+                <a href="index.php"><button id="register" type="submit">Register</button></a>
             </form>
+            <script>
+                document.getElementById('register').addEventListener('submit', function(event) {
+                    event.preventDefault();
+
+                    const formData = new FormData(this);
+
+                    const jsonData = {};
+                    formData.forEach((value, key) => {
+                        jsonData[key] = value;
+                    });
+
+                    fetch('../actions/registerAction.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(jsonData)
+                    })
+                        .then(response => {
+                            if (response.ok) {
+                                window.location.href = 'index.php';
+                            } else {
+                                throw new Error('Failed to register user');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                        });
+                });
+            </script>
         </div>
     </body>
 </html>

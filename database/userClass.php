@@ -1,5 +1,4 @@
 <?php
-
 class User {
     public int $idUser;
     public string $firstName;
@@ -7,12 +6,25 @@ class User {
     public string $phone;
     public string $email;
     public string $address;
-    public string $stars;
+    public int $stars;
     public string $city;
     public string $idCountry;
     public string $zipCode;
 
-    function name() {
+    public function __construct(int $idUser, string $firstName, string $lastName, string $phone, string $email, string $address, int $stars, string $city, string $idCountry, string $zipCode) {
+        $this->idUser = $idUser;
+        $this->firstName = $firstName;
+        $this->lastName = $lastName;
+        $this->phone = $phone;
+        $this->email = $email;
+        $this->address = $address;
+        $this->stars = $stars;
+        $this->city = $city;
+        $this->idCountry = $idCountry;
+        $this->zipCode = $zipCode;
+    }
+
+    function name(): string {
         return $this->firstName . ' ' . $this->lastName;
     }
 
@@ -23,55 +35,6 @@ class User {
         ');
 
         $stmt->execute(array($this->firstName, $this->lastName, $this->idUser));
-    }
-
-    static function getCustomerWithPassword(PDO $db, string $email, string $password) : ?Customer {
-        $stmt = $db->prepare('
-            SELECT CustomerId, FirstName, LastName, Address, City, State, Country, PostalCode, Phone, Email
-            FROM Customer 
-            WHERE lower(email) = ? AND password = ?
-        ');
-
-        $stmt->execute(array(strtolower($email), sha1($password)));
-
-        if ($customer = $stmt->fetch()) {
-            return new Customer(
-                $customer['CustomerId'],
-                $customer['FirstName'],
-                $customer['LastName'],
-                $customer['Address'],
-                $customer['City'],
-                $customer['Stars'],
-                $customer['Country'],
-                $customer['ZipCode'],
-                $customer['Phone'],
-                $customer['Email']
-            );
-        } else return null;
-    }
-
-    static function getCustomer(PDO $db, int $id) : User {
-        $stmt = $db->prepare('
-            SELECT idUser, FirstName, LastName, Address, City, State, Country, PostalCode, Phone, Email
-            FROM User 
-            WHERE idUSer = ?
-        ');
-
-        $stmt->execute(array($id));
-        $user = $stmt->fetch();
-
-        return new User(
-            $user['CustomerId'],
-            $user['FirstName'],
-            $user['LastName'],
-            $user['Address'],
-            $user['City'],
-            $user['State'],
-            $user['Country'],
-            $user['PostalCode'],
-            $user['Phone'],
-            $user['Email']
-        );
     }
 
     static function getFavorites(PDO $db, int $id) : array {

@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<?php
+session_start();
+?>
 <html lang="en-US">
     <head>
         <title>Login</title>
@@ -14,7 +17,7 @@
     </head>
     <body class="log">
         <div class="login">
-            <form>
+            <form id = "login" action="../actions/loginAction.php" method="post">
                 <h1>Login</h1>
                 <label id="email" class="required">
                     <input type="text" name="username" placeholder=" Email..." required>
@@ -22,7 +25,16 @@
                 <label id="password" class="required">
                     <input type="password" name="password" placeholder=" Password..." required>
                 </label>
-                <button id="login" type="submit">Login</button>
+                <?php
+                    if(ISSET($_SESSION['error'])){
+                ?>
+                        <div class="alert alert-danger"><?php echo $_SESSION['error']?></div>
+                <?php
+                        unset($_SESSION['error']);
+                    }
+                ?>
+                <button id="Blogin" type="submit">Login</button>
+                <a href="register.php"><h2 id="goToReg">I don't have an account</h2></a>
             </form>
         </div>
     </body>
