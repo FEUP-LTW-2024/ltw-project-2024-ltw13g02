@@ -35,6 +35,7 @@ CREATE TABLE IF NOT EXISTS User (
   email TEXT NOT NULL,
   userPassword VARCHAR NOT NULL,
   stars INTEGER DEFAULT "0",
+  photo TEXT,
   idCountry TEXT REFERENCES Country (idCountry) ON DELETE SET NULL,
   city TEXT NOT NULL,
   userAddress TEXT NOT NULL,
@@ -88,8 +89,10 @@ CREATE TABLE IF NOT EXISTS Chat (
 
 CREATE TABLE IF NOT EXISTS Messages (
     idMessage INTEGER PRIMARY KEY NOT NULL, 
-    messageDate TEXT,
-    sender INTEGER REFERENCES Chat (idChat) NOT NULL
+    messageDate TEXT NOT NULL,
+    sender INTEGER NOT NULL,
+    chat INTEGER REFERENCES Chat (idChat) NOT NULL,
+    content TEXT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS ShoppingCart (
@@ -121,7 +124,7 @@ CREATE TABLE IF NOT EXISTS Photo (
     idPhoto INTEGER PRIMARY KEY NOT NULL , 
     idProduct INTEGER REFERENCES Product (idProduct) NOT NULL,
     photo TEXT NOT NULL
-)
+);
 
 /*******************************************************************************
    Populate Tables
