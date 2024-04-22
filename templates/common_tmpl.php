@@ -21,25 +21,9 @@ require_once(__DIR__ . '/../sessions/session.php');
     <header>
         <a href="../pages/index.php"><img class="logo" id="mainLogo" src="../imagens/logo.png" alt="ON Logo"></a>
         <a href="../pages/index.php"><img class="logo" id="chatLogo" src="../imagens/message.png" alt="ON Messages"></a>
-        <a href="../pages/index.php"><img class="logo" id="settingsLogo" src="../imagens/settings.png" alt="ON Settings" ></a>
+        <a href="../pages/login.php"><img class="logo" id="settingsLogo" src="../imagens/settings.png" alt="ON Settings" ></a>
     </header>
     <body>
     </body>
     </html>
-<?php } ?>
-
-<?php function drawLoginForm() { ?>
-    <form action="../actions/loginAction.php" method="post" class="login">
-        <input type="email" name="email" placeholder="email">
-        <input type="password" name="password" placeholder="password">
-        <a href="../pages/register.php">Register</a>
-        <button type="submit">Login</button>
-    </form>
-<?php } ?>
-
-<?php function drawLogoutForm(Session $session) { ?>
-    <form action="../actions/logoutAction.php" method="post" class="logout">
-        <a href="../pages/login.php"><?=$session->getName()?></a>
-        <button type="submit">Logout</button>
-    </form>
 <?php } ?>

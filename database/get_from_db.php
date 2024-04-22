@@ -1,20 +1,32 @@
 <?php
 include_once('connection_to_db.php');
 
-function checkUserPassword($idUser, $password): bool {
-    $db = getDatabaseConnection();
+function getUser($email, $password, $db) {
+    $stmt = $db->prepare('
+        SELECT idUser, firstName, lastName, phone, email, userPassword, stars, photo, idCountry, city, userAddress, zipCode
+        FROM User 
+        WHERE lower(email) = ? AND userPassword = ?
+    ');
 
-    $stmt = $db->prepare('SELECT * FROM user WHERE idUser = :idUser');
-    $stmt->bindParam(':idUser', $idUser);
-    $stmt->execute();
+    $stmt->execute(array(strtolower($email), password_hash($password, PASSWORD_DEFAULT)));
 
-    $user = $stmt->fetch();
-    return $user !== false && password_verify($password, $user['password']);
+    if ($user = $stmt->fetch()) {
+        return new User(
+            $user['idUser'],
+            $user['firstName'],
+            $user['lastName'],
+            $user['phone'],
+            $user['email'],
+            $user['userPassword'],
+            $user['stars'],
+            $user['photo'],
+            $user['idCountry'],
+            $user['city'],
+            $user['userAddress'],
+            $user['zipCode']
+        );
+    } else {
+        return null;
+    }
 }
-function getUser($idUser) {
-    $db = getDatabaseConnection();
-    $stmt = $db->prepare('SELECT * FROM user WHERE idUser=:idUser');
-    $stmt->bindParam(':username', $idUser);
-    $stmt->execute();
-    return $stmt->fetch();
-}
+?>

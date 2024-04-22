@@ -8,7 +8,7 @@ body {
 
 form {
     display: grid;
-    grid-template-rows: repeat(11, 4.9em);
+    grid-template-rows: repeat(12, 4.6em);
     grid-template-columns: repeat(1, 1fr);
     background-color: #90bbdf;
     border-radius: 8px;
@@ -44,7 +44,7 @@ label * {
     padding: 0 0 30px 0;
 }
 
-h2#goToReg {
+h2#goToReg, #goToLog {
     margin: 0 auto auto auto;
     height: 40px;
     width: 200px;
@@ -55,6 +55,6 @@ h2#goToReg {
     font-size: 18px;
 }
 
-#goToReg:hover {
+#goToReg:hover, #goToLog:hover {
     color: #276a9f;
 }

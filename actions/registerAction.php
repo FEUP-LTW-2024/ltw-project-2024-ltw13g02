@@ -24,7 +24,7 @@ $db->exec("INSERT INTO User (firstName, lastName, phone, email, userPassword, ci
 $db = null;
 
 // Redirect user after successful registration
-header("Location: ../pages/index.php");
+header("Location: ../pages");
 exit;
 
 

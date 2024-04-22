@@ -33,7 +33,7 @@ session_start();
                         unset($_SESSION['error']);
                     }
                 ?>
-                <button id="Blogin" type="submit">Login</button>
+                <a href="index.php"><button id="Blogin" type="submit">Login</button></a>
                 <a href="register.php"><h2 id="goToReg">I don't have an account</h2></a>
             </form>
         </div>

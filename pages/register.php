@@ -14,7 +14,7 @@
     </head>
     <body class="reg">
         <div class="register">
-            <form action="../actions/registerAction.php" id="register" method="post">
+            <form action="../actions/registerAction.php" id="register" method="post" onsubmit="return validatePassword()">
                 <h1>Register</h1>
                 <label id="name" class="required">
                     <input type="text" name="username" placeholder=" Name..." required>
@@ -26,10 +26,10 @@
                     <input type="text" name="email" placeholder=" Email..." required>
                 </label>
                 <label id="password" class="required">
-                    <input type="password" name="password" placeholder=" Password..." required>
+                    <input type="password" id="passwordInput" name="password" placeholder=" Password..." required>
                 </label>
                 <label id="confirmPassword" class="required">
-                    <input type="text" name="username" placeholder=" Confirm Password..." required>
+                    <input type="password" id="confirmPasswordInput" name="confirmPassword" placeholder=" Confirm Password..." required>
                 </label>
                 <label id="country" class="required">
                     <select>
@@ -248,7 +248,20 @@
                     }
                 ?>
                 <button id="register" type="submit">Register</button>
+                <a href="login.php"><h2 id="goToLog">I already have an account</h2></a>
             </form>
+            <script>
+                function validatePassword() {
+                    var password = document.getElementById("passwordInput").value;
+                    var confirmPassword = document.getElementById("confirmPasswordInput").value;
+
+                    if (password != confirmPassword) {
+                        alert("Passwords do not match.");
+                        return false;
+                    }
+                    return true;
+                }
+            </script>
         </div>
     </body>
 </html>
