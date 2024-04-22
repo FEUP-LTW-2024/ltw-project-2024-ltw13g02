@@ -35,6 +35,7 @@ CREATE TABLE IF NOT EXISTS User (
   email TEXT NOT NULL,
   userPassword VARCHAR NOT NULL,
   stars INTEGER DEFAULT "0",
+  photo TEXT,
   idCountry TEXT REFERENCES Country (idCountry) ON DELETE SET NULL,
   city TEXT NOT NULL,
   userAddress TEXT NOT NULL,
