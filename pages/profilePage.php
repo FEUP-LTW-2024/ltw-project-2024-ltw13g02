@@ -20,5 +20,6 @@
       <h2> NAME: </h2>
       <h2 id="username"><?php echo $session->getEmail(); ?></h2>
       <a href="login.php"><h2 id="goToLogin">Login</h2></a>
+      <a href="logout.php"><h2 id="Logout">Logout</h2></a>
     </main>
 </body>

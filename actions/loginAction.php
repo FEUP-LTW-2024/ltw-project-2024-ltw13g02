@@ -2,7 +2,6 @@
 declare(strict_types = 1);
 
 require_once(__DIR__ . '/../sessions/session.php');
-require '../vendor/autoload.php';
 
 $session = new Session();
 

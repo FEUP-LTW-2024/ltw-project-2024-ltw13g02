@@ -1,7 +1,6 @@
 <?php
 require_once('connection_to_db.php');
 require_once(__DIR__ . '/../database/userClass.php');
-require '../vendor/autoload.php';
 
 
 function getUser($email, $password) : ?User{
