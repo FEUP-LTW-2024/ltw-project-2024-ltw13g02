@@ -5,22 +5,24 @@ class User {
     public string $lastName;
     public string $phone;
     public string $email;
-    public string $address;
+    public string $userAddress;
     public int $stars;
     public string $city;
     public string $idCountry;
     public string $zipCode;
+    public ?string $photo;
 
-    public function __construct(int $idUser, string $firstName, string $lastName, string $phone, string $email, string $address, int $stars, string $city, string $idCountry, string $zipCode) {
+    public function __construct(int $idUser, string $firstName, string $lastName, string $phone, string $email, string $userAddress, int $stars, string $city, string $idCountry, ?string $photo, string $zipCode) {
         $this->idUser = $idUser;
         $this->firstName = $firstName;
         $this->lastName = $lastName;
         $this->phone = $phone;
         $this->email = $email;
-        $this->address = $address;
+        $this->userAddress = $userAddress;
         $this->stars = $stars;
         $this->city = $city;
         $this->idCountry = $idCountry;
+        $this->photo = $photo;
         $this->zipCode = $zipCode;
     }
 

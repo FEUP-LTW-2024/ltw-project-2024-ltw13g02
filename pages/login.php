@@ -1,7 +1,4 @@
 <!DOCTYPE html>
-<?php
-session_start();
-?>
 <html lang="en-US">
     <head>
         <title>Login</title>
@@ -20,7 +17,7 @@ session_start();
             <form id = "login" action="../actions/loginAction.php" method="post">
                 <h1>Login</h1>
                 <label id="email" class="required">
-                    <input type="text" name="username" placeholder=" Email..." required>
+                    <input type="text" name="email" placeholder=" Email..." required>
                 </label>
                 <label id="password" class="required">
                     <input type="password" name="password" placeholder=" Password..." required>

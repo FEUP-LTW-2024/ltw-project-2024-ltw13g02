@@ -21,7 +21,7 @@ require_once(__DIR__ . '/../sessions/session.php');
     <header>
         <a href="../pages/index.php"><img class="logo" id="mainLogo" src="../imagens/logo.png" alt="ON Logo"></a>
         <a href="../pages/index.php"><img class="logo" id="chatLogo" src="../imagens/message.png" alt="ON Messages"></a>
-        <a href="../pages/login.php"><img class="logo" id="settingsLogo" src="../imagens/settings.png" alt="ON Settings" ></a>
+        <a href="../pages/profilePage.php"><img class="logo" id="settingsLogo" src="../imagens/settings.png" alt="ON Settings" ></a>
     </header>
     <body>
     </body>

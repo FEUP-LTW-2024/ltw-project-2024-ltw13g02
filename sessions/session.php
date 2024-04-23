@@ -21,16 +21,20 @@
       return isset($_SESSION['id']) ? $_SESSION['id'] : null;    
     }
 
-    public function getName() : ?string {
-      return isset($_SESSION['name']) ? $_SESSION['name'] : null;
+    public function getEmail() : ?string {
+      return isset($_SESSION['email']) ? $_SESSION['email'] : null;
+    }
+
+    public function setEmail(string $email) {
+      $_SESSION['email'] = $email;
     }
 
     public function setId(int $id) {
-      $_SESSION['id'] = $id;
+      $_SESSION['idUser'] = $id;
     }
 
-    public function setName(string $name) {
-      $_SESSION['name'] = $name;
+    public function setFirstName(string $firstName) {
+      $_SESSION['firstName'] = $firstName;
     }
 
     public function addMessage(string $type, string $text) {

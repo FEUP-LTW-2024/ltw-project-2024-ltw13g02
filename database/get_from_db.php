@@ -1,32 +1,37 @@
 <?php
-include_once('connection_to_db.php');
+require_once('connection_to_db.php');
+require_once(__DIR__ . '/../database/userClass.php');
+require '../vendor/autoload.php';
 
-function getUser($email, $password, $db) {
+
+function getUser($email, $password) : ?User{
+
+    $db = getDatabaseConnection();
     $stmt = $db->prepare('
-        SELECT idUser, firstName, lastName, phone, email, userPassword, stars, photo, idCountry, city, userAddress, zipCode
+        SELECT idUser, firstName, lastName, phone, email, stars, photo, userPassword, idCountry, city, userAddress, zipCode
         FROM User 
-        WHERE lower(email) = ? AND userPassword = ?
+        WHERE lower(email) = ?
     ');
 
-    $stmt->execute(array(strtolower($email), password_hash($password, PASSWORD_DEFAULT)));
+    $stmt->execute(array(strtolower($email)));
 
-    if ($user = $stmt->fetch()) {
+    $user = $stmt->fetch();
+
+    if ($user && password_verify($password, $user['userPassword'])) {
         return new User(
             $user['idUser'],
             $user['firstName'],
             $user['lastName'],
             $user['phone'],
             $user['email'],
-            $user['userPassword'],
-            $user['stars'],
-            $user['photo'],
-            $user['idCountry'],
-            $user['city'],
             $user['userAddress'],
-            $user['zipCode']
+            $user['stars'],
+            $user['city'],
+            $user['idCountry'],
+            $user['photo'],
+            $user['zipCode'],
         );
     } else {
         return null;
     }
 }
-?>
