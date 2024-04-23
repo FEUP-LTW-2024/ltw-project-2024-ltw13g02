@@ -1,4 +1,13 @@
 <?php
+    function output_empty_cart() { ?>
+        <section id='Shopping_Cart'>
+            <h2>Your Shopping Cart is empty</h2>
+        </section>
+    <?php }
+?>
+
+
+<?php
     function output_cart_items($items){ ?>
         
         <section id='Shopping_Cart'>
@@ -46,7 +55,7 @@
     function output_shipping_address( $address, $countries){ ?>
         <aside>
             <h3>Checkout</h3> 
-        <form id ='address' action="cart.php" method="post">
+        <form id ='address' action="database/process_payment.php" method="post">
 
                 <h5>Address</h5>
                 <p><?= $address['userAddress']?> </p>

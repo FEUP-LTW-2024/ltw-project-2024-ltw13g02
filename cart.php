@@ -14,7 +14,11 @@
     ?>
     <link rel="stylesheet" href="cart.css">
     <?php
-    output_cart_items($items);
-    output_shipping_address($address, $countries);
+    if (sizeof($items) > 0) {
+        output_cart_items($items);
+        output_shipping_address($address, $countries);
+    } else {
+        output_empty_cart();
+    }
 
     output_footer();

@@ -15,7 +15,7 @@
   }
 
   function getUserShopingCart( $db, $user_id ) {
-    $stmt = $db->prepare('SELECT P.prodName, P.prodDescription, P.price 
+    $stmt = $db->prepare('SELECT *
                           FROM Product P JOIN ShoppingCart S ON P.idProduct = S.product 
                           WHERE S.user = ? ');
     $stmt->execute(array( $_SESSION['idUser']) );
@@ -38,4 +38,31 @@
     $stmt->execute();
     $result = $stmt->fetchAll();
     return $result;
+  }
+
+  function get_product( $db, $product_id ) {
+    $stmt = $db->prepare('SELECT *
+                          FROM Product p
+                          WHERE P.idProduct = ?');
+    $stmt->execute(array( $product_id) );
+    $result = $stmt->fetch();
+    return $result;
+  }
+
+  function getUserPublicInfo($db, $user_id){
+    $stmt = $db->prepare('SELECT U.idUser, U.firstName, U.lastName, U.stars 
+                          FROM User U
+                          WHERE U.idUser = ?');
+    $stmt->execute(array( $user_id) );
+    $result = $stmt->fetch();
+    return $result;
+  }
+
+  function get_user_num_reviews($db, $user_id) {
+    $stmt = $db->prepare('SELECT COUNT(*) as num_reviews
+                          FROM  Reviews R
+                          WHERE R.idUser = ?');
+    $stmt->execute(array( $user_id) );
+    $result = $stmt->fetch();
+    return $result['num_reviews'];
   }
