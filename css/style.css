@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Didact+Gothic&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap');
 
 button {
     margin: 0 auto auto auto;
@@ -11,6 +11,16 @@ button {
     border-color: #b8c8d6;
     border-radius: 8px;
     font-size: 20px;
+}
+
+#mainLogo {
+    color:  #293fa1;
+    font-family: "Caveat", cursive;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    font-style: normal;
+    position: absolute;
+    left: 0;
 }
 
 button:hover {
@@ -157,12 +167,6 @@ body > header{
     position: relative;
     justify-content: flex-end;
 }
-
-#mainLogo{
-    position: absolute;
-    left: 0;
-}
-
 
 header > a > img{
     height: 100%;

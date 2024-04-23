@@ -32,7 +32,7 @@
                 <!-- PHP fica aqui -->
                 <div class="offers_container">
                     <div class="offer">
-                        <a href="main.html" class="user_small_card"><img class="user_small_pfp" src="../imagens/randomImage.jpg"> <p>Cute User</p></a>
+                        <a href="productPage.php" class="user_small_card"><img class="user_small_pfp" src="../imagens/randomImage.jpg"> <p>Cute User</p></a>
                         <a href="main.html"><img class="offer_img" src="../imagens/randomImage.jpg"></a>
                         <div class="offer_info">
                             <h4>A minha dignidade</h4> <!-- TODO adicionar size restriction-->
