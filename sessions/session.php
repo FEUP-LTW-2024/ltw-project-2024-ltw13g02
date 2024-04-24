@@ -65,6 +65,12 @@
       $_SESSION['stars'] = $stars;
     }
 
-    
+    public function getPhotoUser() : ?string {
+      return isset($_SESSION['photo']) ? $_SESSION['photo'] : null;
+    }
+
+    public function setPhotoUser(string $photo) {
+      $_SESSION['photo'] = $photo;
+    }
   }
 ?>

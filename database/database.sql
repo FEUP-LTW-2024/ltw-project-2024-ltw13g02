@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS User (
   email TEXT NOT NULL,
   userPassword VARCHAR NOT NULL,
   stars INTEGER DEFAULT "0",
-  photo TEXT,
+  photo TEXT DEFAULT "Sem foto",
   idCountry TEXT REFERENCES Country (idCountry) ON DELETE SET NULL,
   city TEXT NOT NULL,
   userAddress TEXT NOT NULL,
@@ -166,11 +166,12 @@ VALUES ('Afghanistan'), ('Albania'),
 ('United Kingdom'),('United States'),('Uruguay'),('Uzbekistan'),('Vanuatu'),('Vatican City'),
 ('Venezuela'),('Vietnam'),('Yemen'),('Zambia'),('Zimbabwe');
 
+INSERT OR REPLACE INTO User(firstName, lastName, phone, email, userPassword, photo, idCountry, city, userAddress, zipCode)
+VALUES ('Leonor', 'Couto', 987654321 , 'leonoremail@fake.com','$2y$10$6sucVUYDP6gbJh54fspvnucUuzsUbRcDQPE.qNvoW4GG1J8IRi6T6', "leonorPhoto.jpeg", 139, 'Porto', 'Rua de camões', '2000-100'),
+('Filipa', 'Fidalgo', 975318642, 'filipaemail@fake.com', '$2y$10$6sucVUYDP6gbJh54fspvnucUuzsUbRcDQPE.qNvoW4GG1J8IRi6T6', "filipaTest.png", 17, 'Gante', 'Rua da exAlbania', '1000'),
+('Pedro', 'Marta', 963852741, 'pedroemail@fake.com', '$2y$10$6sucVUYDP6gbJh54fspvnucUuzsUbRcDQPE.qNvoW4GG1J8IRi6T6', "randomImage.jpg", 63, 'Düsseldorf', 'avenida da libete', '23458-872');
 INSERT OR REPLACE INTO User(firstName, lastName, phone, email, userPassword, idCountry, city, userAddress, zipCode)
-VALUES ('Leonor', 'Couto', 987654321 , 'leonoremail@fake.com','$2y$10$6sucVUYDP6gbJh54fspvnucUuzsUbRcDQPE.qNvoW4GG1J8IRi6T6', 139, 'Porto', 'Rua de camões', '2000-100'),
-('Filipa', 'Fidalgo', 975318642, 'filipaemail@fake.com', '$2y$10$6sucVUYDP6gbJh54fspvnucUuzsUbRcDQPE.qNvoW4GG1J8IRi6T6', 17, 'Gante', 'Rua da exAlbania', '1000'),
-('Pedro', 'Marta', 963852741, 'pedroemail@fake.com', '$2y$10$6sucVUYDP6gbJh54fspvnucUuzsUbRcDQPE.qNvoW4GG1J8IRi6T6', 63, 'Düsseldorf', 'avenida da libete', '23458-872'),
-('Admin', 'Admin', 999599999, 'admin@admin.com', '$2y$10$6sucVUYDP6gbJh54fspvnucUuzsUbRcDQPE.qNvoW4GG1J8IRi6T6', 139, 'Porto', 'Rua dos Admins', '9995-999'),
+VALUES ('Admin', 'Admin', 999599999, 'admin@admin.com', '$2y$10$6sucVUYDP6gbJh54fspvnucUuzsUbRcDQPE.qNvoW4GG1J8IRi6T6', 139, 'Porto', 'Rua dos Admins', '9995-999'),
 ('Alice', 'Johnson', 987654300, 'myemail@email.com', '$2y$10$6sucVUYDP6gbJh54fspvnucUuzsUbRcDQPE.qNvoW4GG1J8IRi6T6', 186, 'Los Angeles', '789 Oak St', '90001'),
 ('Bob', 'Williams', 915415926, 'sellingstuff@email.com', '$2y$10$6sucVUYDP6gbJh54fspvnucUuzsUbRcDQPE.qNvoW4GG1J8IRi6T6', 32, 'Toronto', '567 Maple St', 'M1C 1A1'),
 ('Charlie', 'Brown', 953589793, 'charlie.brown@email.com', '$2y$10$6sucVUYDP6gbJh54fspvnucUuzsUbRcDQPE.qNvoW4GG1J8IRi6T6', 9, 'Sydney', '1010 Pine St', '2000'),

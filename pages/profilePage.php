@@ -24,10 +24,23 @@
 <body>
 <main class="center-text">
     <div class="user-info">
-        <h2><?php echo $session->getEmail(); ?></h2>
+        <?php $email = $session->getEmail(); ?>
         <h2>
-            <?php
-                $email = $session->getEmail();
+          <?php 
+              $photo = $session->getPhotoUser(); 
+
+              if($email == null){
+                //nada
+              }else if ($photo == "Sem foto") {
+                  echo "Sem foto";
+              } else{
+                  echo '<img class="userphoto" src= ../imagens/userProfile/'.$photo.' alt="Foto">';
+              }
+          ?>
+        </h2>
+        <h2><?php echo $email = $session->getEmail(); ?></h2>
+        <h2>
+              <?php
                 $stars = $session->getStars();
                 if($email == null){
                   echo "Faz login :)";
@@ -45,6 +58,7 @@
     <div class="links">
       <?php if($email != null) { ?>       
         <a href="pagina_de_mudar_coisas_perfil"><h2>Change personal info</h2></a>
+        <a href="pagina_anuncios_user"><h2>Change profile picture</h2></a>
         <a href="pagina_anuncios_user"><h2>My announces</h2></a>
         <a href="pagina_arquivo"><h2>Archive</h2></a>
         <a href="logout.php"><h2 id="Logout">Logout</h2></a>

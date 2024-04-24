@@ -6,7 +6,7 @@ function addUser(int $idUser, string $firstName, string $lastName, string $phone
 
     $options = ['cost' => 12];
 
-    $stmt = $db->prepare('INSERT INTO User(idUser, firstName, lastName, phone, email, address, 0, city, idCountry, zipCode) VALUES(:idUser, :firstName, :lastName, :phone, :email, :address, :stars, :city, :idCountry, :zipCode)');
+    $stmt = $db->prepare('INSERT INTO User(idUser, firstName, lastName, phone, email, address, 0, photo, city, idCountry, zipCode) VALUES(:idUser, :firstName, :lastName, :phone, :email, :address, :stars, :photo, :city, :idCountry, :zipCode)');
     $stmt->bindParam(':username', $username);
     $stmt->bindParam(':firstName', $firstName);
     $stmt->bindParam(':lastName', $lastName);
@@ -15,6 +15,7 @@ function addUser(int $idUser, string $firstName, string $lastName, string $phone
     $stmt->bindParam(':address', $address);
     $i = 0;
     $stmt->bindParam(':stars', $i);
+    $stmt->bindParam(':photo', $photo);
     $stmt->bindParam(':city', $city);
     $stmt->bindParam(':idCountry', $idCountry);
     $stmt->bindParam(':zipCode', $zipCode);
