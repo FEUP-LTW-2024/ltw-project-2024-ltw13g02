@@ -76,3 +76,12 @@
     return $result;
   }
 
+  function get_archive_products($db, $idUser){
+    $stmt = $db->prepare('SELECT *
+                          FROM Product P
+                          WHERE P.seller = ? AND P.buyer IS NOT NULL');
+    $stmt->execute(array( $idUser) );
+    $result = $stmt->fetchAll();
+    return $result;
+  }
+
