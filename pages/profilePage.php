@@ -44,7 +44,7 @@
               <?php
                 $stars = $session->getStars();
                 if($email == null){
-                  echo "Faz login :)";
+                  //ainda não deu login
                 }else if ($stars == 0) {
                     echo "0 Stars";
                 } else {
@@ -60,11 +60,11 @@
       <?php if($email != null) { ?>       
         <a href="pagina_de_mudar_coisas_perfil"><h2>Change personal info</h2></a>
         <a href="pagina_anuncios_user"><h2>Change profile picture</h2></a>
-        <a href="pagina_anuncios_user"><h2>My announces</h2></a>
-        <a href="pagina_arquivo"><h2>Archive</h2></a>
-        <a href="logout.php"><h2 id="Logout">Logout</h2></a>
+        <!-- <a href="pagina_anuncios_user"><h2>My announces</h2></a>
+        <a href="pagina_arquivo"><h2>Archive</h2></a> -->
+        <!--<a href="logout.php"><h2 id="Logout">Logout</h2></a> -->
       <?php } else { ?>
-        <a href="login.php"><h2 id="goToLogin">Login</h2></a>
+        <!--<a href="login.php"><h2 id="goToLogin">Login</h2></a> --> <!-- user n deu login -->
       <?php } ?>   
 </div>
 
