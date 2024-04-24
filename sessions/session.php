@@ -45,6 +45,22 @@
       $_SESSION['lastName'] = $firstName;
     }
 
+    public function setPhoneNumber(string $phoneNumber) {
+      $_SESSION['phoneNumber'] = $phoneNumber;
+    }
+
+    public function setAddress(string $address) {
+      $_SESSION['address'] = $address;
+    }
+
+    public function setCity(string $city) {
+      $_SESSION['city'] = $city;
+    }
+
+    public function setZipCode(string $zipCode) {
+      $_SESSION['zipCode'] = $zipCode;
+    }
+
     public function getLastName() : ?string {
       return isset($_SESSION['lastName']) ? $_SESSION['lastName'] : null;
     }
