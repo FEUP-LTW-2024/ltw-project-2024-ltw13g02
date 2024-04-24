@@ -4,6 +4,12 @@ h1 {
     margin: 0 0;
 }
 
+#mainLogo {
+    position: absolute;
+    left: 0;
+    margin: 10px;
+}
+
 #search {
     display: flex;
     padding-left: 0.5em;
@@ -160,4 +166,27 @@ ul {
 
 .icon {
     margin: 20px;
+}
+
+.user-photo-container {
+    position: relative;
+    margin: 20px 700px;
+}
+
+.user-icon-link,
+.user-photo-link {
+    position: relative;
+    display: inline-block;
+}
+
+.edit-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    visibility: hidden;
+}
+
+.user-photo-container:hover .edit-icon {
+    visibility: visible;
 }

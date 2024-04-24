@@ -17,6 +17,11 @@ if(isset($_POST['email']) && isset($_POST['password'])) {
         $session->setEmail($user->email);
         $session->setStars($user->stars);
         $session->setPhotoUser($user->photo);
+        $session->setAddress($user->userAddress);
+        $session->setCity($user->city);
+        $session->setCountry($user->idCountry);
+        $session->setPhone($user->phone);
+        $session->setZipCode($user->zipCode);
         $session->addMessage('success', 'Login successful!');
         header("Location: ../pages"); 
     } else {

@@ -8,11 +8,11 @@ class User {
     public string $userAddress;
     public int $stars;
     public string $city;
-    public string $idCountry;
+    public int $idCountry;
     public string $zipCode;
     public ?string $photo;
 
-    public function __construct(int $idUser, string $firstName, string $lastName, string $phone, string $email, string $userAddress, int $stars, string $city, string $idCountry, ?string $photo, string $zipCode) {
+    public function __construct(int $idUser, string $firstName, string $lastName, string $phone, string $email, string $userAddress, int $stars, string $city, int $idCountry, ?string $photo, string $zipCode) {
         $this->idUser = $idUser;
         $this->firstName = $firstName;
         $this->lastName = $lastName;

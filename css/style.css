@@ -13,14 +13,24 @@ button {
     font-size: 20px;
 }
 
+h2 {
+    font-family: "Didact Gothic", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.userIconPhoto {
+    color: black;
+    padding: 40px 0 40px 0;
+}
+
 #mainLogo {
     color:  #293fa1;
     font-family: "Caveat", cursive;
     font-optical-sizing: auto;
     font-weight: 800;
+    font-size: 3em;
     font-style: normal;
-    position: absolute;
-    left: 0;
 }
 
 button:hover {
@@ -54,9 +64,6 @@ h1 {
 .Products h2 {
     color: gray;
     font-size: 2em;
-    font-family: "Didact Gothic", sans-serif;
-    font-weight: 400;
-    font-style: normal;
     margin: 0;
 }
 
@@ -151,9 +158,11 @@ nav a {
     margin: 1em 0;
     display: inline-block;
     color: black;
-    font-family: "Poppins";
     font-size: 1.2em;
+    font-family: "Didact Gothic", sans-serif;
+    font-weight: 400;
     font-style: normal;
+    text-decoration: none;
 }
 
 .icon {
@@ -164,3 +173,6 @@ nav a {
     color: white;
 }
 
+.edit-icon {
+    color: white;
+}

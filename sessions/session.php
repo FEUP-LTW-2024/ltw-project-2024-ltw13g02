@@ -30,7 +30,7 @@
     }
 
     public function setId(int $id) {
-      $_SESSION['idUser'] = $id;
+      $_SESSION['id'] = $id;
     }
 
     public function setFirstName(string $firstName) {
@@ -45,7 +45,7 @@
       $_SESSION['lastName'] = $firstName;
     }
 
-    public function setPhoneNumber(string $phoneNumber) {
+    public function setPhone(string $phoneNumber) {
       $_SESSION['phoneNumber'] = $phoneNumber;
     }
 
@@ -87,6 +87,39 @@
 
     public function setPhotoUser(string $photo) {
       $_SESSION['photo'] = $photo;
+    }
+
+    public function getPhone() : ?string {
+      return isset($_SESSION['phoneNumber']) ? $_SESSION['phoneNumber'] : null;
+    }
+
+    public function getCountry() : ?string {
+      $db = getDatabaseConnection();
+      $stmt = $db->prepare('
+          SELECT country
+          FROM Country 
+          WHERE id = ?
+      ');
+
+      $stmt->execute($_SESSION['idCountry']);
+
+      return $stmt->fetch();
+    }
+  
+    public function getCity() : ?string {
+      return isset($_SESSION['city']) ? $_SESSION['city'] : null;
+    }
+
+    public function getAddress() : ?string {
+      return isset($_SESSION['userAddress']) ? $_SESSION['userAddress'] : null;
+    }
+
+    public function getZipCode() : ?string {
+      return isset($_SESSION['zipCode']) ? $_SESSION['zipCode'] : null;
+    }
+
+    public function setCountry(int $idCountry) {
+      $_SESSION['idCountry'] = $idCountry;
     }
   }
 ?>
