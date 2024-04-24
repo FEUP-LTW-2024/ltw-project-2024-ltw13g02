@@ -25,16 +25,34 @@
 <main class="center-text">
     <div class="user-info">
         <h2><?php echo $session->getEmail(); ?></h2>
-        <h2>Stars: <?php echo $session->getStars(); ?></h2>
+        <h2>
+            <?php
+                $email = $session->getEmail();
+                $stars = $session->getStars();
+                if($email == null){
+                  echo "Faz login :)";
+                }else if ($stars == 0) {
+                    echo "0 Stars";
+                } else {
+                    for ($i = 0; $i < $stars; $i++) {
+                        echo '<img class="star" src="star.jpeg" alt="Star">';
+                    }
+                }
+              ?>
+            </h2>
         <h2><?php echo $session->getFirstName() . " " . $session->getLastName(); ?></h2>
     </div>
     <div class="links">
+      <?php if($email != null) { ?>       
         <a href="pagina_de_mudar_coisas_perfil"><h2>Change personal info</h2></a>
         <a href="pagina_anuncios_user"><h2>My announces</h2></a>
         <a href="pagina_arquivo"><h2>Archive</h2></a>
-        <a href="login.php"><h2 id="goToLogin">Login</h2></a>
         <a href="logout.php"><h2 id="Logout">Logout</h2></a>
-    </div>
+      <?php } else { ?>
+        <a href="login.php"><h2 id="goToLogin">Login</h2></a>
+      <?php } ?>   
+</div>
+
 </main>
 
 </body>

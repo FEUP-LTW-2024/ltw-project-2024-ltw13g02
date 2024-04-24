@@ -259,3 +259,9 @@ body {
 .links a {
     margin: 0px 0; /* Adjust spacing between each link */
 }
+
+.star{
+    width: 30px;
+    height: auto;
+    margin: 5px;
+}
