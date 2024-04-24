@@ -15,11 +15,28 @@
 
 <!DOCTYPE html>
 <html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Page Title</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
 <body>
-    <main>
-      <h2> NAME: </h2>
-      <h2 id="username"><?php echo $session->getEmail(); ?></h2>
-      <a href="login.php"><h2 id="goToLogin">Login</h2></a>
-      <a href="logout.php"><h2 id="Logout">Logout</h2></a>
-    </main>
+<main class="center-text">
+    <div class="user-info">
+        <h2><?php echo $session->getEmail(); ?></h2>
+        <h2>Stars: <?php echo $session->getStars(); ?></h2>
+        <h2><?php echo $session->getFirstName() . " " . $session->getLastName(); ?></h2>
+    </div>
+    <div class="links">
+        <a href="pagina_de_mudar_coisas_perfil"><h2>Change personal info</h2></a>
+        <a href="pagina_anuncios_user"><h2>My announces</h2></a>
+        <a href="pagina_arquivo"><h2>Archive</h2></a>
+        <a href="login.php"><h2 id="goToLogin">Login</h2></a>
+        <a href="logout.php"><h2 id="Logout">Logout</h2></a>
+    </div>
+</main>
+
 </body>
+</html>
+

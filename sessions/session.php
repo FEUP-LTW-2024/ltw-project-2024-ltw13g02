@@ -37,6 +37,18 @@
       $_SESSION['firstName'] = $firstName;
     }
 
+    public function getFirstName() : ?string {
+      return isset($_SESSION['firstName']) ? $_SESSION['firstName'] : null;
+    }
+
+    public function setLastName(string $firstName) {
+      $_SESSION['lastName'] = $firstName;
+    }
+
+    public function getLastName() : ?string {
+      return isset($_SESSION['lastName']) ? $_SESSION['lastName'] : null;
+    }
+
     public function addMessage(string $type, string $text) {
       $_SESSION['messages'][] = array('type' => $type, 'text' => $text);
     }
@@ -44,5 +56,15 @@
     public function getMessages() {
       return $this->messages;
     }
+
+    public function getStars() : ?int {
+      return isset($_SESSION['stars']) ? $_SESSION['stars'] : null;
+    }  
+
+    public function setStars(int $stars) {
+      $_SESSION['stars'] = $stars;
+    }
+
+    
   }
 ?>

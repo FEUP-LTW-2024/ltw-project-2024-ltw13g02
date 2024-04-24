@@ -237,3 +237,25 @@ body {
     width: 2em;
 
 }
+
+.center-text {
+    text-align: center;
+}
+
+.user-info {
+    margin-bottom: 0px; /* Adjust spacing between user info and links */
+}
+
+.user-info h2 {
+    margin: 10px 0; /* Adjust spacing between each piece of user info */
+}
+
+.links {
+    /*display: flex;*/
+    flex-direction: column;
+    align-items: center;
+}
+
+.links a {
+    margin: 0px 0; /* Adjust spacing between each link */
+}
