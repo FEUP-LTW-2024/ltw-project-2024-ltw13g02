@@ -1,0 +1,163 @@
+h1 {
+    grid-column-start: 1;
+    grid-row-start: 1;
+    margin: 0 0;
+}
+
+#search {
+    display: flex;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    margin: auto;
+
+    margin-top: 0.5em;
+}
+
+#search input{
+    margin: auto;
+    width: 95%;
+    border-radius: 1em;
+    padding-left: 1em;
+}
+
+.Products {
+    width: 99%;
+    margin-top: 10px;
+    margin-left: 0.5%;
+    margin-right: 0.5%;
+}
+
+.Products article {
+    border-radius: 12px;
+    height: 25em;
+    position: relative;
+    display: flex;
+    overflow: hidden;
+}
+
+.Products .offers_container {
+    display: flex;
+    width: 100%;
+    overflow-y: hidden;
+}
+
+.Products input:first-of-type{
+    position: absolute;
+    left: 0;
+    top: 50%;
+    bottom: 50%;
+
+}
+
+.Products input:last-of-type{
+    position: absolute;
+    right: 0;
+    top: 50%;
+    bottom: 50%;
+}
+
+body > header{
+    display: flex;
+    position: relative;
+    justify-content: flex-end;
+    height: 5em;
+}
+
+.Products input{
+    border-radius: 100%;
+}
+
+header > a > img{
+    height: 100%;
+}
+
+.offers_container::-webkit-scrollbar {
+    display: none;
+}
+
+body {
+    margin: 0;
+}
+
+.offer_info{
+    position: relative;
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: 50% 50%;
+    height:max-content;
+}
+
+.offer_info h4{
+    position: relative;
+    margin: 0.5em 0 0 0.5em;
+    grid-column-end: span 2;
+}
+
+.offer_info h5{
+    position: relative;
+    margin: 0.5em 0 0 0.5em;
+
+}
+
+.offer_info p {
+    margin-top: 0;
+    margin-right: 5%;
+}
+
+.offer .offer_img{
+    object-fit: scale-down;
+
+    width: 95%;
+    height: auto;
+}
+
+.user_small_card p{
+    margin-top:auto;
+    margin-bottom: auto;
+}
+
+.user_small_card{
+    display: flex;
+    margin-left: 0.5em;
+    margin-top: auto;
+}
+
+.user_small_card .user_small_pfp{
+    height: 2em;
+    width: 2em;
+}
+
+.user-info {
+    margin-bottom: 0px; /* Adjust spacing between user info and links */
+}
+
+.user-info h2 {
+    margin: 10px 0; /* Adjust spacing between each piece of user info */
+}
+
+.links {
+    /*display: flex;*/
+    flex-direction: column;
+    align-items: center;
+}
+
+.links a {
+    margin: 0px 0; /* Adjust spacing between each link */
+}
+
+.star{
+    width: 30px;
+    height: auto;
+    margin: 5px;
+}
+
+ul {
+    display: grid;
+    grid-template-columns: repeat(3, 33.33%);
+    grid-template-rows: auto;
+    justify-items: stretch;
+}
+
+.icon {
+    margin: 20px;
+}

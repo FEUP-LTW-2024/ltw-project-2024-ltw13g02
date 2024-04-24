@@ -5,10 +5,10 @@ require_once(__DIR__ . '/../sessions/session.php');
 ?>
 
 <?php function drawHeader(Session $session) { ?>
-    <!DOCTYPE html>
-    <html lang="en">
     <head>
         <link rel="stylesheet" href="../css/style.css">
+        <link rel="stylesheet" href="../css/responsive.css">
+        <link rel="stylesheet" href="../css/layout.css">
         <title>Pre Loved Bazaar</title>
         <meta charset="utf-8">
 
@@ -16,14 +16,33 @@ require_once(__DIR__ . '/../sessions/session.php');
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Didact+Gothic&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="../fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+       
     </head>
     <header>
         <a href="../pages/index.php"><h2 id="mainLogo">PRE LOVED BAZAAR</h2></a>
-        <a href="../pages/index.php"><img class="logo" id="chatLogo" src="../imagens/message.png" alt="ON Messages"></a>
-        <a href="../pages/profilePage.php"><img class="logo" id="settingsLogo" src="../imagens/settings.png" alt="ON Settings" ></a>
+        <a href="../pages/index.php"><i class="fa fa-comments fa-2x icon"></i></a>
+        <a href="../pages/profilePage.php"><i class="fa fa-user fa-2x icon"></i></a>
+        <?php if($session->getEmail() != null) { ?>
+            <a href="../pages/logout.php"><i class="fa fa-sign-out fa-2x icon"></i></a>
+        <?php } else { ?>
+            <a href="../pages/login.php"><i class="fa fa-sign-in fa-2x icon"></i></a>
+        <?php } ?> 
     </header>
-    <body>
-    </body>
-    </html>
+<?php } ?>
+
+<?php function drawHamburguer(Session $session) { ?>
+    <?php if($session->getEmail() != null) { ?>
+        <nav id="menu">
+            <input type="checkbox" id="hamburger"/> 
+            <label class="hamburger" for="hamburger"></label>
+            <ul>
+                <li><a href="../pages/profilePage.php">Personal Info</a></li>
+                <li><a href="../pages/myAnnouncements.php">My announcements</a></li>
+                <li><a href="../pages/myArchive.php">Archive</a></li>
+            </ul>
+        </nav>
+    <?php } else { ?>
+        <h2> Ainda não deste login :( </h2>
+    <?php } ?> 
 <?php } ?>

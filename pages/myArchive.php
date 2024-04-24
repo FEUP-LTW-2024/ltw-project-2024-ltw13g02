@@ -20,19 +20,7 @@
     <main>
       <div class="user-info">
         <h2><?php echo $session->getEmail(); ?></h2>
-        <h2>
-          <?php
-            $email = $session->getEmail();
-            $stars = $session->getStars();
-            if ($stars == 0) {
-              echo "0 Stars";
-            } else {
-              for ($i = 0; $i < $stars; $i++) {
-                echo '<img class="star" src="star.jpeg" alt="Star">';
-              }
-            }
-            ?>
-          </h2>
+        <h2> my archive </h2>
         <h2><?php echo $session->getFirstName() . " " . $session->getLastName(); ?></h2>
       </div>
     </main>
