@@ -66,3 +66,13 @@
     $result = $stmt->fetch();
     return $result['num_reviews'];
   }
+
+  function get_seller_products($db, $idSeller) {
+    $stmt = $db->prepare('SELECT *
+                          FROM Product P
+                          WHERE P.seller = ? AND P.buyer is NULL');
+    $stmt->execute(array( $idSeller) );
+    $result = $stmt->fetchAll();
+    return $result;
+  }
+
