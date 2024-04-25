@@ -11,7 +11,7 @@
   $db = getDatabaseConnection();
 
   drawHeader($session);
-  drawHamburguer($session);
+  drawHamburguer($session, 0);
 ?>
 
 <!DOCTYPE html>
