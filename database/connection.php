@@ -1,4 +1,7 @@
 <?php
+
+  require_once(__DIR__ . "/productClass.php");
+  require_once(__DIR__ . "/userClass.php.php");
   /*
   function getDatabaseConnection() {
     return new PDO('sqlite:basededados.db');
@@ -50,13 +53,17 @@
     return $result;
   }
 
-  function getUserPublicInfo($db, $user_id){
-    $stmt = $db->prepare('SELECT U.idUser, U.firstName, U.lastName, U.stars 
+  function getUserInfo($db, $user_id) : ?User{
+    $stmt = $db->prepare('SELECT * 
                           FROM User U
                           WHERE U.idUser = ?');
     $stmt->execute(array( $user_id) );
     $result = $stmt->fetch();
-    return $result;
+
+    $user = new User($result['idProduct'], $result['firstName'], $result['lastName'], $result['phone'], $result['email'],
+                     $result['userAddress'], $result['stars'], $result['city'], $result['idCountry'], $result['photo'], $result['zipCode']);
+
+    return $user;
   }
 
   function get_user_num_reviews($db, $user_id) {
@@ -82,7 +89,7 @@
                           FROM Product P
                           WHERE P.seller = ? AND P.buyer IS NOT NULL');
     $stmt->execute(array( $idUser) );
-    $result = $stmt->fetchAll();
-    return $result;
+    $products = $stmt->fetchAll();
+    return $products;
   }
 

@@ -27,11 +27,14 @@ require_once(__DIR__ . "/../database/get_from_db.php");
     }
 
     public function setId(int $id) {
-<<<<<<< HEAD
-      $_SESSION['id'] = $id; //antes estava 'idUser'
-=======
+
       $_SESSION['id'] = $id;
->>>>>>> main
+    }
+
+    //TODO Esta função foi feita pelo Pedro é preciso verificar
+    public function getId() : ?int {
+
+      return isset($_SESSION['id']) ? $_SESSION['id'] : null;
     }
 
     public function setFirstName(string $firstName) {

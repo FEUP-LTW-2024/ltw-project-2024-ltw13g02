@@ -13,7 +13,7 @@
     $db = getDatabaseConnection();
     if (isset($_GET['user']))
     {
-        $user = getUserPublicInfo($db, $_GET['user']);
+        $user = getUserInfo($db, $_GET['user']);
         $products = get_seller_products($db, $_GET['user']);
 
     }
