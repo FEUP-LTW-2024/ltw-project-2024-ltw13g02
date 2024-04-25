@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com/css2?family=Didact+Gothic&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap');
+
+button {
+    margin: 0 auto auto auto;
+    height: 40px;
+    width: 200px;
+    color: white;
+    background-color: #b8c8d6;
+    border-color: #b8c8d6;
+    border-radius: 8px;
+    font-size: 20px;
+}
+
+#mainLogo {
+    color:  #293fa1;
+    font-family: "Caveat", cursive;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    font-style: normal;
+    position: absolute;
+    left: 0;
+}
+
+button:hover {
+    background: #276a9f;
+}
+
+h1 {
+    color: #ffffff;
+    font-size: 3em;
+    text-align: center;
+}
+
+#search *{
+    border-color: gray;
+    border-style: solid;
+}
+
+#search input:focus{
+    background-color: lightgrey;
+}
+
+#search select{
+    border-radius: 1em;
+}
+
+.Products article {
+    outline: solid;
+    outline-color: lightblue;
+}
+
+.Products h2 {
+    color: gray;
+    font-size: 2em;
+    font-family: "Didact Gothic", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    margin: 0;
+}
+
+.Products input{
+    height: fit-content;
+    width: fit-content;
+}
+
+.offer a{
+    text-decoration: none;
+}
+
+body > header{
+    background-color: lightblue;
+}
+
+.offer_info{
+    font-family: Roboto;
+}
+
+.offer_info p {
+    font-weight: bold;
+    font-size: large;
+}
+
+.offer .offer_img{
+    border-radius: 10%;
+}
+
+.user_small_card .user_small_pfp{
+    border-radius: 100%;
+}
+
+.center-text {
+    text-align: center;
+}
+
+.user-info {
+    margin-bottom: 0px; 
+}
+
+.user-info h2 {
+    margin: 10px 0;
+}
+
+.links {
+    flex-direction: column;
+    align-items: center;
+}
+
+.links a {
+    margin: 0px 0;
+}
+
+.star{
+    width: 30px;
+    height: auto;
+    margin: 5px;
+}
+
+.userphoto{
+    width: 70px;
+    height: auto;
+    margin: 5px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    text-align: center;
+    margin: 0;
+}
+
+#hamburger {
+    display: none;
+}
+
+ul li:nth-child(1) {
+    border-top: 8px solid #E1493E;
+}
+
+ul li:nth-child(2) {
+    border-top: 8px solid #8ABA56;
+}
+
+ul li:nth-child(3) {
+    border-top: 8px solid #5B4282;
+}
+
+nav a {
+    padding-top: 5px;
+    margin: 1em 0;
+    display: inline-block;
+    color: black;
+    font-family: "Poppins";
+    font-size: 1.2em;
+    font-style: normal;
+}
+
+.icon {
+    color: #293fa1;
+}
+
+.icon:hover {
+    color: white;
+}
+

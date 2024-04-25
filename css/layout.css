@@ -1,12 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Didact+Gothic&display=swap');
+h1 {
+    grid-column-start: 1;
+    grid-row-start: 1;
+    margin: 0 0;
+}
 
-
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-
-
-
-
-form{
+#search {
     display: flex;
     padding-left: 0.5em;
     padding-right: 0.5em;
@@ -15,67 +13,32 @@ form{
     margin-top: 0.5em;
 }
 
-form *{
-    border-color: gray;
-    border-style: solid;
-}
-
-form input{
+#search input{
     margin: auto;
     width: 95%;
     border-radius: 1em;
     padding-left: 1em;
 }
 
-form input:focus{
-    background-color: lightgrey;
-}
-
-form select{
-    border-radius: 1em;
-}
-
-.Products
-{
+.Products {
     width: 99%;
     margin-top: 10px;
     margin-left: 0.5%;
     margin-right: 0.5%;
 }
 
-.Products article
-{
+.Products article {
     border-radius: 12px;
     height: 25em;
     position: relative;
-
-    outline: solid;
-    outline-color: lightblue;
-
     display: flex;
     overflow: hidden;
-
 }
 
 .Products .offers_container {
     display: flex;
     width: 100%;
     overflow-y: hidden;
-}
-
-.Products h2 {
-    color: gray;
-    font-size: 2em;
-    font-family: "Didact Gothic", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    margin: 0;
-}
-
-.Products input{
-    border-radius: 100%;
-    height: fit-content;
-    width: fit-content;
 }
 
 .Products input:first-of-type{
@@ -130,19 +93,17 @@ sliding_offer a{
     text-decoration: none;
 }
 
+
 body > header{
-    height: 3em;
-    background-color: lightblue;
     display: flex;
     position: relative;
     justify-content: flex-end;
+    height: 5em;
 }
 
-#mainLogo{
-    position: absolute;
-    left: 0;
+.Products input{
+    border-radius: 100%;
 }
-
 
 header > a > img{
     height: 100%;
@@ -161,8 +122,6 @@ body {
     display: grid;
     grid-template-columns: auto auto;
     grid-template-rows: 50% 50%;
-
-    font-family: Roboto;
     height:max-content;
 }
 
@@ -174,17 +133,13 @@ body {
 
 .offer_info h5{
     position: relative;
-    margin: 0.5em 0 0 0.5em;    
-    
+    margin: 0.5em 0 0 0.5em;
+
 }
 
 .offer_info p {
     margin-top: 0;
     margin-right: 5%;
-
-    font-weight: bold;
-    font-size: large;
-
 }
 
 sliding_offer .offer_img{
@@ -192,13 +147,11 @@ sliding_offer .offer_img{
 
     width: 95%;
     height: auto;
-    border-radius: 10%;
 }
 
 .user_small_card p{
     margin-top:auto;
     margin-bottom: auto;
-
 }
 
 .user_small_card{
@@ -208,8 +161,41 @@ sliding_offer .offer_img{
 }
 
 .user_small_card .user_small_pfp{
-    border-radius: 100%;
     height: 2em;
     width: 2em;
+}
 
+.user-info {
+    margin-bottom: 0px; /* Adjust spacing between user info and links */
+}
+
+.user-info h2 {
+    margin: 10px 0; /* Adjust spacing between each piece of user info */
+}
+
+.links {
+    /*display: flex;*/
+    flex-direction: column;
+    align-items: center;
+}
+
+.links a {
+    margin: 0px 0; /* Adjust spacing between each link */
+}
+
+.star{
+    width: 30px;
+    height: auto;
+    margin: 5px;
+}
+
+ul {
+    display: grid;
+    grid-template-columns: repeat(3, 33.33%);
+    grid-template-rows: auto;
+    justify-items: stretch;
+}
+
+.icon {
+    margin: 20px;
 }

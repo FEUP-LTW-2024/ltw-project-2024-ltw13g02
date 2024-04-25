@@ -2,8 +2,8 @@
 <html lang="en-US">
     <head>
         <title>Login</title>
-        <link rel="stylesheet" href="forms.css">
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="../css/forms.css">
+        <link rel="stylesheet" href="../css/style.css">
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,15 +14,24 @@
     </head>
     <body class="log">
         <div class="login">
-            <form>
+            <form id = "login" action="../actions/loginAction.php" method="post">
                 <h1>Login</h1>
                 <label id="email" class="required">
-                    <input type="text" name="username" placeholder=" Email..." required>
+                    <input type="text" name="email" placeholder=" Email..." required>
                 </label>
                 <label id="password" class="required">
                     <input type="password" name="password" placeholder=" Password..." required>
                 </label>
-                <button id="login" type="submit">Login</button>
+                <?php
+                    if(ISSET($_SESSION['error'])){
+                ?>
+                        <div class="alert alert-danger"><?php echo $_SESSION['error']?></div>
+                <?php
+                        unset($_SESSION['error']);
+                    }
+                ?>
+                <a href="index.php"><button id="Blogin" type="submit">Login</button></a>
+                <a href="register.php"><h2 id="goToReg">I don't have an account</h2></a>
             </form>
         </div>
     </body>

@@ -33,7 +33,7 @@
                 foreach ($products as $product) { ?>
                     <a href="main.html"><img class="offer_img" src="imagens/randomImage.jpg"></a>
                     <div class="offer_info">
-                            <h4> <?= $product['prodName'] ?> </h4> <!-- TODO adicionar size restriction-->
+                            <h4> <?= $product['prodName'] ?> </h4>
                             <h5><? $city . ', ' . $country ?></h5>
                             <p><?= $product['price'] ?></p>
                         </div>
