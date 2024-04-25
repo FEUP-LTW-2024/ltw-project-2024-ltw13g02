@@ -168,11 +168,18 @@ ul {
     margin: 20px;
 }
 
-.user-photo-container {
-    margin: 20px 700px;
+.user-info {
     display: flex;
-    justify-content: center; /* Center the content horizontally */
-    align-items: center; /* Center the content vertically */}
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.user-photo-container {
+    position: relative;
+    margin-bottom: 20px; /* Adjust as needed */
+}
 
 .user-icon-link,
 .user-photo-link {
@@ -193,6 +200,6 @@ ul {
 }
 
 .userphoto {
-    width:150px;
+    width: 150px;
     margin: 20px;
 }

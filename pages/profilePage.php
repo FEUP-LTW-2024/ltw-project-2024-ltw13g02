@@ -45,6 +45,7 @@
               </div>
           <?php } ?>
         </h2>
+        <div class="info">
         <?php
           $stars = $session->getStars();
           if($email != null) {
@@ -78,6 +79,7 @@
             <?php
           }
         ?>
+        </div>
     </div>
   </body>
 </html>
