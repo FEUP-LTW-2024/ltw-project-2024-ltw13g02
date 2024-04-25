@@ -2,6 +2,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap');
 
+html {
+    min-width: 40em;
+}
+
 button {
     margin: 0 auto auto auto;
     height: 40px;
@@ -13,14 +17,24 @@ button {
     font-size: 20px;
 }
 
+h2 {
+    font-family: "Didact Gothic", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.userIconPhoto {
+    color: black;
+    padding: 40px 0 40px 0;
+}
+
 #mainLogo {
     color:  #293fa1;
     font-family: "Caveat", cursive;
     font-optical-sizing: auto;
     font-weight: 800;
+    font-size: 3em;
     font-style: normal;
-    position: absolute;
-    left: 0;
 }
 
 button:hover {
@@ -54,9 +68,6 @@ h1 {
 .Products h2 {
     color: gray;
     font-size: 2em;
-    font-family: "Didact Gothic", sans-serif;
-    font-weight: 400;
-    font-style: normal;
     margin: 0;
 }
 
@@ -117,12 +128,6 @@ body > header{
     margin: 5px;
 }
 
-.userphoto{
-    width: 70px;
-    height: auto;
-    margin: 5px;
-}
-
 ul {
     list-style-type: none;
     padding: 0;
@@ -151,9 +156,11 @@ nav a {
     margin: 1em 0;
     display: inline-block;
     color: black;
-    font-family: "Poppins";
     font-size: 1.2em;
+    font-family: "Didact Gothic", sans-serif;
+    font-weight: 400;
     font-style: normal;
+    text-decoration: none;
 }
 
 .icon {
@@ -164,3 +171,6 @@ nav a {
     color: white;
 }
 
+.edit-icon {
+    color: white;
+}

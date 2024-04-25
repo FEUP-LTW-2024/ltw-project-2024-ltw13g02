@@ -42,7 +42,5 @@ require_once(__DIR__ . '/../sessions/session.php');
                 <li><a href="../pages/myArchive.php">Archive</a></li>
             </ul>
         </nav>
-    <?php } else { ?>
-        <h2> Ainda não deste login :( </h2>
-    <?php } ?> 
-<?php } ?>
+    <?php } 
+    } ?>

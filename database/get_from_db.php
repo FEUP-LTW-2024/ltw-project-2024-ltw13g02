@@ -34,3 +34,11 @@ function getUser($email, $password) : ?User{
         return null;
     }
 }
+
+function getCountryFromDB($idCountry) : ?string {
+    $db = getDatabaseConnection();
+    $stmt = $db->prepare('SELECT country FROM Country WHERE idCountry = ?');
+    $stmt->execute(array($idCountry));
+    $country = $stmt->fetch(PDO::FETCH_ASSOC);
+    return isset($country['country']) ? $country['country'] : null;
+}
