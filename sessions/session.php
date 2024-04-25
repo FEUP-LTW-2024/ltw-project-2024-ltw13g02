@@ -17,10 +17,6 @@
       session_destroy();
     }
 
-    public function getId() : ?int {
-      return isset($_SESSION['id']) ? $_SESSION['id'] : null;    
-    }
-
     public function getEmail() : ?string {
       return isset($_SESSION['email']) ? $_SESSION['email'] : null;
     }
@@ -94,7 +90,7 @@
     }
 
     public function getCountry() : ?string {
-      return isset($_SESSION['country']) ? $_SESSION['country'] : null;
+      return isset($_SESSION['idCountry']) ? $_SESSION['idCountry'] : null;
     }
   
     public function getCity() : ?string {
@@ -109,8 +105,8 @@
       return isset($_SESSION['zipCode']) ? $_SESSION['zipCode'] : null;
     }
 
-    public function setCountry(int $idCountry) {
-
+    public function setCountry(string $idCountry) {
+      $_SESSION['idCountry'] = $idCountry; //:(
     }
   }
 ?>

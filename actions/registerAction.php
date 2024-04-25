@@ -9,7 +9,11 @@ try {
     $phone = $_POST['phone'];
     $email = $_POST['email'];
     $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+<<<<<<< HEAD
     $idCountry = $_POST['country'];
+=======
+    $idCountry = $_POST['idCountry'];
+>>>>>>> 50e0deedde3edd973f32d7675025b17d2c7d9da1
     $city = $_POST['city'];
     $address = $_POST['address'];
     $zipCode = $_POST['zipCode'];
