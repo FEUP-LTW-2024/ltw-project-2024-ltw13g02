@@ -50,7 +50,7 @@
     }
 
     public function setAddress(string $address) {
-      $_SESSION['address'] = $address;
+      $_SESSION['userAddress'] = $address;
     }
 
     public function setCity(string $city) {
@@ -94,16 +94,7 @@
     }
 
     public function getCountry() : ?string {
-      $db = getDatabaseConnection();
-      $stmt = $db->prepare('
-          SELECT country
-          FROM Country 
-          WHERE id = ?
-      ');
-
-      $stmt->execute($_SESSION['idCountry']);
-
-      return $stmt->fetch();
+      return isset($_SESSION['country']) ? $_SESSION['country'] : null;
     }
   
     public function getCity() : ?string {
@@ -119,7 +110,7 @@
     }
 
     public function setCountry(int $idCountry) {
-      $_SESSION['idCountry'] = $idCountry;
+
     }
   }
 ?>

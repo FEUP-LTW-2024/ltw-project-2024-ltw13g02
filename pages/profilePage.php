@@ -29,29 +29,35 @@
         <h2>
           <?php 
             $photo = $session->getPhotoUser(); 
-            if($email != null): ?>
+            if($email != null) { ?>
               <div class="user-photo-container">
-                  <?php if ($photo == "Sem foto"): ?>
+                  <?php if ($photo == "Sem foto") { ?>
                       <a href="../pages/profilePage.php" class="user-icon-link">
                           <i class="fa fa-user fa-5x userIconPhoto"></i>
                           <a href="../pages/editingProfile.php"><i class="fa fa-pencil edit-icon fa-1x"></i></a>
                       </a>
-                  <?php else: ?>
+                  <?php } else { ?>
                       <a href="../pages/profilePage.php" class="user-photo-link">
                           <img class="userphoto" src="../imagens/userProfile/<?php echo $photo; ?>" alt="Photo">
                           <a href="../pages/editingProfile.php"><i class="fa fa-pencil edit-icon fa-1x"></i></a>
                       </a>
-                  <?php endif; ?>
+                  <?php } ?>
               </div>
-          <?php endif; ?>
+            <?php } else { ?>
+              <div class="user-photo-container">
+                  <a href="../pages/profilePage.php" class="user-icon-link">
+                    <i class="fa fa-user fa-5x userIconPhoto"></i>
+                  </a>
+              </div>
+          <?php } ?>
         </h2>
         <?php
           $stars = $session->getStars();
-            if($email != null) {
+          if($email != null) {
         ?>
-          <h2><?php echo "Name: " . $session->getFirstName() . " " . $session->getLastName(); ?></h2>
-          <h2><?php echo "Email: " . $email = $session->getEmail(); ?></h2>
-          <h2>
+            <h2><?php echo "Name: " . $session->getFirstName() . " " . $session->getLastName(); ?></h2>
+            <h2><?php echo "Email: " . $email = $session->getEmail(); ?></h2>
+            <h2>
             <?php
               $stars = $session->getStars();
               if ($stars == 0) {
@@ -63,17 +69,20 @@
                 }
               }
             ?>
-          </h2>
-          <h2><?php echo "Phone: " . $session->getPhone(); ?></h2>
-          <h2><?php echo "City: " . $session->getCity(); ?></h2>
-          <h2><?php echo "Address: " . $session->getAddress(); ?></h2>
-          <h2><?php echo "zipCode: " . $session->getZipCode(); ?></h2>
+            </h2>
+            <h2><?php echo "Phone: " . $session->getPhone(); ?></h2>
+            <h2><?php echo "Country: " . $session->getCountry(); ?></h2>
+            <h2><?php echo "City: " . $session->getCity(); ?></h2>
+            <h2><?php echo "Address: " . $session->getAddress(); ?></h2>
+            <h2><?php echo "zipCode: " . $session->getZipCode(); ?></h2>
         <?php
-            }
-            else {
-              echo "Guest\n";
-              echo "Login to announce and buy!!";
-            }
+          }
+          else {
+            ?>
+            <h2><?php echo "Guest\n"; ?></h2>
+            <h2><?php echo "Login to announce and buy!!"; ?></h2>
+            <?php
+          }
         ?>
     </div>
   </body>

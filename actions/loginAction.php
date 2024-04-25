@@ -23,7 +23,7 @@ if(isset($_POST['email']) && isset($_POST['password'])) {
         $session->setPhone($user->phone);
         $session->setZipCode($user->zipCode);
         $session->addMessage('success', 'Login successful!');
-        header("Location: ../pages"); 
+        header("Location: ../pages");
     } else {
         $session->addMessage('error', 'Wrong email or password!');
         header("Location: ../pages/login.php");
