@@ -106,7 +106,7 @@ require_once(__DIR__ . "/../database/get_from_db.php");
       return isset($_SESSION['zipCode']) ? $_SESSION['zipCode'] : null;
     }
 
-    public function setCountry(string $idCountry) {
+    public function setCountry(int $idCountry) {
       $_SESSION['idCountry'] = $idCountry;
     }
   }

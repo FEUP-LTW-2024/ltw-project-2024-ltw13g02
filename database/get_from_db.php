@@ -35,10 +35,10 @@ function getUser($email, $password) : ?User{
     }
 }
 
-function getCountryFromDB($countryNumber) : ?string {
+function getCountryFromDB($idCountry) : ?string {
     $db = getDatabaseConnection();
-    $stmt = $db->prepare('SELECT country FROM Country LIMIT ?, 1');
-    $stmt->execute(array($countryNumber - 1)); // Adjust the country number to match the row index (starting from 0)
+    $stmt = $db->prepare('SELECT country FROM Country WHERE idCountry = ?');
+    $stmt->execute(array($idCountry));
     $country = $stmt->fetch(PDO::FETCH_ASSOC); // Fetch as associative array
     return isset($country['country']) ? $country['country'] : null; // Access the country name
 }
