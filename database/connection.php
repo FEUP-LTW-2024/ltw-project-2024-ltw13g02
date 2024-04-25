@@ -1,7 +1,7 @@
 <?php
 
   require_once(__DIR__ . "/productClass.php");
-  require_once(__DIR__ . "/userClass.php.php");
+  require_once(__DIR__ . "/userClass.php");
   /*
   function getDatabaseConnection() {
     return new PDO('sqlite:basededados.db');
@@ -27,7 +27,7 @@
     return $result;
   }
 
-  function getUserAddress( $db, $user_id ) {
+  function getUserAddress( $db, User $user_id ) {
     $stmt = $db->prepare('SELECT U.userAddress, U.city, C.country, U.zipCode
                           FROM User U JOIN Country C ON C.idCountry = U.idCountry
                           WHERE U.idUser = ? ');
@@ -59,10 +59,11 @@
                           WHERE U.idUser = ?');
     $stmt->execute(array( $user_id) );
     $result = $stmt->fetch();
+    if ( empty($result) ) {return null;}
 
-    $user = new User($result['idProduct'], $result['firstName'], $result['lastName'], $result['phone'], $result['email'],
+    $user = new User($result['idUser'], $result['firstName'], $result['lastName'], $result['phone'], $result['email'],
                      $result['userAddress'], $result['stars'], $result['city'], $result['idCountry'], $result['photo'], $result['zipCode']);
-
+    
     return $user;
   }
 
