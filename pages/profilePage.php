@@ -10,6 +10,8 @@
 
   require_once(__DIR__ . '/../templates/common_tmpl.php');
 
+  require_once(__DIR__ . '/../templates/user_tmpl.php');
+
   $db = getDatabaseConnection();
 
   drawHeader($session);
@@ -54,21 +56,8 @@
             <h2><?php echo "Name: " . $session->getFirstName() . " " . $session->getLastName(); ?></h2>
             <a href="reviewsPage.php"><h2 id="stars">
             <?php
-              $stars = 0;
-
-              $filledStars = floor($stars);
-              if($stars - $filledStars > 0.5)  $filledStars++;
-              else if ($stars - $filledStars <= 0.5 && $stars - $filledStars > 0) $hasHalfStar = true;
-
-              for ($i = 1; $i <= 5; $i++) {
-                  $filled = $i <= $filledStars;
-                  if ($filled) echo '<i class="fa fa-star"></i>';
-                  else if ($hasHalfStar) {
-                    echo '<i class="fa fa-star-half-o"></i>';
-                    $hasHalfStar = false;
-                  }
-                  else echo '<i class="fa fa-star-o"></i>';
-              }
+              $stars = $session->getStars();
+              drawStars($stars);
             ?>
             </h2></a>
             <h2><?php echo "Email: " . $email = $session->getEmail(); ?></h2>

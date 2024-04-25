@@ -2,6 +2,9 @@
 declare(strict_types = 1);
 
 require_once(__DIR__ . '/../sessions/session.php');
+
+require_once(__DIR__ . "/user_tmpl.php")
+
 ?>
 
 <?php function drawFilterBar(Session $session) { ?>
@@ -17,23 +20,11 @@ require_once(__DIR__ . '/../sessions/session.php');
                         <?php
                         $stars = $session->getStars();
 
-                        $filledStars = floor($stars);
-                        if($stars - $filledStars > 0.5)  $filledStars++;
-                        else if ($stars - $filledStars <= 0.5 && $stars - $filledStars > 0) $hasHalfStar = true;
-
-                        for ($i = 1; $i <= 5; $i++) {
-                            $filled = $i <= $filledStars;
-                            if ($filled) echo '<i class="fa fa-star"></i>';
-                            else if ($hasHalfStar) {
-                                echo '<i class="fa fa-star-half-o"></i>';
-                                $hasHalfStar = false;
-                            }
-                            else echo '<i class="fa fa-star-o"></i>';
-                        }
+                        drawStars($stars);
                         ?>
                     </h2>
                 </span>
-                <span class="rating-score"><?php echo $session->getStars(); ?></span>
+                <span class="rating-score"><?php echo round($session->getStars(), 2); ?></span>
             </div>
             <div class="filters">
                 <label for="classification">Classification:</label>

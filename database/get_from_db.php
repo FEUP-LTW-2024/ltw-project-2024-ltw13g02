@@ -2,6 +2,7 @@
 require_once('connection_to_db.php');
 require_once(__DIR__ . '/../database/userClass.php');
 require_once(__DIR__ . '/change_in_db.php');
+require_once(__DIR__ . '/../vendor/autoload.php');
 
 
 function getUser($email, $password) : ?User{
@@ -44,28 +45,25 @@ function getCountryFromDB($idCountry) : ?string {
     return isset($country['country']) ? $country['country'] : null;
 }
 
-function getStarsFromReviews($idUser): ?int {
-    $db = getDatabaseConnection();
-    $stmt = $db->prepare('
-        SELECT SUM(R.stars) as S, COUNT(*) as C
-        FROM USER U
-        LEFT JOIN Reviews R ON U.idUser = R.idUser
-        WHERE U.idUser = ?
-        GROUP BY U.idUser
-    ');
-    $stmt->execute(array($idUser));
-    $star = $stmt->fetch(PDO::FETCH_ASSOC);
-    if (isset($star['S']) && isset($star['C'])) {
-        setStarsOnDB($idUser, $star['S'] / $star['C']);
-        return $star['S'] / $star['C'];
+function getStarsFromReviews($idUser): ?float {
+    $reviews = getReviewsFromDB($idUser);
+    $sum = 0;
+    for ($i = 0; $i < count($reviews); $i++) {
+        $sum +=$reviews[$i]['stars'];
     }
-    return null;
+    $average = $sum / count($reviews);
+
+    $db = getDatabaseConnection();
+    $stmt = $db->prepare("UPDATE User SET stars = ? WHERE idUser = ?");
+    $stmt->execute(array($average, $idUser));
+
+    return $average;
 }
 
 function getReviewsFromDB($idUser): ?array {
     $db = getDatabaseConnection();
-    $stmt = $db->prepare("SELECT stars, reviewsDescription FROM Reviews WHERE Reviews.idUser = ?");
+    $stmt = $db->prepare("SELECT stars, reviewsDescription FROM Reviews WHERE idUser = ?");
     $stmt->execute(array($idUser));
-    $reviews = $stmt->fetch(PDO::FETCH_ASSOC);
+    $reviews = $stmt->fetchAll();
     return $reviews;
 }

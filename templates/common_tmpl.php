@@ -3,7 +3,6 @@ declare(strict_types = 1);
 
 require_once(__DIR__ . '/../sessions/session.php');
 
-include(__DIR__ . '/../vendor/autoload.php');
 ?>
 
 <?php function drawHeader(Session $session) { ?>
