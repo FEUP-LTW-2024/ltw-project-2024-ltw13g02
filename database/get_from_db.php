@@ -39,6 +39,6 @@ function getCountryFromDB($idCountry) : ?string {
     $db = getDatabaseConnection();
     $stmt = $db->prepare('SELECT country FROM Country WHERE idCountry = ?');
     $stmt->execute(array($idCountry));
-    $country = $stmt->fetch(PDO::FETCH_ASSOC); // Fetch as associative array
-    return isset($country['country']) ? $country['country'] : null; // Access the country name
+    $country = $stmt->fetch(PDO::FETCH_ASSOC);
+    return isset($country['country']) ? $country['country'] : null;
 }
