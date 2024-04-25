@@ -1,6 +1,6 @@
 <?php
   declare(strict_types = 1);
-
+  
   require_once(__DIR__ . '/../sessions/session.php');
   $session = new Session();
 
@@ -13,7 +13,7 @@
   $db = getDatabaseConnection();
 
   drawHeader($session);
-  drawHamburguer($session);
+  drawHamburguer($session, 0);
 ?>
 
 <!DOCTYPE html>
@@ -49,13 +49,12 @@
         </h2>
         <div class="info">
         <?php
-          $stars = $session->getStars();
           if($email != null) {
         ?>
             <h2><?php echo "Name: " . $session->getFirstName() . " " . $session->getLastName(); ?></h2>
             <a href="reviewsPage.php"><h2 id="stars">
             <?php
-              $stars = $session->getStars();;
+              $stars = 0;
 
               $filledStars = floor($stars);
               if($stars - $filledStars > 0.5)  $filledStars++;

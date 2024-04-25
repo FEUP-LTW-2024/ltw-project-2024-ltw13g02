@@ -30,6 +30,10 @@ require_once(__DIR__ . "/../database/get_from_db.php");
       $_SESSION['id'] = $id;
     }
 
+    public function getId() : ?int {
+      return isset($_SESSION['id']) ? $_SESSION['id'] : null;
+    }
+
     public function setFirstName(string $firstName) {
       $_SESSION['firstName'] = $firstName;
     }
@@ -75,7 +79,7 @@ require_once(__DIR__ . "/../database/get_from_db.php");
     }  
 
     public function setStars(int $stars) {
-      $_SESSION['stars'] = $stars;
+      $_SESSION['stars'] = getStarsFromReviews($this->getId());
     }
 
     public function getPhotoUser() : ?string {
