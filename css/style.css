@@ -139,21 +139,12 @@ ul {
     display: none;
 }
 
-ul li:nth-child(1) {
-    border-top: 8px solid #E1493E;
+ul li {
+    border-bottom: 1px solid #525252;
 }
 
-ul li:nth-child(2) {
-    border-top: 8px solid #8ABA56;
-}
-
-ul li:nth-child(3) {
-    border-top: 8px solid #5B4282;
-}
-
-nav a {
-    padding-top: 5px;
-    margin: 1em 0;
+nav a { 
+    margin: 0;
     display: inline-block;
     color: black;
     font-size: 1.2em;
@@ -173,4 +164,21 @@ nav a {
 
 .edit-icon {
     color: white;
+}
+
+#stars {
+    color: rgb(216, 182, 30);
+}
+
+.icon_menu {
+    margin:10px;
+}
+
+ul li:hover {
+    background-color: rgb(135, 141, 163);
+}
+
+li:hover a {
+    color: white;
+    transition: color .2s;
 }

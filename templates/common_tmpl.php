@@ -17,7 +17,6 @@ require_once(__DIR__ . '/../sessions/session.php');
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link rel="stylesheet" href="../fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-       
     </head>
     <header>
         <a href="../pages/index.php"><h2 id="mainLogo">PRE LOVED BAZAAR</h2></a>
@@ -37,9 +36,9 @@ require_once(__DIR__ . '/../sessions/session.php');
             <input type="checkbox" id="hamburger"/> 
             <label class="hamburger" for="hamburger"></label>
             <ul>
-                <li><a href="../pages/profilePage.php">Personal Info</a></li>
-                <li><a href="../pages/myAnnouncements.php">My announcements</a></li>
-                <li><a href="../pages/myArchive.php">Archive</a></li>
+                <li><a href="../pages/profilePage.php"><i class="fa fa-user-secret fa-1x icon_menu"></i> Personal Info</a></li>
+                <li><a href="../pages/myAnnouncements.php"><i class="fa fa-bullhorn fa-1x icon_menu"></i> My announcements</a></li>
+                <li><a href="../pages/myArchive.php"><i class="fa fa-archive fa-1x icon_menu"></i> Archive</a></li>
             </ul>
         </nav>
     <?php } 

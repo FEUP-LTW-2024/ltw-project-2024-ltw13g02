@@ -40,33 +40,12 @@
         padding-left: 1em;
     }
 
-    li:hover a {
-        color: white;
-        transition: color .2s;
-    }
-
-    li:hover {
-        background-color: rgb(51, 55, 71);
-        transition: background-color .2s;
+    ul li:hover {
+        background-color: rgb(135, 141, 163);
     }
 
     li {
-        background:rgb(212, 212, 212);
-    }
-
-    ul li:nth-child(1) {
-        border-top: none;
-        border-left: 4px solid #E1493E;
-    }
-    
-    ul li:nth-child(2) {
-        border-top: none;
-        border-left: 4px solid #8ABA56;
-    }
-    
-    ul li:nth-child(3) {
-        border-top: none;
-        border-left: 4px solid #5B4282;
+        background:rgb(224, 224, 224);
     }
 
     #menu ul {

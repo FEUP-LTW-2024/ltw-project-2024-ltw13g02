@@ -53,20 +53,26 @@
           if($email != null) {
         ?>
             <h2><?php echo "Name: " . $session->getFirstName() . " " . $session->getLastName(); ?></h2>
-            <h2><?php echo "Email: " . $email = $session->getEmail(); ?></h2>
-            <h2>
+            <a href="reviewsPage.php"><h2 id="stars">
             <?php
-              $stars = $session->getStars();
-              if ($stars == 0) {
-                echo "0 Stars";
-              }
-              else {
-                for ($i = 0; $i < $stars; $i++) {
-                  echo '<img class="star" src="star.jpeg" alt="Star">';
-                }
+              $stars = $session->getStars();;
+
+              $filledStars = floor($stars);
+              if($stars - $filledStars > 0.5)  $filledStars++;
+              else if ($stars - $filledStars <= 0.5 && $stars - $filledStars > 0) $hasHalfStar = true;
+
+              for ($i = 1; $i <= 5; $i++) {
+                  $filled = $i <= $filledStars;
+                  if ($filled) echo '<i class="fa fa-star"></i>';
+                  else if ($hasHalfStar) {
+                    echo '<i class="fa fa-star-half-o"></i>';
+                    $hasHalfStar = false;
+                  }
+                  else echo '<i class="fa fa-star-o"></i>';
               }
             ?>
-            </h2>
+            </h2></a>
+            <h2><?php echo "Email: " . $email = $session->getEmail(); ?></h2>
             <h2><?php echo "Phone: " . $session->getPhone(); ?></h2>
             <h2><?php echo "Country: " . $session->getCountry(); ?></h2>
             <h2><?php echo "City: " . $session->getCity(); ?></h2>
