@@ -9,7 +9,7 @@ try {
     $phone = $_POST['phone'];
     $email = $_POST['email'];
     $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
-    $countryId = $_POST['country'];
+    $idCountry = $_POST['country'];
     $city = $_POST['city'];
     $address = $_POST['address'];
     $zipCode = $_POST['zipCode'];
@@ -19,7 +19,7 @@ try {
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     var_dump($_POST);
     $stmt = $db->prepare("INSERT INTO User (firstName, lastName, phone, email, userPassword, idCountry, city, userAddress, zipCode) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->execute([$firstName, $lastName, $phone, $email, $password, $countryId, $city, $address, $zipCode]);
+    $stmt->execute([$firstName, $lastName, $phone, $email, $password, $idCountry, $city, $address, $zipCode]);
 
     $db = null;
 
