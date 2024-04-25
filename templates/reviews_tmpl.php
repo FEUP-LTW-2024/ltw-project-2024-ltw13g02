@@ -3,7 +3,9 @@ declare(strict_types = 1);
 
 require_once(__DIR__ . '/../sessions/session.php');
 
-require_once(__DIR__ . "/user_tmpl.php")
+require_once(__DIR__ . "/user_tmpl.php");
+
+require_once(__DIR__ . '/../vendor/autoload.php');
 
 ?>
 
@@ -13,7 +15,7 @@ require_once(__DIR__ . "/user_tmpl.php")
     <head>
     </head>
     <body>
-        <div class="review-container">
+        <div class="filterBar-container">
             <div class="average-rating">
                 <span class="stars">
                     <h2 id="stars">
@@ -44,7 +46,7 @@ require_once(__DIR__ . "/user_tmpl.php")
 <?php } ?>
 
 <?php function drawReviews(Session $session) { 
-    $reviews = getReviewsFromDB($session->getId());
+    $reviews = getReviewsWithUsersFromDB($session->getId());
     ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -56,8 +58,10 @@ require_once(__DIR__ . "/user_tmpl.php")
             foreach ($reviews as $row) {
                 ?>
                 <div class="review">
-                    <p><strong>Stars:</strong> <?php echo $row['stars']; ?></p>
-                    <p><strong>Review:</strong> <?php echo $row['reviewsDescription']; ?></p>
+                    <h2 class="review-user"><?php echo $row['firstName'] . " " . $row['lastName']; ?></h2>
+                    <h2 class="created-at"><?php echo $row['created_at']; ?></h2>
+                    <h2 id="stars"><?php drawStars($row['stars']);?></h2>
+                    <h2 class="review-description"><?php echo $row['reviewsDescription']; ?></h2>
                 </div>
                 <?php
             }

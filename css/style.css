@@ -170,10 +170,6 @@ nav a {
     color: rgb(216, 182, 30);
 }
 
-.icon_menu {
-    margin:10px;
-}
-
 ul li:hover {
     background-color: rgb(135, 141, 163);
     transition: color .2s;
@@ -187,7 +183,7 @@ li:hover a {
     transition: color .2s;
 }
 
-.review-container {
+.filterBar-container, .review {
     width: 80%;
     margin: auto;
     background: #f2f2f2;
@@ -196,8 +192,6 @@ li:hover a {
 }
 
 .average-rating {
-    display: flex;
-    align-items: center;
     font-size: 24px;
 }
 
@@ -216,35 +210,10 @@ li:hover a {
     padding-top: 10px;
 }
 
-.filters label {
-    margin-right: 5px;
+.created-at {
+    font-size: 1em;
 }
 
-.filters select {
-    margin-right: 20px;
-}
-
-.review-list {
-    margin-top: 20px;
-}
-
-.review {
-    background: #fff;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 3px;
-}
-
-.review .rating {
-    color: #ffd700;
-}
-
-.review .date {
-    font-size: 12px;
-    color: #666;
-}
-
-.review .text {
-    margin-top: 5px;
-    line-height: 1.5;
+.review-user, .review-description {
+    margin: 0;
 }

@@ -49,7 +49,7 @@ function getStarsFromReviews($idUser): ?float {
     $reviews = getReviewsFromDB($idUser);
     $sum = 0;
     for ($i = 0; $i < count($reviews); $i++) {
-        $sum +=$reviews[$i]['stars'];
+        $sum += $reviews[$i]['stars'];
     }
     $average = $sum / count($reviews);
 
@@ -63,6 +63,16 @@ function getStarsFromReviews($idUser): ?float {
 function getReviewsFromDB($idUser): ?array {
     $db = getDatabaseConnection();
     $stmt = $db->prepare("SELECT stars, reviewsDescription FROM Reviews WHERE idUser = ?");
+    $stmt->execute(array($idUser));
+    $reviews = $stmt->fetchAll();
+    return $reviews;
+}
+
+function getReviewsWithUsersFromDB($idUser): ?array {
+    $db = getDatabaseConnection();
+    $stmt = $db->prepare("SELECT U.firstName, U.lastName, R.* FROM Reviews R 
+    LEFT JOIN User U ON R.idUserFrom = U.idUser
+    WHERE R.idUser = ?");
     $stmt->execute(array($idUser));
     $reviews = $stmt->fetchAll();
     return $reviews;
