@@ -1,4 +1,5 @@
 <?php
+require_once(__DIR__ . "/../database/get_from_db.php");
   class Session {
     private array $messages;
 
@@ -90,7 +91,7 @@
     }
 
     public function getCountry() : ?string {
-      return isset($_SESSION['idCountry']) ? $_SESSION['idCountry'] : null;
+        return getCountryFromDB($_SESSION['idCountry']);
     }
   
     public function getCity() : ?string {
@@ -106,7 +107,7 @@
     }
 
     public function setCountry(string $idCountry) {
-      $_SESSION['idCountry'] = $idCountry; //:(
+      $_SESSION['idCountry'] = $idCountry;
     }
   }
 ?>
