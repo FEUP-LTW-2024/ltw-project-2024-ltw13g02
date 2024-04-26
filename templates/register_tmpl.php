@@ -19,6 +19,8 @@ require_once(__DIR__ . '/../sessions/session.php');
             <link rel="preconnect" href="https://fonts.googleapis.com">
             <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
             <link href="https://fonts.googleapis.com/css2?family=Didact+Gothic&display=swap" rel="stylesheet">
+
+            <script src="register.js"></script>
         </head>
         <body class="reg">
             <div class="register">
