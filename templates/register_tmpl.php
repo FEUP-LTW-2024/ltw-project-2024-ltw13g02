@@ -259,7 +259,18 @@ require_once(__DIR__ . '/../sessions/session.php');
                     <button id="register" type="submit">Register</button>
                     <a href="login.php"><h2 id="goToLog">I already have an account</h2></a>
                 </form>
-                <script>src=".js"</script>
+                <script>
+                    function validatePassword() {
+                        var password = document.getElementById("passwordInput").value;
+                        var confirmPassword = document.getElementById("confirmPasswordInput").value;
+
+                        if (password != confirmPassword) {
+                            alert("Passwords do not match.");
+                            return false;
+                        }
+                        return true;
+                    }
+                </script>
             </div>
         </body>
     </html>
