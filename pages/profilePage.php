@@ -17,4 +17,5 @@
   drawHeader($session);
   drawHamburguer($session, 0);
   drawUserProfile($session);
+  drawFooter();
 ?>
