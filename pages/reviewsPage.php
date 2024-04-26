@@ -18,4 +18,4 @@
   drawHamburguer($session, 0);
   drawFilterBar($session);
   drawReviews($session);
-?>
+  drawFooter();

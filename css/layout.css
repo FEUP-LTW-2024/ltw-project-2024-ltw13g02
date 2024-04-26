@@ -164,10 +164,6 @@ ul {
     justify-items: stretch;
 }
 
-.icon {
-    margin: 20px;
-}
-
 .user-info {
     display: flex;
     flex-direction: column;

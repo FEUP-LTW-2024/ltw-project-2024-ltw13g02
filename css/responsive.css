@@ -61,6 +61,12 @@
         max-height: 500px;
     }
 
+    ul li {
+        display: block;
+        width: 100%;
+        padding: 10px;
+    }
+
     nav label.hamburger:after {
         content: "\2630";
         color: white;
@@ -69,5 +75,21 @@
 
     #hamburger:checked + label.hamburger:after {
         content: "\2715";
+    }
+
+    .icon {
+        margin: 25px 20px 0 0;
+    }
+}
+
+@media (max-width: 37em) {
+    a #mainLogo {
+        font-size: 2em;
+        margin: 18px 10px 10px 10px;
+    }
+    
+    .header-icons {
+        font-size: 2em;
+        margin: 0;
     }
 }

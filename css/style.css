@@ -3,7 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap');
 
 html {
-    min-width: 40em;
+    min-width: 30em;
 }
 
 button {
@@ -156,6 +156,12 @@ nav a {
 
 .icon {
     color: #293fa1;
+    margin: 25px;
+}
+
+.header-icons {
+    font-size: 2em;
+    margin: 0;
 }
 
 .icon:hover {

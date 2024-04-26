@@ -12,6 +12,7 @@
 
   drawHeader($session);
   drawHamburguer($session, 0);
+  drawFooter();
 ?>
 
 <!DOCTYPE html>
