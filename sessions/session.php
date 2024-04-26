@@ -33,7 +33,6 @@ require_once(__DIR__ . "/../database/get_from_db.php");
 
     //TODO Esta função foi feita pelo Pedro é preciso verificar
     public function getId() : ?int {
-
       return isset($_SESSION['id']) ? $_SESSION['id'] : null;
     }
 

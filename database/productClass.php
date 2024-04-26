@@ -8,10 +8,10 @@ class Product {
     public int $category;
     public int $prodsize;
     public int $seller;
-    public int $buyer;
-    public string $purchaseDate;
+    public ?int $buyer;
+    public ?string $purchaseDate;
 
-    public function __construct(int $idProduct, string $prodName, int $price, int $condition, int $category, int $prodsize, int $seller, int $buyer, string $purchaseDate) {
+    public function __construct(int $idProduct, string $prodName, int $price, int $condition, int $category, int $prodsize, int $seller, ?int $buyer, ?string $purchaseDate) {
         $this->idProduct = $idProduct;
         $this->prodName = $prodName;
         $this->price = $price;

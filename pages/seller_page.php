@@ -24,6 +24,7 @@
         $products = get_seller_products($db, $_GET['user']);
     }else{
         header('Location: /index.php');
+        exit();
     }
 
 
@@ -34,6 +35,7 @@
         output_footer();
     }else{
         header('Location: /index.php');
+        exit();
         //TODO link to my announces i think
     }
     

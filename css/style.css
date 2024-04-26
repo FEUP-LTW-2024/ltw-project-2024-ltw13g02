@@ -174,3 +174,8 @@ nav a {
 .edit-icon {
     color: white;
 }
+
+a {
+    text-decoration: none;
+    color: inherit;
+}

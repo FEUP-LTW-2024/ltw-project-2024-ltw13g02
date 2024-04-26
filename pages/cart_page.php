@@ -1,24 +1,41 @@
 <?php
-    require_once('database/connection.php');
-    require_once('templates/common.php');
-    require_once('templates/shopingCart.php');
-    session_start();
-    $_SESSION['idUser'] = 1;
+
+    require_once(__DIR__ . '/../database/connection.php');
+    require_once(__DIR__ . '/../templates/common.php');
+    require_once(__DIR__ . '/../sessions/session.php');
+
+    require_once(__DIR__ . '/../templates/shopingCart.php');
+    require_once(__DIR__ . '/../templates/common.php');
+    require_once(__DIR__ . '/../templates/common_tmpl.php');
+
+
+    //TODO remove after testing
+    $session = new Session();
+    $session->setId(1);
+    $session->setCity('Porto');
+    $session->setZipCode('4420-388');
+    $session->setCountry('1');
+    $session->setAddress('rua da rua 33');
+
+        
+    if (!$session->isLoggedIn()) { header('Location: /index.php'); } 
 
     $db = getDatabaseConnection();
-    $items = getUserShopingCart($db, $_SESSION['idUser']);
-    $address = getUserAddress($db, $_SESSION['idUser']);
-    $countries = getAllCountries($db);
 
-    output_header();
+    $items_ids = getUserShopingCart($db, $session->getId());
+
+    $countries = getAllCountries($db);
+    
+    drawHeader($session);
     ?>
-    <link rel="stylesheet" href="cart.css">
+    <link rel="stylesheet" href="../css/cart.css">
+    <link rel="stylesheet" href="../css/style.css">
+
     <?php
-    if (sizeof($items) > 0) {
-        output_cart_items($items);
-        output_shipping_address($address, $countries);
+    if (sizeof($items_ids) > 0) {
+        output_cart_items($items_ids);
+        output_shipping_address($session, $countries);
     } else {
         output_empty_cart();
     }
-
     output_footer();

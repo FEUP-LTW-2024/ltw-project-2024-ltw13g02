@@ -2,11 +2,6 @@
 
   require_once(__DIR__ . "/productClass.php");
   require_once(__DIR__ . "/userClass.php");
-  /*
-  function getDatabaseConnection() {
-    return new PDO('sqlite:basededados.db');
-  }
-  */
 
   function getAllUsers($db) {
     $stmt = $db->prepare('SELECT firstName, lastName
@@ -19,10 +14,10 @@
   }
 
   function getUserShopingCart( $db, $user_id ) {
-    $stmt = $db->prepare('SELECT *
+    $stmt = $db->prepare('SELECT S.product
                           FROM Product P JOIN ShoppingCart S ON P.idProduct = S.product 
                           WHERE S.user = ? ');
-    $stmt->execute(array( $_SESSION['idUser']) );
+    $stmt->execute(array( $user_id) );
     $result = $stmt->fetchAll();
     return $result;
   }
@@ -92,5 +87,18 @@
     $stmt->execute(array( $idUser) );
     $products = $stmt->fetchAll();
     return $products;
+  }
+
+  function build_Product_from_id($db, $id) {
+    $stmt = $db->prepare('SELECT *
+                          FROM Product P
+                          WHERE P.idProduct = ?');
+    $stmt->execute(array( $id) );
+    $product = $stmt->fetch();
+    $result = new Product($product['idProduct'], $product['prodName'], $product['price'], $product['condition'], $product['category'],
+                          $product['prodsize'], $product['seller'], $product['buyer'], $product['purchaseDate']);
+
+    return $result;
+
   }
 

@@ -127,7 +127,7 @@ body {
     position: relative;
     display: grid;
     grid-template-columns: auto auto;
-    grid-template-rows: 50% 50%;
+    grid-template-rows: 1fr 1fr;
     height:max-content;
 }
 

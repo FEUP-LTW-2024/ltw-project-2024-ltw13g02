@@ -1,6 +1,7 @@
 <?php
     function output_empty_cart() { ?>
         <section id='Shopping_Cart'>
+            <img class="empty_cart_img" src="../imagens/empty_cart.png">
             <h2>Your Shopping Cart is empty</h2>
         </section>
     <?php }
@@ -8,16 +9,19 @@
 
 
 <?php
-    function output_cart_items($items){ ?>
+    function output_cart_items($items_ids){ 
+        $db = getDatabaseConnection();  
+        ?>
         
         <section id='Shopping_Cart'>
             <h2>Shopping Cart</h2>
             <section id='Shopping_items'>
                 <?php
-                foreach ($items as $item){
-                    output_single_cart_item($item);
+                foreach ($items_ids as $item){
+                    $product = build_Product_from_id($db, $item['product']);
+                    output_single_cart_item($product);
                 }
-                output_total_payment($items);
+                output_total_payment($items_ids);
             ?>
             </section>
     <?php 
@@ -25,12 +29,12 @@
 ?>
 
 <?php 
-    function output_single_cart_item($item){?>
+    function output_single_cart_item(Product $item){?>
         <article class='CartItem'>
-            <a href='main.html'>
-                <img src="<?= $item['prodName'] ?>">
-                <p id='cart_item_name'><?=$item['prodName']?> </p>
-                <p id='cart_item_price'><?=$item['price']?>€</p>
+            <a href='../pages/index.php'> <!--TODO change to product page -->
+                <img src="../imagens/randomImage.jpg"> <!-- TODO add photo -->
+                <p id='cart_item_name'><?=$item->prodName ?> </p>
+                <p id='cart_item_price'><?=$item->price ?>€</p>
             </a>
         </article>
     <?php }
@@ -38,10 +42,12 @@
 
 <?php
     function output_total_payment($items){
+        $db = getDatabaseConnection();
         $total = 0;
         foreach ($items as $item){
-            $total += $item['price'];
-        }
+                $product = build_Product_from_id($db, $item['product']);
+                $total += $product->price;
+            }  
         ?>
         <article>
             <p>Total:</p>
@@ -52,15 +58,15 @@
 ?>
 
 <?php
-    function output_shipping_address( $address, $countries){ ?>
+    function output_shipping_address(Session $session,$countries){ ?>
         <aside>
             <h3>Checkout</h3> 
         <form id ='address' action="database/process_payment.php" method="post">
 
                 <h5>Address</h5>
-                <p><?= $address['userAddress']?> </p>
-                <p><?= $address['zipCode']?>, <?= $address['city']?></p>
-                <p><?= $address['country']?></p>
+                <p><?= $session->getAddress()?> </p>
+                <p><?= $session->getZipCode()?>, <?= $session->getCity()?></p>
+                <p><?= $session->getCountry()?></p>
                 <div class='address_option' id='default_address_option'> <input type = 'radio' name='address_option' value='default_address' checked='checked'> Default Address </div>
 
                 <div class='custom_address_field' id ='custom_address_street'>Street: <input type='text' name='custom_address'> </div>

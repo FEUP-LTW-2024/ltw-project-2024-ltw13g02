@@ -20,8 +20,7 @@ require_once(__DIR__ . "/../database/userClass.php");
         <section id='archive_products'>
         <?php
         foreach ($products as $product) {
-            $archived_product = new Product($product['idProduct'], $product['prodName'], $product['price'], $product['condition'], $product['category'],
-                                            $product['prodsize'], $product['seller'], $product['buyer'], $product['purchaseDate']);
+            $archived_product = build_Product_from_id($db,$product);
             $db = getDatabaseConnection();
             $buyer = getUserInfo($db,$product->buyer);
 
