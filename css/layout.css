@@ -133,22 +133,13 @@ body {
     width: 2em;
 }
 
-.user-info {
-    margin-bottom: 0px; /* Adjust spacing between user info and links */
-}
-
-.user-info h2 {
-    margin: 10px 0; /* Adjust spacing between each piece of user info */
-}
-
 .links {
-    /*display: flex;*/
     flex-direction: column;
     align-items: center;
 }
 
 .links a {
-    margin: 0px 0; /* Adjust spacing between each link */
+    margin: 0px 0;
 }
 
 .star{
@@ -164,6 +155,10 @@ ul {
     justify-items: stretch;
 }
 
+.chat-menu {
+    grid-template-columns: repeat(2, 50%);
+}
+
 .user-info {
     display: flex;
     flex-direction: column;
@@ -174,7 +169,7 @@ ul {
 
 .user-photo-container {
     position: relative;
-    margin-bottom: 20px; /* Adjust as needed */
+    margin-bottom: 20px;
 }
 
 .user-icon-link,
@@ -196,6 +191,7 @@ ul {
 }
 
 .userphoto {
+    border-radius: 50%;
     width: 150px;
     margin: 20px;
 }
@@ -252,4 +248,74 @@ li a {
     right: 0; 
     margin-right: 30px;
     margin-top: 25px;
+}
+
+#info-to-user {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.info-to-user {
+    margin-top: 50px;
+}
+
+.chat-tile {
+    display: grid;
+    grid-template-columns: 60px auto;
+    grid-template-rows: 100px;
+    padding: 0 10px 0 10px;
+}
+
+.chat-user-photo-container {
+    grid-column-start: 1;
+    width: 60px;
+}
+
+.chat-info {
+    grid-column-start: 2;
+    display: grid;
+    grid-template-columns: auto 100px;
+    grid-template-rows: 50% 50%;
+}
+
+.chat-userphoto {
+    margin-top: 15px;
+    grid-column-start: 1;
+    margin-right: 10px;
+    width: 60px;
+    border-radius: 50%;
+}
+
+.with-user {
+    grid-column-start: 1;
+    grid-row-start: 1;
+    margin-top: 15px;
+    margin-left: 10px;
+    margin-bottom: 0;
+}
+
+.message-content {
+    grid-column-start: 1;
+    grid-row-start: 2;
+    margin-top: 5px;
+    margin-bottom: 0;
+    margin-left: 10px;
+}
+
+#message-date {
+    margin-top: 20px;
+    margin-bottom: 0;
+    grid-column-start: 2;
+    grid-row-start: 1;
+}
+
+.unseen, .unchecked {
+    grid-column-start: 2;
+    grid-row-start: 2;
+    align-self: center;
+    justify-self: right;
+    margin-right: 14px
 }

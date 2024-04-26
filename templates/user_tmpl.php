@@ -23,8 +23,8 @@ require_once(__DIR__ . '/../sessions/session.php');
 
 <?php function drawUserProfile(Session $session) { ?>
     <div class="user-info">
-        <?php $email = $session->getEmail();
-        drawPhoto($session, $email); ?>
+        <?php $email = $session->getEmail();?>
+        <h2><?php drawPhoto($session, $email);?></h2>
         <div class="info">
         <?php
           if($email != null) {
@@ -55,30 +55,27 @@ require_once(__DIR__ . '/../sessions/session.php');
     </div>
 <?php } ?>
 
-<?php function drawPhoto($session, $email) { ?>
-    <h2>
-        <?php 
-        $photo = $session->getPhotoUser(); 
-        if($email != null) { ?>
-            <div class="user-photo-container">
-                <?php if ($photo == "Sem foto") { ?>
-                    <a href="../pages/profilePage.php" class="user-icon-link">
-                        <i class="fa fa-user fa-5x userIconPhoto"></i>
-                        <a href="../pages/editingProfile.php"><i class="fa fa-pencil edit-icon fa-1x"></i></a>
-                    </a>
-                <?php } else { ?>
-                    <a href="../pages/profilePage.php" class="user-photo-link">
-                        <img class="userphoto" src="../imagens/userProfile/<?php echo $photo; ?>" alt="Photo">
-                        <a href="../pages/editingProfile.php"><i class="fa fa-pencil edit-icon fa-1x"></i></a>
-                    </a>
-                <?php } ?>
-            </div>
-        <?php } else { ?>
-            <div class="user-photo-container">
-                <a href="../pages/profilePage.php" class="user-icon-link">
-                <i class="fa fa-user fa-5x userIconPhoto"></i>
+<?php function drawPhoto($session, $email) {
+    $photo = $session->getPhotoUser(); 
+    if($email != null) { ?>
+        <div class="user-photo-container">
+            <?php if ($photo == "Sem foto") { ?>
+                <a href="../pages/editingProfile.php" class="user-icon-link">
+                    <i class="fa fa-user fa-5x userIconPhoto"></i>
+                    <a href="../pages/editingProfile.php"><i class="fa fa-pencil edit-icon fa-1x"></i></a>
                 </a>
-            </div>
-        <?php } ?>
-    </h2>
-<?php } ?>
+            <?php } else { ?>
+                <a href="../pages/editingProfile.php" class="user-photo-link">
+                    <img class="userphoto" src="../imagens/userProfile/<?php echo $photo; ?>" alt="Photo">
+                    <a href="../pages/editingProfile.php"><i class="fa fa-pencil edit-icon fa-1x"></i></a>
+                </a>
+            <?php } ?>
+        </div>
+    <?php } else { ?>
+        <div class="user-photo-container">
+            <a href="../pages/profilePage.php" class="user-icon-link">
+            <i class="fa fa-user fa-5x userIconPhoto"></i>
+            </a>
+        </div>
+    <?php }
+ } ?>
