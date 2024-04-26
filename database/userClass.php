@@ -6,13 +6,13 @@ class User {
     public string $phone;
     public string $email;
     public string $userAddress;
-    public int $stars;
+    public float $stars;
     public string $city;
     public int $idCountry;
     public string $zipCode;
     public ?string $photo;
 
-    public function __construct(int $idUser, string $firstName, string $lastName, string $phone, string $email, string $userAddress, int $stars, string $city, int $idCountry, ?string $photo, string $zipCode) {
+    public function __construct(int $idUser, string $firstName, string $lastName, string $phone, string $email, string $userAddress, float $stars, string $city, int $idCountry, ?string $photo, string $zipCode) {
         $this->idUser = $idUser;
         $this->firstName = $firstName;
         $this->lastName = $lastName;

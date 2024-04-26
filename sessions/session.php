@@ -31,6 +31,7 @@ require_once(__DIR__ . "/../database/get_from_db.php");
       $_SESSION['id'] = $id;
     }
 
+ 
     //TODO Esta função foi feita pelo Pedro é preciso verificar
     public function getId() : ?int {
       return isset($_SESSION['id']) ? $_SESSION['id'] : null;
@@ -76,11 +77,14 @@ require_once(__DIR__ . "/../database/get_from_db.php");
       return $this->messages;
     }
 
-    public function getStars() : ?int {
+    public function getStars() : ?float {
       return isset($_SESSION['stars']) ? $_SESSION['stars'] : null;
     }  
 
-    public function setStars(int $stars) {
+    public function setStars(float $stars) {
+      if ($stars == 0) {
+        $stars = getStarsFromReviews($this->getId());
+      }
       $_SESSION['stars'] = $stars;
     }
 

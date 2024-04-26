@@ -1,6 +1,6 @@
 <?php
   declare(strict_types = 1);
-
+  
   require_once(__DIR__ . '/../sessions/session.php');
   $session = new Session();
 
@@ -10,10 +10,12 @@
 
   require_once(__DIR__ . '/../templates/common_tmpl.php');
 
+  require_once(__DIR__ . '/../templates/user_tmpl.php');
+
   $db = getDatabaseConnection();
 
   drawHeader($session);
-  drawHamburguer($session);
+  drawHamburguer($session, 0);
 ?>
 
 <!DOCTYPE html>
@@ -49,24 +51,16 @@
         </h2>
         <div class="info">
         <?php
-          $stars = $session->getStars();
           if($email != null) {
         ?>
             <h2><?php echo "Name: " . $session->getFirstName() . " " . $session->getLastName(); ?></h2>
-            <h2><?php echo "Email: " . $email = $session->getEmail(); ?></h2>
-            <h2>
+            <a href="reviewsPage.php"><h2 id="stars">
             <?php
               $stars = $session->getStars();
-              if ($stars == 0) {
-                echo "0 Stars";
-              }
-              else {
-                for ($i = 0; $i < $stars; $i++) {
-                  echo '<img class="star" src="star.jpeg" alt="Star">';
-                }
-              }
+              drawStars($stars);
             ?>
-            </h2>
+            </h2></a>
+            <h2><?php echo "Email: " . $email = $session->getEmail(); ?></h2>
             <h2><?php echo "Phone: " . $session->getPhone(); ?></h2>
             <h2><?php echo "Country: " . $session->getCountry(); ?></h2>
             <h2><?php echo "City: " . $session->getCity(); ?></h2>

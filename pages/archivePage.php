@@ -23,7 +23,7 @@
         $products = get_archive_products($db, $session->getId());
 
         drawHeader($session);
-        
+    
         output_archive_user_profile($session);
         output_archive_user_products($db, $products);
 

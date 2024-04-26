@@ -27,7 +27,16 @@ function addUser(int $idUser, string $firstName, string $lastName, string $phone
 
 function deleteUser($username) {
     $db = getDatabaseConnection();
-    $stmt = $db->prepare('DELETE FROM user WHERE idUser=:idUser');
+    $stmt = $db->prepare('DELETE FROM User WHERE idUser=:idUser');
     $stmt->bindParam(':idUser', $idUser);
     $stmt->execute();
 }
+
+function setStarsOnDB($idUser, $stars) {
+    /*$db = getDatabaseConnection();
+    $stmt = $db->prepare('UPDATE User SET stars = :stars WHERE idUser = :idUser');
+    $stmt->bindParam(':idUser', $idUser, PDO::PARAM_INT);
+    $stmt->bindParam(':stars', $stars, PDO::PARAM_INT);
+    $stmt->execute();*/
+}
+

@@ -11,7 +11,7 @@
   $db = getDatabaseConnection();
 
   drawHeader($session);
-  drawHamburguer($session);
+  drawHamburguer($session, 2);
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +24,6 @@
         <h2><?php echo $session->getFirstName() . " " . $session->getLastName(); ?></h2>
       </div>
     </main>
-
   </body>
 </html>
 
