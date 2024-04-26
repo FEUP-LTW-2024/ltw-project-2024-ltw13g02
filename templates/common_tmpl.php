@@ -50,6 +50,7 @@ require_once(__DIR__ . '/../sessions/session.php');
     <?php } 
 } ?>
 
+
 <?php function drawFooter() { ?>
     <footer>
 

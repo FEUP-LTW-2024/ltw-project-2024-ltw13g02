@@ -12,4 +12,4 @@
 
   drawHeader($session);
   drawFooter();
-?>
+
