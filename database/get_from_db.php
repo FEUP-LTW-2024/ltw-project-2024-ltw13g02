@@ -5,7 +5,6 @@ require_once(__DIR__ . '/userClass.php');
 require_once('connection_to_db.php');
 require_once(__DIR__ . '/../database/userClass.php');
 require_once(__DIR__ . '/change_in_db.php');
-require_once(__DIR__ . '/../vendor/autoload.php');
 
 
     

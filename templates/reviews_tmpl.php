@@ -5,8 +5,6 @@ require_once(__DIR__ . '/../sessions/session.php');
 
 require_once(__DIR__ . "/user_tmpl.php");
 
-require_once(__DIR__ . '/../vendor/autoload.php');
-
 ?>
 
 <?php function drawFilterBar(Session $session) { ?>
