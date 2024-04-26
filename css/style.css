@@ -227,3 +227,25 @@ li:hover a {
 .review-user, .review-description {
     margin: 0;
 }
+
+.chat-tile {
+    border-bottom: 1px solid #ccc;
+}
+
+#message-date {
+    margin-top: 5px;
+    color: #888;
+    font-size: 17px;
+}
+
+.message-content {
+    font-style: italic;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: calc(100% - 100px);
+}
+
+.unseen {
+    color: greenyellow;
+}

@@ -88,3 +88,40 @@ function getCategories($db){
     return $categories;  
 
 }
+
+function getChatsAsSellerFromDB($idUser): ?array {
+    $db = getDatabaseConnection();
+    $stmt = $db->prepare('
+        SELECT idChat, Product.prodName, User.firstName, User.lastName, User.photo
+        FROM Product, Chat, User
+        WHERE Product.seller = ? AND Chat.product = Product.idProduct AND Chat.possibleBuyer = User.idUser
+    ');
+    $stmt->execute(array($idUser));
+    $chats = $stmt->fetchAll();
+    return $chats;
+}
+
+function getChatsAsBuyerFromDB($idUser): ?array {
+    $db = getDatabaseConnection();
+    $stmt = $db->prepare('
+        SELECT idChat, Product.prodName, User.firstName, User.lastName, User.photo
+        FROM Product, Chat, User
+        WHERE Product.seller = User.idUser AND Chat.product = Product.idProduct AND Chat.possibleBuyer = ?
+    ');
+    $stmt->execute(array($idUser));
+    $reviews = $stmt->fetchAll();
+    return $reviews;
+}
+
+function getLastMessage($idChat): ?array {
+    $db = getDatabaseConnection();
+    $stmt = $db->prepare('
+        SELECT * FROM Messages
+        WHERE chat = ? 
+        ORDER BY messageDate DESC
+        LIMIT 1
+    ');
+    $stmt->execute(array($idChat));
+    $lastmessage = $stmt->fetch();
+    return $lastmessage;
+}

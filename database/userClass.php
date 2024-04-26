@@ -71,26 +71,4 @@ class User {
 
         return $stmt->fetchAll(PDO::FETCH_COLUMN);
     }
-
-    static function getChatsAsSeller(PDO $db, int $id) : array {
-        $stmt = $db->prepare('
-            SELECT Product.prodName, User.firstName, USer.lastName
-            FROM Product, Chat, User
-            WHERE Product.seller = ?, Chat.product = Product.idProduct, Chat.possibleBuyer = User.idUser
-        ');
-        $stmt->execute(array($id));
-
-        return $stmt->fetchAll(PDO::FETCH_COLUMN);
-    }
-
-    static function getChatsAsBuyer(PDO $db, int $id) : array {
-        $stmt = $db->prepare('
-            SELECT Product.prodName, User.firstName, USer.lastName
-            FROM Product, Chat, User
-            WHERE Product.seller = User.id, Chat.product = Product.idProduct, Chat.possibleBuyer = ?
-        ');
-        $stmt->execute(array($id));
-
-        return $stmt->fetchAll(PDO::FETCH_COLUMN);
-    }
 }

@@ -23,7 +23,7 @@ require_once(__DIR__ . '/../sessions/session.php');
         </head>
         <header>
             <a href="../pages/index.php"><h2 id="mainLogo">PRE LOVED BAZAAR</h2></a>
-            <a href="../pages/index.php"><h2 class="header-icons"><i class="fa fa-comments fa-1x icon"></i></h2></a>
+            <a href="../pages/chatsAsSellerPage.php"><h2 class="header-icons"><i class="fa fa-comments fa-1x icon"></i></h2></a>
             <a href="../pages/profilePage.php"><h2 class="header-icons"><i class="fa fa-user fa-1x icon"></i></h2></a>
             <?php if($session->getEmail() != null) { ?>
                 <a href="../pages/logout.php"><h2 class="header-icons"><i class="fa fa-sign-out fa-1x icon"></i></h2></a>

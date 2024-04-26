@@ -91,10 +91,11 @@ CREATE TABLE IF NOT EXISTS Chat (
 
 CREATE TABLE IF NOT EXISTS Messages (
     idMessage INTEGER PRIMARY KEY NOT NULL, 
-    messageDate TEXT NOT NULL,
+    messageDate DATETIME NOT NULL,
     sender INTEGER NOT NULL,
     chat INTEGER REFERENCES Chat (idChat) NOT NULL,
-    content TEXT NOT NULL
+    content TEXT NOT NULL,
+    seen BOOLEAN NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS ShoppingCart (
@@ -281,7 +282,7 @@ VALUES ('Homem - XS'), ('Homem - S'), ('Homem - M'), ('Homem - L'), ('Homem - XL
 ('Tamanho unico');
 
 INSERT INTO Product (prodName, prodDescription, price, condition, category, prodsize, seller)
-VALUES ('Computer', 'Asus computer 2003', 40, 3, 2, 22, 6),
+VALUES ('Computer', 'Asus computer 2003', 40, 3, 2, 22, 1),
 ('Basketball', 'Brand new basketball', 25, 1, 1, 21, 8),
 ('iPhone X', 'Used iPhone X in good condition', 300, 4, 2, 12, 12),
 ('Harry Potter Books', 'Complete set of Harry Potter books', 50, 2, 3, 10, 17),
@@ -319,3 +320,9 @@ VALUES (1,9), (1,17);
 
 INSERT INTO Photo (idProduct, photo)
 VALUES (6,'photo de um Toyota'), (6,'photo de um Toyota 2');
+
+INSERT INTO Messages (idMessage, messageDate, sender, chat, content, seen)
+VALUES (1, '2024-04-05 11:00:00', 2, 1, 'Hi! I''m interested in your product!', false);
+
+INSERT INTO Chat (idChat, product, possibleBuyer)
+VALUES (1, 1, 2);
