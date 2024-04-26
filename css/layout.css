@@ -42,7 +42,7 @@ h1 {
 }
 
 .Products .offers_container {
-    display: flex;
+    display: inline-flex;
     width: 100%;
     overflow-y: hidden;
 }
@@ -62,10 +62,9 @@ h1 {
     bottom: 50%;
 }
 
-@media (max-width: 100em){
-sliding_offer {
+.sliding_offer {
     height: 100%; 
-    border: 1px solid lightgray;
+    border: 3px solid lightgray;
 
     align-items: center;
     flex-basis: 20%;
@@ -74,28 +73,11 @@ sliding_offer {
     border-style: none;
 
     display: grid;
-    grid-template-rows: 2.5em auto 2.5em;
+    grid-template-rows: 2.5em 1fr 2.5em;
 }
-}
-
-@media (max-width: 60em){
-    sliding_offer {
-        height: 100%; 
-        border: 1px solid lightgray;
-        overflow-y: auto;
-        align-items: center;
-        flex-basis: 40%;
-        flex-shrink: 0;
-        position: relative;
-        border-style: none;
-    
-        display: grid;
-        grid-template-rows: 2.5em auto 2.5em;
-    }
-    }
 
 
-sliding_offer a{
+.sliding_offer a{
     text-decoration: none;
 }
 
@@ -148,7 +130,7 @@ body {
     margin-right: 5%;
 }
 
-sliding_offer .offer_img{
+.sliding_offer .offer_img{
     object-fit: scale-down;
 
     width: 95%;

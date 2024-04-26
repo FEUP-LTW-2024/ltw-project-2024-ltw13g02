@@ -79,3 +79,12 @@ function getReviewsWithUsersFromDB($idUser): ?array {
     $reviews = $stmt->fetchAll();
     return $reviews;
 }
+
+function getCategories($db){
+    $stmt = $db->prepare("SELECT C.category 
+                        FROM Category C ");
+    $stmt->execute();
+    $categories = $stmt->fetchAll();
+    return $categories;  
+
+}

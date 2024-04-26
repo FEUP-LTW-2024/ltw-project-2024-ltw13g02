@@ -39,24 +39,24 @@ class User {
         $stmt->execute(array($this->firstName, $this->lastName, $this->idUser));
     }
 
-    static function getFavorites(PDO $db, int $id) : array {
+    function getFavorites(PDO $db) : array {
         $stmt = $db->prepare('
             SELECT Favorites.product
             FROM Favorites
             WHERE Favorites.user = ?
         ');
-        $stmt->execute(array($id));
+        $stmt->execute(array($this->idUser));
 
         return $stmt->fetchAll(PDO::FETCH_COLUMN);
     }
 
-    static function getRecent(PDO $db, int $id) : array {
+    function getRecent(PDO $db) : array {
         $stmt = $db->prepare('
             SELECT Recent.product
             FROM Recent
             WHERE Recent.user = ?
         ');
-        $stmt->execute(array($id));
+        $stmt->execute(array($this->idUser));
 
         return $stmt->fetchAll(PDO::FETCH_COLUMN);
     }

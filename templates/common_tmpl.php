@@ -10,7 +10,7 @@ require_once(__DIR__ . '/../sessions/session.php');
         <head>
             <link rel="stylesheet" href="../css/style.css">
             <link rel="stylesheet" href="../css/responsive.css">
-            <link rel="stylesheet" href="../css/layout.css">
+             <link rel="stylesheet" href="../css/layout.css">
             <title>Pre Loved Bazaar</title>
             <meta charset="utf-8">
 

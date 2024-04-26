@@ -102,3 +102,21 @@
 
   }
 
+  function getRecommended( $db, $currentId ) {
+    if (isset($currentId)) {
+      $stmt = $db->prepare('SELECT P.idProduct
+                          FROM Product P
+                          WHERE P.seller != ?');
+      $stmt->execute(array( $currentId) );
+      $product = $stmt->fetchAll(PDO::FETCH_COLUMN);
+      return $product;
+    }else{
+      $stmt = $db->prepare('SELECT P.idProduct
+                            FROM Product P
+                          ');
+      $stmt->execute();
+      $products_id = $stmt->fetchAll();
+      return $products_id;
+    }
+  }
+
