@@ -275,7 +275,7 @@ VALUES ('New with tags'),('New without tags'), ('Very Good'), ('Good'), ('Satisf
 INSERT INTO Category (category)
 VALUES ('Sports'),('Tecnology'),('Books'), ('Games'), ('Cars'), ('Kids'), ('Animals');   
 
-INSERT INTO Caracteristics (caracteristic)
+INSERT INTO Sizes (tamanho)
 VALUES ('Homem - XS'), ('Homem - S'), ('Homem - M'), ('Homem - L'), ('Homem - XL'), ('Homem - XXL'), 
 ('Mulher - XS'), ('Mulher - S'), ('Mulher - M'), ('Mulher - L'), ('Mulher - XL'), ('Mulher - XXL'), 
 ('Criança - 1 ano'), ('Criança - 2 anos'), ('Criança - 3-4 anos'), ('Criança - 5-6 anos'), ('Criança - 7-8 anos'), ('Criança - 9-10 anos'), ('Criança - 11-12 anos'), ('Criança - 13-14 anos'), ('Criança - 15-16 anos'),
@@ -323,6 +323,7 @@ VALUES (1, 'asus_computer.jpg'),
 (8, 'dell.jpg'),
 (9, 'cookbook.jpg'),
 (10, 'nintendo.jpg'),
+
 
 INSERT INTO ShoppingCart (user, product)
 VALUES (1, 10), (1,24), (1,3);
