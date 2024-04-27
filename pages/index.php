@@ -30,6 +30,8 @@
     drawRecommended($db,$recommended_ids);
 
   }
+
+  drawFooter();
 ?>
 </main>
 </body>

@@ -1,3 +1,11 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
 h1 {
     grid-column-start: 1;
     grid-row-start: 1;
@@ -99,10 +107,6 @@ header > a > img{
 
 .offers_container::-webkit-scrollbar {
     display: none;
-}
-
-body {
-    margin: 0;
 }
 
 .offer_info{
@@ -338,4 +342,10 @@ li a {
     align-self: center;
     justify-self: right;
     margin-right: 14px
+}
+
+footer {
+    margin-top: auto;
+    width: 100%;
+    padding: 5px;
 }

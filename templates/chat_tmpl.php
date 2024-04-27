@@ -17,21 +17,23 @@ require_once(__DIR__ . '/../utils/elapsedTime.php')
         else $chats = getChatsAsBuyerFromDB($session->getId());
         if (count($chats) > 0) {
             foreach ($chats as $row) {?>
-                <div class="chat-tile">
-                    <?php drawOtherUserPhoto($row["photo"]); ?>
-                    <div class="chat-info">
-                        <h2 class="with-user"><?php echo $row['firstName'] . " " . $row['lastName']; ?></h2>
-                        <?php $lastmessage = getLastMessage($row['idChat']); 
-                        if ($lastmessage["sender"] == $session->getId()) {?>
-                            <h2 class="unchecked <?php echo $lastmessage["seen"] ? "fa fa-check-circle" : "fa fa-check-circle-o"; ?>"></h2>
-                            <h2 class="message-content"><?php echo $lastmessage['content']; ?></h2>
-                        <?php } else { ?>
-                            <h2 class="message-content"><?php echo $lastmessage['content']; ?></h2>
-                            <h2 class="last-message <?php echo $lastmessage["seen"] ? "" : "fa fa-circle unseen"; ?>"></h2>
-                        <?php } ?>
-                        <h2 id="message-date"><?php echo elapsedTime($lastmessage['messageDate']);?></h2>
+                <a href="../pages/messagesPage.php?chat=<?php echo $row['idChat']; ?>">
+                    <div class="chat-tile">
+                        <?php drawOtherUserPhoto($row["photo"]); ?>
+                        <div class="chat-info">
+                            <h2 class="with-user"><?php echo $row['firstName'] . " " . $row['lastName']; ?></h2>
+                            <?php $lastmessage = getLastMessage($row['idChat']); 
+                            if ($lastmessage["sender"] == $session->getId()) {?>
+                                <h2 class="unchecked <?php echo $lastmessage["seen"] ? "fa fa-check-circle" : "fa fa-check-circle-o"; ?>"></h2>
+                                <h2 class="message-content"><?php echo $lastmessage['content']; ?></h2>
+                            <?php } else { ?>
+                                <h2 class="message-content"><?php echo $lastmessage['content']; ?></h2>
+                                <h2 class="last-message <?php echo $lastmessage["seen"] ? "" : "fa fa-circle unseen"; ?>"></h2>
+                            <?php } ?>
+                            <h2 id="message-date"><?php echo elapsedTime($lastmessage['messageDate']);?></h2>
+                        </div>
                     </div>
-                </div>
+                </a>
     <?php   }
         }
         else { ?>
