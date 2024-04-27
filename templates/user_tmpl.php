@@ -66,7 +66,7 @@ require_once(__DIR__ . '/../sessions/session.php');
                 </a>
             <?php } else { ?>
                 <a href="../pages/editingProfile.php" class="user-photo-link">
-                    <img class="userphoto" src="../imagens/userProfile/<?php echo $photo; ?>" alt="Photo">
+                    <img class="userphoto" src="../images/userProfile/<?php echo $photo; ?>" alt="Photo">
                     <a href="../pages/editingProfile.php"><i class="fa fa-pencil edit-icon fa-1x"></i></a>
                 </a>
             <?php } ?>

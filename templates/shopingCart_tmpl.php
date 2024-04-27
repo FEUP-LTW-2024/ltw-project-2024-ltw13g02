@@ -1,7 +1,7 @@
 <?php
     function output_empty_cart() { ?>
         <section id='Shopping_Cart'>
-            <img class="empty_cart_img" src="../imagens/empty_cart.png">
+            <img class="empty_cart_img" src="../images/empty_cart.png">
             <h2>Your Shopping Cart is empty</h2>
         </section>
     <?php }
@@ -32,7 +32,7 @@
     function output_single_cart_item(Product $item){?>
         <article class='CartItem'>
             <a href='../pages/index.php'> <!--TODO change to product page -->
-                <img src="../imagens/randomImage.jpg"> <!-- TODO add photo -->
+                <img src="../images/randomImage.jpg"> <!-- TODO add photo -->
                 <p id='cart_item_name'><?=$item->prodName ?> </p>
                 <p id='cart_item_price'><?=$item->price ?>€</p>
             </a>

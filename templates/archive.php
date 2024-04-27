@@ -5,7 +5,7 @@ require_once(__DIR__ . "/../database/userClass.php");
     function output_archive_user_profile(Session $session) { ?>
         <article id='archive page'>
             <section id='archive_header'>
-                <img class="user_pfp" src=<?= "/../imagens/userProfile/{$session->getPhotoUser()}" ?>>
+                <img class="user_pfp" src=<?= "/../images/userProfile/{$session->getPhotoUser()}" ?>>
                 <h4>Archive</h4>
                 <p>(Sold Items)</p>
             </section>
@@ -39,10 +39,10 @@ require_once(__DIR__ . "/../database/userClass.php");
         ?>
         <article class='static_offer'>
                 <a href="main.html" class="user_small_card">
-                    <img class="user_small_pfp" src="imagens/<?= $buyer->photo?>">
+                    <img class="user_small_pfp" src="images/<?= $buyer->photo?>">
                     <p><?=$buyer->name()?></p>
                 </a>
-                <a href="main.html"><img class="offer_img" src="imagens/randomImage.jpg"></a>
+                <a href="main.html"><img class="offer_img" src="images/randomImage.jpg"></a>
                 <!-- TODO mudar href para product page com id do prod -->
 
                 <div class="offer_info">
