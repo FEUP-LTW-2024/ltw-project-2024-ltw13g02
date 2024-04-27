@@ -3,9 +3,8 @@
 
     require_once(__DIR__ . '/../database/get_from_db.php');
 
-    require_once(__DIR__ . '/../templates/common.php');
     require_once(__DIR__ . '/../templates/common_tmpl.php');
-    require_once(__DIR__ . '/../templates/seller_page.php');
+    require_once(__DIR__ . '/../templates/seller_page_tmpl.php');
 
     require_once(__DIR__ . '/../sessions/session.php');
 

@@ -1,11 +1,9 @@
 <?php
 
     require_once(__DIR__ . '/../database/connection.php');
-    require_once(__DIR__ . '/../templates/common.php');
     require_once(__DIR__ . '/../sessions/session.php');
 
-    require_once(__DIR__ . '/../templates/shopingCart.php');
-    require_once(__DIR__ . '/../templates/common.php');
+    require_once(__DIR__ . '/../templates/shopingCart_tmpl.php');
     require_once(__DIR__ . '/../templates/common_tmpl.php');
 
 
@@ -29,7 +27,6 @@
     drawHeader($session);
     ?>
     <link rel="stylesheet" href="../css/cart.css">
-    <link rel="stylesheet" href="../css/style.css">
 
     <?php
     if (sizeof($items_ids) > 0) {
@@ -38,4 +35,4 @@
     } else {
         output_empty_cart();
     }
-    output_footer();
+    drawFooter();

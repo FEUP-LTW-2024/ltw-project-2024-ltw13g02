@@ -23,6 +23,8 @@ require_once(__DIR__ . '/../sessions/session.php');
         </head>
         <header>
             <a href="../pages/index.php"><h2 id="mainLogo">PRE LOVED BAZAAR</h2></a>
+            <a href="../pages/favoritesPage.php"><h2 class="header-icons"><i class="fa fa-heart fa-1x icon"></i></h2></a>
+            <a href="../pages/cart_page.php"><h2 class="header-icons"><i class="fa fa-shopping-cart fa-1x icon"></i></h2></a>
             <a href="../pages/chatsAsSellerPage.php"><h2 class="header-icons"><i class="fa fa-comments fa-1x icon"></i></h2></a>
             <a href="../pages/profilePage.php"><h2 class="header-icons"><i class="fa fa-user fa-1x icon"></i></h2></a>
             <?php if($session->getEmail() != null) { ?>
@@ -52,8 +54,8 @@ require_once(__DIR__ . '/../sessions/session.php');
 
 <?php function drawFooter() { ?>
     <footer>
-
+            <p>&copy; Pre Looved Bazaar </p>
     </footer>
-  </body>
-  </html>
+    </body>
+    </html>
 <?php } ?>
