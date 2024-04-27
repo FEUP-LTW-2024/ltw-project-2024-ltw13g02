@@ -275,7 +275,7 @@ VALUES ('New with tags'),('New without tags'), ('Very Good'), ('Good'), ('Satisf
 INSERT INTO Category (category)
 VALUES ('Sports'),('Tecnology'),('Books'), ('Games'), ('Cars'), ('Kids'), ('Animals');   
 
-INSERT INTO Sizes (tamanho)
+INSERT INTO Caracteristics (caracteristic)
 VALUES ('Homem - XS'), ('Homem - S'), ('Homem - M'), ('Homem - L'), ('Homem - XL'), ('Homem - XXL'), 
 ('Mulher - XS'), ('Mulher - S'), ('Mulher - M'), ('Mulher - L'), ('Mulher - XL'), ('Mulher - XXL'), 
 ('Criança - 1 ano'), ('Criança - 2 anos'), ('Criança - 3-4 anos'), ('Criança - 5-6 anos'), ('Criança - 7-8 anos'), ('Criança - 9-10 anos'), ('Criança - 11-12 anos'), ('Criança - 13-14 anos'), ('Criança - 15-16 anos'),
@@ -308,6 +308,21 @@ VALUES ('Computer', 'Asus computer 2003', 40, 3, 2, 22, 1),
 ('Camping Tent', 'Compact tent for outdoor camping adventures', 50, 3, 1, 19, 17),
 ('Used Xbox One', 'Pre-owned Xbox One console with controller', 80, 3, 4, 21, 11),
 ('DVD Movie Collection', 'Assorted collection of classic movies on DVD', 15, 2, 4, 21, 23);
+
+INSERT INTO Photo(idProduct, photo)
+VALUES (1, 'asus_computer.jpg'),
+(2, 'basketball.jpeg'),
+(3, 'iphoneX1.jpg'),
+(3, 'iphoneX2.jpg'),
+(3, 'iphoneX3.jpg'),
+(4, 'harry_potter_books.jpg'),
+(5, 'ps5.jpg'),
+(6, 'toyota.jpg'),
+(7, 'nike1.jpg'),
+(7, 'nike2.jpeg'),
+(8, 'dell.jpg'),
+(9, 'cookbook.jpg'),
+(10, 'nintendo.jpg'),
 
 INSERT INTO ShoppingCart (user, product)
 VALUES (1, 10), (1,24), (1,3);
