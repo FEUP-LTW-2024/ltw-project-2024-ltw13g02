@@ -12,6 +12,6 @@
   $db = getDatabaseConnection();
 
   drawHeader($session);
+  drawChatHeader($session, $_GET['chat']);
   drawMessages($session, $_GET['chat']);
   drawFooter();
-?>

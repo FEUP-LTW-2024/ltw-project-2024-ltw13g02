@@ -240,10 +240,20 @@ li:hover a {
 
 .message-content {
     font-style: italic;
+    font-size: 1.3em;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: calc(100% - 100px);
+}
+
+.message-product {
+    font-size: 1.5em;
+}
+
+.with-user {
+    font-size: 1em;
+    color:rgb(131, 131, 131)
 }
 
 .unseen {

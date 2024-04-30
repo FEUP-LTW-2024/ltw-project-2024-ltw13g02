@@ -322,7 +322,7 @@ VALUES (1, 'asus_computer.jpg'),
 (7, 'nike2.jpeg'),
 (8, 'dell.jpg'),
 (9, 'cookbook.jpg'),
-(10, 'nintendo.jpg'),
+(10, 'nintendo.jpg');
 
 
 INSERT INTO ShoppingCart (user, product)

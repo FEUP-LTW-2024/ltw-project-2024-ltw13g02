@@ -293,7 +293,7 @@ li a {
     padding: 0 10px 0 10px;
 }
 
-.chat-user-photo-container {
+.chat-product-photo-container {
     grid-column-start: 1;
     width: 60px;
 }
@@ -302,10 +302,10 @@ li a {
     grid-column-start: 2;
     display: grid;
     grid-template-columns: auto 100px;
-    grid-template-rows: 50% 50%;
+    grid-template-rows: 20% 40% 40%;
 }
 
-.chat-userphoto {
+.chat-productphoto {
     margin-top: 15px;
     grid-column-start: 1;
     margin-right: 10px;
@@ -316,15 +316,23 @@ li a {
 .with-user {
     grid-column-start: 1;
     grid-row-start: 1;
-    margin-top: 15px;
+    margin-top: 10px;
     margin-left: 10px;
-    margin-bottom: 0;
+    margin-bottom: 10px;
 }
 
 .message-content {
     grid-column-start: 1;
-    grid-row-start: 2;
+    grid-row-start: 3;
     margin-top: 5px;
+    margin-bottom: 0;
+    margin-left: 10px;
+}
+
+.message-product {
+    grid-column-start: 1;
+    grid-row-start: 2;
+    margin-top: 10px;
     margin-bottom: 0;
     margin-left: 10px;
 }
@@ -338,7 +346,7 @@ li a {
 
 .unseen, .unchecked {
     grid-column-start: 2;
-    grid-row-start: 2;
+    grid-row-start: 3;
     align-self: center;
     justify-self: right;
     margin-right: 14px
