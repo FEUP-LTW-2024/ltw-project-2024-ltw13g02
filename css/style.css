@@ -265,17 +265,13 @@ li:hover a {
     background-color: #f5f5f5;
 }
 
-.other-message {
-    background-color: gray;
-}
-
 .message-tile {
     font-family: "Didact Gothic", sans-serif;
     font-weight: 400;
     font-style: normal;
 }
 
-.own-message {
+.column-of-messages .own-message {
     margin: 1rem 1rem 1rem auto;
     border-radius: 1.125rem 1.125rem 0 1.125rem;
     background: #333;
@@ -343,4 +339,14 @@ footer {
 
 .input .send-icon:hover {
     color: lightblue;
+}
+
+.message-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.message-container .message-status {
+    margin-right: 10px;
+    padding-top: 55px;
 }

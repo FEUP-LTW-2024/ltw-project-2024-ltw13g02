@@ -10,11 +10,6 @@
 
 
     require_once(__DIR__ . '/../templates/common_tmpl.php');
-
-    $session = new Session();
-    //TODO remove this lines after testing
-    $session->setId(1);
-    $session->setPhotoUser('randomImage.jpg');
     
     if ($session->isLoggedIn()) {
 

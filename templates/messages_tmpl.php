@@ -5,6 +5,8 @@ require_once(__DIR__ . '/../sessions/session.php');
 
 require_once(__DIR__ . '/../database/get_from_db.php');
 
+require_once(__DIR__ . '/../database/change_in_db.php');
+
 require_once(__DIR__ . '/user_tmpl.php');
 
 ?>
@@ -42,8 +44,11 @@ require_once(__DIR__ . '/user_tmpl.php');
                         <p><?php echo $row['messageDate']; ?></p>
                     </div>
                 <?php } ?>
-                <div class="message-tile message own-message">
-                    <p><?php echo $row['content']; ?></p>
+                <div class="message-container">
+                    <div class="message-tile message own-message">
+                        <p><?php echo $row['content']; ?></p>
+                    </div>
+                    <h2 class="message-status <?php echo $row['seen'] ? "fa fa-check-circle" : "fa fa-check-circle-o"; ?>"></h2>
                 </div>
             <?php } else { 
                 if ($ff || (strtotime($row['messageDate']) - strtotime($lastPrintedDate)) > 7200) {
