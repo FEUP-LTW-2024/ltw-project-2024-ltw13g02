@@ -307,7 +307,7 @@ li a {
 
 .chat-productphoto {
     margin-top: 15px;
-    grid-column-start: 1;
+    grid-column-start: 2;
     margin-right: 10px;
     width: 60px;
     border-radius: 50%;
@@ -350,6 +350,30 @@ li a {
     align-self: center;
     justify-self: right;
     margin-right: 14px
+}
+
+.chat-header {
+    display: grid;
+    grid-template-columns: 60px 100px auto;
+    grid-template-rows: 30px 70px;
+}
+
+.chat-back-button {
+    margin-left: 20px;
+    margin-top: 30px;
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.chat .with-user {
+    margin-top: 15px;
+    grid-column: 3;
+    grid-row: 1;
+}
+
+.chat .message-product {
+    grid-column: 3;
+    grid-row: 2;
 }
 
 footer {

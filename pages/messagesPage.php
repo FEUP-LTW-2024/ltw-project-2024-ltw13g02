@@ -14,4 +14,4 @@
   drawHeader($session);
   drawChatHeader($session, $_GET['chat']);
   drawMessages($session, $_GET['chat']);
-  drawFooter();
+  drawMessagesFooter($session, $_GET['chat']);
