@@ -9,7 +9,6 @@ require_once(__DIR__ . '/../database/change_in_db.php');
 
 require_once(__DIR__ . '/user_tmpl.php');
 
-
 ?>
 
 <?php function drawChatHeader(Session $session, $idChat) { 
@@ -30,12 +29,10 @@ require_once(__DIR__ . '/user_tmpl.php');
 <?php } ?> 
 
 <?php function drawMessages(Session $session, $idChat) {
-    $first = true;
-    $lastPrintedDate = null;
     $messages = getMessages($idChat);
     setAsSeen($idChat, $session->getId()); ?>
     <div class="column-of-messages">
-        <?php foreach ($messages as $row) { ?>
+        <?php foreach ($messages as $key => $row) { ?>
             <?php if ($row["sender"] == $session->getId()) { ?>
                 <div class="message-container">
                     <div class="message-tile message own-message">
@@ -44,22 +41,27 @@ require_once(__DIR__ . '/user_tmpl.php');
                     <h2 class="message-status <?php echo $row['seen'] ? "fa fa-check-circle" : "fa fa-check-circle-o"; ?>"></h2>
                 </div>
                 <?php
-                if ($first || strtotime($lastPrintedDate) - strtotime($row['messageDate']) < 3600) {
-                    $first = false;
-                    $lastPrintedDate = $row['messageDate'];
+                if ($key < count($messages) - 1 && strtotime($row['messageDate']) - strtotime($messages[$key + 1]['messageDate']) < 3600) {
                 } 
-                else { 
-                    $lastPrintedDate = $row['messageDate']; ?>
+                else { ?>
                     <div class="time">
                         <p><?php echo $row['messageDate']; ?></p>
                     </div>
-                <?php } ?>
-            <?php } else { 
+                <?php } 
+             } else { 
             ?>
             <div class="message-tile message other-message">
                 <p><?php echo $row['content']; ?></p>
             </div>
-            <?php } 
+            <?php
+                if ($key < count($messages) - 1 && strtotime($row['messageDate']) - strtotime($messages[$key + 1]['messageDate']) < 3600) {
+                } 
+                else { ?>
+                    <div class="time">
+                        <p><?php echo $row['messageDate']; ?></p>
+                    </div>
+                <?php }
+             } 
             } ?>
     </div>
 <?php } ?> 

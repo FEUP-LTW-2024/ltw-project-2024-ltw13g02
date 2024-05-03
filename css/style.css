@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Didact+Gothic&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&display=swap');
 
 html {
     min-width: 30em;
@@ -30,10 +31,9 @@ h2 {
 
 #mainLogo {
     color:  #293fa1;
-    font-family: "Caveat", cursive;
-    font-optical-sizing: auto;
-    font-weight: 800;
-    font-size: 3em;
+    font-family: "Syncopate", sans-serif;
+    font-weight: 400;
+    font-size: 2.5em;
     font-style: normal;
 }
 

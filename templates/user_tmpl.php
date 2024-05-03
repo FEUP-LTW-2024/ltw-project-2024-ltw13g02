@@ -59,7 +59,7 @@ require_once(__DIR__ . '/../sessions/session.php');
     $photo = $session->getPhotoUser(); 
     if($email != null) { ?>
         <div class="user-photo-container">
-            <?php if ($photo == "Sem foto") { ?>
+            <?php if ($photo == "Sem FF") { ?>
                 <a href="../pages/editingProfile.php" class="user-icon-link">
                     <i class="fa fa-user fa-5x userIconPhoto"></i>
                     <a href="../pages/editingProfile.php"><i class="fa fa-pencil edit-icon fa-1x"></i></a>
