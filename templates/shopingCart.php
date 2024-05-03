@@ -1,4 +1,6 @@
 <?php
+    require_once(__DIR__ . '/../database/get_from_db.php');
+
     function output_empty_cart() { ?>
         <section id='Shopping_Cart'>
             <img class="empty_cart_img" src="../imagens/empty_cart.png">
@@ -61,22 +63,15 @@
     function output_shipping_address(Session $session,$countries){ ?>
         <aside>
             <h3>Checkout</h3> 
-        <form id ='address' action="database/process_payment.php" method="post">
+        <form id ='address' action="../action/process_payment.php" method="post">
 
                 <h5>Address</h5>
-                <p><?= $session->getAddress()?> </p>
-                <p><?= $session->getZipCode()?>, <?= $session->getCity()?></p>
-                <p><?= $session->getCountry()?></p>
-                <div class='address_option' id='default_address_option'> <input type = 'radio' name='address_option' value='default_address' checked='checked'> Default Address </div>
 
-                <div class='custom_address_field' id ='custom_address_street'>Street: <input type='text' name='custom_address'> </div>
-                <div class='custom_address_field' id ='custom_address_zipcode'>Zipcode: <input type='text' name='custom_zipcode'> </div>
-                <div class='custom_address_field' id ='custom_address_city'>City: <input type='text' name='custom_city'> </div> <?php
+                <div class='address_field' id ='address_street'>Street: <input type='text' name='address' required="required" value= "<?=$session->getAddress()?>"> </div>
+                <div class='address_field' id ='address_zipcode'>Zipcode: <input type='text' name='zipcode' required="required" value= "<?= $session->getZipCode()?>"> </div>
+                <div class='address_field' id ='address_city'>City: <input type='text' name='city' required="required" value= "<?= $session->getCity()?>"> </div> <?php
                 output_country_option($countries);
                 ?>
-
-
-                <div class='custom_address_field' id ='custom_address_option'> <input type = 'radio' name='address_option' value='custom_address'> Custom Address </div>
                 <input type="submit" value="Pay Now">
         </form>
         </aside>
@@ -86,15 +81,22 @@
 
 <?php
     function output_country_option($countries){ 
+        $session = new Session();
         ?>
         
-        <div class='custom_address_field' id ='custom_address_country'>
+        <div class='address_field' id ='address_country'>
         Country:
-            <select name='custom_country'>
+            <select name='country'>
                 <?php 
-                    foreach ($countries as $country){ ?>
-                        <option value="<?=$country['country']?>"><?=$country['country']?></option>
-                    <?php }
+                    foreach ($countries as $country){ 
+                        if ($country['country'] === $session->getCountry())
+                        { ?>
+                            <option value="<?=$country['country']?>" selected><?=$country['country']?></option>
+                        <?php 
+                        }else{ ?>
+                            <option value="<?=$country['country']?>"><?=$country['country']?></option>
+                        <?php }
+                        }
                 ?>
             </select>
         </div>

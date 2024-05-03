@@ -29,13 +29,16 @@ function drawRecent($recent_ids, $db)
         <section class="Products" id="Recent">
             <h2>Recents</h2>
             <article>
-                <div class="offers_container"> <?php 
+                <div class="sliding_offers_container"> <?php 
                     foreach($recent_ids as $item_id)
                     {
                         $product = build_Product_from_id($db, $item_id);
 
                         $user = getUserInfo($db,$product->seller);
-                        drawProduct($product, $user);  
+                        ?>
+                        <div class="sliding_offer"> <?php
+                            drawProduct($product, $user);  ?>
+                        </div> <?php 
                     } ?>
                 </div>
                 <button class="move_button">&#60</button>
@@ -49,15 +52,18 @@ function drawRecent($recent_ids, $db)
 
 function drawFavorites($favorites_ids, $db){ ?>
     <section class="Products" id="Favorites">
-        <h2>Recents</h2>
+        <h2>Favorites</h2>
         <article>
-            <div class="offers_container"> <?php 
+            <div class="sliding_offers_container"> <?php 
                 foreach($favorites_ids as $item_id)
                 {
                     $product = build_Product_from_id($db, $item_id);
 
                     $user = getUserInfo($db,$product->seller);
-                    drawProduct($product, $user);  
+                    ?>
+                    <div class="sliding_offer"> <?php
+                        drawProduct($product, $user);  ?>
+                    </div> <?php 
                 } ?>
             </div>
             <button class="move_button">&#60</button>
@@ -69,8 +75,27 @@ function drawFavorites($favorites_ids, $db){ ?>
 ?>
 
 <?php
+function drawRecommended($db, $recommended_ids) { ?>
+    <section class="Products" id="Recommended">
+        <h2>Recommended</h2>
+        <div id="static_offer_container">
+            <?php
+            foreach($recommended_ids as $item_id)
+            {   
+                $product = build_Product_from_id($db, $item_id);
+                $user = getUserInfo($db,$product->seller); ?>
+                <div class="static_offer"> <?php
+                    drawProduct($product, $user);  ?>
+                </div> <?php
+            } ?>
+        </div>
+    </section>
+<?php }
+
+?>
+
+<?php
 function drawProduct($product, $user){ ?>
-    <div class="sliding_offer">
         <a href="../pages/seller_page.php?user=<?=$user->idUser?>" class="user_small_card">
             <img class="user_small_pfp" src="../imagens/userProfile/<?=$user->photo?>"> 
             <p><?=$user->name() ?></p>
@@ -82,30 +107,6 @@ function drawProduct($product, $user){ ?>
             <h5><?= $user->city . ", " . getCountryFromDB($user->idCountry)?></h5>
             <p><?=$product->price?>€</p>
         </a>
-    </div>
 <?php 
 } 
-?>
-
-<?php
-function drawRecommended($db, $recommended_ids) { ?>
-    <section class="Products" id="Recommended">
-        <h2>Recommended</h2>
-        <article>
-            <div class="offers_container"> <?php 
-                foreach($recommended_ids as $item_id)
-                {   
-                    var_dump($item_id);
-                    $product = build_Product_from_id($db, $item_id);
-
-                    $user = getUserInfo($db,$product->seller);
-                    drawProduct($product, $user);  
-                } ?>
-            </div>
-            <button class="move_button">&#60</button>
-            <button class="move_button">></button>
-        </article>
-    </section>
-<?php }
-
 ?>

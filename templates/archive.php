@@ -3,7 +3,7 @@ require_once(__DIR__ . "/../database/get_from_db.php");
 require_once(__DIR__ . "/../database/userClass.php");
 
     function output_archive_user_profile(Session $session) { ?>
-        <article id='archive page'>
+        <main id='archive page'>
             <section id='archive_header'>
                 <img class="user_pfp" src=<?= "/../imagens/userProfile/{$session->getPhotoUser()}" ?>>
                 <h4>Archive</h4>
@@ -29,7 +29,7 @@ require_once(__DIR__ . "/../database/userClass.php");
         ?>
         </section>
 
-    </article>
+    </main>
     <?php }
 ?>
 

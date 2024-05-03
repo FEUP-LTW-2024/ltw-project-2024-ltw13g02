@@ -101,7 +101,7 @@ require_once(__DIR__ . "/../database/get_from_db.php");
     }
 
     public function getCountry() : ?string {
-        return getCountryFromDB($_SESSION['idCountry']);
+        return getCountryFromDB($_SESSION['Country']);
     }
   
     public function getCity() : ?string {
@@ -117,7 +117,7 @@ require_once(__DIR__ . "/../database/get_from_db.php");
     }
 
     public function setCountry(int $idCountry) {
-      $_SESSION['idCountry'] = $idCountry;
+      $_SESSION['Country'] = $idCountry;
     }
   }
 ?>

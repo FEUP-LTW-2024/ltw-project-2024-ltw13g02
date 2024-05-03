@@ -13,7 +13,8 @@
 
     $session = new Session();
     //TODO remove this lines after testing
-    $session->setId(1);
+    $session->setId(2);
+    var_dump($session->getId());
     $session->setPhotoUser('randomImage.jpg');
     
     if ($session->isLoggedIn()) {
@@ -29,6 +30,6 @@
 
         output_footer();
     }else{
-        header('Location: /index.php');
+        header('Location: ../index.php');
     }
     

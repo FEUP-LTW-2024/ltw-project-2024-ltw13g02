@@ -28,21 +28,22 @@ h1 {
 
 .Products {
     width: 99%;
+    height: 25em;
     margin-top: 10px;
     margin-left: 0.5%;
     margin-right: 0.5%;
 }
 
-.Products article {
+.Products > article {
     border-radius: 12px;
-    height: 25em;
     position: relative;
     display: flex;
     overflow: hidden;
+    height: 100%;
 }
 
-.Products .offers_container {
-    display: inline-flex;
+.Products .sliding_offers_container {
+    display: flex;
     width: 100%;
     overflow-y: hidden;
 }
@@ -55,8 +56,11 @@ h1 {
 
 }
 
+
+
 .Products input:last-of-type{
-    position: absolute;
+    position: relative;
+    float: left;
     right: 0;
     top: 50%;
     bottom: 50%;
@@ -82,6 +86,24 @@ h1 {
 }
 
 
+#static_offer_container {
+    display:inline-flex;
+    flex-wrap: wrap;
+
+}
+
+.static_offer {
+    width: 25%;
+    display: grid;
+    grid-template-rows: 2.5em 1fr 2.5em;
+    margin: 5px;
+}
+
+.static_offer .offer_img{
+    object-fit: contain;
+
+}
+
 body > header{
     display: flex;
     position: relative;
@@ -97,7 +119,7 @@ header > a > img{
     height: 100%;
 }
 
-.offers_container::-webkit-scrollbar {
+.sliding_offers_container::-webkit-scrollbar {
     display: none;
 }
 
