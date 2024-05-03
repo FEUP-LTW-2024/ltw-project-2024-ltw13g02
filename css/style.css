@@ -348,7 +348,7 @@ footer {
     font-family: "Didact Gothic", sans-serif;
     font-weight: 400;
     letter-spacing: 0.025em;
-    width: 80%;
+    grid-column: 1;
 }
 
 .Send, .Send:hover {
@@ -364,6 +364,7 @@ footer {
 .Send i {
     margin: 0;
     font-size: 20px;
+    grid-column: 2;
 }
 
 .Send i:hover {
@@ -372,6 +373,8 @@ footer {
 
 .messages-input-form {
     width: 100%;
+    display: grid;
+    grid-template-columns: auto 45px;
 }
 
 .message-container {

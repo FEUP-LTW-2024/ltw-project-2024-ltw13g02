@@ -10,6 +10,9 @@
 
   require_once(__DIR__ . '/../templates/chat_tmpl.php');
 
+  require_once(__DIR__ . '/../utils/prev_current_pages.php');
+  updatePages($session, "chatsAsBuyerPage.php");
+
   $db = getDatabaseConnection();
 
   drawHeader($session);

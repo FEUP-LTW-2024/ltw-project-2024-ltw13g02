@@ -9,6 +9,9 @@
   require_once(__DIR__ . '/../templates/common_tmpl.php');
   require_once(__DIR__ . '/../templates/messages_tmpl.php');
 
+  require_once(__DIR__ . '/../utils/prev_current_pages.php');
+  updatePages($session, 'messagesPage.php?chat=' . urlencode($_GET['chat']));
+
   $db = getDatabaseConnection();
 
   drawHeader($session);
