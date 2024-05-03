@@ -9,7 +9,6 @@ require_once(__DIR__ . '/../database/change_in_db.php');
 
 require_once(__DIR__ . '/user_tmpl.php');
 
-require_once(__DIR__ . '/../vendor/autoload.php');
 
 ?>
 
@@ -31,10 +30,9 @@ require_once(__DIR__ . '/../vendor/autoload.php');
 <?php } ?> 
 
 <?php function drawMessages(Session $session, $idChat) {
-    $ff = true;
+    $first = true;
     $lastPrintedDate = null;
     $messages = getMessages($idChat);
-    $info = getChatInfo($idChat); 
     setAsSeen($idChat, $session->getId()); ?>
     <div class="column-of-messages">
         <?php foreach ($messages as $row) { ?>
@@ -46,11 +44,12 @@ require_once(__DIR__ . '/../vendor/autoload.php');
                     <h2 class="message-status <?php echo $row['seen'] ? "fa fa-check-circle" : "fa fa-check-circle-o"; ?>"></h2>
                 </div>
                 <?php
-                if ($ff || strtotime($lastPrintedDate) - strtotime($row['messageDate']) < 7200) {
-                    $ff = false;
+                if ($first || strtotime($lastPrintedDate) - strtotime($row['messageDate']) < 3600) {
+                    $first = false;
                     $lastPrintedDate = $row['messageDate'];
                 } 
-                else { ?>
+                else { 
+                    $lastPrintedDate = $row['messageDate']; ?>
                     <div class="time">
                         <p><?php echo $row['messageDate']; ?></p>
                     </div>
