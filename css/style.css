@@ -6,7 +6,7 @@ html {
     min-width: 30em;
 }
 
-.Blogin, .register {
+#Blogin, #Bregister {
     margin: 0 auto auto auto;
     height: 40px;
     width: 200px;
