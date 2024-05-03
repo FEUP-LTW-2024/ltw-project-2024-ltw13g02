@@ -1,6 +1,7 @@
 <?php
 include_once('../database/connection_to_db.php');
 
+
 try {
     $fullName = $_POST['name'];
     $names = explode(' ', $fullName);
@@ -9,7 +10,7 @@ try {
     $phone = $_POST['phone'];
     $email = $_POST['email'];
     $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
-    $idCountry = $_POST['idCountry'];
+    $idCountry = $_POST['country'];
     $city = $_POST['city'];
     $address = $_POST['address'];
     $zipCode = $_POST['zipCode'];

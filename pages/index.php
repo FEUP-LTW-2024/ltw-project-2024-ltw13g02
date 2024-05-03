@@ -7,6 +7,7 @@
   TODO remove
   $session->setId(1);
   */
+  
   require_once(__DIR__ . '/../database/connection_to_db.php');
   require_once(__DIR__ . '/../database/connection.php');
   require_once(__DIR__ . '/../database/userClass.php');
@@ -14,7 +15,6 @@
 
   require_once(__DIR__ . '/../templates/common_tmpl.php');
   require_once(__DIR__ . '/../templates/index_tmp.php');
-
 
   $db = getDatabaseConnection();
   $categories = getCategories($db);
@@ -35,8 +35,9 @@
   }else{
     $recommended_ids = getRecommended($db, -1);
   }
-    drawRecommended($db,$recommended_ids);
+  drawRecommended($db,$recommended_ids);
 
+  drawFooter();
 ?>
 </main>
 </body>

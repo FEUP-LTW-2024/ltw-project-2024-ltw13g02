@@ -32,11 +32,20 @@ function deleteUser($username) {
     $stmt->execute();
 }
 
-function setStarsOnDB($idUser, $stars) {
-    /*$db = getDatabaseConnection();
-    $stmt = $db->prepare('UPDATE User SET stars = :stars WHERE idUser = :idUser');
-    $stmt->bindParam(':idUser', $idUser, PDO::PARAM_INT);
-    $stmt->bindParam(':stars', $stars, PDO::PARAM_INT);
-    $stmt->execute();*/
+function setAsSeen($idChat, $idUser) {
+    $db = getDatabaseConnection();
+    $stmt = $db->prepare('UPDATE Messages SET seen=1 WHERE sender <> ? AND chat = ?');
+    $stmt->execute(array($idUser, $idChat));
 }
 
+function addMessage($idUser, $idChat, $content) {
+    // Check if content is empty or NULL
+    if (empty($content)) {
+        throw new Exception("Content cannot be empty");
+    }
+    
+    $db = getDatabaseConnection();
+    $date = date('Y-m-d H:i:s');
+    $stmt = $db->prepare('INSERT INTO Messages (messageDate, sender, chat, content, seen) VALUES (?, ?, ?, ?, 0)');
+    $stmt->execute(array($date, $idUser, $idChat, $content));
+}

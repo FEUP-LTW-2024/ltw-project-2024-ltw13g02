@@ -1,5 +1,5 @@
 /*******************************************************************************
-   Database - Version 0.1
+   Database - Version 0.3
 ********************************************************************************/
 
 DROP TABLE IF EXISTS Country;
@@ -32,10 +32,10 @@ CREATE TABLE IF NOT EXISTS User (
   firstName VARCHAR NOT NULL,
   lastName VARCHAR NOT NULL,
   phone INTEGER CHECK (phone >= 200000000 AND phone <= 999999999) NOT NULL,
-  email TEXT NOT NULL,
+  email TEXT UNIQUE NOT NULL,
   userPassword VARCHAR NOT NULL,
   stars INTEGER DEFAULT "0",
-  photo TEXT DEFAULT "Sem foto",
+  photo TEXT DEFAULT "Sem FF",
   idCountry TEXT REFERENCES Country (idCountry) ON DELETE SET NULL,
   city TEXT NOT NULL,
   userAddress TEXT NOT NULL,
@@ -65,9 +65,16 @@ CREATE TABLE IF NOT EXISTS Category (
     category TEXT NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS Sizes (
-    idSize INTEGER PRIMARY KEY NOT NULL,
-    tamanho TEXT NOT NULL
+CREATE TABLE IF NOT EXISTS Characteristic (
+    idCharacteristic INTEGER PRIMARY KEY NOT NULL,
+    characteristic TEXT NOT NULL,
+    idType INTEGER REFERENCES TypesInCategory (idType) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS TypesInCategory (
+    idType INTEGER PRIMARY KEY NOT NULL,
+    type_name TEXT NOT NULL,
+    category INTEGER REFERENCES Category (idCategory) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS Product (
@@ -76,8 +83,9 @@ CREATE TABLE IF NOT EXISTS Product (
     prodDescription TEXT,
     price DOUBLE NOT NULL,
     condition INTEGER REFERENCES Condition (idCondition) NOT NULL,
-    category INTEGER REFERENCES Category (idCategory) NOT NULL,
-    prodsize INTEGER REFERENCES Sizes (idSize) NOT NULL,
+    characteristic1 INTEGER REFERENCES Characteristic (idCharacteristic) NOT NULL,
+    characteristic2 INTEGER REFERENCES Characteristic (idCharacteristic),
+    characteristic3 INTEGER REFERENCES Characteristic (idCharacteristic),
     seller INTEGER REFERENCES User (idUser) NOT NULL,
     buyer INTEGER REFERENCES User(idUser) DEFAULT NULL,
     purchaseDate DATETIME DEFAULT NULL
@@ -124,7 +132,7 @@ CREATE TABLE IF NOT EXISTS Shipping (
 );
 
 CREATE TABLE IF NOT EXISTS Photo (
-    idPhoto INTEGER PRIMARY KEY NOT NULL , 
+    idPhoto INTEGER PRIMARY KEY NOT NULL, 
     idProduct INTEGER REFERENCES Product (idProduct) NOT NULL,
     photo TEXT NOT NULL
 );
@@ -273,41 +281,110 @@ INSERT INTO Condition (condition)
 VALUES ('New with tags'),('New without tags'), ('Very Good'), ('Good'), ('Satisfactory');
 
 INSERT INTO Category (category)
-VALUES ('Sports'),('Tecnology'),('Books'), ('Games'), ('Cars'), ('Kids'), ('Animals');   
+VALUES ('Sports'), ('Tecnology'), ('Books'), ('Games'), ('Cars'), ('Kids'), ('Animals'), ('Clothes'), ('Others'), ('Shoes');   
 
-INSERT INTO Sizes (tamanho)
-VALUES ('Homem - XS'), ('Homem - S'), ('Homem - M'), ('Homem - L'), ('Homem - XL'), ('Homem - XXL'), 
-('Mulher - XS'), ('Mulher - S'), ('Mulher - M'), ('Mulher - L'), ('Mulher - XL'), ('Mulher - XXL'), 
-('Criança - 1 ano'), ('Criança - 2 anos'), ('Criança - 3-4 anos'), ('Criança - 5-6 anos'), ('Criança - 7-8 anos'), ('Criança - 9-10 anos'), ('Criança - 11-12 anos'), ('Criança - 13-14 anos'), ('Criança - 15-16 anos'),
-('Tamanho unico');
+INSERT INTO TypesInCategory (type_name, category)
+VALUES ('Type of Sport', 1), 
+('Type of equipments', 2),
+('Genre', 3),
+('Devices', 4),
+('kms', 5),
+('Type of fuel', 5),
+('Kid''s Size', 6),
+('Clothes', 7),
+('Toys', 7),
+('Food', 7),
+('Type of clothes', 8),
+('Clothes'' Genre', 8),
+('Clothes'' Size', 8),
+('Type of shoes', 10),
+('Shoes'' Size', 10),
+('Other', 9);
 
-INSERT INTO Product (prodName, prodDescription, price, condition, category, prodsize, seller)
-VALUES ('Computer', 'Asus computer 2003', 40, 3, 2, 22, 1),
-('Basketball', 'Brand new basketball', 25, 1, 1, 21, 8),
-('iPhone X', 'Used iPhone X in good condition', 300, 4, 2, 12, 12),
-('Harry Potter Books', 'Complete set of Harry Potter books', 50, 2, 3, 10, 17),
-('PS5 Console', 'Brand new PS5 console with controller', 600, 1, 4, 21, 9),
-('Toyota Camry', 'Used Toyota Camry 2018', 15000, 3, 5, 1, 14),
-('Nike Running Shoes', 'Brand new Nike running shoes', 80, 1, 1, 6, 20),
-('Dell Laptop', 'Refurbished Dell laptop with SSD', 500, 2, 2, 7, 11),
-('Cooking Book', 'Best-selling cooking book with recipes', 30, 3, 3, 16, 24),
-('Nintendo Switch', 'Nintendo Switch console with Mario Kart', 350, 1, 4, 21, 7),
-('Ford Mustang', 'Used Ford Mustang GT 2019', 30000, 3, 5, 4, 18),
-('Football Jersey', 'Official team jersey with player name', 60, 1, 1, 4, 15),
-('Samsung Galaxy S20', 'Brand new Samsung Galaxy S20', 700, 1, 2, 12, 19),
-('Gardening Tools Set', 'Complete set of gardening tools', 100, 2, 6, 20, 8),
-('Board Game - Settlers of Catan', 'Classic board game for strategy lovers', 45, 2, 4, 18, 6),
-('Sony 4K TV', '55-inch Sony 4K Smart TV', 900, 1, 2, 19, 10),
-('Yoga Mat', 'High-quality yoga mat for home workouts', 20, 1, 1, 22, 13),
-('Used Desktop PC', 'Older model desktop PC, good for basic tasks', 100, 3, 2, 7, 16),
-('Classic Novels Collection', 'Collection of classic novels by famous authors', 40, 2, 3, 10, 21),
-('FIFA 21 (PS4)', 'Pre-owned FIFA 21 game for PlayStation 4', 15, 4, 4, 21, 24),
-('Bicycle Helmet', 'Safety helmet for cycling enthusiasts', 25, 1, 5, 21, 8),
-('Coloring Book for kids', 'Coloring book with various themes for kids', 10, 5, 6, 20, 5),
-('Bluetooth Earbuds', 'Wireless earbuds with charging case', 30, 2, 2, 22, 12),
-('Camping Tent', 'Compact tent for outdoor camping adventures', 50, 3, 1, 19, 17),
-('Used Xbox One', 'Pre-owned Xbox One console with controller', 80, 3, 4, 21, 11),
-('DVD Movie Collection', 'Assorted collection of classic movies on DVD', 15, 2, 4, 21, 23);
+INSERT INTO Characteristic (characteristic, idType) 
+VALUES ('Football', 1), ('Basketball', 1), ('American Football', 1), 
+('Baseball', 1), ('Tennis', 1), ('Golf', 1), ('Rugby', 1), ('Cricket', 1), 
+('Hockey', 1), ('Volleyball', 1), ('Table Tennis', 1), ('Badminton', 1), 
+('Swimming', 1), ('Athletics', 1), ('Gymnastics', 1), ('Boxing', 1), ('Wrestling', 1), 
+('Martial Arts', 1), ('Cycling', 1), ('Skiing', 1), ('Snowboarding', 1), 
+('Surfing', 1), ('Skateboarding', 1), ('Rowing', 1), ('Sailing', 1), 
+('Fencing', 1), ('Archery', 1), ('Equestrian', 1), ('Triathlon', 1), ('Other', 1),
+('Computers & Laptops', 2), ('Mobile Devices', 2), ('Audio & Entertainment', 2), 
+('Cameras & Photography', 2), ('Home Electronics', 2), ('Gaming', 2), 
+('Software & Applications', 2), ('Accessories & Peripherals', 2), 
+('Networking & Internet', 2), ('Components & Parts', 2), 
+('Fiction', 3), ('Non-Fiction', 3), ('Poetry', 3), ('Drama', 3), 
+('Child books', 3), ('Graphic Novels/Comics', 3), ('Reference', 3), 
+('Religious/Spiritual', 3), ('Cooking/Food', 3), ('Art/Photography', 3), 
+('Music', 3), ('Sports', 3), ('Science Fiction/Fantasy', 3), 
+('Romance', 3), ('Mystery/Thriller', 3), ('Historical Fiction', 3), 
+('Horror', 3), ('Humor', 3), ('Business/Finance', 3), 
+('Self-Help/Personal Development', 3), ('Political/Current Events', 3), 
+('Nature/Environment', 3), ('Philosophy', 3), ('Technology/Computers', 3), 
+('Travel', 3), ('Health/Fitness', 3), ('Parenting/Family', 3), 
+('Education/Teaching', 3), ('LGBTQ+', 3), ('Cultural Studies', 3), 
+('Board Games', 4), ('Card Games', 4), ('Video Games', 4),
+('Puzzle Games', 4), ('Party Games', 4), ('Educational Games', 4),
+('Music/Rhythm Games', 4), ('Virtual Reality Games', 4),
+('PS4', 4), ('PS5', 4), ('Xbox', 4),  ('Nintendo Switch', 4), 
+('Nintendo 3DS', 4), ('Nintendo 2DS', 4), ('Nintendo Wii', 4),
+('0-5000 kms',5), ('5000-10000 kms',5), ('10000-100000 kms',5), ('200000-300000 kms',5), ('300000 + kms',5),
+('Diesel', 6), ('Electric', 6), ('Hybrid', 6), ('Gasoline/Petrol', 6),
+('Hydrogen Fuel Cell', 6), ('Natural Gas (CNG)', 6), ('Plug-In Hybrid', 6),
+('Biofuel', 6), ('Flex-Fuel', 6), ('Propane/Liquefied Petroleum Gas (LPG)', 6),
+('1 ano', 7), ('2 anos', 7), ('3-4 anos', 7), 
+('5-6 anos', 7), ('7-8 anos', 7), ('9-10 anos', 7), 
+('11-12 anos', 7), ('13-14 anos', 7), ('15-16 anos', 7),
+('One Size', 7),
+('Skirts', 11), ('Sweaters', 11), ('Jeans', 11), ('T-shirts', 11), ('Jackets', 11), ('Dresses', 11), ('Polo Shirts', 11), ('Shirts', 11), ('Suit', 11), ('Shorts', 11),
+('Homem', 12), ('Mulher', 12),
+('XS', 13), ('S', 13), ('M', 13), ('L', 13), ('XL', 13), ('XXL', 13), 
+('One Size', 13),
+('Sneakers',14), ('Boots',14), ('Sandals',14), ('Loafers',14), ('Oxfords',14), 
+('Brogues',14), ('Derby shoes',14), ('Espadrilles',14), ('Moccasins',14), 
+('Ballet flats',14), ('High heels',14), ('Wedges',14), ('Platform shoes',14), 
+('Athletic shoes',14), ('Hiking boots',14), ('Chelsea boots',14), ('Dress shoes',14), 
+('Slippers',14), ('Clogs',14), ('Boat shoes',14),
+('16',15), ('16.5',15), ('17',15), ('17.5',15), ('18',15), ('18.5',15), ('19',15), 
+('19.5',15), ('20',15), ('20.5',15), ('21',15), ('21.5',15), ('22',15), ('22.5',15), 
+('23',15), ('23.5',15), ('24',15), ('24.5',15), ('25',15), ('25.5',15), ('26',15), 
+('26.5',15), ('27',15), ('27.5',15), ('28',15), ('28.5',15), ('29',15), ('29.5',15), 
+('30',15), ('30.5',15), ('31',15), ('31.5',15), ('32',15), ('32.5',15), ('33',15), 
+('33.5',15), ('34',15), ('34.5',15), ('35',15), ('35.5',15), ('36',15), ('36.5',15), 
+('37',15), ('37.5',15), ('38',15), ('38.5',15), ('39',15), ('39.5',15), ('40',15), 
+('40.5',15), ('41',15), ('41.5',15), ('42',15), ('42.5',15), ('43',15), ('43.5',15), 
+('44',15), ('44.5',15), ('45',15), ('45.5',15), ('46',15),
+('Others', 16);
+
+
+INSERT INTO Product (prodName, prodDescription, price, condition, characteristic1, characteristic2, characteristic3, seller)
+VALUES ('Computer', 'Asus computer 2003', 40, 3, 31, NULL, NULL, 1),
+('Basketball', 'Brand new basketball', 25, 1, 2, NULL, NULL, 8),
+('iPhone X', 'Used iPhone X in good condition', 300, 4, 32, NULL, NULL, 12),
+('Harry Potter Books', 'Complete set of Harry Potter books', 50, 2, 41, NULL, NULL, 17),
+('PS5 Console', 'Brand new PS5 console with controller', 600, 1, 36, NULL, NULL, 9),
+('Toyota Camry', 'Used Toyota Camry 2018 electric', 15000, 3, 87, 91, NULL, 14),
+('Nike Running Shoes', 'Brand new Nike running shoes', 80, 1, 143, 203, NULL, 20),
+('Dell Laptop', 'Refurbished Dell laptop with SSD', 500, 2, 31, NULL, NULL, 11),
+('Cooking Book', 'Best-selling cooking book with recipes', 30, 3, 66, NULL, NULL, 24),
+('Nintendo Switch', 'Nintendo Switch console with Mario Kart', 350, 1, 36, NULL, NULL, 7),
+('Ford Mustang', 'Used Ford Mustang GT 2019', 30000, 3, 88, 91, NULL, 18),
+('Football Jersey', 'Official team jersey with player name', 60, 1, 1, NULL, NULL, 15),
+('Samsung Galaxy S20', 'Brand new Samsung Galaxy S20', 700, 1, 32, NULL, NULL, 19),
+('Gardening Tools Set', 'Complete set of gardening tools', 100, 2, 211, NULL, NULL, 8),
+('Board Game - Settlers of Catan', 'Classic board game for strategy lovers', 45, 2, 71, NULL, NULL, 6),
+('Sony 4K TV', '55-inch Sony 4K Smart TV', 900, 1, 35, NULL, NULL, 10),
+('Yoga Mat', 'High-quality yoga mat for home workouts', 20, 1, 30, NULL, NULL, 13),
+('Used Desktop PC', 'Older model desktop PC, good for basic tasks', 100, 3, 31, NULL, NULL, 16),
+('Classic Novels Collection', 'Collection of classic novels by famous authors', 40, 2, 41, NULL, NULL, 21),
+('FIFA 21 (PS4)', 'Pre-owned FIFA 21 game for PlayStation 4', 15, 4, 79, NULL, NULL, 24),
+('Bicycle Helmet', 'Safety helmet for cycling enthusiasts', 25, 1, 19, NULL, NULL, 8),
+('Coloring Book for kids', 'Coloring book with various themes for kids', 10, 5, 45, NULL, NULL, 5),
+('Bluetooth Earbuds', 'Wireless earbuds with charging case', 30, 2, 33, NULL, NULL, 12),
+('Camping Tent', 'Compact tent for outdoor camping adventures', 50, 3, 211, NULL, NULL, 17),
+('Used Xbox One', 'Pre-owned Xbox One console with controller', 80, 3, 81, NULL, NULL, 11),
+('DVD Movie Collection', 'Assorted collection of classic movies on DVD', 15, 2, 33, NULL, NULL, 23);
+
 
 INSERT INTO ShoppingCart (user, product)
 VALUES (1, 10), (1,24), (1,3);
@@ -318,8 +395,36 @@ VALUES (1, 10), (1,4), (1,24), (1,3), (1,9), (1,17);
 INSERT INTO Recent (user, product)
 VALUES (1,9), (1,17);
 
-INSERT INTO Photo (idProduct, photo)
-VALUES (6,'photo de um Toyota'), (6,'photo de um Toyota 2');
+INSERT INTO Photo(idProduct, photo)
+VALUES (1, 'asus_computer.jpg'),
+(2, 'basketball.jpeg'),
+(3, 'iphoneX1.jpg'),
+(3, 'iphoneX2.jpg'),
+(3, 'iphoneX3.jpg'),
+(4, 'harry_potter_books.jpg'),
+(5, 'ps5.jpg'),
+(6, 'toyota.jpg'),
+(7, 'nike1.jpg'),
+(7, 'nike2.jpeg'),
+(8, 'dell.jpg'),
+(9, 'cookbook.jpg'),
+(10, 'nintendo.jpg'),
+(11, 'fordMustang.jpeg'),
+(12,'jersey.jpeg'),
+(13, 'samsung.jpeg'),
+(14, 'tool.webp'),
+(15, 'catan.jpeg'),
+(16, 'sonyTV.jpeg'),
+(17, 'yogamat.jpeg'),
+(18, 'desktopPc.jpeg'),
+(19, 'classicalNovels.jpg'),
+(20, 'fifa.jpeg'),
+(21, 'helmet.jpeg'),
+(22, 'colorbook.jpeg'),
+(23, 'earbuds.jpeg'),
+(24, 'tent.jpeg'),
+(25, 'xbox.jpeg'),
+(26, 'dvdmoviecollection.jpg');
 
 INSERT INTO Messages (idMessage, messageDate, sender, chat, content, seen)
 VALUES (1, '2024-04-05 11:00:00', 2, 1, 'Hi! I''m interested in your product!', false);

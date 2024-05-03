@@ -97,10 +97,14 @@ function drawRecommended($db, $recommended_ids) { ?>
 <?php
 function drawProduct($product, $user){ ?>
         <a href="../pages/seller_page.php?user=<?=$user->idUser?>" class="user_small_card">
-            <img class="user_small_pfp" src="../imagens/userProfile/<?=$user->photo?>"> 
+            <?php if ($user->photo != "Sem foto") { ?>
+                <img class="user_small_pfp" src="../images/userProfile/<?=$user->photo?>"> 
+            <?php } else { ?>
+               <h2><i class="fa fa-user fa-1x user-icons"></i></h2>
+            <?php } ?>
             <p><?=$user->name() ?></p>
         </a>
-        <a href="../pages/productPage.php?product=<?=$product->idProduct?>"><img class="offer_img" src="../imagens/randomImage.jpg"></a> <!--TODO adicionar imagem do prod-->
+        <a href="../pages/productPage.php?product=<?=$product->idProduct?>"><img class="offer_img" src="../images/randomImage.jpg"></a> <!--TODO adicionar imagem do prod-->
 
         <a class="offer_info" href="../pages/productPage.php?product=<?=$product->idProduct?>">
             <h4><?=substr($product->prodName,0,30) ?></h4>

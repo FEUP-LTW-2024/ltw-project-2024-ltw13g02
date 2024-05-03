@@ -2,6 +2,7 @@
     require_once(__DIR__ . "/../database/connection.php");
     require_once(__DIR__ . '/../database/get_from_db.php');
     require_once(__DIR__ . '/../sessions/session.php');
+    $session = new Session();
 
     require_once(__DIR__ . '/../templates/common.php');
 
@@ -16,7 +17,7 @@
     $session->setId(2);
     var_dump($session->getId());
     $session->setPhotoUser('randomImage.jpg');
-    
+
     if ($session->isLoggedIn()) {
 
         $db = getDatabaseConnection();

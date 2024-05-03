@@ -50,6 +50,7 @@ function getCountryFromDB($idCountry) : ?string {
 function getStarsFromReviews($idUser): ?float {
     $reviews = getReviewsFromDB($idUser);
     $sum = 0;
+    if(count($reviews) == 0) return 0;
     for ($i = 0; $i < count($reviews); $i++) {
         $sum += $reviews[$i]['stars'];
     }
@@ -92,7 +93,7 @@ function getCategories($db){
 function getChatsAsSellerFromDB($idUser): ?array {
     $db = getDatabaseConnection();
     $stmt = $db->prepare('
-        SELECT idChat, Product.prodName, User.firstName, User.lastName, User.photo
+        SELECT idChat,  Product.idProduct, Product.prodName, User.firstName, User.lastName
         FROM Product, Chat, User
         WHERE Product.seller = ? AND Chat.product = Product.idProduct AND Chat.possibleBuyer = User.idUser
     ');
@@ -104,13 +105,25 @@ function getChatsAsSellerFromDB($idUser): ?array {
 function getChatsAsBuyerFromDB($idUser): ?array {
     $db = getDatabaseConnection();
     $stmt = $db->prepare('
-        SELECT idChat, Product.prodName, User.firstName, User.lastName, User.photo
+        SELECT idChat, Product.idProduct, Product.prodName, User.firstName, User.lastName
         FROM Product, Chat, User
         WHERE Product.seller = User.idUser AND Chat.product = Product.idProduct AND Chat.possibleBuyer = ?
     ');
     $stmt->execute(array($idUser));
     $reviews = $stmt->fetchAll();
     return $reviews;
+}
+
+function getPhotos($idProduct): ?array {
+    $db = getDatabaseConnection();
+    $stmt = $db->prepare('
+        SELECT photo
+        FROM Photo
+        WHERE Photo.idProduct = ?
+    ');
+    $stmt->execute(array($idProduct));
+    $photos = $stmt->fetchAll();
+    return $photos;
 }
 
 function getLastMessage($idChat): ?array {
@@ -124,4 +137,36 @@ function getLastMessage($idChat): ?array {
     $stmt->execute(array($idChat));
     $lastmessage = $stmt->fetch();
     return $lastmessage;
+}
+
+function getMessages($idChat): ?array {
+    $db = getDatabaseConnection();
+    $stmt = $db->prepare('
+        SELECT * FROM Messages
+        WHERE chat = ? 
+        ORDER BY messageDate DESC
+    ');
+    $stmt->execute(array($idChat));
+    $messages = $stmt->fetchAll();
+    return $messages;
+}
+
+function getChatInfo($idChat): ?array {
+    $db = getDatabaseConnection();
+    $stmt = $db->prepare('
+        SELECT Product.idProduct, Product.prodName as ProdName, Seller.idUser as SId, Seller.firstName as SFN, Seller.lastName as SLN, Seller.photo as SP, Buyer.idUser as BId, Buyer.firstName as BFN, Buyer.lastName as BLN, Buyer.photo as BP
+        FROM Product, Chat, User as Seller, User as Buyer
+        WHERE idChat = ? AND Chat.product = Product.idProduct AND Chat.possibleBuyer = Buyer.idUser AND Product.seller = Seller.idUser
+    ');
+    $stmt->execute(array($idChat));
+    $info = $stmt->fetch();
+    return $info;
+}
+
+function getProduct($idProduct): ?array {
+    $db = getDatabaseConnection();
+    $stmt = $db->prepare('SELECT * FROM Product WHERE Product.idProduct = ?');
+    $stmt->execute(array($idProduct));
+    $product = $stmt->fetchAll();
+    return $product;
 }

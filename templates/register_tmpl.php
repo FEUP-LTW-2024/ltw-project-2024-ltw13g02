@@ -256,7 +256,7 @@ require_once(__DIR__ . '/../sessions/session.php');
                         unset($_SESSION['success']);
                         }
                     ?>
-                    <button id="register" type="submit">Register</button>
+                    <button id="Bregister" type="submit">Register</button>
                     <a href="login.php"><h2 id="goToLog">I already have an account</h2></a>
                 </form>
                 <script>

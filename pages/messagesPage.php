@@ -7,9 +7,11 @@
   require_once(__DIR__ . '/../database/connection_to_db.php');
 
   require_once(__DIR__ . '/../templates/common_tmpl.php');
-
+  require_once(__DIR__ . '/../templates/messages_tmpl.php');
+  
   $db = getDatabaseConnection();
 
   drawHeader($session);
-  drawFooter();
-?>
+  drawChatHeader($session, $_GET['chat']);
+  drawMessages($session, $_GET['chat']);
+  drawMessagesFooter($session, $_GET['chat']);
