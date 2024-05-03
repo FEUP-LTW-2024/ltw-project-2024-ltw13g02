@@ -1,5 +1,5 @@
 /*******************************************************************************
-   Database - Version 0.2
+   Database - Version 0.3
 ********************************************************************************/
 
 DROP TABLE IF EXISTS Country;
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS User (
   email TEXT UNIQUE NOT NULL,
   userPassword VARCHAR NOT NULL,
   stars INTEGER DEFAULT "0",
-  photo TEXT DEFAULT "Sem foto",
+  photo TEXT DEFAULT "Sem FF",
   idCountry TEXT REFERENCES Country (idCountry) ON DELETE SET NULL,
   city TEXT NOT NULL,
   userAddress TEXT NOT NULL,
@@ -277,8 +277,7 @@ INSERT INTO Category (category)
 VALUES ('Sports'), ('Tecnology'), ('Books'), ('Games'), ('Cars'), ('Kids'), ('Animals'), ('Clothes'), ('Others'), ('Shoes');   
 
 INSERT INTO Characteristic (characteristic, category) 
-VALUES 
-('Football', 1), ('Basketball', 1), ('American Football', 1), 
+VALUES ('Football', 1), ('Basketball', 1), ('American Football', 1), 
 ('Baseball', 1), ('Tennis', 1), ('Golf', 1), ('Rugby', 1), ('Cricket', 1), 
 ('Hockey', 1), ('Volleyball', 1), ('Table Tennis', 1), ('Badminton', 1), 
 ('Swimming', 1), ('Athletics', 1), ('Gymnastics', 1), ('Boxing', 1), ('Wrestling', 1), 
@@ -361,6 +360,15 @@ VALUES ('Computer', 'Asus computer 2003', 40, 3, 30, NULL, 1),
 ('DVD Movie Collection', 'Assorted collection of classic movies on DVD', 15, 2, 32, NULL, 23);
 
 
+INSERT INTO ShoppingCart (user, product)
+VALUES (1, 10), (1,24), (1,3);
+
+INSERT INTO Favorites (user, product)
+VALUES (1, 10), (1,4), (1,24), (1,3), (1,9), (1,17);
+
+INSERT INTO Recent (user, product)
+VALUES (1,9), (1,17);
+
 INSERT INTO Photo(idProduct, photo)
 VALUES (1, 'asus_computer.jpg'),
 (2, 'basketball.jpeg'),
@@ -374,20 +382,23 @@ VALUES (1, 'asus_computer.jpg'),
 (7, 'nike2.jpeg'),
 (8, 'dell.jpg'),
 (9, 'cookbook.jpg'),
-(10, 'nintendo.jpg');
-
-
-INSERT INTO ShoppingCart (user, product)
-VALUES (1, 10), (1,24), (1,3);
-
-INSERT INTO Favorites (user, product)
-VALUES (1, 10), (1,4), (1,24), (1,3), (1,9), (1,17);
-
-INSERT INTO Recent (user, product)
-VALUES (1,9), (1,17);
-
-INSERT INTO Photo (idProduct, photo)
-VALUES (6,'photo de um Toyota'), (6,'photo de um Toyota 2');
+(10, 'nintendo.jpg'),
+(11, 'fordMustang.jpeg'),
+(12,'jersey.jpeg'),
+(13, 'samsung.jpeg'),
+(14, 'tool.webp'),
+(15, 'catan.jpeg'),
+(16, 'sonyTV.jpeg'),
+(17, 'yogamat.jpeg'),
+(18, 'desktopPc.jpeg'),
+(19, 'classicalNovels.jpg'),
+(20, 'fifa.jpeg'),
+(21, 'helmet.jpeg'),
+(22, 'colorbook.jpeg'),
+(23, 'earbuds.jpeg'),
+(24, 'tent.jpeg'),
+(25, 'xbox.jpeg'),
+(26, 'dvdmoviecollection.jpg');
 
 INSERT INTO Messages (idMessage, messageDate, sender, chat, content, seen)
 VALUES (1, '2024-04-05 11:00:00', 2, 1, 'Hi! I''m interested in your product!', false);
