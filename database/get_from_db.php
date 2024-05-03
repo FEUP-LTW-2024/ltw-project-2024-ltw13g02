@@ -122,8 +122,8 @@ function getPhotos($idProduct): ?array {
         WHERE Photo.idProduct = ?
     ');
     $stmt->execute(array($idProduct));
-    $reviews = $stmt->fetchAll();
-    return $reviews;
+    $photos = $stmt->fetchAll();
+    return $photos;
 }
 
 function getLastMessage($idChat): ?array {

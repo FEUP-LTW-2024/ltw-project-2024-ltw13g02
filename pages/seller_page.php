@@ -9,12 +9,7 @@
     require_once(__DIR__ . '/../sessions/session.php');
     $session = new Session();
 
-    require_once(__DIR__ . '/../utils/prev_current_pages.php');
-
-    updatePages($session, "seller_page.php");
-
     $db = getDatabaseConnection();
-
 
     if (isset($_GET['user'])) {
         $user = getUserInfo($db, $_GET['user']);

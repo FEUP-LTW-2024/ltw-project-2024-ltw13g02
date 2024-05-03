@@ -12,9 +12,6 @@
   require_once(__DIR__ . '/../templates/common_tmpl.php');
   require_once(__DIR__ . '/../templates/index_tmp.php');
 
-  require_once(__DIR__ . '/../utils/prev_current_pages.php');
-  updatePages($session, "index.php");
-
   $db = getDatabaseConnection();
   $categories = getCategories($db);
   drawHeader($session);

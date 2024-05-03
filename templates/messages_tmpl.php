@@ -15,7 +15,7 @@ require_once(__DIR__ . '/user_tmpl.php');
     $info = getChatInfo($idChat); ?>
     <div class="chat-header">
         <?php $photos = getPhotos($info['idProduct']);?>
-        <a href="../pages/<?php echo $session->getPreviousPage() ?>"><i class="fa fa-angle-left fa-2x chat-back-button"></i></a>
+        <a href="../pages/<?php echo $info['BId'] == $session->getId() ? "chatsAsBuyerPage.php" : "chatsAsSellerPage.php" ?>"><i class="fa fa-angle-left fa-2x chat-back-button"></i></a>
         <img class="chat-productphoto" src="../images/products/<?php echo $photos[0]["photo"]; ?>" alt="Photo">
         <div class="chat">
                 <?php if ($session->getId() == $info['SId']) { ?>
