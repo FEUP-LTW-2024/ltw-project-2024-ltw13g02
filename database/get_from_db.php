@@ -154,11 +154,19 @@ function getMessages($idChat): ?array {
 function getChatInfo($idChat): ?array {
     $db = getDatabaseConnection();
     $stmt = $db->prepare('
-        SELECT Product.idProduct, Product.prodName as ProdName, Seller.idUser as SId, Seller.firstName as SFN, Seller.lastName as SLN, Seller.photo as SP, Buyer.firstName as BFN, Buyer.lastName as BLN, Buyer.photo as BP
+        SELECT Product.idProduct, Product.prodName as ProdName, Seller.idUser as SId, Seller.firstName as SFN, Seller.lastName as SLN, Seller.photo as SP, Buyer.idUser as BId, Buyer.firstName as BFN, Buyer.lastName as BLN, Buyer.photo as BP
         FROM Product, Chat, User as Seller, User as Buyer
         WHERE idChat = ? AND Chat.product = Product.idProduct AND Chat.possibleBuyer = Buyer.idUser AND Product.seller = Seller.idUser
     ');
     $stmt->execute(array($idChat));
     $info = $stmt->fetch();
     return $info;
+}
+
+function getProduct($idProduct): ?array {
+    $db = getDatabaseConnection();
+    $stmt = $db->prepare('SELECT * FROM Product WHERE Product.idProduct = ?');
+    $stmt->execute(array($idProduct));
+    $product = $stmt->fetchAll();
+    return $product;
 }
