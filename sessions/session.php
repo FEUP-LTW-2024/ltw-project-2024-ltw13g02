@@ -1,7 +1,6 @@
 <?php
 require_once(__DIR__ . "/../database/get_from_db.php");
 
-require_once(__DIR__ . '/../vendor/autoload.php');
   class Session {
     private array $messages;
 
