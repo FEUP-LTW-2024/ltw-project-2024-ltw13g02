@@ -5,9 +5,9 @@ require_once(__DIR__ . '/../sessions/session.php');
 
 require_once(__DIR__ . '/../database/get_from_db.php');
 
-require_once(__DIR__ . '/user_tmpl.php');
+require_once(__DIR__ . '/../database/change_in_db.php');
 
-require_once(__DIR__ . '/../vendor/autoload.php');
+require_once(__DIR__ . '/user_tmpl.php');
 
 ?>
 
@@ -29,16 +29,36 @@ require_once(__DIR__ . '/../vendor/autoload.php');
 <?php } ?> 
 
 <?php function drawMessages(Session $session, $idChat) {
+    $ff = true;
+    $lastPrintedDate = null;
     $messages = getMessages($idChat);
-    $info = getChatInfo($idChat); ?>
+    $info = getChatInfo($idChat); 
+    setAsSeen($idChat, $session->getId()); ?>
     <div class="column-of-messages">
         <?php foreach ($messages as $row) {
-            if ($row["sender"] == $session->getId()) { ?>
-                <div class="message-tile own-message">
-                    <p><?php echo $row['content']; ?></p>
+            if ($row["sender"] == $session->getId()) { 
+                if ($ff || (strtotime($row['messageDate']) - strtotime($lastPrintedDate)) > 7200) {
+                    $ff = false;
+                    $lastPrintedDate = $row['messageDate'];?>
+                    <div class="time">
+                        <p><?php echo $row['messageDate']; ?></p>
+                    </div>
+                <?php } ?>
+                <div class="message-container">
+                    <div class="message-tile message own-message">
+                        <p><?php echo $row['content']; ?></p>
+                    </div>
+                    <h2 class="message-status <?php echo $row['seen'] ? "fa fa-check-circle" : "fa fa-check-circle-o"; ?>"></h2>
                 </div>
-            <?php } else { ?>
-                <div class="message-tile other-message">
+            <?php } else { 
+                if ($ff || (strtotime($row['messageDate']) - strtotime($lastPrintedDate)) > 7200) {
+                    $ff = false;
+                    $lastPrintedDate = $row['messageDate'];?>
+                    <div class="time">
+                        <p><?php echo $row['messageDate']; ?></p>
+                    </div>
+                <?php } ?>
+                <div class="message-tile message other-message">
                     <p><?php echo $row['content']; ?></p>
                 </div>
         <?php } ?>
@@ -47,6 +67,10 @@ require_once(__DIR__ . '/../vendor/autoload.php');
 } ?> 
 
 <?php function drawMessagesFooter(Session $session, $idChat) { ?>
-
+        <div class="input">
+           <input placeholder="Type your message here!" type="text"><i class="fa fa-paper-plane fa-1x icon send-icon"></i>
+        </div>
+    </body>
+</html>
 <?php
 } ?> 

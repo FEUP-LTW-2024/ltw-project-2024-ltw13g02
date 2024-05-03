@@ -10,9 +10,6 @@
 
 
 
-    //TODO remove this line after testing
-    $session = new Session();
-    $session->setId(1);
     $db = getDatabaseConnection();
 
     if (isset($_GET['user']))
@@ -31,7 +28,7 @@
         drawHeader($session);
         output_seller_header($db, $user);
         output_seller_products($db, $products, $user);
-        output_footer();
+        drawFooter();
     }else{
         header('Location: /index.php');
         exit();

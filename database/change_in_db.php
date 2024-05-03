@@ -32,11 +32,9 @@ function deleteUser($username) {
     $stmt->execute();
 }
 
-function setStarsOnDB($idUser, $stars) {
-    /*$db = getDatabaseConnection();
-    $stmt = $db->prepare('UPDATE User SET stars = :stars WHERE idUser = :idUser');
-    $stmt->bindParam(':idUser', $idUser, PDO::PARAM_INT);
-    $stmt->bindParam(':stars', $stars, PDO::PARAM_INT);
-    $stmt->execute();*/
+function setAsSeen($idChat, $idUser) {
+    $db = getDatabaseConnection();
+    $stmt = $db->prepare('UPDATE Messages SET seen=1 WHERE sender <> ? AND chat = ?');
+    $stmt->execute(array($idUser, $idChat));
 }
 

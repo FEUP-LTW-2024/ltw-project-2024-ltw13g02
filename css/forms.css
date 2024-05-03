@@ -4,6 +4,11 @@ body {
     font-weight: 400;
     font-style: normal;
     padding: 20px;
+    margin: 0;
+}
+
+h1 {
+    margin: 0;
 }
 
 form {
@@ -13,7 +18,7 @@ form {
     background-color: #90bbdf;
     border-radius: 8px;
     font-size: 1em;
-    width: 50%;
+    width: 40%;
     margin: auto auto;
     text-align: center;
 }

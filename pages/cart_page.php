@@ -2,20 +2,12 @@
 
     require_once(__DIR__ . '/../database/connection.php');
     require_once(__DIR__ . '/../sessions/session.php');
+    $session = new Session();
 
     require_once(__DIR__ . '/../templates/shopingCart_tmpl.php');
     require_once(__DIR__ . '/../templates/common_tmpl.php');
 
 
-    //TODO remove after testing
-    $session = new Session();
-    $session->setId(1);
-    $session->setCity('Porto');
-    $session->setZipCode('4420-388');
-    $session->setCountry('1');
-    $session->setAddress('rua da rua 33');
-
-        
     if (!$session->isLoggedIn()) { header('Location: /index.php'); } 
 
     $db = getDatabaseConnection();
