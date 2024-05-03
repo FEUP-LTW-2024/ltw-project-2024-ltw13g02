@@ -38,3 +38,14 @@ function setAsSeen($idChat, $idUser) {
     $stmt->execute(array($idUser, $idChat));
 }
 
+function addMessage($idUser, $idChat, $content) {
+    // Check if content is empty or NULL
+    if (empty($content)) {
+        throw new Exception("Content cannot be empty");
+    }
+    
+    $db = getDatabaseConnection();
+    $date = date('Y-m-d H:i:s');
+    $stmt = $db->prepare('INSERT INTO Messages (messageDate, sender, chat, content, seen) VALUES (?, ?, ?, ?, 0)');
+    $stmt->execute(array($date, $idUser, $idChat, $content));
+}

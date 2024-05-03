@@ -6,7 +6,7 @@ html {
     min-width: 30em;
 }
 
-button {
+.Blogin, .register {
     margin: 0 auto auto auto;
     height: 40px;
     width: 200px;
@@ -99,6 +99,11 @@ body > header{
 
 .user_small_card .user_small_pfp{
     border-radius: 100%;
+}
+
+.user-icons {
+    color: black;
+    margin: 5px 10px;
 }
 
 .center-text {
@@ -271,11 +276,36 @@ li:hover a {
     font-style: normal;
 }
 
+.column-of-messages {
+    height: 100%;
+    overflow: auto;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
 .column-of-messages .own-message {
+    box-sizing: border-box;
+    padding: 0.5rem 1rem;
     margin: 1rem 1rem 1rem auto;
     border-radius: 1.125rem 1.125rem 0 1.125rem;
     background: #333;
     color: white;
+    min-height: 2.25rem;
+    width: fit-content;
+    max-width: 66%;
+    box-shadow: 0 0 2rem rgba(0, 0, 0, 0.075), 0rem 1rem 1rem -1rem rgba(0, 0, 0, 0.1);
+}
+
+.column-of-messages .other-message {
+    box-sizing: border-box;
+    padding: 0.5rem 1rem;
+    margin: 1rem;
+    background: #FFF;
+    border-radius: 1.125rem 1.125rem 1.125rem 0;
+    min-height: 2.25rem;
+    width: fit-content;
+    max-width: 66%;
+    box-shadow: 0 0 2rem rgba(0, 0, 0, 0.075), 0rem 1rem 1rem -1rem rgba(0, 0, 0, 0.1);
 }
 
 .time {
@@ -287,18 +317,6 @@ li:hover a {
     color: #999;
     width: fit-content;
     margin: 10px auto 0 auto;
-}
-
-.message {
-    box-sizing: border-box;
-    padding: 0.5rem 1rem;
-    margin: 1rem;
-    background: #FFF;
-    border-radius: 1.125rem 1.125rem 1.125rem 0;
-    min-height: 2.25rem;
-    width: fit-content;
-    max-width: 66%;
-    box-shadow: 0 0 2rem rgba(0, 0, 0, 0.075), 0rem 1rem 1rem -1rem rgba(0, 0, 0, 0.1);
 }
 
 footer {
@@ -324,21 +342,36 @@ footer {
     background-image: none;
     background-color: white;
     padding: 0.5rem 1rem;
-    margin-right: 1rem;
+    margin-right: 0.7rem;
     border-radius: 1.125rem;
-    flex-grow: 2;
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1), 0rem 1rem 1rem -1rem rgba(0, 0, 0, 0.2);
     font-family: "Didact Gothic", sans-serif;
     font-weight: 400;
     letter-spacing: 0.025em;
+    width: 80%;
 }
 
-.input .send-icon {
-    margin-bottom: 25px;
+.Send, .Send:hover {
+    margin: 0;
+    height: 40px;
+    width: 40px;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
 }
 
-.input .send-icon:hover {
+.Send i {
+    margin: 0;
+    font-size: 20px;
+}
+
+.Send i:hover {
     color: lightblue;
+}
+
+.messages-input-form {
+    width: 100%;
 }
 
 .message-container {

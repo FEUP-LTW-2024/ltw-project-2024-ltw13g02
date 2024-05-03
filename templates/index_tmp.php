@@ -72,7 +72,11 @@ function drawFavorites($favorites_ids, $db){ ?>
 function drawProduct($product, $user){ ?>
     <div class="sliding_offer">
         <a href="../pages/seller_page.php?user=<?=$user->idUser?>" class="user_small_card">
-            <img class="user_small_pfp" src="../images/userProfile/<?=$user->photo?>"> 
+            <?php if ($user->photo != "Sem foto") { ?>
+                <img class="user_small_pfp" src="../images/userProfile/<?=$user->photo?>"> 
+            <?php } else { ?>
+               <h2><i class="fa fa-user fa-1x user-icons"></i></h2>
+            <?php } ?>
             <p><?=$user->name() ?></p>
         </a>
         <a href="../pages/productPage.php?product=<?=$product->idProduct?>"><img class="offer_img" src="../images/randomImage.jpg"></a> <!--TODO adicionar imagem do prod-->
