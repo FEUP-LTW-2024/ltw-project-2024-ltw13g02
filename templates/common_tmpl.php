@@ -11,7 +11,7 @@ require_once(__DIR__ . '/../sessions/session.php');
             <link rel="stylesheet" href="../css/style.css">
             <link rel="stylesheet" href="../css/responsive.css">
              <link rel="stylesheet" href="../css/layout.css">
-            <title>Pre Loved Bazaar</title>
+            <title>Dealify</title>
             <meta charset="utf-8">
 
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -54,7 +54,7 @@ require_once(__DIR__ . '/../sessions/session.php');
 
 <?php function drawFooter() { ?>
     <footer>
-            <p>&copy; Pre Looved Bazaar </p>
+            <p>&copy; Dealify </p>
     </footer>
     </body>
     </html>
