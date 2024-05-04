@@ -397,3 +397,24 @@ footer {
     border-color: #293fa1;
     background-color: #293fa1;
 }
+
+.prev-icon, .next-icon {
+    color: white;
+}
+
+.product-image-container {
+    padding: 20px;
+    margin-left: 20px;
+    width: 40%;
+    height: 800px;
+    position: relative;
+    justify-content: center; /* Horizontally center */
+    align-items: center; /* Vertically center */
+}
+
+#product-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: auto; /* Centers horizontally */
+}
