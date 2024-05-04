@@ -19,17 +19,6 @@ label {
     margin-bottom: 0em;
 }
 
-label * {
-    font-family: "Didact Gothic", sans-serif;
-    grid-column-start: 1;
-    border: 1px solid #ffffff ;
-    border-radius: 3px;
-    background-color: #ffffff;
-    width: 70%;
-    height: 50px;
-    padding: 0 0;
-}
-
 form input[type="text"] {
     border: 1px solid grey;
     font-family: "Didact Gothic", sans-serif;
@@ -40,7 +29,7 @@ form input[type="text"] {
 
 form select[name="country"] {
     border: 0.5px solid grey;
-    width:max-content;
+    font-family: "Didact Gothic", sans-serif;
     height: 50px;
     padding: 0;
     border-radius: 0;
