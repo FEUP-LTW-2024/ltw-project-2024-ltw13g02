@@ -182,7 +182,8 @@ a {
     text-decoration: none;
     color: inherit;
 }
-#stars {
+
+.stars {
     color: rgb(216, 182, 30);
 }
 
@@ -371,22 +372,6 @@ footer {
     color: lightblue;
 }
 
-.messages-input-form {
-    width: 100%;
-    display: grid;
-    grid-template-columns: auto 45px;
-}
-
-.message-container {
-    display: flex;
-    justify-content: flex-end;
-}
-
-.message-container .message-status {
-    margin-right: 10px;
-    padding-top: 55px;
-}
-
 .prev-button, .next-button {
     border-radius: 200px;
     border-color: lightblue;
@@ -402,19 +387,3 @@ footer {
     color: white;
 }
 
-.product-image-container {
-    padding: 20px;
-    margin-left: 20px;
-    width: 40%;
-    height: 800px;
-    position: relative;
-    justify-content: center; /* Horizontally center */
-    align-items: center; /* Vertically center */
-}
-
-#product-image {
-    width: 100%;
-    height: auto;
-    display: block;
-    margin: auto; /* Centers horizontally */
-}

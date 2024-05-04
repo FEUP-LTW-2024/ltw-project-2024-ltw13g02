@@ -18,6 +18,21 @@
     .icon {
         margin: 25px 20px 0 0;
     }
+
+    #product-grid {
+        grid-template-columns: auto; 
+        grid-template-rows: auto auto;
+    }
+
+    .product-grid .product-image-container {
+        grid-row: 1;
+    }
+
+    .product-grid .product-info {
+        grid-column: 1;
+        grid-row: 2;
+        display: grid;
+    }
 }
 
 @media (max-width: 40em){
