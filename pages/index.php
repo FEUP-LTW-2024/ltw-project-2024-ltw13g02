@@ -12,7 +12,6 @@
   require_once(__DIR__ . '/../templates/common_tmpl.php');
   require_once(__DIR__ . '/../templates/index_tmp.php');
 
-
   $db = getDatabaseConnection();
   $categories = getCategories($db);
   drawHeader($session);

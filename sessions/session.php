@@ -1,5 +1,6 @@
 <?php
 require_once(__DIR__ . "/../database/get_from_db.php");
+
   class Session {
     private array $messages;
 
@@ -116,5 +117,28 @@ require_once(__DIR__ . "/../database/get_from_db.php");
     public function setCountry(int $idCountry) {
       $_SESSION['idCountry'] = $idCountry;
     }
+
+    public function setPreviousPage($page) {
+      $_SESSION['previous-page'] = $page;
+    }
+
+    public function getPreviousPage() : string {
+      if(isset($_SESSION['previous-page'])) {
+          $previousPage = $_SESSION['previous-page'];
+      } else {
+          $previousPage = "index.php";
+      }
+      return $previousPage;    
+    }
+
+    public function setCurrentPage($page) {
+      $_SESSION['current-page'] = $page;
+    }
+
+    public function getCurrentPage() : string {
+      if(isset($_SESSION['current-page'])) {
+          $currentPage = $_SESSION['current-page'];
+      }
+      return $currentPage;    
+    }
   }
-?>

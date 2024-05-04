@@ -10,6 +10,7 @@
 
   require_once(__DIR__ . '/../templates/chat_tmpl.php');
 
+
   $db = getDatabaseConnection();
 
   drawHeader($session);

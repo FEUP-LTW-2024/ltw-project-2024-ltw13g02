@@ -15,15 +15,16 @@ require_once(__DIR__ . '/user_tmpl.php');
     $info = getChatInfo($idChat); ?>
     <div class="chat-header">
         <?php $photos = getPhotos($info['idProduct']);?>
-        <a href="../pages/chatsAsSellerPage.php"><i class="fa fa-angle-left fa-2x chat-back-button"></i></a>
+        <a href="../pages/<?php echo $info['BId'] == $session->getId() ? "chatsAsBuyerPage.php" : "chatsAsSellerPage.php" ?>"><i class="fa fa-angle-left fa-2x chat-back-button"></i></a>
         <img class="chat-productphoto" src="../images/products/<?php echo $photos[0]["photo"]; ?>" alt="Photo">
         <div class="chat">
-            <?php if ($session->getId() == $info['SId']) { ?>
-                <h2 class="with-user"><?php echo $info['BFN'] . " " . $info['BLN']; ?></h2>
-            <?php } else { ?>
-                <h2 class="with-user"><?php echo $info['SFN'] . " " . $info['SLN']; ?></h2>
-            <?php } ?>
-            <h2 class="message-product"><?php echo $info['ProdName']; ?></h2> 
+                <?php if ($session->getId() == $info['SId']) { ?>
+                    <a href="../pages/seller_page.php?user=<?php echo $info['SId']; ?>"><h2 class="with-user"><?php echo $info['BFN'] . " " . $info['BLN']; ?></h2>
+                <?php } else { ?>
+                    <a href="../pages/seller_page.php?user=<?php echo $info['BId']; ?>"><h2 class="with-user"><?php echo $info['SFN'] . " " . $info['SLN']; ?></h2>
+                <?php } ?>
+            </a>
+            <a href="../pages/productPage.php?product=<?php echo $info['idProduct']; ?>&chat=<?php echo $idChat; ?>"><h2 class="message-product"><?php echo $info['ProdName']; ?></h2> </a>
         </div>
             </div>
 <?php } ?> 

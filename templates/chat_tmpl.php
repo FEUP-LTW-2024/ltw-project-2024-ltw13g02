@@ -13,8 +13,14 @@ require_once(__DIR__ . '/../utils/elapsedTime.php');
 
 <?php function drawChats(Session $session, $activePage) {
     if ($session->getEmail() != null) {
-        if ($activePage == 0) $chats = getChatsAsSellerFromDB($session->getId());
-        else $chats = getChatsAsBuyerFromDB($session->getId());
+        if ($activePage == 0) {
+            $session->setPreviousPage("chatsAsSellerPage.php");
+            $chats = getChatsAsSellerFromDB($session->getId());
+        }
+        else {
+            $session->setPreviousPage("chatsAsBuyerPage.php");
+            $chats = getChatsAsBuyerFromDB($session->getId());
+        }
         if (count($chats) > 0) {
             foreach ($chats as $row) {?>
                 <a href="../pages/messagesPage.php?chat=<?php echo $row['idChat']; ?>">
