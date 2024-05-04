@@ -30,7 +30,7 @@ require_once(__DIR__ . '/../sessions/session.php');
           if($email != null) {
         ?>
             <h2><?php echo "Name: " . $session->getFirstName() . " " . $session->getLastName(); ?></h2>
-            <a href="reviewsPage.php"><h2 id="stars">
+            <a href="reviewsPage.php"><h2 id="stars" class="stars">
             <?php
               $stars = $session->getStars();
               drawStars($stars);
