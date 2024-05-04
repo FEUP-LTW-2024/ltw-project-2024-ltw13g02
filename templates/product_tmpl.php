@@ -8,8 +8,6 @@ require_once(__DIR__ . '/../database/get_from_db.php');
 
 require_once(__DIR__ . '/../database/change_in_db.php');
 
-require_once(__DIR__ . '/../vendor/autoload.php');
-
 ?>
 
 <?php function drawProductHeader(Session $session, $idProduct) { 
@@ -23,7 +21,7 @@ require_once(__DIR__ . '/../vendor/autoload.php');
 
 <?php function drawProduct(Session $session, $idProduct) { 
     $product = getProduct($idProduct); 
-    $photos = getPhotos($idProduct); ?>
+    $photos = getPhotos($idProduct);?>
     <div class="product-grid">
         <div class="product-image-container">
             <?php if (count($photos) == 0) { ?>
@@ -34,7 +32,7 @@ require_once(__DIR__ . '/../vendor/autoload.php');
         </div>
         <?php if (count($photos) != 0) { ?>
             <button class="prev-button" ><i class="fa fa-angle-left fa-2x"></i></button>
-            <button class="next-button" ><i class="fa fa-angle-rigth fa-2x"></i></button>
+            <button class="next-button" ><i class="fa fa-angle-right fa-2x"></i></button>
         <?php } ?>
     </div>
 <?php } ?> 

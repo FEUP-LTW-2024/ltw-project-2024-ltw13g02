@@ -387,4 +387,13 @@ footer {
     padding-top: 55px;
 }
 
+.prev-button, .next-button {
+    border-radius: 200px;
+    border-color: lightblue;
+    background-color: lightblue;
+}
 
+.prev-button:hover, .next-button:hover {
+    border-color: #293fa1;
+    background-color: #293fa1;
+}
