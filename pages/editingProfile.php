@@ -20,7 +20,7 @@
     $newPhone = $_POST['phone'];
     $newAddress =  $_POST['address'];
     $newCity = $_POST['city'];
-    //$newCountry = $_POST['country'];
+    $newCountry = $_POST['country'];
     $newZipCode = $_POST['zipCode'];
     
 
@@ -29,11 +29,10 @@
     $session->setPhone($newPhone);
     $session->setAddress($newAddress);
     $session->setCity($newCity);
-    //$session->setCountry($userCountry);
+    //setCoutry in editingProfileAction because of string to id coversion
     $session->setZipCode($newZipCode);
 
-    //&country=$newIdCountry
-    header("Location: /../actions/editingProfileAction.php?first_name=$newFirstName&last_name=$newLastName&phone=$newPhone&address=$newAddress&city=$newCity&zipCode=$newZipCode");
+    header("Location: /../actions/editingProfileAction.php?first_name=$newFirstName&last_name=$newLastName&phone=$newPhone&address=$newAddress&city=$newCity&country=$newCountry&zipCode=$newZipCode");
     exit();
 }
 
