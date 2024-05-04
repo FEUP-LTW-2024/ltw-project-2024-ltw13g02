@@ -8,7 +8,6 @@ require_once(__DIR__ . '/../database/get_from_db.php');
 
 require_once(__DIR__ . '/../database/change_in_db.php');
 
-require_once(__DIR__ . '/../vendor/autoload.php');
 
 ?>
 
@@ -22,7 +21,8 @@ require_once(__DIR__ . '/../vendor/autoload.php');
 } ?> 
 
 <?php function drawProduct(Session $session, $idProduct) { 
-    $product = getProduct($idProduct); 
+    $product = getProduct($idProduct);
+    $seller = getSeller($idProduct); 
     $photos = getPhotos($idProduct); ?>
     <div class="product-grid">
         <div class="product-image-container">
@@ -36,6 +36,19 @@ require_once(__DIR__ . '/../vendor/autoload.php');
             <button class="prev-button" onclick="changePhoto(-1)"><i class="fa fa-angle-left fa-2x prev-icon"></i></button>
             <button class="next-button" onclick="changePhoto(1)"><i class="fa fa-angle-right fa-2x next-icon"></i></button>
         <?php } ?>
+
+        <div class="product-info">
+            <h2 id="product-page-name">Name: <?php echo $product['prodName'] ?> </h2>
+            <h2 id="product-page-price">Name: <?php echo $product['price'] ?> </h2>
+            <h2 id="product-page-name">Seller: <?php echo $seller['prodName'] ?> </h2>
+            <h2 id="stars">
+                <?php
+                $stars = $session->getStars();
+                drawStars($stars);
+                ?>
+            </h2>
+            <h2 id="product-page-description">Description: <?php echo $seller['prodDescription'] ?> </h2>
+        </div>
     </div>
 
     <script>
