@@ -82,6 +82,7 @@ require_once(__DIR__ . '/../sessions/session.php');
 
 
 <?php function drawEditProfile($session){ ?>
+    <link rel="stylesheet" href="../css/editProfile.css"-->
     <div class="user-info">
         <?php $email = $session->getEmail(); ?>
         <div class="info">
@@ -99,15 +100,14 @@ require_once(__DIR__ . '/../sessions/session.php');
                 <label for="address">Address:</label>
                 <input type="text" id="address" name="address" value="<?= $session->getAddress(); ?>"><br><br>
                 
-                <label id="country" class="required"> Country:
+                <label for="country">Country: </label>
+                <label id="country" class="required"> 
                     <select name="country" required>
                         <?php
-                        $currentCountry = $session->getCountry(); // Assuming you have a method to get the current country
+                        $currentCountry = $session->getCountry();
 
-                        // Output the current country as the first option
                         echo "<option value='$currentCountry'>$currentCountry</option>";
 
-                        // List of countries
                         $countries = array(
                             "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", "Argentina", "Armenia", "Australia", "Austria",
                             "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bhutan",
@@ -131,9 +131,7 @@ require_once(__DIR__ . '/../sessions/session.php');
                             "Vatican City", "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe"
                         );
 
-                        // Loop through the rest of the countries to output the options
                         foreach ($countries as $country) {
-                            // Skip the current country since it's already added as the first option
                             if ($country === $currentCountry) continue;
                             echo "<option value='$country'>$country</option>";
                         }
