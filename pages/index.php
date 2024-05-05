@@ -18,10 +18,10 @@
 
   $db = getDatabaseConnection();
   $categories = getCategories($db);
-
   drawHeader($session);
 
   drawSearchbar($categories);
+  
   if ($session->isLoggedIn()) 
   {
     $user = getUserInfo($db,$session->getId());

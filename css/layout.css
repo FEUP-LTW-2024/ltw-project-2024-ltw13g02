@@ -40,6 +40,7 @@ h1 {
     margin-top: 10px;
     margin-left: 0.5%;
     margin-right: 0.5%;
+
 }
 
 .Products > article {
@@ -97,6 +98,7 @@ h1 {
 .Products #static_offer_container {
     display: grid;
     grid-template-columns: repeat(4,1fr);
+    grid-auto-rows: auto;
 }
 
 .static_offer {
@@ -109,9 +111,8 @@ h1 {
 
 .static_offer .offer_img{
     height: 100%;
-    width: 100%;
+    width: 95%;
     object-fit: contain;
-
 }
 
 body > header{
@@ -136,9 +137,8 @@ header > a > img{
 .offer_info{
     position: relative;
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
-    height:max-content;
 }
 
 .offer_info h4{
@@ -155,7 +155,8 @@ header > a > img{
 
 .offer_info p {
     margin-top: 0;
-    margin-right: 5%;
+    margin-right: 2em;
+    justify-self: end;
 }
 
 .sliding_offer .offer_img{

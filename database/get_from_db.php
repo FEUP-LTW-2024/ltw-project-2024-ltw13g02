@@ -81,10 +81,11 @@ function getReviewsWithUsersFromDB($idUser): ?array {
     return $reviews;
 }
 
-function getCategories($db){
-    $stmt = $db->prepare("SELECT C.category 
-                        FROM Category C ");
+function getCategories(PDO $db){
+    $stmt = $db->prepare("SELECT category 
+                        FROM Category ");
     $stmt->execute();
+
     $categories = $stmt->fetchAll();
     return $categories;  
 
