@@ -100,10 +100,10 @@ function drawProduct(Product $product,User $user){ ?>
                 <img class="user_small_pfp" src="../images/userProfile/<?=$user->photo?>"> 
         <?php } else { ?>
                 <h2><i class="fa fa-user fa-1x user-icons"></i></h2>
-        <?php } ?>
+        <?php  } ?>
                 <p><?=$user->name() ?></p>
         </a>
-        <a href="../pages/productPage.php?product=<?=$product->idProduct?>"><img class="offer_img" src="../images/products/<?=getPhotos($product->idProduct)?>"></a>
+        <a href="../pages/productPage.php?product=<?=$product->idProduct?>"><img class="offer_img" src="../images/products/<?=getPhotos($product->idProduct)[0]['photo']?>"></a>
 
         <a class="offer_info" href="../pages/productPage.php?product=<?=$product->idProduct?>">
             <h4><?=substr($product->prodName,0,30) ?></h4>
