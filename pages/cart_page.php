@@ -37,7 +37,5 @@
         output_shipping_address($session, $countries);
     } else {
         output_empty_cart();
-
-        drawRecent(getRecens($db,$session->getId()),$db);
     }
     drawFooter();

@@ -29,7 +29,7 @@
         output_archive_user_profile($session);
         output_archive_user_products($db, $products);
 
-        output_footer();
+        drawFooter();
     }else{
         header('Location: ../index.php');
     }

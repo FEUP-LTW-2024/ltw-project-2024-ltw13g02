@@ -22,9 +22,10 @@
             removeFromCarts($db, $product->idProduct);
             removeFromRecent($db, $product->idProduct);            
             removeFromFavorites($db, $product->idProduct);
-            //addShiping(); TODO
-            //addMessage();
-            //uppdateBuyer();
+            //TODO add adaptar tamanho tela diferentes
+            addShiping($db,$product->idProduct,$session->getId(),$product->seller);
+            //sendMessage();  TODO descobrir se fazer isto ou não
+            uppdateBuyer($db,$product->idProduct ,$session->getId());
 
         }
     }
@@ -57,4 +58,27 @@
                             WHERE product = ? ');
         $stmt->execute(array($item));
     }
+?>
+
+<?php
+    function addShiping(PDO $db, int $item, int $buyer, int $seller) {
+        $stmt = $db->prepare('INSERT INTO Shipping (product, buyer, seller, purchaseDate)
+                                VALUES (?,?,?,?);
+                              ');
+        $stmt->execute(array($item, $buyer, $seller, date('Y-m-d')));
+    }
+
+?>
+
+<?php
+    function uppdateBuyer(PDO $db, int $item, int $buyer) {
+
+
+        $stmt = $db->prepare('UPDATE Product 
+                                SET buyer = (?), purchaseDate = (?)
+                                WHERE idProduct=(?);
+                              ');
+        $stmt->execute(array($buyer, date('Y-m-d'), $item));
+    }
+
 ?>

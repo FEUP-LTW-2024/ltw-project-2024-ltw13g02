@@ -12,6 +12,12 @@
         display: grid;
         grid-template-rows: 2.5em auto 2.5em;
     }
+
+    #Shopping_Cart {
+    
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+    }
 }
 
 @media (max-width: 60em) {
@@ -105,5 +111,10 @@
 
     .icon {
         margin: 25px 12px 0 0;
+    }
+
+    #Shopping_Cart {
+    
+        display: block;
     }
 }

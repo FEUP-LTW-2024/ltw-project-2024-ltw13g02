@@ -495,3 +495,19 @@ footer {
     grid-column: 1 span 2;
     grid-row: 3;
 }
+
+.CartItem img{
+    height: 5em;
+    width: 5em;
+    
+}
+
+#address {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(4,2em) 1fr;
+}
+
+#address div{
+    align-self: center;
+}
