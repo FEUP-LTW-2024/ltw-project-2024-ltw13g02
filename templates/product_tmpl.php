@@ -12,9 +12,14 @@ require_once(__DIR__ . '/user_tmpl.php');
 ?>
 
 <?php function drawProductHeader(Session $session, $idProduct) { 
-    if ($_GET['chat'] != null) { ?>
-        <a href="../pages/messagesPage.php?chat=<?php echo $_GET['chat'] ?>"><i class="fa fa-angle-left fa-2x chat-back-button"></i></a>
-<?php }
+    if ($_GET['chat'] != null) { 
+        if (getChatInfo($_GET['chat'])['idProduct'] == $idProduct) { ?>
+            <a href="../pages/messagesPage.php?chat=<?php echo $_GET['chat'] ?>"><i class="fa fa-angle-left fa-2x chat-back-button"></i></a>
+<?php   }
+        else { ?>
+            <a href="../pages/index.php"><i class="fa fa-angle-left fa-2x chat-back-button"></i></a>
+        <?php }
+    }
     else { ?>
         <a href="../pages/index.php"><i class="fa fa-angle-left fa-2x chat-back-button"></i></a>
     <?php }
