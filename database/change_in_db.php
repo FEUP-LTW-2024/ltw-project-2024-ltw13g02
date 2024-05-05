@@ -49,3 +49,4 @@ function addMessage($idUser, $idChat, $content) {
     $stmt = $db->prepare('INSERT INTO Messages (messageDate, sender, chat, content, seen) VALUES (?, ?, ?, ?, 0)');
     $stmt->execute(array($date, $idUser, $idChat, $content));
 }
+

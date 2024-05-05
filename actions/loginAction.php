@@ -9,8 +9,8 @@ require_once(__DIR__ . '/../database/get_from_db.php');
 
 if(isset($_POST['email']) && isset($_POST['password'])) {
     $user = getUser($_POST['email'], $_POST['password']);
-
     if ($user) {
+
         $session->setId($user->idUser);
         $session->setFirstName($user->firstName);
         $session->setLastName($user->lastName);

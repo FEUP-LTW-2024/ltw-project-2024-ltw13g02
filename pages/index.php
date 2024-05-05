@@ -9,12 +9,14 @@
   */
   
   require_once(__DIR__ . '/../database/connection_to_db.php');
-  require_once(__DIR__ . '/../database/connection.php');
+  require_once(__DIR__ . '/../database/get_from_db.php');
   require_once(__DIR__ . '/../database/userClass.php');
 
 
   require_once(__DIR__ . '/../templates/common_tmpl.php');
   require_once(__DIR__ . '/../templates/index_tmpl.php');
+
+  require_once(__DIR__ . '/../vendor/autoload.php');
 
   $db = getDatabaseConnection();
   $categories = getCategories($db);

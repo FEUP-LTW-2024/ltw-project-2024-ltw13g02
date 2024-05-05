@@ -9,13 +9,13 @@ class Product {
     public ?string $characteristic1;
     public ?string $characteristic2;
     public ?string $characteristic3;
-    public int $seller;
+    public string $seller;
     public ?int $buyer;
     public ?string $purchaseDate;
 
     public function __construct(int $idProduct, string $prodName, int $price, int $condition,
                                  ?string $characteristic1, ?string $characteristic2, ?string $characteristic3 , 
-                                int $seller, ?int $buyer, ?string $purchaseDate) {
+                                string $seller, ?int $buyer, ?string $purchaseDate) {
         $this->idProduct = $idProduct;
         $this->prodName = $prodName;
         $this->price = $price;

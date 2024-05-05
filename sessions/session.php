@@ -27,11 +27,11 @@ require_once(__DIR__ . "/../database/get_from_db.php");
       $_SESSION['email'] = $email;
     }
 
-    public function setId(int $id) {
+    public function setId(string $id) {
       $_SESSION['id'] = $id;
     }
 
-     public function getId() : ?int {
+     public function getId() : ?string {
       return isset($_SESSION['id']) ? $_SESSION['id'] : null;
     }
 

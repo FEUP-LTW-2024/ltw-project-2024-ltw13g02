@@ -3,6 +3,7 @@ include_once('../database/connection_to_db.php');
 
 
 try {
+    $idUSer = uniqid() . bin2hex(random_bytes(2));
     $fullName = $_POST['name'];
     $names = explode(' ', $fullName);
     $firstName = $names[0];
@@ -19,8 +20,8 @@ try {
 
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     var_dump($_POST);
-    $stmt = $db->prepare("INSERT INTO User (firstName, lastName, phone, email, userPassword, idCountry, city, userAddress, zipCode) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->execute([$firstName, $lastName, $phone, $email, $password, $idCountry, $city, $address, $zipCode]);
+    $stmt = $db->prepare("INSERT INTO User (idUser, firstName, lastName, phone, email, userPassword, idCountry, city, userAddress, zipCode) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->execute([$idUSer, $firstName, $lastName, $phone, $email, $password, $idCountry, $city, $address, $zipCode]);
 
     $db = null;
 

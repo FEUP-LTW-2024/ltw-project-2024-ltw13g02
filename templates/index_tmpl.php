@@ -80,11 +80,9 @@ function drawRecommended(PDO $db, $recommended_ids) { ?>
         <h2>Recommended</h2>
         <div id="static_offer_container">
             <?php
-            foreach($recommended_ids as $item_id)
-            {   
+            foreach($recommended_ids as $item_id) {
                 $product = build_Product_from_id($db, $item_id);
-
-                $user = getUserInfo($db,$product->seller); ?>
+                $user = getUserInfo($db,$product->seller);?>
                 <div class="static_offer"> <?php
                     drawProduct($product, $user);  ?>
                 </div> <?php
