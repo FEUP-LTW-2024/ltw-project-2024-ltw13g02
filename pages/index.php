@@ -31,12 +31,12 @@
     if (sizeof($recent_ids) > 0) {drawRecent($recent_ids, $db); }
     if (sizeof($favourites_ids) > 0) {drawFavorites($favourites_ids, $db); }
 
-    $recommended_ids = getRecommended($db, $session->getId());
+    $recommended_ids = getRecommended($db);
   }else{
-    $recommended_ids = getRecommended($db, -1);
+    $recommended_ids = getRecommended($db);
   }
   drawRecommended($db,$recommended_ids);
-
+  //TODO o header devia desenhar coisas diferentes dependendo se o user está logado ou não
   drawFooter();
 ?>
 </main>

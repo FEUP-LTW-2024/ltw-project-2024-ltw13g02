@@ -63,14 +63,17 @@
     function output_shipping_address(Session $session,$countries){ ?>
         <aside>
             <h3>Checkout</h3> 
-        <form id ='address' action="../action/process_payment.php" method="post">
+        <form id ='address' action="../actions/process_purchase.php" method="post">
 
                 <h5>Address</h5>
 
                 <div class='address_field' id ='address_street'>Street: <input type='text' name='address' required="required" value= "<?=$session->getAddress()?>"> </div>
                 <div class='address_field' id ='address_zipcode'>Zipcode: <input type='text' name='zipcode' required="required" value= "<?= $session->getZipCode()?>"> </div>
-                <div class='address_field' id ='address_city'>City: <input type='text' name='city' required="required" value= "<?= $session->getCity()?>"> </div> <?php
+                <div class='address_field' id ='address_city'>City: <input type='text' name='city' required="required" value= "<?= $session->getCity()?>"> </div> 
+                <input type="hidden" name='paymentAuthhorization' value="paymentAuthorized">
+                <?php
                 output_country_option($countries);
+                
                 ?>
                 <input type="submit" value="Pay Now">
         </form>

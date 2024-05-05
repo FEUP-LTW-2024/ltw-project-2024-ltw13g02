@@ -75,7 +75,7 @@ function drawFavorites($favorites_ids, $db){ ?>
 ?>
 
 <?php
-function drawRecommended($db, $recommended_ids) { ?>
+function drawRecommended(PDO $db, $recommended_ids) { ?>
     <section class="Products" id="Recommended">
         <h2>Recommended</h2>
         <div id="static_offer_container">
@@ -83,6 +83,7 @@ function drawRecommended($db, $recommended_ids) { ?>
             foreach($recommended_ids as $item_id)
             {   
                 $product = build_Product_from_id($db, $item_id);
+
                 $user = getUserInfo($db,$product->seller); ?>
                 <div class="static_offer"> <?php
                     drawProduct($product, $user);  ?>

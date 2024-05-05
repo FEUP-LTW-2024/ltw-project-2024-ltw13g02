@@ -94,20 +94,22 @@ h1 {
 }
 
 
-#static_offer_container {
-    display:inline-flex;
-    flex-wrap: wrap;
-
+.Products #static_offer_container {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
 }
 
 .static_offer {
-    width: 25%;
     display: grid;
     grid-template-rows: 2.5em 1fr 2.5em;
-    margin: 5px;
+    
+    margin: 1em;
+
 }
 
 .static_offer .offer_img{
+    height: 100%;
+    width: 100%;
     object-fit: contain;
 
 }

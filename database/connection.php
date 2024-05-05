@@ -95,27 +95,30 @@
                           WHERE P.idProduct = ?');
     $stmt->execute(array( $id) );
     $product = $stmt->fetch();
-    $result = new Product($product['idProduct'], $product['prodName'], $product['price'], $product['condition'], $product['category'],
-                          $product['prodsize'], $product['seller'], $product['buyer'], $product['purchaseDate']);
+    $result = new Product($product['idProduct'], $product['prodName'], $product['price'], $product['condition'],
+                           $product['characteristic1'],$product['characteristic2'],$product['characteristic3'],
+                            $product['seller'], $product['buyer'], $product['purchaseDate']);
 
     return $result;
 
   }
 
-  function getRecommended( $db, $currentId ) {
+  function getRecommended( $db ) {
+    $session = new Session();
+    $currentId = $session->getId();
     if (isset($currentId)) {
       $stmt = $db->prepare('SELECT P.idProduct
                           FROM Product P
                           WHERE P.seller != ?');
       $stmt->execute(array( $currentId) );
-      $product = $stmt->fetchAll(PDO::FETCH_COLUMN);
-      return $product;
+      $products_id = $stmt->fetchAll(PDO::FETCH_COLUMN);
+      return $products_id;
     }else{
       $stmt = $db->prepare('SELECT P.idProduct
                             FROM Product P
                           ');
       $stmt->execute();
-      $products_id = $stmt->fetchAll();
+      $products_id = $stmt->fetchAll(PDO::FETCH_COLUMN);
       return $products_id;
     }
   }

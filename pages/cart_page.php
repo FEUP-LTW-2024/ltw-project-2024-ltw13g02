@@ -2,7 +2,7 @@
 
     require_once(__DIR__ . '/../database/connection.php');
 
-    require_once(__DIR__ . '/../templates/common.php');
+    require_once(__DIR__ . '/../templates/common_tmpl.php');
 
     require_once(__DIR__ . '/../sessions/session.php');
     $session = new Session();
@@ -37,5 +37,7 @@
         output_shipping_address($session, $countries);
     } else {
         output_empty_cart();
+
+        drawRecent(getRecens($db,$session->getId()),$db);
     }
     drawFooter();

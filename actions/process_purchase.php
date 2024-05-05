@@ -1,21 +1,28 @@
 
 <?php
-    require_once('database/connection.php');
+    require_once(__DIR__. '/../database/connection.php');
+    require_once(__DIR__ . '/../sessions/session.php');
+
+
     $session = new Session();
+
     $db = getDatabaseConnection();
     $db->beginTransaction();
-    $items = getUserShopingCart($db, $SESSION['idUser']);
+    $items = getUserShopingCart($db, $session->getId());
     foreach($items as $item) {
-        $db_item = get_product($db,$item['idProduct']);
-        if ($db_item['buyer'] !== null) {
+        $product = build_Product_from_id($db,$item['product']);
+        if ($product->buyer !== null) {
             $db->rollBack();
 
             header('Location: ../pages/errorPage.php?error=Tried_to_buy_bought_item');
         }else{
-            removeFromCarts($db, $item);
-            removeFromRecent($db, $item);
-            removeFromFavorites($db, $item);
-            //addShiping();
+            
+
+
+            removeFromCarts($db, $product->idProduct);
+            removeFromRecent($db, $product->idProduct);            
+            removeFromFavorites($db, $product->idProduct);
+            //addShiping(); TODO
             //addMessage();
             //uppdateBuyer();
 
@@ -26,10 +33,10 @@
 ?>
 
 <?php
-    function removeFromCarts(PDO $db, $item) {
+    function removeFromCarts(PDO $db, int $item) {
         $stmt = $db->prepare('DELETE 
-                            FROM ShoppingCart SP
-                            WHERE SP.product = ? ');
+                            FROM ShoppingCart
+                            WHERE product = ? ');
         $stmt->execute(array($item));
     }
 ?>
@@ -37,8 +44,8 @@
 <?php
     function removeFromRecent(PDO $db, $item) {
         $stmt = $db->prepare('DELETE 
-                            FROM Recent R
-                            WHERE R.product = ? ');
+                            FROM Recent
+                            WHERE product = ? ');
         $stmt->execute(array($item));
     }
 ?>
@@ -46,8 +53,8 @@
 <?php
     function removeFromFavorites(PDO $db, $item) {
         $stmt = $db->prepare('DELETE 
-                            FROM Favorites F
-                            WHERE F.product = ? ');
+                            FROM Favorites
+                            WHERE product = ? ');
         $stmt->execute(array($item));
     }
 ?>
