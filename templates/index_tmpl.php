@@ -98,7 +98,7 @@ function drawRecommended(PDO $db, $recommended_ids) { ?>
 <?php
 function drawProduct($product, $user){ ?>
         <a href="../pages/seller_page.php?user=<?=$user->idUser?>" class="user_small_card">
-            <?php if ($user->photo != "Sem foto") { ?>
+            <?php if ($user->photo != "Sem FF") { ?>
                 <img class="user_small_pfp" src="../images/userProfile/<?=$user->photo?>"> 
             <?php } else { ?>
                <h2><i class="fa fa-user fa-1x user-icons"></i></h2>

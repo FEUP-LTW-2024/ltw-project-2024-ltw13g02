@@ -14,7 +14,7 @@
 
 
   require_once(__DIR__ . '/../templates/common_tmpl.php');
-  require_once(__DIR__ . '/../templates/index_tmp.php');
+  require_once(__DIR__ . '/../templates/index_tmpl.php');
 
   $db = getDatabaseConnection();
   $categories = getCategories($db);
