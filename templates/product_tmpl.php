@@ -53,6 +53,9 @@ require_once(__DIR__ . '/user_tmpl.php');
                 ?>
             </h2>
             <h2 id="product-page-description">Description: <?php echo $product['prodDescription'] ?> </h2>
+
+            <button id="contact" class="button">Contact me</button>
+            <button id="add-to-cart" class="button">Add to cart</button>
         </div>
     </div>
 
