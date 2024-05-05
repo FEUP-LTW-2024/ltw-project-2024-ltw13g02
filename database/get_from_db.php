@@ -163,10 +163,18 @@ function getChatInfo($idChat): ?array {
     return $info;
 }
 
-function getProduct($idProduct): ?array {
+function getProduct($idProduct) {
     $db = getDatabaseConnection();
     $stmt = $db->prepare('SELECT * FROM Product WHERE Product.idProduct = ?');
     $stmt->execute(array($idProduct));
-    $product = $stmt->fetchAll();
+    $product = $stmt->fetch();
+    return $product;
+}
+
+function getUserbyId($idUser) {
+    $db = getDatabaseConnection();
+    $stmt = $db->prepare('SELECT * FROM User WHERE User.idUser = ?');
+    $stmt->execute(array($idUser));
+    $product = $stmt->fetch();
     return $product;
 }

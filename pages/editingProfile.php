@@ -1,6 +1,6 @@
 <?php
   declare(strict_types = 1);
-
+  
   require_once(__DIR__ . '/../sessions/session.php');
   $session = new Session();
 
@@ -9,36 +9,35 @@
   require_once(__DIR__ . '/../templates/common_tmpl.php');
   
 
+  require_once(__DIR__ . '/../templates/user_tmpl.php');
+
   $db = getDatabaseConnection();
+
+  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    $newFirstName = $_POST['first_name'];
+    $newLastName = $_POST['last_name'];
+    $newPhone = $_POST['phone'];
+    $newAddress =  $_POST['address'];
+    $newCity = $_POST['city'];
+    $newCountry = $_POST['country'];
+    $newZipCode = $_POST['zipCode'];
+    
+
+    $session->setFirstName($newFirstName);
+    $session->setLastName($newLastName);
+    $session->setPhone($newPhone);
+    $session->setAddress($newAddress);
+    $session->setCity($newCity);
+    //setCoutry in editingProfileAction because of string to id coversion
+    $session->setZipCode($newZipCode);
+
+    header("Location: /../actions/editingProfileAction.php?first_name=$newFirstName&last_name=$newLastName&phone=$newPhone&address=$newAddress&city=$newCity&country=$newCountry&zipCode=$newZipCode");
+    exit();
+}
 
   drawHeader($session);
   drawHamburguer($session, 0);
+  drawEditProfile($session);
   drawFooter();
 ?>
-
-<!DOCTYPE html>
-<html lang="en-US">
-<body>
-<main class="center-text">
-    <div class="user-info">
-        <?php $email = $session->getEmail(); ?>
-        <div class="info">
-        <?php
-          if($email != null) {
-        ?>
-            <h2><?php echo "First Name: " . $session->getFirstName(); ?></h2>
-            <h2><?php echo "Last Name: " . $session->getLastName(); ?></h2>
-            <h2><?php echo "Email: " . $email = $session->getEmail(); ?></h2>
-            <h2><?php echo "Phone: " . $session->getPhone(); ?></h2>
-            <h2><?php echo "Country: " . $session->getCountry(); ?></h2>
-            <h2><?php echo "City: " . $session->getCity(); ?></h2>
-            <h2><?php echo "Address: " . $session->getAddress(); ?></h2>
-            <h2><?php echo "zipCode: " . $session->getZipCode(); ?></h2>
-        <?php
-          }
-        ?>
-        </div>
-    </div>
-  </body>
-</html>
-

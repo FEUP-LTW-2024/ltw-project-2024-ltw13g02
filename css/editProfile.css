@@ -1,0 +1,36 @@
+body {
+    min-width: 40em;
+    font-family: "Didact Gothic", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    margin: 0;
+}
+
+form {
+    display: grid;
+    grid-template-rows: repeat(22, 2em);
+    font-size: 1em;
+    text-align: center;
+}
+
+label {
+    display: block;
+    text-align: center;
+    margin-bottom: 0em;
+}
+
+form input[type="text"] {
+    border: 1px solid grey;
+    font-family: "Didact Gothic", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    padding: 3px;
+}
+
+form select[name="country"] {
+    border: 0.5px solid grey;
+    font-family: "Didact Gothic", sans-serif;
+    height: 50px;
+    padding: 0;
+    border-radius: 0;
+}

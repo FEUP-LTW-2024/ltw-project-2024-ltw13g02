@@ -409,3 +409,88 @@ footer {
 .time p {
     margin: 2px;
 }
+
+.messages-input-form {
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto 45px;
+}
+
+.message-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.message-container .message-status {
+    margin-right: 10px;
+    padding-top: 55px;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: 40% auto;
+    height: 100%;
+}
+
+.product-image-container {
+    grid-column: 1;
+    padding: 20px;
+    margin-left: 20px;
+    height: 650px;
+    position: relative;
+    display: grid;
+    grid-template-columns: 7% auto 7%;
+    grid-template-rows: 100%;
+}
+
+.prev-button {
+    grid-column: 1;
+    grid-row: 1;
+    height: 30px;
+    width: 30px;
+    margin: auto;
+}
+
+.next-button {
+    grid-column: 3;
+    grid-row: 1;
+    height: 30px;
+    width: 30px;
+    margin: auto;
+}
+
+#product-image {
+    grid-column: 2;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: auto;
+}
+
+.product-info {
+    grid-column: 2;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 20% 20% auto;
+}
+
+#product-page-name {
+    grid-column: 1;
+    grid-row: 1;
+}
+#product-page-price {
+    grid-column: 2;
+    grid-row: 1;
+}
+#product-page-seller {
+    grid-column: 1;
+    grid-row: 2;
+}
+#product-page-stars {
+    grid-column: 2;
+    grid-row: 2;
+}
+#product-page-description {
+    grid-column: 1 span 2;
+    grid-row: 3;
+}
