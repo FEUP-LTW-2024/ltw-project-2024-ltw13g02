@@ -80,11 +80,9 @@ function drawRecommended(PDO $db, $recommended_ids) { ?>
         <h2>Recommended</h2>
         <div id="static_offer_container">
             <?php
-            foreach($recommended_ids as $item_id)
-            {   
+            foreach($recommended_ids as $item_id) {
                 $product = build_Product_from_id($db, $item_id);
-
-                $user = getUserInfo($db,$product->seller); ?>
+                $user = getUserInfo($db,$product->seller);?>
                 <div class="static_offer"> <?php
                     drawProduct($product, $user);  ?>
                 </div> <?php
@@ -98,20 +96,14 @@ function drawRecommended(PDO $db, $recommended_ids) { ?>
 <?php
 function drawProduct(Product $product,User $user){ ?>
         <a href="../pages/seller_page.php?user=<?=$user->idUser?>" class="user_small_card">
-        <?php   if ($user->photo != "Sem foto") { 
-                    if ($user->photo === "Sem FF"){ ?>
-                        <img class="user_small_pfp" src="../images/products/no_images_small.png"> <!--TODO adicionar imagem do prod-->
-                    <?php
-                    }else{ ?>
-                        <img class="user_small_pfp" src="../images/userProfile/<?=$user->photo?>">
-                    <?php 
-                    }
-                } else { ?>
-               <h2><i class="fa fa-user fa-1x user-icons"></i></h2>
-            <?php } ?>
-            <p><?=$user->name() ?></p>
+        <?php if ($user->photo != "Sem FF") { ?>
+                <img class="user_small_pfp" src="../images/userProfile/<?=$user->photo?>"> 
+        <?php } else { ?>
+                <h2><i class="fa fa-user fa-1x user-icons"></i></h2>
+        <?php } ?>
+                <p><?=$user->name() ?></p>
         </a>
-        <a href="../pages/productPage.php?product=<?=$product->idProduct?>"><img class="offer_img" src="../images/randomImage.jpg"></a> <!--TODO adicionar imagem do prod-->
+        <a href="../pages/productPage.php?product=<?=$product->idProduct?>"><img class="offer_img" src="../images/products/<?=getPhotos($product->idProduct)?>"></a>
 
         <a class="offer_info" href="../pages/productPage.php?product=<?=$product->idProduct?>">
             <h4><?=substr($product->prodName,0,30) ?></h4>
