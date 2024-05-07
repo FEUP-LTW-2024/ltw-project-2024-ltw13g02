@@ -108,7 +108,8 @@ class Product {
                 WHERE Product.idProduct = 1 AND Product.characteristic1 = Characteristic.idCharacteristic AND Characteristic.idType = TypesInCategory.idType AND TypesInCategory.category = Category.idCategory
             ');
         $stmt->execute([$this->idProduct]);
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        $result = $stmt->fetch();
+        return $result;
     }
 
     function getPurchaseDate(): string {
