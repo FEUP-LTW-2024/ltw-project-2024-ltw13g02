@@ -10,9 +10,9 @@
     $db = getDatabaseConnection();
 
     if (isset($_GET['user'])) {
-        $user = getUserInfo($db, $_GET['user']);
+        $seller = getUserbyId($_GET['user']);
 
-        $products = get_seller_products($db, $_GET['user']);
+        $products = $seller->getSellingProducts();
     } else {
         header('Location: /index.php');
         exit();

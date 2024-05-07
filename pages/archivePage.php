@@ -13,23 +13,18 @@
     require_once(__DIR__ . '/../templates/common_tmpl.php');
 
     $session = new Session();
-    //TODO remove this lines after testing
-    $session->setId(2);
-    var_dump($session->getId());
-    $session->setPhotoUser('randomImage.jpg');
 
     if ($session->isLoggedIn()) {
 
-        $db = getDatabaseConnection();
-
-        $products = get_archive_products($db, $session->getId());
+        $user = $session->getUser();
+        $products = $user->getArchiveProducts();
 
         drawHeader($session);
     
         output_archive_user_profile($session);
-        output_archive_user_products($db, $products);
+        output_archive_user_products($products);
 
-        output_footer();
+        drawFooter();
     }else{
         header('Location: ../index.php');
     }

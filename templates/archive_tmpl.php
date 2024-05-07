@@ -16,13 +16,13 @@ require_once(__DIR__ . "/../database/userClass.php");
 
 <?php
 
-    function output_archive_user_products($db, $products) { ?>
+    function output_archive_user_products($products) { ?>
         <section id='archive_products'>
         <?php
         foreach ($products as $product) {
-            $archived_product = build_Product_from_id($db,$product);
+            $archived_product = getProduct($product);
             $db = getDatabaseConnection();
-            $buyer = getUserInfo($db,$product->buyer);
+            $buyer = getUserbyId($product->buyer);
 
             output_single_product($archived_product,$buyer);
         }

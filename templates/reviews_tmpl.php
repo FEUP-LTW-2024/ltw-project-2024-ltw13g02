@@ -18,13 +18,14 @@ require_once(__DIR__ . "/user_tmpl.php");
                 <span class="stars">
                     <h2 id="stars">
                         <?php
-                        $stars = $session->getStars();
+                        $user = $session->getUser();
+                        $stars = $user->getStarsFromReviews();
 
                         drawStars($stars);
                         ?>
                     </h2>
                 </span>
-                <span class="rating-score"><?php echo round($session->getStars(), 2); ?></span>
+                <span class="rating-score"><?php echo round($stars, 2); ?></span>
             </div>
             <div class="filters">
                 <label for="classification">Classification:</label>
@@ -44,7 +45,8 @@ require_once(__DIR__ . "/user_tmpl.php");
 <?php } ?>
 
 <?php function drawReviews(Session $session) { 
-    $reviews = getReviewsWithUsersFromDB($session->getId());
+    $user = $session->getUser();
+    $reviews = $user->getReviewsWithUsersFromDB();
     ?>
     <!DOCTYPE html>
     <html lang="en">

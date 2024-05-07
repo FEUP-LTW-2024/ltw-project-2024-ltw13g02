@@ -11,21 +11,13 @@
     require_once(__DIR__ . '/../templates/common_tmpl.php');
 
 
-    //TODO remove after testing
-    $session = new Session();
-    $session->setId(1);
-    $session->setCity('Porto');
-    $session->setZipCode('4420-388');
-    $session->setCountry(5);
-    $session->setAddress("rua da rua 33");
-
     if (!$session->isLoggedIn()) { header('Location: /index.php'); } 
 
-    $db = getDatabaseConnection();
+    $user = $session->getUser();
 
-    $items_ids = getUserShopingCart($db, $session->getId());
+    $items_ids = $user->getShoppingCart();
 
-    $countries = getAllCountries($db);
+    $countries = getAllCountries();
     
     drawHeader($session);
     ?>
@@ -38,6 +30,6 @@
     } else {
         output_empty_cart();
 
-        drawRecent(getRecens($db,$session->getId()),$db);
+        drawRecent($user->getRecent());
     }
     drawFooter();

@@ -11,16 +11,14 @@
 
 
 <?php
-    function output_cart_items($items_ids){ 
-        $db = getDatabaseConnection();  
-        ?>
+    function output_cart_items($items_ids){?>
         
         <section id='Shopping_Cart'>
             <h2>Shopping Cart</h2>
             <section id='Shopping_items'>
                 <?php
                 foreach ($items_ids as $item){
-                    $product = build_Product_from_id($db, $item['product']);
+                    $product = getProduct($item['product']);
                     output_single_cart_item($product);
                 }
                 output_total_payment($items_ids);
@@ -44,10 +42,9 @@
 
 <?php
     function output_total_payment($items){
-        $db = getDatabaseConnection();
         $total = 0;
         foreach ($items as $item){
-                $product = build_Product_from_id($db, $item['product']);
+                $product = getProduct($item['product']);
                 $total += $product->price;
             }  
         ?>
@@ -92,7 +89,8 @@
             <select name='country'>
                 <?php 
                     foreach ($countries as $country){ 
-                        if ($country['country'] === $session->getCountry())
+                        $user = $session->getUser();
+                        if ($country['country'] === $user->getCountry())
                         { ?>
                             <option value="<?=$country['country']?>" selected><?=$country['country']?></option>
                         <?php 

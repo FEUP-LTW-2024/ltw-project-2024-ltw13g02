@@ -8,11 +8,10 @@
 
   require_once(__DIR__ . '/../templates/common_tmpl.php');
 
-  $db = getDatabaseConnection();
-
   drawHeader($session);
   drawHamburguer($session, 2);
   drawFooter();
+  $user = $session->getUser();
 ?>
 
 <!DOCTYPE html>
@@ -20,9 +19,9 @@
   <body>
     <main>
       <div class="user-info">
-        <h2><?php echo $session->getEmail(); ?></h2>
+        <h2><?php echo $user->getEmail(); ?></h2>
         <h2> my archive </h2>
-        <h2><?php echo $session->getFirstName() . " " . $session->getLastName(); ?></h2>
+        <h2><?php echo $user->name(); ?></h2>
       </div>
     </main>
   </body>

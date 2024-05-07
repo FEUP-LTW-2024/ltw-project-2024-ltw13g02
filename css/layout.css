@@ -471,7 +471,7 @@ footer {
     grid-column: 2;
     display: grid;
     grid-template-columns: 50% 25% 25%;
-    grid-template-rows: 15% 15% auto 10%;
+    grid-template-rows: 15% 15% 15% auto 10%;
 }
 
 #product-page-name {
@@ -502,18 +502,18 @@ footer {
 
 #product-page-description {
     grid-column: 1 / span 3;
-    grid-row: 3;
+    grid-row: 4;
     margin: 0;
 }
 
 #contact {
-    grid-row: 4;
+    grid-row: 5;
     grid-column: 1;
     margin: auto;
 }
 
 #add-to-cart {
-    grid-row: 4;
+    grid-row: 5;
     grid-column: 2 / span 3;
     margin: auto;
 }

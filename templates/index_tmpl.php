@@ -24,7 +24,7 @@ require_once(__DIR__ . '/../database/get_from_db.php');
 ?>
 
 <?php
-function drawRecent($recent_ids, $db)
+function drawRecent($recent_ids)
     { ?>
         <section class="Products" id="Recent">
             <h2>Recents</h2>
@@ -32,12 +32,12 @@ function drawRecent($recent_ids, $db)
                 <div class="sliding_offers_container"> <?php 
                     foreach($recent_ids as $item_id)
                     {
-                        $product = build_Product_from_id($db, $item_id);
+                        $product = getProduct($item_id);
 
-                        $user = getUserInfo($db,$product->seller);
+                        $seller = $product->getSeller();
                         ?>
                         <div class="sliding_offer"> <?php
-                            drawProduct($product, $user);  ?>
+                            drawProduct($product, $seller);  ?>
                         </div> <?php 
                     } ?>
                 </div>
@@ -50,19 +50,19 @@ function drawRecent($recent_ids, $db)
 
 <?php 
 
-function drawFavorites($favorites_ids, $db){ ?>
+function drawFavorites($favorites_ids){ ?>
     <section class="Products" id="Favorites">
         <h2>Favorites</h2>
         <article>
             <div class="sliding_offers_container"> <?php 
                 foreach($favorites_ids as $item_id)
                 {
-                    $product = build_Product_from_id($db, $item_id);
+                    $product = getProduct($item_id);
 
-                    $user = getUserInfo($db,$product->seller);
+                    $seller = $product->getSeller();
                     ?>
                     <div class="sliding_offer"> <?php
-                        drawProduct($product, $user);  ?>
+                        drawProduct($product, $seller);  ?>
                     </div> <?php 
                 } ?>
             </div>
@@ -75,16 +75,16 @@ function drawFavorites($favorites_ids, $db){ ?>
 ?>
 
 <?php
-function drawRecommended(PDO $db, $recommended_ids) { ?>
+function drawRecommended($recommended_ids) { ?>
     <section class="Products" id="Recommended">
         <h2>Recommended</h2>
         <div id="static_offer_container">
             <?php
             foreach($recommended_ids as $item_id) {
-                $product = build_Product_from_id($db, $item_id);
-                $user = getUserInfo($db,$product->seller);?>
+                $product = getProduct($item_id);
+                $seller = $product->getSeller();?>
                 <div class="static_offer"> <?php
-                    drawProduct($product, $user);  ?>
+                    drawProduct($product, $seller);  ?>
                 </div> <?php
             } ?>
         </div>

@@ -12,8 +12,6 @@
 
   require_once(__DIR__ . '/../templates/reviews_tmpl.php');
 
-  $db = getDatabaseConnection();
-
   drawHeader($session);
   drawHamburguer($session, 0);
   drawFilterBar($session);
