@@ -50,12 +50,65 @@ class Product {
         return $this->description;
     }
 
-    function getCharacteristics(): string {
-        // TODO
+    function getCharacteristics(): array {
+        $db = getDatabaseConnection();
+        $characteristics = [];
+    
+        if ($this->characteristic1 !== null) {
+            $stmt = $db->prepare('
+                SELECT Characteristic.characteristic
+                FROM Characteristic
+                JOIN Product ON Characteristic.idCharacteristic = Product.characteristic1
+                WHERE Product.idProduct = ?
+            ');
+            $stmt->execute([$this->idProduct]);
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($result) {
+                $characteristics[] = $result['characteristic'];
+            }
+        }
+    
+        if ($this->characteristic2 !== null) {
+            $stmt = $db->prepare('
+                SELECT Characteristic.characteristic
+                FROM Characteristic
+                JOIN Product ON Characteristic.idCharacteristic = Product.characteristic2
+                WHERE Product.idProduct = ?
+            ');
+            $stmt->execute([$this->idProduct]);
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($result) {
+                $characteristics[] = $result['characteristic'];
+            }
+        }
+    
+        if ($this->characteristic3 !== null) {
+            $stmt = $db->prepare('
+                SELECT Characteristic.characteristic
+                FROM Characteristic
+                JOIN Product ON Characteristic.idCharacteristic = Product.characteristic3
+                WHERE Product.idProduct = ?
+            ');
+            $stmt->execute([$this->idProduct]);
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($result) {
+                $characteristics[] = $result['characteristic'];
+            }
+        }
+        
+        return $characteristics;
     }
+    
 
-    function getCategory(PDO $db, int $id) : array {
-        // TODO
+    function getCategory() : array {
+        $db = getDatabaseConnection();
+        $stmt = $db->prepare('
+                SELECT Category.category
+                FROM Characteristic, Category, TypesInCategory, Product
+                WHERE Product.idProduct = 1 AND Product.characteristic1 = Characteristic.idCharacteristic AND Characteristic.idType = TypesInCategory.idType AND TypesInCategory.category = Category.idCategory
+            ');
+        $stmt->execute([$this->idProduct]);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
     function getPurchaseDate(): string {
