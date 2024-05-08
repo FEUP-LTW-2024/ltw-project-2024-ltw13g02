@@ -5,46 +5,31 @@
   $session = new Session();
 
   require_once(__DIR__ . '/../database/connection_to_db.php');
+  require_once(__DIR__ . '/../database/get_from_db.php');
+  require_once(__DIR__ . '/../database/userClass.php');
+
 
   require_once(__DIR__ . '/../templates/common_tmpl.php');
+  require_once(__DIR__ . '/../templates/productsprint_tmpl.php');
+
+  $db = getDatabaseConnection();
+  $categories = getCategories($db);
 
   drawHeader($session);
   drawHamburguer($session, 1);
+
+  if ($session->isLoggedIn()) {
+
+    $user = $session->getUser();
+    $announcements_ids = $user->getAnnouncements();
+
+    if (sizeof($announcements_ids) > 0) {drawAnnouncements($announcements_ids); }
+  else { ?>
+    <div class="user-info">
+      <h2><?php echo "No Announcements"; ?></h2>
+    </div>  
+  <?php }
+  }
+  
   drawFooter();
 ?>
-
-<!DOCTYPE html>
-<html lang="en-US">
-  <body>
-    <main>
-      <div class="user-info">
-        <section class="Products" id="Announcements">
-            <h2>My Announcements</h2>
-            <article>
-                <!-- PHP fica aqui -->
-                <div class="offers_container">
-                    <div class="offer">A1</div>
-                    <div class="offer">A2</div>
-                    <div class="offer">A3</div>
-                    <div class="offer">A4</div>
-                    <div class="offer">A5</div>
-                    <div class="offer">A6</div>
-                    <div class="offer">A7</div>
-                    <div class="offer">A8</div>
-                    <div class="offer">A9</div>
-                </div>
-                <!--<input type="submit" value="&#60" class="MovArrows" >
-                <input type="submit" value=">" class="MovArrows">-->
-            </article>
-
-            <!-- PHP fica aqui -->
-            <!--
-            <input type="submit" value="Move Left"class="MovArrows">
-            <input type="submit" value="Move Right" class="MovArrows">
-            -->
-        </section>
-      </div>
-    </main>
-  </body>
-</html>
-

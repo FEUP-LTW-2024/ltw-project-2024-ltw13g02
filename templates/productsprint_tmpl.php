@@ -92,11 +92,33 @@ function drawRecommended($recommended_ids) { ?>
         </div>
     </section>
 <?php }
-
 ?>
 
 <?php
+function drawAnnouncements($announcements_ids)
+    { ?>
+        <section class="Products" id="Announcements">
+            <h2>My Announcements</h2>
+            <article>
+                <div class="sliding_offers_container"> <?php 
+                    foreach($announcements_ids as $item_id)
+                    {
+                        $product = getProduct($item_id);
 
+                        $seller = $product->getSeller();
+                        ?>
+                        <div class="sliding_offer"> <?php
+                            drawProduct($product, $seller);  ?>
+                        </div> <?php 
+                    } ?>
+                </div>
+            </article>
+        </section>
+    <?php } 
+?>
+
+
+<?php
 function drawProduct(Product $product, $user){ ?>
         <a href="../pages/seller_page.php?user=<?=$user->getId()?>" class="user_small_card">
             <?php if ($user->getPhoto() != "Sem FF") { ?>

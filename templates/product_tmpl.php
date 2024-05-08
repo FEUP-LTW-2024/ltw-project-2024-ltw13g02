@@ -70,9 +70,11 @@ require_once(__DIR__ . '/user_tmpl.php');
             <h2 id="product-page-description">Description: <?php echo $product->getDescription(); ?> </h2>
             <?php $user = $session->getUser();
             $chat = $user->findBuyerChat($idProduct);
-            $idChat = $chat->getId(); ?>
-            <button id="contact" class="button"><a href="../pages/messagesPage.php?chat=<?php echo $idChat ?>">Contact me</a></button>
-            <button id="add-to-cart" class="button"><a href="">Add to cart</a></button>
+            $idChat = $chat->getId(); 
+            if($seller->name() != $user->name()){?>
+                <button id="contact" class="button"><a href="../pages/messagesPage.php?chat=<?php echo $idChat ?>">Contact me</a></button>
+                <button id="add-to-cart" class="button"><a href="">Add to cart</a></button>
+            <?php } ?>
         </div>
     </div>
 
