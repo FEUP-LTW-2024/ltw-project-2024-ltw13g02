@@ -97,7 +97,7 @@ function drawRecommended($recommended_ids) { ?>
 
 <?php
 
-function drawProduct($product, $user){ ?>
+function drawProduct(Product $product, $user){ ?>
         <a href="../pages/seller_page.php?user=<?=$user->getId()?>" class="user_small_card">
             <?php if ($user->getPhoto() != "Sem FF") { ?>
                 <img class="user_small_pfp" src="../images/userProfile/<?=$user->getPhoto()?>"> 
@@ -106,7 +106,7 @@ function drawProduct($product, $user){ ?>
             <?php } ?>
             <p><?=$user->name() ?></p>
         </a>
-        <a href="../pages/productPage.php?product=<?=$product->getId()?>"><img class="offer_img" src="../images/randomImage.jpg"></a> <!--TODO adicionar imagem do prod-->
+        <a href="../pages/productPage.php?product=<?=$product->getId()?>"><img class="offer_img" src="../images/products/<?= $product->getPhotos()[0]['photo']?>"></a>
 
         <a class="offer_info" href="../pages/productPage.php?product=<?=$product->getId()?>">
             <h4><?=substr($product->getName(),0,30) ?></h4>
