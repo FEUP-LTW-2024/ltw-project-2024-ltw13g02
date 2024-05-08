@@ -323,6 +323,7 @@ li a {
 }
 
 .chat-info {
+    padding-left: 10px;
     grid-column-start: 2;
     display: grid;
     grid-template-columns: auto 100px;
@@ -333,8 +334,9 @@ li a {
     margin-top: 15px;
     grid-column-start: 2;
     margin-right: 10px;
-    width: 60px;
-    border-radius: 50%;
+    width: 67px;
+    height: 67px;
+    border-radius: 100%;
 }
 
 .with-user {
