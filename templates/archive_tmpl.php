@@ -5,7 +5,7 @@ require_once(__DIR__ . "/../database/userClass.php");
     function output_archive_user_profile(Session $session) { ?>
         <main id='archive page'>
             <section id='archive_header'>
-                <img class="user_pfp" src=<?= "/../images/userProfile/{$session->getPhotoUser()}" ?>>
+                <img class="user_pfp" src="/../images/userProfile/<?=$session->getUser()->getPhoto()?>">
                 <h4>Archive</h4>
                 <p>(Sold Items)</p>
             </section>

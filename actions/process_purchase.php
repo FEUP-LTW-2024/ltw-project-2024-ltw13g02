@@ -5,27 +5,29 @@
 
 
     $session = new Session();
-
+    $user = $session->getUser();
     $db = getDatabaseConnection();
     $db->beginTransaction();
-    $items = getUserShopingCart($db, $session->getId());
+    $items = $user->getShoppingCart();
     foreach($items as $item) {
-        $product = build_Product_from_id($db,$item['product']);
-        if ($product->buyer !== null) {
+        $product = getProduct($item);
+
+        if ($product->getBuyer() !== null) {
+            echo'NANA';
             $db->rollBack();
 
             header('Location: ../pages/errorPage.php?error=Tried_to_buy_bought_item');
         }else{
             
+            echo"JOJO\n";
 
-
-            removeFromCarts($db, $product->idProduct);
-            removeFromRecent($db, $product->idProduct);            
-            removeFromFavorites($db, $product->idProduct);
-            //TODO add adaptar tamanho tela diferentes
-            addShiping($db,$product->idProduct,$session->getId(),$product->seller);
+            removeFromCarts($db, $product->getId());
+            removeFromRecent($db, $product->getId());            
+            removeFromFavorites($db, $product->getId());
+            $user = $session->getUser();
+            addShiping($db,$product->getId(),$user->getId(),$product->getSeller());
             //sendMessage();  TODO descobrir se fazer isto ou não
-            uppdateBuyer($db,$product->idProduct ,$session->getId());
+            uppdateBuyer($db,$product->idProduct ,$user->getId());
 
         }
     }
@@ -61,7 +63,7 @@
 ?>
 
 <?php
-    function addShiping(PDO $db, int $item, int $buyer, int $seller) {
+    function addShiping(PDO $db, int $item, string $buyer, string $seller) {
         $stmt = $db->prepare('INSERT INTO Shipping (product, buyer, seller, purchaseDate)
                                 VALUES (?,?,?,?);
                               ');

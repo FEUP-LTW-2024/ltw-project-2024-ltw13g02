@@ -416,27 +416,26 @@ footer {
     margin-right: 1em;
 }
 
-#Shopping_items article:last-of-type{
+#Shopping_items #totalPayment{
     display: flex;
 }
 
 .CartItem {
-    margin-bottom: 0.5em;
-}
-
-.CartItem a{
 
     display: grid;
     grid-template-columns: 6em 1fr;
     grid-template-rows: 1fr 1fr;
+
+    margin-bottom: 0.5em;
+    padding-left: 1em;
 }
 
 .CartItem img {
-    height: 6em;
+    height: 95%;
+    width: 95%;
     border-radius: 1em;
     grid-row-end: span 2;
-    object-fit:scale-down;
-    margin: auto 0 auto 0.5em;
+    object-fit:contain;
 }
 
 #Shopping_Cart aside {
@@ -445,8 +444,9 @@ footer {
 }
 
 #Shopping_Cart aside form{
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 10em 1fr;
+    grid-template-rows: repeat(4, 1.5em);
 }
 
 #shippingAdress h3{
@@ -472,5 +472,6 @@ footer {
 
 #address input,
 #address select {
-    height: 1.3em
+    height: 1.3em;
+    margin-right: 1em;
 }

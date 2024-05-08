@@ -18,7 +18,7 @@
         exit();
     }
     
-    if ( $session->isLoggedIn() ) {
+    if ((!$session->isLoggedIn()) or ($session->isLoggedIn() and ($session->getUser()->getId() != $_GET['user'])) ) {
         drawHeader($session);
         output_seller_header($db, $user);
         output_seller_products($db, $products, $user);
@@ -26,6 +26,5 @@
     } else {
         header('Location: /index.php');
         exit();
-        //TODO link to my announces i think
     }
     
