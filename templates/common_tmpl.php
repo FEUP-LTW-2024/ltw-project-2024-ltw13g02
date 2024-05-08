@@ -53,6 +53,7 @@ require_once(__DIR__ . '/../sessions/session.php');
 
 
 <?php function drawFooter() { ?>
+    </main>
     <footer>
             <p>&copy; Dealify </p>
     </footer>

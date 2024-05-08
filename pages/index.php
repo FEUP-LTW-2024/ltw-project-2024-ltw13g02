@@ -37,6 +37,3 @@
 
   drawRecommended($recommended_ids);
   drawFooter();
-?>
-</main>
-</body>

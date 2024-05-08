@@ -80,7 +80,9 @@ function drawRecommended($recommended_ids) { ?>
         <h2>Recommended</h2>
         <div id="static_offer_container">
             <?php
-            foreach($recommended_ids as $item_id) {
+            for ($i = 0; $i < 20; $i++)
+            {
+                $item_id = $recommended_ids[$i];
                 $product = getProduct($item_id);
                 $seller = $product->getSeller();?>
                 <div class="static_offer"> <?php
@@ -103,7 +105,7 @@ function drawProduct(Product $product,User $user){ ?>
         <?php  } ?>
                 <p><?=$user->name() ?></p>
         </a>
-        <a href="../pages/productPage.php?product=<?=$product->idProduct?>"><img class="offer_img" src="../images/products/<?=getPhotos($product->idProduct)[0]['photo']?>"></a>
+        <a href="../pages/productPage.php?product=<?=$product->idProduct?>"><img class="offer_img" src="../images/products/<?=$product->getPhotos()[0]['photo']?>"></a>
 
         <a class="offer_info" href="../pages/productPage.php?product=<?=$product->idProduct?>">
             <h4><?=substr($product->prodName,0,30) ?></h4>
