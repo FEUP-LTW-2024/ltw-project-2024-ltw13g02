@@ -10,6 +10,4 @@
 
   require_once(__DIR__ . '/../templates/register_tmpl.php');
 
-  $db = getDatabaseConnection();
-
   drawRegister();

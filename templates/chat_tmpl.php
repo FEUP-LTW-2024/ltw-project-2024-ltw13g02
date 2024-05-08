@@ -12,28 +12,31 @@ require_once(__DIR__ . '/../utils/elapsedTime.php');
 ?>
 
 <?php function drawChats(Session $session, $activePage) {
-    if ($session->getEmail() != null) {
+    $user = $session->getUser();
+    if ($user != null) {
         if ($activePage == 0) {
-            $session->setPreviousPage("chatsAsSellerPage.php");
-            $chats = getChatsAsSellerFromDB($session->getId());
+            $chats = $user->getChatsAsSellerFromDB();
         }
         else {
-            $session->setPreviousPage("chatsAsBuyerPage.php");
-            $chats = getChatsAsBuyerFromDB($session->getId());
+            $chats = $user->getChatsAsBuyerFromDB();
         }
         if (count($chats) > 0) {
             foreach ($chats as $row) {?>
                 <a href="../pages/messagesPage.php?chat=<?php echo $row['idChat']; ?>">
                     <div class="chat-tile">
-                        <?php $photos = getPhotos($row['idProduct']);?>
+                        <?php 
+                        $product = getProduct($row['idProduct']);
+                        $seller = $product->getSeller();
+                        $photos = $product->getPhotos();
+                        ?>
                         <div class="chat-product-photo-container">
                             <img class="chat-productphoto" src="../images/products/<?php echo $photos[0]["photo"]; ?>" alt="Photo">
                         </div>
                         <div class="chat-info">
-                            <h2 class="with-user"><?php echo $row['firstName'] . " " . $row['lastName']; ?></h2>
+                            <h2 class="with-user"><?php echo $seller->name(); ?></h2>
                             <h2 class="message-product"><?php echo $row['prodName']; ?></h2>
                             <?php $lastmessage = getLastMessage($row['idChat']); 
-                            if ($lastmessage["sender"] == $session->getId()) {?>
+                            if ($lastmessage["sender"] == $session->getUser()->getId()) {?>
                                 <h2 class="unchecked <?php echo $lastmessage["seen"] ? "fa fa-check-circle" : "fa fa-check-circle-o"; ?>"></h2>
                                 <h2 class="message-content"><?php echo $lastmessage['content']; ?></h2>
                             <?php } else { ?>

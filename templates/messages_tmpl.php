@@ -14,11 +14,14 @@ require_once(__DIR__ . '/user_tmpl.php');
 <?php function drawChatHeader(Session $session, $idChat) { 
     $info = getChatInfo($idChat); ?>
     <div class="chat-header">
-        <?php $photos = getPhotos($info['idProduct']);?>
-        <a href="../pages/<?php echo $info['BId'] == $session->getId() ? "chatsAsBuyerPage.php" : "chatsAsSellerPage.php" ?>"><i class="fa fa-angle-left fa-2x chat-back-button"></i></a>
+        <?php 
+        $product = getProduct($info['idProduct']);
+        $photos = $product->getPhotos();
+        ?>
+        <a href="../pages/<?php echo $info['BId'] == $session->getUser()->getId() ? "chatsAsBuyerPage.php" : "chatsAsSellerPage.php" ?>"><i class="fa fa-angle-left fa-2x chat-back-button"></i></a>
         <img class="chat-productphoto" src="../images/products/<?php echo $photos[0]["photo"]; ?>" alt="Photo">
         <div class="chat">
-                <?php if ($session->getId() == $info['SId']) { ?>
+                <?php if ($session->getUser()->getId() == $info['SId']) { ?>
                     <a href="../pages/seller_page.php?user=<?php echo $info['SId']; ?>"><h2 class="with-user"><?php echo $info['BFN'] . " " . $info['BLN']; ?></h2>
                 <?php } else { ?>
                     <a href="../pages/seller_page.php?user=<?php echo $info['BId']; ?>"><h2 class="with-user"><?php echo $info['SFN'] . " " . $info['SLN']; ?></h2>
@@ -31,10 +34,10 @@ require_once(__DIR__ . '/user_tmpl.php');
 
 <?php function drawMessages(Session $session, $idChat) {
     $messages = getMessages($idChat);
-    setAsSeen($idChat, $session->getId()); ?>
+    setAsSeen($idChat, $session->getUser()->getId()); ?>
     <div class="column-of-messages">
         <?php foreach ($messages as $key => $row) { ?>
-            <?php if ($row["sender"] == $session->getId()) { ?>
+            <?php if ($row["sender"] == $session->getUser()->getId()) { ?>
                 <div class="message-container">
                     <div class="message-tile message own-message">
                         <p><?php echo $row['content']; ?></p>
@@ -79,7 +82,7 @@ require_once(__DIR__ . '/user_tmpl.php');
 <?php
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $message = $_POST['message'];
-        addMessage($session->getId(), $idChat, $message);
+        addMessage($session->getUser()->getId(), $idChat, $message);
 
         header("Location: ".$_SERVER['PHP_SELF']."?chat=".urlencode($idChat));
     }

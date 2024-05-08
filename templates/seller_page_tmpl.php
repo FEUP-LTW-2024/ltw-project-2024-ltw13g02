@@ -1,6 +1,6 @@
 <?php
     function output_seller_header($db, User $user) {
-        $num_reviews = get_user_num_reviews($db, $user->idUser);
+        $num_reviews = $user->getNumberOfReviews();
         ?>
         <article id="seller_header">
             <p id='user_fullname'><?= $user->name() ?> </p>
@@ -25,7 +25,7 @@
 <?php
     function output_seller_products($db, $products, User $user) { 
 
-        $address =getUserAddress($db,$user);
+        $address = $user->getAddress();
         $city = $address['city'];
         $country = $address['country'];
         ?>

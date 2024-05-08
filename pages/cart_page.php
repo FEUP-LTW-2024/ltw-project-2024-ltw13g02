@@ -10,13 +10,14 @@
     require_once(__DIR__ . '/../templates/shopingCart_tmpl.php');
     require_once(__DIR__ . '/../templates/common_tmpl.php');
 
+
     if (!$session->isLoggedIn()) { header('Location: /index.php'); } 
 
-    $db = getDatabaseConnection();
+    $user = $session->getUser();
 
-    $items_ids = getUserShopingCart($db, $session->getId());
+    $items_ids = $user->getShoppingCart();
 
-    $countries = getAllCountries($db);
+    $countries = getAllCountries();
     
     drawHeader($session);
     

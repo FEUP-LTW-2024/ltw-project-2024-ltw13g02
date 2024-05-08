@@ -10,9 +10,6 @@
 
   require_once(__DIR__ . '/../templates/chat_tmpl.php');
 
-
-  $db = getDatabaseConnection();
-
   drawHeader($session);
   drawHamburguerChat($session, 0);
   drawChats($session, 0);

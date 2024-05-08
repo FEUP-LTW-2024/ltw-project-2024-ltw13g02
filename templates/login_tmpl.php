@@ -38,7 +38,7 @@ require_once(__DIR__ . '/../sessions/session.php');
                             unset($_SESSION['error']);
                         }
                     ?>
-                    <a href="index.php"><button id="Blogin" type="submit">Login</button></a>
+                    <a href="index.php"><button id="Blogin" class="button" type="submit">Login</button></a>
                     <a href="register.php"><h2 id="goToReg">I don't have an account</h2></a>
                 </form>
             </div>

@@ -12,8 +12,6 @@
 
   require_once(__DIR__ . '/../templates/user_tmpl.php');
 
-  $db = getDatabaseConnection();
-
   drawHeader($session);
   drawHamburguer($session, 0);
   drawUserProfile($session);

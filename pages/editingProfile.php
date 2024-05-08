@@ -11,8 +11,6 @@
 
   require_once(__DIR__ . '/../templates/user_tmpl.php');
 
-  $db = getDatabaseConnection();
-
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $newFirstName = $_POST['first_name'];
@@ -23,14 +21,27 @@
     $newCountry = $_POST['country'];
     $newZipCode = $_POST['zipCode'];
     
+    $user = $session->getUser();
+    $user->setFirstName($newFirstName);
+    $user->setLastName($newLastName);
+    $newPhone = intval($newPhone);
+    $user->setPhone($newPhone);
+    $user->setAddress($newAddress);
+    $user->setCity($newCity);
 
-    $session->setFirstName($newFirstName);
-    $session->setLastName($newLastName);
-    $session->setPhone($newPhone);
-    $session->setAddress($newAddress);
-    $session->setCity($newCity);
-    //setCoutry in editingProfileAction because of string to id coversion
-    $session->setZipCode($newZipCode);
+    $db = getDatabaseConnection();
+    
+    $stmt = $db->prepare('SELECT idCountry FROM Country WHERE country = ?');
+    $stmt->execute(array($newCountry));
+    $country = $stmt->fetch(PDO::FETCH_ASSOC);    
+    if ($country) {
+        $user->setCountry((int)$country['idCountry']);
+        $newCountry = (int)$country['idCountry'];
+    } else {
+        return; // Country Invalid
+    }
+
+    $user->setZipCode($newZipCode);
 
     header("Location: /../actions/editingProfileAction.php?first_name=$newFirstName&last_name=$newLastName&phone=$newPhone&address=$newAddress&city=$newCity&country=$newCountry&zipCode=$newZipCode");
     exit();
@@ -40,4 +51,3 @@
   drawHamburguer($session, 0);
   drawEditProfile($session);
   drawFooter();
-?>

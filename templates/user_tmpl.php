@@ -23,25 +23,28 @@ require_once(__DIR__ . '/../sessions/session.php');
 
 <?php function drawUserProfile(Session $session) { ?>
     <div class="user-info">
-        <?php $email = $session->getEmail();?>
+        <?php 
+        $user = $session->getUser();
+        $email = $user->getEmail();
+        ?>
         <h2><?php drawPhoto($session, $email);?></h2>
         <div class="info">
         <?php
           if($email != null) {
         ?>
-            <h2><?php echo "Name: " . $session->getFirstName() . " " . $session->getLastName(); ?></h2>
+            <h2><?php echo "Name: " . $user->name(); ?></h2>
             <a href="reviewsPage.php"><h2 id="stars" class="stars">
             <?php
-              $stars = $session->getStars();
+              $stars = $user->getStarsFromReviews();
               drawStars($stars);
             ?>
             </h2></a>
-            <h2><?php echo "Email: " . $email = $session->getEmail(); ?></h2>
-            <h2><?php echo "Phone: " . $session->getPhone(); ?></h2>
-            <h2><?php echo "Country: " . $session->getCountry(); ?></h2>
-            <h2><?php echo "City: " . $session->getCity(); ?></h2>
-            <h2><?php echo "Address: " . $session->getAddress(); ?></h2>
-            <h2><?php echo "zipCode: " . $session->getZipCode(); ?></h2>
+            <h2><?php echo "Email: " . $user->getEmail(); ?></h2>
+            <h2><?php echo "Phone: " . $user->getPhone(); ?></h2>
+            <h2><?php echo "Country: " . $user->getCountry(); ?></h2>
+            <h2><?php echo "City: " . $user->getCity(); ?></h2>
+            <h2><?php echo "Address: " . $user->getAddress(); ?></h2>
+            <h2><?php echo "zipCode: " . $user->getZipCode(); ?></h2>
         <?php
           }
           else {
@@ -56,7 +59,8 @@ require_once(__DIR__ . '/../sessions/session.php');
 <?php } ?>
 
 <?php function drawPhoto($session, $email) {
-    $photo = $session->getPhotoUser(); 
+    $user = $session->getUser();
+    $photo = $user->getPhoto(); 
     if($email != null) { ?>
         <div class="user-photo-container">
             <?php if ($photo == "Sem FF") { ?>
@@ -84,27 +88,27 @@ require_once(__DIR__ . '/../sessions/session.php');
 <?php function drawEditProfile($session){ ?>
     <link rel="stylesheet" href="../css/editProfile.css"-->
     <div class="user-info">
-        <?php $email = $session->getEmail(); ?>
         <div class="info">
+            <?php $user = $session->getUser(); ?>
             <h2><?php echo "Editing Profile" ?></h2>
             <form id="editProfileForm" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                 <label for="first_name">First Name:</label>
-                <input type="text" id="first_name" name="first_name" value="<?= $session->getFirstName(); ?>"><br><br>
+                <input type="text" id="first_name" name="first_name" value="<?= $user->getFirstName(); ?>"><br><br>
 
                 <label for="last_name">Last Name:</label>
-                <input type="text" id="last_name" name="last_name" value="<?= $session->getLastName(); ?>"><br><br>
+                <input type="text" id="last_name" name="last_name" value="<?= $user->getLastName(); ?>"><br><br>
 
                 <label for="phone">Phone:</label>
-                <input type="text" id="phone" name="phone" value="<?= $session->getPhone(); ?>"><br><br>
+                <input type="text" id="phone" name="phone" value="<?= $user->getPhone(); ?>"><br><br>
             
                 <label for="address">Address:</label>
-                <input type="text" id="address" name="address" value="<?= $session->getAddress(); ?>"><br><br>
+                <input type="text" id="address" name="address" value="<?= $user->getAddress(); ?>"><br><br>
                 
                 <label for="country">Country: </label>
                 <label id="country" class="required"> 
                     <select name="country" required>
                         <?php
-                        $currentCountry = $session->getCountry();
+                        $currentCountry = $user->getCountry();
 
                         echo "<option value='$currentCountry'>$currentCountry</option>";
 
@@ -139,10 +143,10 @@ require_once(__DIR__ . '/../sessions/session.php');
                     </select>
                 </label><br><br>
                 <label for="city">City:</label>
-                <input type="text" id="city" name="city" value="<?= $session->getCity(); ?>"><br><br>
+                <input type="text" id="city" name="city" value="<?= $user->getCity(); ?>"><br><br>
                 
                 <label for="zipCode">Zip Code:</label>
-                <input type="text" id="zipCode" name="zipCode" value="<?= $session->getZipCode(); ?>"><br><br>
+                <input type="text" id="zipCode" name="zipCode" value="<?= $user->getZipCode(); ?>"><br><br>
 
                 <input type="submit" value="Submit">
             </form>

@@ -9,8 +9,6 @@
   require_once(__DIR__ . '/../templates/common_tmpl.php');
   require_once(__DIR__ . '/../templates/product_tmpl.php');
 
-  $db = getDatabaseConnection();
-
   drawHeader($session);
   drawProductHeader($session, $_GET['product']);
   drawProduct($session, $_GET['product']);

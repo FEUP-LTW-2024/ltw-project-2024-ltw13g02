@@ -27,8 +27,8 @@ require_once(__DIR__ . '/user_tmpl.php');
 
 <?php function drawProduct(Session $session, $idProduct) { 
     $product = getProduct($idProduct);
-    $seller = getUserbyId($product['seller']); 
-    $photos = getPhotos($idProduct); ?>
+    $seller = $product->getSeller(); 
+    $photos = $product->getPhotos(); ?>
     <div class="product-grid" id="product-grid">
         <div class="product-image-container">
             <?php if (count($photos) == 0) { ?>
@@ -43,16 +43,20 @@ require_once(__DIR__ . '/user_tmpl.php');
         </div>
 
         <div class="product-info">
-            <h2 id="product-page-name"><?php echo $product['prodName'] ?> </h2>
-            <h2 id="product-page-price"><?php echo $product['price'] ?> € </h2>
-            <h2 id="product-page-seller"><?php echo $seller['firstName'] ?> <?php echo $seller['lastName'] ?> </h2>
+            <h2 id="product-page-name"><?php echo $product->getName(); ?> </h2>
+            <h2 id="product-page-price"><?php echo $product->getPrice(); ?> € </h2>
+            <h2 id="product-page-seller"><?php echo $seller->name(); ?> </h2>
             <h2 id="product-page-stars" class="stars">
                 <?php
-                $stars = $seller['stars'];
+                $stars = $seller->getStarsFromReviews();
                 drawStars($stars);
                 ?>
             </h2>
-            <h2 id="product-page-description">Description: <?php echo $product['prodDescription'] ?> </h2>
+            <!-- <h2 id="product-characteristic">Description: <?php echo $product['prodDescription'] ?> </h2> -->
+            <h2 id="product-page-description">Description: <?php echo $product->getDescription(); ?> </h2>
+
+            <button id="contact" class="button">Contact me</button>
+            <button id="add-to-cart" class="button">Add to cart</button>
         </div>
     </div>
 

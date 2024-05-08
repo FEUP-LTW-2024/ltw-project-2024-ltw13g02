@@ -25,13 +25,6 @@ function addUser(int $idUser, string $firstName, string $lastName, string $phone
     $stmt->execute();
 }
 
-function deleteUser($username) {
-    $db = getDatabaseConnection();
-    $stmt = $db->prepare('DELETE FROM User WHERE idUser=:idUser');
-    $stmt->bindParam(':idUser', $idUser);
-    $stmt->execute();
-}
-
 function setAsSeen($idChat, $idUser) {
     $db = getDatabaseConnection();
     $stmt = $db->prepare('UPDATE Messages SET seen=1 WHERE sender <> ? AND chat = ?');

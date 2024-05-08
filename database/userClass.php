@@ -30,16 +30,52 @@ class User {
         return $this->firstName . ' ' . $this->lastName;
     }
 
-    function save($db) {
-        $stmt = $db->prepare('
-            UPDATE User SET FirstName = ?, LastName = ?
-            WHERE idUser = ?
-        ');
-
-        $stmt->execute(array($this->firstName, $this->lastName, $this->idUser));
+    function getFirstName(): string {
+        return $this->firstName;
     }
 
-    function getFavorites(PDO $db) : array {
+    function getLastName(): string {
+        return $this->lastName;
+    }
+
+    function getId(): string {
+        return $this->idUser;
+    }
+
+    function getAddress(): string {
+        return $this->userAddress;
+    }
+
+    function getCity(): string {
+        return $this->city;
+    }
+
+    function getPhone(): string {
+        return $this->phone;
+    }
+
+    function getEmail(): string {
+        return $this->email;
+    }
+
+    function getZipCode(): string {
+        return $this->zipCode;
+    }
+
+    function getPhoto(): string {
+        return $this->photo;
+    }
+
+    function getCountry() : ?string {
+        $db = getDatabaseConnection();
+        $stmt = $db->prepare('SELECT country FROM Country WHERE idCountry = ?');
+        $stmt->execute(array($this->idCountry));
+        $country = $stmt->fetch();
+        return isset($country['country']) ? $country['country'] : null;
+    }
+
+    function getFavorites() : array {
+        $db = getDatabaseConnection();
         $stmt = $db->prepare('
             SELECT Favorites.product
             FROM Favorites
@@ -50,7 +86,8 @@ class User {
         return $stmt->fetchAll(PDO::FETCH_COLUMN);
     }
 
-    function getRecent(PDO $db) : array {
+    function getRecent() : array {
+        $db = getDatabaseConnection();
         $stmt = $db->prepare('
             SELECT Recent.product
             FROM Recent
@@ -61,14 +98,150 @@ class User {
         return $stmt->fetchAll(PDO::FETCH_COLUMN);
     }
 
-    static function getShoppingCart(PDO $db, int $id) : array {
+    function getShoppingCart() : array {
+        $db = getDatabaseConnection();
         $stmt = $db->prepare('
             SELECT ShoppingCart.product
             FROM ShoppingCart
             WHERE ShoppingCart.user = ?
         ');
-        $stmt->execute(array($id));
+        $stmt->execute(array($this->idUser));
 
         return $stmt->fetchAll(PDO::FETCH_COLUMN);
+    }
+
+    function getReviewsFromDB(): ?array {
+        $db = getDatabaseConnection();
+        $stmt = $db->prepare("SELECT stars, reviewsDescription FROM Reviews WHERE idUser = ?");
+        $stmt->execute(array($this->idUser));
+        $reviews = $stmt->fetchAll();
+        return $reviews;
+    }
+
+    function getNumberOfReviews() {
+        $db = getDatabaseConnection();
+        $stmt = $db->prepare('SELECT COUNT(*) as num_reviews
+                                FROM  Reviews R
+                                WHERE R.idUser = ?');
+        $stmt->execute(array($this->idUser) );
+        $result = $stmt->fetch();
+        return $result['num_reviews'];
+    }
+
+    function getSellingProducts() {
+        $db = getDatabaseConnection();
+        $stmt = $db->prepare('SELECT *
+                                FROM Product P
+                                WHERE P.seller = ? AND P.buyer is NULL');
+        $stmt->execute(array($this->idUser));
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+
+    function getArchiveProducts() {
+        $db = getDatabaseConnection();
+        $stmt = $db->prepare('SELECT *
+                                FROM Product P
+                                WHERE P.seller = ? AND P.buyer IS NOT NULL');
+        $stmt->execute(array($this->idUser) );
+        $products = $stmt->fetchAll();
+        return $products;
+    }
+
+    function getStarsFromReviews(): ?float {
+        $reviews = $this->getReviewsFromDB();
+        $sum = 0;
+        if(count($reviews) == 0) return 0;
+        for ($i = 0; $i < count($reviews); $i++) {
+            $sum += $reviews[$i]['stars'];
+        }
+        $average = $sum / count($reviews);
+    
+        $db = getDatabaseConnection();
+        $stmt = $db->prepare("UPDATE User SET stars = ? WHERE idUser = ?");
+        $stmt->execute(array($average, $this->idUser));
+    
+        return $average;
+    }
+
+    function getReviewsWithUsersFromDB(): ?array {
+        $db = getDatabaseConnection();
+        $stmt = $db->prepare("SELECT U.firstName, U.lastName, R.* FROM Reviews R 
+        LEFT JOIN User U ON R.idUserFrom = U.idUser
+        WHERE R.idUser = ?");
+        $stmt->execute(array($this->idUser));
+        $reviews = $stmt->fetchAll();
+        return $reviews;
+    }
+
+    function getChatsAsSellerFromDB(): ?array {
+        $db = getDatabaseConnection();
+        $stmt = $db->prepare('
+            SELECT idChat,  Product.idProduct, Product.prodName, User.firstName, User.lastName
+            FROM Product, Chat, User
+            WHERE Product.seller = ? AND Chat.product = Product.idProduct AND Chat.possibleBuyer = User.idUser
+        ');
+        $stmt->execute(array($this->idUser));
+        $chats = $stmt->fetchAll();
+        return $chats;
+    }
+    
+    function getChatsAsBuyerFromDB(): ?array {
+        $db = getDatabaseConnection();
+        $stmt = $db->prepare('
+            SELECT idChat, Product.idProduct, Product.prodName, User.firstName, User.lastName
+            FROM Product, Chat, User
+            WHERE Product.seller = User.idUser AND Chat.product = Product.idProduct AND Chat.possibleBuyer = ?
+        ');
+        $stmt->execute(array($this->idUser));
+        $reviews = $stmt->fetchAll();
+        return $reviews;
+    }
+
+    function setId(string $id) {
+        $this->idUser = $id;
+    }
+
+    function setFirstName(string $fn) {
+        $this->firstName = $fn;
+    }
+
+    function setLastName(string $ln) {
+        $this->firstName = $ln;
+    }
+
+    function setPhone(int $phone) {
+        $this->phone = $phone;
+    }
+
+    function setCountry(int $id) {
+        $this->idCountry = $id;
+    }
+
+    function setCity(string $city) {
+        $this->city = $city;
+    }
+
+    function setEmail(string $email) {
+        $this->email = $email;
+    }
+
+    function setZipCode(string $zipCode) {
+        $this->zipCode = $zipCode;
+    }
+
+    function setAddress(string $userAddress) {
+        $this->userAddress = $userAddress;
+    }
+
+    function setPhoto(string $photo) {
+        $this->photo = $photo;
+    }
+
+    function deleteUser() {
+        $db = getDatabaseConnection();
+        $stmt = $db->prepare('DELETE FROM User WHERE idUser=:idUser');
+        $stmt->bindParam(':idUser', $this->idUser);
+        $stmt->execute();
     }
 }
