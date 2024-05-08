@@ -25,12 +25,11 @@ require_once(__DIR__ . '/../sessions/session.php');
     <div class="user-info">
         <?php 
         $user = $session->getUser();
-        $email = $user->getEmail();
         ?>
-        <h2><?php drawPhoto($session, $email);?></h2>
+        <h2><?php drawPhoto($session, $user);?></h2>
         <div class="info">
         <?php
-          if($email != null) {
+          if($user != null) {
         ?>
             <h2><?php echo "Name: " . $user->name(); ?></h2>
             <a href="reviewsPage.php"><h2 id="stars" class="stars">
@@ -58,10 +57,10 @@ require_once(__DIR__ . '/../sessions/session.php');
     </div>
 <?php } ?>
 
-<?php function drawPhoto($session, $email) {
+<?php function drawPhoto($session, $user) {
     $user = $session->getUser();
-    $photo = $user->getPhoto(); 
-    if($email != null) { ?>
+    if($user != null) { ?>
+        <?php $photo = $user->getPhoto(); ?>
         <div class="user-photo-container">
             <?php if ($photo == "Sem FF") { ?>
                 <a href="../pages/editingProfile.php" class="user-icon-link">
