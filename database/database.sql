@@ -43,15 +43,15 @@ CREATE TABLE IF NOT EXISTS User (
 );
 
 CREATE TABLE IF NOT EXISTS UserAdmin (
-    idUser INTEGER REFERENCES User (idUser) ON DELETE CASCADE PRIMARY KEY NOT NULL 
+    idUser VARCHAR REFERENCES User (idUser) ON DELETE CASCADE PRIMARY KEY NOT NULL 
 );
 
 CREATE TABLE IF NOT EXISTS Reviews (
     idReviews INTEGER PRIMARY KEY NOT NULL ,
     stars INTEGER,
-    idUser INTEGER REFERENCES User (idUser) NOT NULL,
+    idUser VARCHAR REFERENCES User (idUser) NOT NULL,
     reviewsDescription TEXT,
-    idUserFrom INTEGER REFERENCES User (idUser) NOT NULL,
+    idUserFrom VARCHAR REFERENCES User (idUser) NOT NULL,
     created_at DATETIME
 );
 
@@ -86,48 +86,48 @@ CREATE TABLE IF NOT EXISTS Product (
     characteristic1 INTEGER REFERENCES Characteristic (idCharacteristic) NOT NULL,
     characteristic2 INTEGER REFERENCES Characteristic (idCharacteristic),
     characteristic3 INTEGER REFERENCES Characteristic (idCharacteristic),
-    seller INTEGER REFERENCES User (idUser) NOT NULL,
-    buyer INTEGER REFERENCES User(idUser) DEFAULT NULL,
+    seller VARCHAR REFERENCES User (idUser) NOT NULL,
+    buyer VARCHAR REFERENCES User(idUser) DEFAULT NULL,
     purchaseDate DATETIME DEFAULT NULL
 );
 
 CREATE TABLE IF NOT EXISTS Chat (
     idChat INTEGER PRIMARY KEY NOT NULL,
     product INTEGER REFERENCES Product (idProduct) NOT NULL,
-    possibleBuyer INTEGER REFERENCES User (idUser) NOT NULL
+    possibleBuyer VARCHAR REFERENCES User (idUser) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS Messages (
     idMessage INTEGER PRIMARY KEY NOT NULL, 
     messageDate DATETIME NOT NULL,
-    sender INTEGER NOT NULL,
+    sender VARCHAR NOT NULL,
     chat INTEGER REFERENCES Chat (idChat) NOT NULL,
     content TEXT NOT NULL,
     seen BOOLEAN NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS ShoppingCart (
-    user INTEGER REFERENCES User (idUser) NOT NULL,
+    user VARCHAR REFERENCES User (idUser) NOT NULL,
     product INTEGER REFERENCES Product (idProduct) NOT NULL,
     PRIMARY KEY(product, user)
 );
 
 CREATE TABLE IF NOT EXISTS Favorites (
-    user INTEGER REFERENCES User (idUser) NOT NULL,
+    user VARCHAR REFERENCES User (idUser) NOT NULL,
     product INTEGER REFERENCES Product (idProduct) NOT NULL,
     PRIMARY KEY(product, user)
 );
 
 CREATE TABLE IF NOT EXISTS Recent (
-    user INTEGER REFERENCES User (idUser) NOT NULL,
+    user VARCHAR REFERENCES User (idUser) NOT NULL,
     product INTEGER REFERENCES Product (idProduct) NOT NULL,
     PRIMARY KEY(product, user)
 );
 
 CREATE TABLE IF NOT EXISTS Shipping (
     product INTEGER REFERENCES Product (idProduct) NOT NULL PRIMARY KEY,
-    buyer INTEGER REFERENCES User (idUser) NOT NULL,
-    seller INTEGER REFERENCES User (idUser) NOT NULL,
+    buyer VARCHAR REFERENCES User (idUser) NOT NULL,
+    seller VARCHAR REFERENCES User (idUser) NOT NULL,
     purchaseDate TEXT REFERENCES Product (purchaseDate) NOT NULL
 );
 
@@ -205,7 +205,7 @@ VALUES ('6637ab278105e5186', 'Admin', 'Admin', 999599999, 'admin@admin.com', '$2
 ('6637ab278107255cc', 'William', 'Lee', 962304319, 'william.lee@email.com', '$2y$10$6sucVUYDP6gbJh54fspvnucUuzsUbRcDQPE.qNvoW4GG1J8IRi6T6', 83, 'Osaka', '456 Cedar St', '550-0012');
 
 INSERT OR REPLACE INTO UserAdmin(idUser)
-VALUES(1),(2),(3),(4);
+VALUES('6637ab278105554a8'),('6637ab278105b4ffd'),('6637ab2781073badf'),('6637ab278105e5186');
 
 INSERT INTO Reviews (stars, idUser, reviewsDescription, idUserFrom, created_at)
 VALUES (3, '6637ab278105f11e7', 'Nice service!', '6637ab278105b4ffd', '2024-04-04 02:00:00'),

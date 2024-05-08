@@ -50,6 +50,8 @@ class Product {
         return $this->description;
     }
 
+    
+
     function getCharacteristics(): array {
         $db = getDatabaseConnection();
         $characteristics = [];
