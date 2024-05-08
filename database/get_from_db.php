@@ -68,27 +68,11 @@ function getLastMessage($idChat): ?array {
 }
 
 function getMessages($idChat): ?array {
-    $db = getDatabaseConnection();
-    $stmt = $db->prepare('
-        SELECT * FROM Messages
-        WHERE chat = ? 
-        ORDER BY messageDate DESC
-    ');
-    $stmt->execute(array($idChat));
-    $messages = $stmt->fetchAll();
-    return $messages;
+    
 }
 
 function getChatInfo($idChat): ?array {
-    $db = getDatabaseConnection();
-    $stmt = $db->prepare('
-        SELECT Product.idProduct, Product.prodName as ProdName, Seller.idUser as SId, Seller.firstName as SFN, Seller.lastName as SLN, Seller.photo as SP, Buyer.idUser as BId, Buyer.firstName as BFN, Buyer.lastName as BLN, Buyer.photo as BP
-        FROM Product, Chat, User as Seller, User as Buyer
-        WHERE idChat = ? AND Chat.product = Product.idProduct AND Chat.possibleBuyer = Buyer.idUser AND Product.seller = Seller.idUser
-    ');
-    $stmt->execute(array($idChat));
-    $info = $stmt->fetch();
-    return $info;
+    
 }
 
 function getProduct($idProduct) : ?Product {

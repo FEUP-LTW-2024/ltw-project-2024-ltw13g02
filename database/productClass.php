@@ -1,18 +1,18 @@
 <?php
 
 class Product {
-    public int $idProduct;
-    public string $prodName;
-    public int $price;
-    public int $condition;
-    public int $category;
-    public string $description;
-    public ?string $characteristic1;
-    public ?string $characteristic2;
-    public ?string $characteristic3;
-    public string $seller;
-    public ?int $buyer;
-    public ?string $purchaseDate;
+    private int $idProduct;
+    private string $prodName;
+    private int $price;
+    private int $condition;
+    private int $category;
+    private string $description;
+    private ?string $characteristic1;
+    private ?string $characteristic2;
+    private ?string $characteristic3;
+    private string $seller;
+    private ?int $buyer;
+    private ?string $purchaseDate;
 
     public function __construct(int $idProduct, string $prodName, int $price, int $condition, string $description,
                                  ?string $characteristic1, ?string $characteristic2, ?string $characteristic3 , 
@@ -100,16 +100,16 @@ class Product {
     }
     
 
-    function getCategory() : array {
+    function getCategory() : string {
         $db = getDatabaseConnection();
         $stmt = $db->prepare('
                 SELECT Category.category
                 FROM Characteristic, Category, TypesInCategory, Product
-                WHERE Product.idProduct = 1 AND Product.characteristic1 = Characteristic.idCharacteristic AND Characteristic.idType = TypesInCategory.idType AND TypesInCategory.category = Category.idCategory
+                WHERE Product.idProduct = ? AND Product.characteristic1 = Characteristic.idCharacteristic AND Characteristic.idType = TypesInCategory.idType AND TypesInCategory.category = Category.idCategory
             ');
         $stmt->execute([$this->idProduct]);
         $result = $stmt->fetch();
-        return $result;
+        return $result['category'];
     }
 
     function getPurchaseDate(): string {

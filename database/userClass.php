@@ -1,16 +1,16 @@
 <?php
 class User {
-    public string $idUser;
-    public string $firstName;
-    public string $lastName;
-    public string $phone;
-    public string $email;
-    public string $userAddress;
-    public float $stars;
-    public string $city;
-    public int $idCountry;
-    public string $zipCode;
-    public ?string $photo;
+    private string $idUser;
+    private string $firstName;
+    private string $lastName;
+    private string $phone;
+    private string $email;
+    private string $userAddress;
+    private float $stars;
+    private string $city;
+    private int $idCountry;
+    private string $zipCode;
+    private ?string $photo;
 
     public function __construct(string $idUser, string $firstName, string $lastName, string $phone, string $email, string $userAddress, float $stars, string $city, int $idCountry, ?string $photo, string $zipCode) {
         $this->idUser = $idUser;
