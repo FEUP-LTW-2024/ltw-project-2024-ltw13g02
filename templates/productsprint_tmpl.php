@@ -80,7 +80,9 @@ function drawRecommended($recommended_ids) { ?>
         <h2>Recommended</h2>
         <div id="static_offer_container">
             <?php
-            foreach($recommended_ids as $item_id) {
+            for ($i = 0; $i < 20; $i++)
+            {
+                $item_id = $recommended_ids[$i];
                 $product = getProduct($item_id);
                 $seller = $product->getSeller();?>
                 <div class="static_offer"> <?php
@@ -90,11 +92,34 @@ function drawRecommended($recommended_ids) { ?>
         </div>
     </section>
 <?php }
-
 ?>
 
 <?php
-function drawProduct($product, $user){ ?>
+function drawAnnouncements($announcements_ids)
+    { ?>
+        <section class="Products" id="Announcements">
+            <h2>My Announcements</h2>
+            <article>
+                <div class="sliding_offers_container"> <?php 
+                    foreach($announcements_ids as $item_id)
+                    {
+                        $product = getProduct($item_id);
+
+                        $seller = $product->getSeller();
+                        ?>
+                        <div class="sliding_offer"> <?php
+                            drawProduct($product, $seller);  ?>
+                        </div> <?php 
+                    } ?>
+                </div>
+            </article>
+        </section>
+    <?php } 
+?>
+
+
+<?php
+function drawProduct(Product $product, $user){ ?>
         <a href="../pages/seller_page.php?user=<?=$user->getId()?>" class="user_small_card">
             <?php if ($user->getPhoto() != "Sem FF") { ?>
                 <img class="user_small_pfp" src="../images/userProfile/<?=$user->getPhoto()?>"> 
@@ -103,7 +128,7 @@ function drawProduct($product, $user){ ?>
             <?php } ?>
             <p><?=$user->name() ?></p>
         </a>
-        <a href="../pages/productPage.php?product=<?=$product->getId()?>"><img class="offer_img" src="../images/randomImage.jpg"></a> <!--TODO adicionar imagem do prod-->
+        <a href="../pages/productPage.php?product=<?=$product->getId()?>"><img class="offer_img" src="../images/products/<?= $product->getPhotos()[0]['photo']?>"></a>
 
         <a class="offer_info" href="../pages/productPage.php?product=<?=$product->getId()?>">
             <h4><?=substr($product->getName(),0,30) ?></h4>

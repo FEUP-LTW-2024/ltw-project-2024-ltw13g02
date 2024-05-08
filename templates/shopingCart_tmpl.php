@@ -2,10 +2,10 @@
     require_once(__DIR__ . '/../database/get_from_db.php');
 
     function output_empty_cart() { ?>
-        <section id='Shopping_Cart'>
+        <main id='Shopping_Cart'>
             <img class="empty_cart_img" src="../images/empty_cart.png">
             <h2>Your Shopping Cart is empty</h2>
-        </section>
+        </main>
     <?php }
 ?>
 
@@ -13,7 +13,7 @@
 <?php
     function output_cart_items($items_ids){?>
         
-        <section id='Shopping_Cart'>
+        <main id='Shopping_Cart'>
             <h2>Shopping Cart</h2>
             <section id='Shopping_items'>
                 <?php
@@ -29,10 +29,12 @@
 ?>
 
 <?php 
-    function output_single_cart_item(Product $item){?>
+    function output_single_cart_item(Product $item){
+        $photos = getPhotos($item->idProduct);
+        ?>
         <article class='CartItem'>
-            <a href='../pages/index.php'> <!--TODO change to product page -->
-                <img src="../images/randomImage.jpg"> <!-- TODO add photo -->
+            <a href='../pages/productPage.php?product=<?= $item->idProduct ?>'>
+                <img src="../images/products/<?= $photos[0]['photo'] ?>"> <!-- TODO add photo -->
                 <p id='cart_item_name'><?=$item->prodName ?> </p>
                 <p id='cart_item_price'><?=$item->price ?>€</p>
             </a>
@@ -58,15 +60,16 @@
 
 <?php
     function output_shipping_address(Session $session,$countries){ ?>
-        <aside>
+        <aside id="shippingAdress">
             <h3>Checkout</h3> 
+            <h5>Address</h5>
         <form id ='address' action="../actions/process_purchase.php" method="post">
 
-                <h5>Address</h5>
 
-                <div class='address_field' id ='address_street'>Street: <input type='text' name='address' required="required" value= "<?=$session->getAddress()?>"> </div>
-                <div class='address_field' id ='address_zipcode'>Zipcode: <input type='text' name='zipcode' required="required" value= "<?= $session->getZipCode()?>"> </div>
-                <div class='address_field' id ='address_city'>City: <input type='text' name='city' required="required" value= "<?= $session->getCity()?>"> </div> 
+
+                <div>Street:</div> <input type='text' name='address' required="required" value= "<?=$session->getAddress()?>">
+                <div>Zipcode:</div> <input type='text' name='zipcode' required="required" value= "<?= $session->getZipCode()?>">
+                <div>City:</div> <input type='text' name='city' required="required" value= "<?= $session->getCity()?>">
                 <input type="hidden" name='paymentAuthhorization' value="paymentAuthorized">
                 <?php
                 output_country_option($countries);
@@ -75,7 +78,7 @@
                 <input type="submit" value="Pay Now">
         </form>
         </aside>
-        </section>
+        </main>
     <?php }
 ?>
 
@@ -101,6 +104,20 @@
                 ?>
             </select>
         </div>
+        <select name='country'>
+            <?php 
+            foreach ($countries as $country){ 
+                if ($country['country'] === $session->getCountry())
+                { ?>
+                    <option value="<?=$country['country']?>" selected><?=$country['country']?></option>
+                <?php 
+                }else{ ?>
+                    <option value="<?=$country['country']?>"><?=$country['country']?></option>
+                    <?php }
+            }
+            ?>
+        </select>
+       
 
     <?php }
 ?>

@@ -20,16 +20,11 @@
     $countries = getAllCountries();
     
     drawHeader($session);
-    ?>
-    <link rel="stylesheet" href="../css/cart.css">
-
-    <?php
+    
     if (sizeof($items_ids) > 0) {
         output_cart_items($items_ids);
         output_shipping_address($session, $countries);
     } else {
         output_empty_cart();
-
-        drawRecent($user->getRecent());
     }
     drawFooter();

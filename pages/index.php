@@ -10,17 +10,19 @@
 
 
   require_once(__DIR__ . '/../templates/common_tmpl.php');
-  require_once(__DIR__ . '/../templates/index_tmpl.php');
+  require_once(__DIR__ . '/../templates/productsprint_tmpl.php');
 
+  //require_once(__DIR__ . '/../vendor/autoload.php'); TODO rmove???
 
   $db = getDatabaseConnection();
   $categories = getCategories($db);
-
   drawHeader($session);
 
   drawSearchbar($categories);
+
   if ($session->isLoggedIn()) 
   {
+
     $user = $session->getUser();
     $recent_ids = $user->getRecent();
     $favourites_ids = $user->getFavorites();
@@ -32,9 +34,6 @@
   }else{
     $recommended_ids = getRecommended();
   }
+
   drawRecommended($recommended_ids);
-  //TODO o header devia desenhar coisas diferentes dependendo se o user está logado ou não
   drawFooter();
-?>
-</main>
-</body>

@@ -387,3 +387,90 @@ footer {
     color: white;
 }
 
+
+
+
+
+#Shopping_Cart h2{
+    grid-column-start: 1;
+    grid-column-end: span 2;
+    font-weight: bold;
+    font-size: xx-large;
+    padding: 0.5 0;
+    margin-left: 0.2em;
+    color: #276a9f;
+
+}
+
+
+
+#Shopping_items > *  {
+    outline: solid;
+    outline-color: lightblue;
+    border-radius: 1em;
+    margin-left: 0.5em;
+
+}
+
+#Shopping_items{
+    margin-right: 1em;
+}
+
+#Shopping_items article:last-of-type{
+    display: flex;
+}
+
+.CartItem {
+    margin-bottom: 0.5em;
+}
+
+.CartItem a{
+
+    display: grid;
+    grid-template-columns: 6em 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+
+.CartItem img {
+    height: 6em;
+    border-radius: 1em;
+    grid-row-end: span 2;
+    object-fit:scale-down;
+    margin: auto 0 auto 0.5em;
+}
+
+#Shopping_Cart aside {
+    display: flex;
+    flex-direction: column;
+}
+
+#Shopping_Cart aside form{
+    display: flex;
+    flex-direction: column;
+}
+
+#shippingAdress h3{
+    font-size: 2.5em;
+    margin: 0;
+}
+
+#shippingAdress h5{
+    font-size: larger;
+    margin-bottom: 1em;
+}
+
+#shippingAdress input[type="submit"]{
+    grid-column-end: span 2;
+    height: 2.5em;
+    margin-top: 10px;
+    border-radius: 1em;
+
+    background-color: lightblue;
+    color: white;
+    border-style: none;
+}
+
+#address input,
+#address select {
+    height: 1.3em
+}
