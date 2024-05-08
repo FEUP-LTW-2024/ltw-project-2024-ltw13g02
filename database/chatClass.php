@@ -104,7 +104,7 @@ class Chat {
 
     function checkIfEmpty() : bool {
         $chats = $this->getMessages();
-        if (count($chats) == 0) return false;
+        if (count($chats) === 0) return false;
         return true;
     }
 

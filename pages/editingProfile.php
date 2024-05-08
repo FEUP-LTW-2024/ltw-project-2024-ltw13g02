@@ -11,7 +11,7 @@
 
   require_once(__DIR__ . '/../templates/user_tmpl.php');
 
-  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     $newFirstName = $_POST['first_name'];
     $newLastName = $_POST['last_name'];

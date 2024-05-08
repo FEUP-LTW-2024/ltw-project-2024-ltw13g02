@@ -49,7 +49,7 @@ function getCountryFromDB($idCountry) : ?string {
 function getStarsFromReviews($idUser): ?float {
     $reviews = getReviewsFromDB($idUser);
     $sum = 0;
-    if(count($reviews) == 0) return 0;
+    if(count($reviews) === 0) return 0;
     for ($i = 0; $i < count($reviews); $i++) {
         $sum += $reviews[$i]['stars'];
     }

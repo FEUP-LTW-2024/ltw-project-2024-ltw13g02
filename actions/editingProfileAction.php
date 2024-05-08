@@ -8,7 +8,7 @@ require_once(__DIR__ . '/../database/connection_to_db.php');
 $db = getDatabaseConnection();
 
 
-if ($_SERVER["REQUEST_METHOD"] == "GET") {
+if ($_SERVER["REQUEST_METHOD"] === "GET") {
     $newFirstName = $_GET['first_name'];
     $newLastName = $_GET['last_name'];
     $newPhone = $_GET['phone'];

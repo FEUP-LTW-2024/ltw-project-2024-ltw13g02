@@ -18,7 +18,7 @@ require_once(__DIR__ . '/user_tmpl.php');
 <?php function drawProductHeader(Session $session, $idProduct) { 
     if ($_GET['chat'] != null) { 
         $chat = getChat($_GET['chat']);
-        if ($chat->getInfo()['idProduct'] == $idProduct) { ?>
+        if ($chat->getInfo()['idProduct'] === $idProduct) { ?>
             <a href="../pages/messagesPage.php?chat=<?php echo $_GET['chat'] ?>"><i class="fa fa-angle-left fa-2x chat-back-button"></i></a>
 <?php   }
         else { ?>
@@ -36,7 +36,7 @@ require_once(__DIR__ . '/user_tmpl.php');
     $photos = $product->getPhotos(); ?>
     <div class="product-grid" id="product-grid">
         <div class="product-image-container">
-            <?php if (count($photos) == 0) { ?>
+            <?php if (count($photos) === 0) { ?>
                 <img id="product-image" src="../images/products/no_images_big.png" alt="Photo">
             <?php } else { ?>
                 <img id="product-image" src="../images/products/<?php echo $photos[0]['photo']; ?>" alt="photo">

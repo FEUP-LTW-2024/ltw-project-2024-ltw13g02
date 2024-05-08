@@ -169,7 +169,7 @@ class User {
     function getStarsFromReviews(): ?float {
         $reviews = $this->getReviewsFromDB();
         $sum = 0;
-        if(count($reviews) == 0) return 0;
+        if(count($reviews) === 0) return 0;
         for ($i = 0; $i < count($reviews); $i++) {
             $sum += $reviews[$i]['stars'];
         }
@@ -225,7 +225,7 @@ class User {
 
         foreach ($result as $data) {
             $chat = new Chat($data["idChat"], $data["idProduct"], $data["possibleBuyer"]);
-            if ($chat->getMessages() == NULL) {$chat->deleteChat();}
+            if ($chat->getMessages() === NULL) {$chat->deleteChat();}
             else {$chats[] = $chat;}
         }
 
