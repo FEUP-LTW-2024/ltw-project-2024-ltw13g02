@@ -12,7 +12,6 @@ require_once(__DIR__ . '/../database/change_in_db.php');
 
 require_once(__DIR__ . '/user_tmpl.php');
 
-require_once(__DIR__ . '/../vendor/autoload.php');
 
 ?>
 
