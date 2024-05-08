@@ -7,6 +7,7 @@ require_once('connection_to_db.php');
 require_once(__DIR__ . '/../database/userClass.php');
 require_once(__DIR__ . '/change_in_db.php');
 
+
 function getUser($email, $password) : ?User{
 
     $db = getDatabaseConnection();
@@ -61,7 +62,7 @@ function getChat($idChat): ?Chat {
     $chat = $stmt->fetch();
     if ($chat) {
         return new Chat(
-            $chat['id'],
+            $chat['idChat'],
             $chat['product'],
             $chat['possibleBuyer']
         );

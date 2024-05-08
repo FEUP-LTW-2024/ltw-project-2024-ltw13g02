@@ -1,5 +1,9 @@
 <?php
 require_once(__DIR__ ."/messageClass.php");
+require_once(__DIR__ ."/productClass.php");
+require_once(__DIR__ ."/userClass.php");
+require_once(__DIR__ ."/get_from_db.php");
+
 class Chat {
     private int $id;
     private int $product;
@@ -14,7 +18,7 @@ class Chat {
     }
 
     public function getPossibleBuyer(): string {
-        return $this->possibleBuyer;
+        return getUserbyId($this->possibleBuyer);
     }
 
     public function setPossibleBuyer(string $possibleBuyer): void {
@@ -29,13 +33,14 @@ class Chat {
         $this->id = $id;
     }
 
-    public function getProduct(): int {
-        return $this->product;
+    public function getProduct(): Product {
+        return getProduct($this->product);
     }
 
     public function setProduct(int $product): void {
         $this->product = $product;
     }
+    
 
     public function getMessages(): array {
         $db = getDatabaseConnection();
@@ -47,9 +52,8 @@ class Chat {
         $stmt->execute(array($this->id));
         $result = $stmt->fetchAll();
         $messages = [];
-
         foreach ($result as $data) {
-            $messages[] = new Message($data["id"], $data["messageDate"], $data["sender"], $data["chat"], $data["content"], $data["seen"]);
+            $messages[] = new Message($data["idMessage"], $data["messageDate"], $data["sender"], $data["chat"], $data["content"], $data["seen"]);
         }
 
         return $messages;
@@ -77,6 +81,25 @@ class Chat {
         ');
         $stmt->execute(array($this->id));
         $data = $stmt->fetch();
-        return new Message($data["id"], $data["messageDate"], $data["sender"], $data["chat"], $data["content"], $data["seen"]);
+        $last = new Message($data["idMessage"], $data["messageDate"], $data["sender"], $data["chat"], $data["content"], $data["seen"]);
+        return $last;
+    }
+
+    public function setAsSeen($idUser) {
+        $db = getDatabaseConnection();
+        $stmt = $db->prepare('UPDATE Messages SET seen=1 WHERE sender <> ? AND chat = ?');
+        $stmt->execute(array($idUser, $this->id));
+    }
+
+    function addMessage($idUser, $content) {
+        // Check if content is empty or NULL
+        if (empty($content)) {
+            throw new Exception("Content cannot be empty");
+        }
+        
+        $db = getDatabaseConnection();
+        $date = date('Y-m-d H:i:s');
+        $stmt = $db->prepare('INSERT INTO Messages (messageDate, sender, chat, content, seen) VALUES (?, ?, ?, ?, 0)');
+        $stmt->execute(array($date, $idUser, $this->id, $content));
     }
 }

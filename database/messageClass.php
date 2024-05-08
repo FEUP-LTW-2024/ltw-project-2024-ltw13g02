@@ -17,5 +17,22 @@ class Message {
         $this->seen = $seen;
     }
 
-    
+    public function getId(): int {
+        return $this->id;
+    }
+    public function getMessageDate(): string {
+        return $this->messageDate;
+    }
+    public function getSender(): string {
+        return $this->sender;
+    }
+    public function getChat(): string {
+        return $this->chat;
+    }
+    public function getContent(): string {
+        return $this->content;
+    }
+    public function getSeen(): bool {
+        return $this->seen;
+    }
 }

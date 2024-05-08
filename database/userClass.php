@@ -1,4 +1,7 @@
 <?php
+require_once(__DIR__ . '/chatClass.php');
+
+
 class User {
     private string $idUser;
     private string $firstName;
@@ -177,25 +180,39 @@ class User {
     function getChatsAsSellerFromDB(): ?array {
         $db = getDatabaseConnection();
         $stmt = $db->prepare('
-            SELECT idChat,  Product.idProduct, Product.prodName, User.firstName, User.lastName
-            FROM Product, Chat, User
-            WHERE Product.seller = ? AND Chat.product = Product.idProduct AND Chat.possibleBuyer = User.idUser
+            SELECT idChat,  Product.idProduct, Product.prodName
+            FROM Product, Chat
+            WHERE Product.seller = ? AND Chat.product = Product.idProduct
         ');
         $stmt->execute(array($this->idUser));
-        $chats = $stmt->fetchAll();
+        $result = $stmt->fetchAll();
+        $chats = [];
+
+        foreach ($result as $data) {
+            if ($data['idChat'] != NULL) {
+                $chats[] = new Chat($data["idChat"], $data["idProduct"], $data["prodName"]);
+            }
+        }
+
         return $chats;
     }
     
     function getChatsAsBuyerFromDB(): ?array {
         $db = getDatabaseConnection();
         $stmt = $db->prepare('
-            SELECT idChat, Product.idProduct, Product.prodName, User.firstName, User.lastName
-            FROM Product, Chat, User
-            WHERE Product.seller = User.idUser AND Chat.product = Product.idProduct AND Chat.possibleBuyer = ?
+            SELECT idChat, Product.idProduct, Chat.possibleBuyer
+            FROM Product, Chat
+            WHERE Chat.product = Product.idProduct AND Chat.possibleBuyer = ?
         ');
         $stmt->execute(array($this->idUser));
-        $reviews = $stmt->fetchAll();
-        return $reviews;
+        $result = $stmt->fetchAll();
+        $chats = [];
+
+        foreach ($result as $data) {
+            $chats[] = new Chat($data["idChat"], $data["idProduct"], $data["possibleBuyer"]);;
+        }
+
+        return $chats;
     }
 
     function setId(string $id) {

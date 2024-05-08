@@ -9,6 +9,7 @@ require_once(__DIR__ . '/user_tmpl.php');
 
 require_once(__DIR__ . '/../utils/elapsedTime.php');
 
+
 ?>
 
 <?php function drawChats(Session $session, $activePage) {
@@ -21,11 +22,11 @@ require_once(__DIR__ . '/../utils/elapsedTime.php');
             $chats = $user->getChatsAsBuyerFromDB();
         }
         if (count($chats) > 0) {
-            foreach ($chats as $row) {?>
-                <a href="../pages/messagesPage.php?chat=<?php echo $row['idChat']; ?>">
+            foreach ($chats as $chat) {?>
+                <a href="../pages/messagesPage.php?chat=<?php echo $chat->getId(); ?>">
                     <div class="chat-tile">
                         <?php 
-                        $product = getProduct($row['idProduct']);
+                        $product = $chat->getProduct();
                         $seller = $product->getSeller();
                         $photos = $product->getPhotos();
                         ?>
@@ -34,16 +35,16 @@ require_once(__DIR__ . '/../utils/elapsedTime.php');
                         </div>
                         <div class="chat-info">
                             <h2 class="with-user"><?php echo $seller->name(); ?></h2>
-                            <h2 class="message-product"><?php echo $row['prodName']; ?></h2>
-                            <?php $lastmessage = getLastMessage($row['idChat']); 
-                            if ($lastmessage["sender"] == $session->getUser()->getId()) {?>
-                                <h2 class="unchecked <?php echo $lastmessage["seen"] ? "fa fa-check-circle" : "fa fa-check-circle-o"; ?>"></h2>
-                                <h2 class="message-content"><?php echo $lastmessage['content']; ?></h2>
+                            <h2 class="message-product"><?php echo $product->getName(); ?></h2>
+                            <?php $lastmessage = $chat->getLastMessage(); 
+                            if ($lastmessage->getSender() == $session->getUser()->getId()) {?>
+                                <h2 class="unchecked <?php echo $lastmessage->getSeen() ? "fa fa-check-circle" : "fa fa-check-circle-o"; ?>"></h2>
+                                <h2 class="message-content"><?php echo $lastmessage->getContent(); ?></h2>
                             <?php } else { ?>
-                                <h2 class="message-content"><?php echo $lastmessage['content']; ?></h2>
-                                <h2 class="last-message <?php echo $lastmessage["seen"] ? "" : "fa fa-circle unseen"; ?>"></h2>
+                                <h2 class="message-content"><?php echo $lastmessage->getContent(); ?></h2>
+                                <h2 class="last-message <?php echo $lastmessage->getSeen() ? "" : "fa fa-circle unseen"; ?>"></h2>
                             <?php } ?>
-                            <h2 id="message-date"><?php echo elapsedTime($lastmessage['messageDate']);?></h2>
+                            <h2 id="message-date"><?php echo elapsedTime($lastmessage->getMessageDate());?></h2>
                         </div>
                     </div>
                 </a>

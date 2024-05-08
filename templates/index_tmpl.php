@@ -95,20 +95,20 @@ function drawRecommended($recommended_ids) { ?>
 
 <?php
 function drawProduct($product, $user){ ?>
-        <a href="../pages/seller_page.php?user=<?=$user->idUser?>" class="user_small_card">
-            <?php if ($user->photo != "Sem FF") { ?>
-                <img class="user_small_pfp" src="../images/userProfile/<?=$user->photo?>"> 
+        <a href="../pages/seller_page.php?user=<?=$user->getId()?>" class="user_small_card">
+            <?php if ($user->getPhoto() != "Sem FF") { ?>
+                <img class="user_small_pfp" src="../images/userProfile/<?=$user->getPhoto()?>"> 
             <?php } else { ?>
                <h2><i class="fa fa-user fa-1x user-icons"></i></h2>
             <?php } ?>
             <p><?=$user->name() ?></p>
         </a>
-        <a href="../pages/productPage.php?product=<?=$product->idProduct?>"><img class="offer_img" src="../images/randomImage.jpg"></a> <!--TODO adicionar imagem do prod-->
+        <a href="../pages/productPage.php?product=<?=$product->getId()?>"><img class="offer_img" src="../images/randomImage.jpg"></a> <!--TODO adicionar imagem do prod-->
 
-        <a class="offer_info" href="../pages/productPage.php?product=<?=$product->idProduct?>">
-            <h4><?=substr($product->prodName,0,30) ?></h4>
-            <h5><?= $user->city . ", " . getCountryFromDB($user->idCountry)?></h5>
-            <p><?=$product->price?>€</p>
+        <a class="offer_info" href="../pages/productPage.php?product=<?=$product->getId()?>">
+            <h4><?=substr($product->getName(),0,30) ?></h4>
+            <h5><?= $user->getCity() . ", " . $user->getCountry()?></h5>
+            <p><?=$product->getPrice()?>€</p>
         </a>
 <?php 
 } 
