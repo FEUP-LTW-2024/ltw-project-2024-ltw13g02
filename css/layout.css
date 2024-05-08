@@ -429,7 +429,7 @@ footer {
 .product-grid {
     display: grid;
     grid-template-columns: 50% auto;
-    height: 100%;
+    min-height: 760px;
 }
 
 .product-image-container {
