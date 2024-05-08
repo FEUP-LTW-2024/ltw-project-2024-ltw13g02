@@ -9,10 +9,12 @@ require_once(__DIR__ . '/../database/change_in_db.php');
 
 require_once(__DIR__ . '/user_tmpl.php');
 
+
 ?>
 
 <?php function drawChatHeader(Session $session, $idChat) { 
-    $info = getChatInfo($idChat); ?>
+    $chat = getChat($idChat);
+    $info = $chat->getInfo(); ?>
     <div class="chat-header">
         <?php 
         $product = getProduct($info['idProduct']);
@@ -33,36 +35,37 @@ require_once(__DIR__ . '/user_tmpl.php');
 <?php } ?> 
 
 <?php function drawMessages(Session $session, $idChat) {
-    $messages = getMessages($idChat);
-    setAsSeen($idChat, $session->getUser()->getId()); ?>
+    $chat = getChat($idChat);
+    $messages = $chat->getMessages();
+    $chat->setAsSeen($session->getUser()->getId()); ?>
     <div class="column-of-messages">
-        <?php foreach ($messages as $key => $row) { ?>
-            <?php if ($row["sender"] == $session->getUser()->getId()) { ?>
+        <?php foreach ($messages as $key => $message) { ?>
+            <?php if ($message->getSender() == $session->getUser()->getId()) { ?>
                 <div class="message-container">
                     <div class="message-tile message own-message">
-                        <p><?php echo $row['content']; ?></p>
+                        <p><?php echo $message->getContent(); ?></p>
                     </div>
-                    <h2 class="message-status <?php echo $row['seen'] ? "fa fa-check-circle" : "fa fa-check-circle-o"; ?>"></h2>
+                    <h2 class="message-status <?php echo $message->getSeen() ? "fa fa-check-circle" : "fa fa-check-circle-o"; ?>"></h2>
                 </div>
                 <?php
-                if ($key < count($messages) - 1 && strtotime($row['messageDate']) - strtotime($messages[$key + 1]['messageDate']) < 3600) {
+                if ($key < count($messages) - 1 && strtotime($message->getMessageDate()) - strtotime($messages[$key + 1]['messageDate']) < 3600) {
                 } 
                 else { ?>
                     <div class="time">
-                        <p><?php echo $row['messageDate']; ?></p>
+                        <p><?php echo $message->getMessageDate(); ?></p>
                     </div>
                 <?php } 
              } else { 
             ?>
             <div class="message-tile message other-message">
-                <p><?php echo $row['content']; ?></p>
+                <p><?php echo $message->getContent(); ?></p>
             </div>
             <?php
-                if ($key < count($messages) - 1 && strtotime($row['messageDate']) - strtotime($messages[$key + 1]['messageDate']) < 3600) {
+                if ($key < count($messages) - 1 && strtotime($message->getMessageDate()) - strtotime($messages[$key + 1]['messageDate']) < 3600) {
                 } 
                 else { ?>
                     <div class="time">
-                        <p><?php echo $row['messageDate']; ?></p>
+                        <p><?php echo $message->getMessageDate(); ?></p>
                     </div>
                 <?php }
              } 
@@ -81,8 +84,9 @@ require_once(__DIR__ . '/user_tmpl.php');
 </html>
 <?php
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $chat = getChat($idChat);
         $message = $_POST['message'];
-        addMessage($session->getUser()->getId(), $idChat, $message);
+        $chat->addMessage($session->getUser()->getId(), $message);
 
         header("Location: ".$_SERVER['PHP_SELF']."?chat=".urlencode($idChat));
     }

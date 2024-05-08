@@ -5,15 +5,20 @@ require_once(__DIR__ . '/../sessions/session.php');
 $session = new Session();
 
 require_once(__DIR__ . '/../database/get_from_db.php');
-
+require_once(__DIR__ . '/../database/userClass.php');
+require_once(__DIR__ . '/../database/productClass.php');
+require_once(__DIR__ . '/../database/chatClass.php');
 require_once(__DIR__ . '/../database/change_in_db.php');
 
 require_once(__DIR__ . '/user_tmpl.php');
+
+
 ?>
 
 <?php function drawProductHeader(Session $session, $idProduct) { 
     if ($_GET['chat'] != null) { 
-        if (getChatInfo($_GET['chat'])['idProduct'] == $idProduct) { ?>
+        $chat = getChat($_GET['chat']);
+        if ($chat->getInfo()['idProduct'] == $idProduct) { ?>
             <a href="../pages/messagesPage.php?chat=<?php echo $_GET['chat'] ?>"><i class="fa fa-angle-left fa-2x chat-back-button"></i></a>
 <?php   }
         else { ?>
@@ -45,18 +50,29 @@ require_once(__DIR__ . '/user_tmpl.php');
         <div class="product-info">
             <h2 id="product-page-name"><?php echo $product->getName(); ?> </h2>
             <h2 id="product-page-price"><?php echo $product->getPrice(); ?> € </h2>
-            <h2 id="product-page-seller"><?php echo $seller->name(); ?> </h2>
-            <h2 id="product-page-stars" class="stars">
+            <a href="" class="product-page-seller"><h2 class="product-page-seller"><?php echo $seller->name(); ?> </h2></a>
+            <a href="" class="product-page-stars"><h2 class="product-page-stars stars">
                 <?php
                 $stars = $seller->getStarsFromReviews();
                 drawStars($stars);
                 ?>
-            </h2>
-            <!-- <h2 id="product-characteristic">Description: <?php echo $product['prodDescription'] ?> </h2> -->
+            </h2></a>
+            <?php
+            $characteristics = $product->getCharacteristics();
+            $category = $product->getCategory();
+            ?>
+            <a href="" class="product-category"><h2 class="product-category">Category: <?php echo $category ?> </h2></a>
+            <div id="product-characteristics"> 
+                <?php foreach ($characteristics as $c) { ?> 
+                    <a href="" class="product-characteristic"><h2 id="product-characteristic"> <?php echo $c ?> </h2></a>
+                <?php } ?>
+            </div>
             <h2 id="product-page-description">Description: <?php echo $product->getDescription(); ?> </h2>
-
-            <button id="contact" class="button">Contact me</button>
-            <button id="add-to-cart" class="button">Add to cart</button>
+            <?php $user = $session->getUser();
+            $chat = $user->findBuyerChat($idProduct);
+            $idChat = $chat->getId(); ?>
+            <button id="contact" class="button"><a href="../pages/messagesPage.php?chat=<?php echo $idChat ?>">Contact me</a></button>
+            <button id="add-to-cart" class="button"><a href="">Add to cart</a></button>
         </div>
     </div>
 

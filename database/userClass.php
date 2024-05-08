@@ -1,16 +1,21 @@
 <?php
+require_once(__DIR__ . '/chatClass.php');
+require_once(__DIR__ . '/../database/connection_to_db.php');
+
+
+
 class User {
-    public string $idUser;
-    public string $firstName;
-    public string $lastName;
-    public string $phone;
-    public string $email;
-    public string $userAddress;
-    public float $stars;
-    public string $city;
-    public int $idCountry;
-    public string $zipCode;
-    public ?string $photo;
+    private string $idUser;
+    private string $firstName;
+    private string $lastName;
+    private string $phone;
+    private string $email;
+    private string $userAddress;
+    private float $stars;
+    private string $city;
+    private int $idCountry;
+    private string $zipCode;
+    private ?string $photo;
 
     public function __construct(string $idUser, string $firstName, string $lastName, string $phone, string $email, string $userAddress, float $stars, string $city, int $idCountry, ?string $photo, string $zipCode) {
         $this->idUser = $idUser;
@@ -177,25 +182,76 @@ class User {
     function getChatsAsSellerFromDB(): ?array {
         $db = getDatabaseConnection();
         $stmt = $db->prepare('
-            SELECT idChat,  Product.idProduct, Product.prodName, User.firstName, User.lastName
-            FROM Product, Chat, User
-            WHERE Product.seller = ? AND Chat.product = Product.idProduct AND Chat.possibleBuyer = User.idUser
+            SELECT idChat,  Product.idProduct, Product.prodName
+            FROM Product, Chat
+            WHERE Product.seller = ? AND Chat.product = Product.idProduct
         ');
         $stmt->execute(array($this->idUser));
-        $chats = $stmt->fetchAll();
+        $result = $stmt->fetchAll();
+        $chats = [];
+
+        foreach ($result as $data) {
+            if ($data['idChat'] != NULL) {
+                $chats[] = new Chat($data["idChat"], $data["idProduct"], $data["prodName"]);
+            }
+        }
+
         return $chats;
     }
     
     function getChatsAsBuyerFromDB(): ?array {
         $db = getDatabaseConnection();
         $stmt = $db->prepare('
-            SELECT idChat, Product.idProduct, Product.prodName, User.firstName, User.lastName
-            FROM Product, Chat, User
-            WHERE Product.seller = User.idUser AND Chat.product = Product.idProduct AND Chat.possibleBuyer = ?
+            SELECT idChat, Product.idProduct, Chat.possibleBuyer
+            FROM Product, Chat
+            WHERE Chat.product = Product.idProduct AND Chat.possibleBuyer = ?
         ');
         $stmt->execute(array($this->idUser));
-        $reviews = $stmt->fetchAll();
-        return $reviews;
+        $result = $stmt->fetchAll();
+        $chats = [];
+
+        foreach ($result as $data) {
+            $chat = new Chat($data["idChat"], $data["idProduct"], $data["possibleBuyer"]);
+            if ($chat->getMessages() == NULL) {$chat->deleteChat();}
+            else {$chats[] = $chat;}
+        }
+
+        return $chats;
+    }
+
+    function findBuyerChat($idProduct): Chat {
+        $db = getDatabaseConnection();
+        $stmt = $db->prepare('
+            SELECT idChat, Chat.possibleBuyer
+            FROM Chat
+            WHERE Chat.product = ? AND Chat.possibleBuyer = ?
+        ');
+        $stmt->execute(array($idProduct, $this->idUser));
+        $result = $stmt->fetch();
+        if ($result) {
+            return new Chat($result["idChat"], $idProduct, $result["possibleBuyer"]);
+        }
+        else {
+            $this->addChat($idProduct);
+            $db = getDatabaseConnection();
+            $stmt = $db->prepare('
+                SELECT idChat, Chat.possibleBuyer
+                FROM Chat
+                WHERE Chat.product = ? AND Chat.possibleBuyer = ?
+            ');
+            $stmt->execute(array($idProduct, $this->idUser));
+            $result = $stmt->fetch();
+            return new Chat($result["idChat"], $idProduct, $result["possibleBuyer"]);
+        };
+    }
+
+    function addChat($idProduct) {
+        $db = getDatabaseConnection();
+        $stmt = $db->prepare('
+            INSERT INTO Chat(product, possibleBuyer)
+            VALUES (?, ?)
+        ');
+        $stmt->execute(array($idProduct, $this->idUser));
     }
 
     function setId(string $id) {
