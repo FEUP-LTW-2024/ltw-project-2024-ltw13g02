@@ -115,6 +115,19 @@ class User {
         return $stmt->fetchAll(PDO::FETCH_COLUMN);
     }
 
+    function getAnnouncements() : array {
+        $db = getDatabaseConnection();
+        $stmt = $db->prepare('
+            SELECT idProduct
+            FROM Product
+            WHERE seller = ? 
+            AND buyer IS NULL
+        ');
+        $stmt->execute(array($this->idUser));
+
+        return $stmt->fetchAll(PDO::FETCH_COLUMN);
+    }
+
     function getReviewsFromDB(): ?array {
         $db = getDatabaseConnection();
         $stmt = $db->prepare("SELECT stars, reviewsDescription FROM Reviews WHERE idUser = ?");
