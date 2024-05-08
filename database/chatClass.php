@@ -66,4 +66,17 @@ class Chat {
         $info = $stmt->fetch();
         return $info;
     }
+
+    function getLastMessage(): ?Message {
+        $db = getDatabaseConnection();
+        $stmt = $db->prepare('
+            SELECT * FROM Messages
+            WHERE chat = ? 
+            ORDER BY messageDate DESC
+            LIMIT 1
+        ');
+        $stmt->execute(array($this->id));
+        $data = $stmt->fetch();
+        return new Message($data["id"], $data["messageDate"], $data["sender"], $data["chat"], $data["content"], $data["seen"]);
+    }
 }

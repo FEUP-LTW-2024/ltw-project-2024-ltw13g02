@@ -54,25 +54,20 @@ function getCategories($db){
 
 }
 
-function getLastMessage($idChat): ?array {
+function getChat($idChat): ?Chat {
     $db = getDatabaseConnection();
-    $stmt = $db->prepare('
-        SELECT * FROM Messages
-        WHERE chat = ? 
-        ORDER BY messageDate DESC
-        LIMIT 1
-    ');
+    $stmt = $db->prepare('SELECT * FROM Chat WHERE Chat.idChat = ?');
     $stmt->execute(array($idChat));
-    $lastmessage = $stmt->fetch();
-    return $lastmessage;
-}
-
-function getMessages($idChat): ?array {
-    
-}
-
-function getChatInfo($idChat): ?array {
-    
+    $chat = $stmt->fetch();
+    if ($chat) {
+        return new Chat(
+            $chat['id'],
+            $chat['product'],
+            $chat['possibleBuyer']
+        );
+    } else {
+        return null;
+    }
 }
 
 function getProduct($idProduct) : ?Product {
