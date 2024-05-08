@@ -92,7 +92,6 @@ class Chat {
     }
 
     function addMessage($idUser, $content) {
-        // Check if content is empty or NULL
         if (empty($content)) {
             throw new Exception("Content cannot be empty");
         }
@@ -101,5 +100,17 @@ class Chat {
         $date = date('Y-m-d H:i:s');
         $stmt = $db->prepare('INSERT INTO Messages (messageDate, sender, chat, content, seen) VALUES (?, ?, ?, ?, 0)');
         $stmt->execute(array($date, $idUser, $this->id, $content));
+    }
+
+    function checkIfEmpty() : bool {
+        $chats = $this->getMessages();
+        if (count($chats) == 0) return false;
+        return true;
+    }
+
+    function deleteChat() {
+        $db = getDatabaseConnection();
+        $stmt = $db->prepare('DELETE FROM Chat WHERE idChat=?');
+        $stmt->execute(array($this->id));
     }
 }

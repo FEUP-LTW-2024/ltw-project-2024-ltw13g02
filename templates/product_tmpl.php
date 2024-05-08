@@ -5,16 +5,21 @@ require_once(__DIR__ . '/../sessions/session.php');
 $session = new Session();
 
 require_once(__DIR__ . '/../database/get_from_db.php');
-
+require_once(__DIR__ . '/../database/userClass.php');
+require_once(__DIR__ . '/../database/productClass.php');
+require_once(__DIR__ . '/../database/chatClass.php');
 require_once(__DIR__ . '/../database/change_in_db.php');
 
 require_once(__DIR__ . '/user_tmpl.php');
+
+require_once(__DIR__ . '/../vendor/autoload.php');
 
 ?>
 
 <?php function drawProductHeader(Session $session, $idProduct) { 
     if ($_GET['chat'] != null) { 
-        if (getChatInfo($_GET['chat'])['idProduct'] == $idProduct) { ?>
+        $chat = getChat($_GET['chat']);
+        if ($chat->getInfo()['idProduct'] == $idProduct) { ?>
             <a href="../pages/messagesPage.php?chat=<?php echo $_GET['chat'] ?>"><i class="fa fa-angle-left fa-2x chat-back-button"></i></a>
 <?php   }
         else { ?>
@@ -64,8 +69,10 @@ require_once(__DIR__ . '/user_tmpl.php');
                 <?php } ?>
             </div>
             <h2 id="product-page-description">Description: <?php echo $product->getDescription(); ?> </h2>
-
-            <button id="contact" class="button"><a href="../utils/newChat.php?product="<?php echo $product->getId() ?>>Contact me</a></button>
+            <?php $user = $session->getUser();
+            $chat = $user->findBuyerChat($idProduct);
+            $idChat = $chat->getId(); ?>
+            <button id="contact" class="button"><a href="../pages/messagesPage.php?chat=<?php echo $idChat ?>">Contact me</a></button>
             <button id="add-to-cart" class="button"><a href="">Add to cart</a></button>
         </div>
     </div>

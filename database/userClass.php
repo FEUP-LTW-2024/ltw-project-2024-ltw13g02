@@ -1,5 +1,8 @@
 <?php
 require_once(__DIR__ . '/chatClass.php');
+require_once(__DIR__ . '/../database/connection_to_db.php');
+
+require_once(__DIR__ . '/../vendor/autoload.php');
 
 
 class User {
@@ -209,10 +212,47 @@ class User {
         $chats = [];
 
         foreach ($result as $data) {
-            $chats[] = new Chat($data["idChat"], $data["idProduct"], $data["possibleBuyer"]);;
+            $chat = new Chat($data["idChat"], $data["idProduct"], $data["possibleBuyer"]);
+            if ($chat->getMessages() == NULL) {$chat->deleteChat();}
+            else {$chats[] = $chat;}
         }
 
         return $chats;
+    }
+
+    function findBuyerChat($idProduct): Chat {
+        $db = getDatabaseConnection();
+        $stmt = $db->prepare('
+            SELECT idChat, Chat.possibleBuyer
+            FROM Chat
+            WHERE Chat.product = ? AND Chat.possibleBuyer = ?
+        ');
+        $stmt->execute(array($idProduct, $this->idUser));
+        $result = $stmt->fetch();
+        if ($result) {
+            return new Chat($result["idChat"], $idProduct, $result["possibleBuyer"]);
+        }
+        else {
+            $this->addChat($idProduct);
+            $db = getDatabaseConnection();
+            $stmt = $db->prepare('
+                SELECT idChat, Chat.possibleBuyer
+                FROM Chat
+                WHERE Chat.product = ? AND Chat.possibleBuyer = ?
+            ');
+            $stmt->execute(array($idProduct, $this->idUser));
+            $result = $stmt->fetch();
+            return new Chat($result["idChat"], $idProduct, $result["possibleBuyer"]);
+        };
+    }
+
+    function addChat($idProduct) {
+        $db = getDatabaseConnection();
+        $stmt = $db->prepare('
+            INSERT INTO Chat(product, possibleBuyer)
+            VALUES (?, ?)
+        ');
+        $stmt->execute(array($idProduct, $this->idUser));
     }
 
     function setId(string $id) {
