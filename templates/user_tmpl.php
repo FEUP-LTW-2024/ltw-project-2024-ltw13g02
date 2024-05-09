@@ -85,12 +85,12 @@ require_once(__DIR__ . '/../sessions/session.php');
 
 
 <?php function drawEditProfile($session){ ?>
-    <link rel="stylesheet" href="../css/editProfile.css"-->
+    <link rel="stylesheet" href="../css/editProfile.css">
     <div class="user-info">
         <div class="info">
             <?php $user = $session->getUser(); ?>
             <h2><?php echo "Editing Profile" ?></h2>
-            <form id="editProfileForm" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+            <form id="editProfileForm" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
                 <label for="first_name">First Name:</label>
                 <input type="text" id="first_name" name="first_name" value="<?= $user->getFirstName(); ?>"><br><br>
 
@@ -146,6 +146,10 @@ require_once(__DIR__ . '/../sessions/session.php');
                 
                 <label for="zipCode">Zip Code:</label>
                 <input type="text" id="zipCode" name="zipCode" value="<?= $user->getZipCode(); ?>"><br><br>
+
+                <label for="photo">Photo:</label>
+                <input type="file" name="photo" id="photo">
+                <br><br>
 
                 <input type="submit" value="Submit">
             </form>
