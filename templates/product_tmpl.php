@@ -9,7 +9,6 @@ require_once(__DIR__ . '/../database/userClass.php');
 require_once(__DIR__ . '/../database/productClass.php');
 require_once(__DIR__ . '/../database/chatClass.php');
 require_once(__DIR__ . '/../database/change_in_db.php');
-require_once(__DIR__ . '/../vendor/autoload.php');
 
 require_once(__DIR__ . '/user_tmpl.php');
 

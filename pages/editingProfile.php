@@ -9,7 +9,7 @@
   require_once(__DIR__ . '/../templates/common_tmpl.php');
   
 
-  require_once(__DIR__ . '/../templates/user_tmpl.php');
+  require_once(__DIR__ . '/../templates/edit_tmpl.php');
 
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
 

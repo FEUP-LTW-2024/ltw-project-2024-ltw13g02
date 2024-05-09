@@ -12,8 +12,7 @@
   require_once(__DIR__ . '/../templates/common_tmpl.php');
   require_once(__DIR__ . '/../templates/productsprint_tmpl.php');
 
-  //require_once(__DIR__ . '/../vendor/autoload.php'); TODO rmove???
-
+  
   $db = getDatabaseConnection();
   $categories = getCategories($db);
   drawHeader($session);
