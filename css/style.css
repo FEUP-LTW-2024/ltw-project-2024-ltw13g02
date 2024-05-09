@@ -474,3 +474,17 @@ footer {
 #address select {
     height: 1.3em
 }
+
+#no-favs {
+    text-align: center;
+}
+
+#favs {
+    color: red;
+    grid-column: 2;
+    margin: auto;
+}
+
+#favs:hover {
+    color: red;
+}

@@ -30,7 +30,7 @@
 
 <?php 
     function output_single_cart_item(Product $item){
-        $photos = getPhotos($item->idProduct);
+        $photos = $item->getPhotos();
         ?>
         <article class='CartItem'>
             <a href='../pages/productPage.php?product=<?= $item->idProduct ?>'>

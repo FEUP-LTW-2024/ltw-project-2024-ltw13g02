@@ -25,10 +25,8 @@
 
     $user = $session->getUser();
     $recent_ids = $user->getRecent();
-    $favourites_ids = $user->getFavorites();
-
+    
     if (sizeof($recent_ids) > 0) {drawRecent($recent_ids); }
-    if (sizeof($favourites_ids) > 0) {drawFavorites($favourites_ids); }
 
     $recommended_ids = getRecommended();
   }else{
