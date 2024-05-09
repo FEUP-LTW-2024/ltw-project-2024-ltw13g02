@@ -63,11 +63,8 @@
 ?>
 
 <?php
-<<<<<<< HEAD
+
     function addShiping(PDO $db, int $item, string $buyer, string $seller){
-=======
-    function addShiping(PDO $db, int $item, string $buyer, int $seller) {
->>>>>>> 6e4a34fe6c72d7dd6014956a0bb2736bb450226d
         $stmt = $db->prepare('INSERT INTO Shipping (product, buyer, seller, purchaseDate)
                                 VALUES (?,?,?,?);
                               ');

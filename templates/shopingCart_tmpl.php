@@ -31,11 +31,9 @@
 <?php 
     function output_single_cart_item(Product $item){
         $photos = $item->getPhotos();
-<<<<<<< HEAD
+
         $session = new Session();
 
-=======
->>>>>>> 6e4a34fe6c72d7dd6014956a0bb2736bb450226d
         ?>
         
             <article class='CartItem'>
