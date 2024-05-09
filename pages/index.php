@@ -12,8 +12,6 @@
   require_once(__DIR__ . '/../templates/common_tmpl.php');
   require_once(__DIR__ . '/../templates/productsprint_tmpl.php');
 
-  //require_once(__DIR__ . '/../vendor/autoload.php'); TODO remove???
-
   $db = getDatabaseConnection();
   $categories = getCategories($db);
   drawHeader($session);
@@ -25,10 +23,8 @@
 
     $user = $session->getUser();
     $recent_ids = $user->getRecent();
-    $favourites_ids = $user->getFavorites();
-
+    
     if (sizeof($recent_ids) > 0) {drawRecent($recent_ids); }
-    if (sizeof($favourites_ids) > 0) {drawFavorites($favourites_ids); }
 
   }
   $recommended_ids = getRecommended();

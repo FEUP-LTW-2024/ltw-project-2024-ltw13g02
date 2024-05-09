@@ -73,6 +73,7 @@ require_once(__DIR__ . '/user_tmpl.php');
             $idChat = $chat->getId(); 
             if($seller->name() != $user->name()){?>
                 <button id="contact" class="button"><a href="../pages/messagesPage.php?chat=<?php echo $idChat ?>">Contact me</a></button>
+                <i class="fa fa-heart<?php echo $user->isFavorite($idProduct) ? " isFav" : "-o" ?> fa-2x icon" id="favs" data-product-id="<?php echo $idProduct ?>"></i>  
                 <button id="add-to-cart" class="button"><a href="">Add to cart</a></button>
             <?php } ?>
         </div>
@@ -91,5 +92,37 @@ require_once(__DIR__ . '/user_tmpl.php');
             }
             document.getElementById('product-image').src = "../images/products/" + photos[currentIndex]['photo'];
         }
+    </script>
+    <script>
+        document.getElementById('favs').addEventListener('click', function() {
+        var idProduct = this.getAttribute('data-product-id');
+        var isFavorite = this.classList.contains('isFav');
+
+        // Send AJAX request to add or remove from favorites
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '../actions/updateFavorites.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    // Toggle the isFav class based on response
+                    if (isFavorite) {
+                        document.getElementById('favs').classList.remove('isFav');
+                    } else {
+                        document.getElementById('favs').classList.add('isFav');
+                    }
+                } else {
+                    console.error('Error:', xhr.status);
+                }
+            }
+        };
+
+        // Send the appropriate action based on current favorite state
+        if (isFavorite) {
+            xhr.send('action=remove&idProduct=' + encodeURIComponent(idProduct));
+        } else {
+            xhr.send('action=add&idProduct=' + encodeURIComponent(idProduct));
+        }
+    });
     </script>
 <?php } ?> 

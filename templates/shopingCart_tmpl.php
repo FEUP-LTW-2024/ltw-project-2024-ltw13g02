@@ -32,6 +32,7 @@
     function output_single_cart_item(Product $item){
         $photos = $item->getPhotos();
         $session = new Session();
+
         ?>
         
             <article class='CartItem'>

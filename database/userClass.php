@@ -87,8 +87,15 @@ class User {
             WHERE Favorites.user = ?
         ');
         $stmt->execute(array($this->idUser));
+        return $stmt->fetch();
+    }
 
-        return $stmt->fetchAll(PDO::FETCH_COLUMN);
+    function isFavorite($idProduct) : bool {
+        $favs = $this->getFavorites();
+        foreach ($favs as $f) {
+            if ($f == $idProduct) return true;
+        }
+        return false;
     }
 
     function getRecent() : array {
@@ -122,6 +129,19 @@ class User {
             FROM Product
             WHERE seller = ? 
             AND buyer IS NULL
+        ');
+        $stmt->execute(array($this->idUser));
+
+        return $stmt->fetchAll(PDO::FETCH_COLUMN);
+    }
+
+    function getArchive() : array {
+        $db = getDatabaseConnection();
+        $stmt = $db->prepare('
+            SELECT idProduct
+            FROM Product
+            WHERE seller = ? 
+            AND buyer IS NOT NULL
         ');
         $stmt->execute(array($this->idUser));
 
@@ -265,6 +285,24 @@ class User {
             VALUES (?, ?)
         ');
         $stmt->execute(array($idProduct, $this->idUser));
+    }
+
+    function addToFavorites($idProduct) {
+        $db = getDatabaseConnection();
+        $stmt = $db->prepare('
+            INSERT INTO Favorites(user, product)
+            VALUES (?, ?)
+        ');
+        $stmt->execute(array($this->idUser, $idProduct));
+    }
+
+    function removeFromFavorites($idProduct) {
+        $db = getDatabaseConnection();
+        $stmt = $db->prepare('
+            DELETE FROM Favorites
+            WHERE user=? AND product=?
+        ');
+        $stmt->execute(array($this->idUser, $idProduct));
     }
 
     function setId(string $id) {

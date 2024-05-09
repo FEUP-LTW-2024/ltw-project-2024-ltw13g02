@@ -5,25 +5,31 @@
   $session = new Session();
 
   require_once(__DIR__ . '/../database/connection_to_db.php');
+  require_once(__DIR__ . '/../database/get_from_db.php');
+  require_once(__DIR__ . '/../database/userClass.php');
+
 
   require_once(__DIR__ . '/../templates/common_tmpl.php');
+  require_once(__DIR__ . '/../templates/productsprint_tmpl.php');
+
+  $db = getDatabaseConnection();
+  $categories = getCategories($db);
 
   drawHeader($session);
   drawHamburguer($session, 2);
+
+  if ($session->isLoggedIn()) {
+
+    $user = $session->getUser();
+    $archive_ids = $user->getArchive();
+
+    if (sizeof($archive_ids) > 0) {drawArchive($archive_ids); }
+  else { ?>
+    <div class="user-info">
+      <h2><?php echo "No Products in Archive"; ?></h2>
+    </div>  
+  <?php }
+  }
+  
   drawFooter();
-  $user = $session->getUser();
 ?>
-
-<!DOCTYPE html>
-<html lang="en-US">
-  <body>
-    <main>
-      <div class="user-info">
-        <h2><?php echo $user->getEmail(); ?></h2>
-        <h2> my archive </h2>
-        <h2><?php echo $user->name(); ?></h2>
-      </div>
-    </main>
-  </body>
-</html>
-

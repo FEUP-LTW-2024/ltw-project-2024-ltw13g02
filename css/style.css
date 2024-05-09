@@ -529,5 +529,18 @@ footer {
     margin: 0;
     font-weight: bold;
     font-size: large;
+}
 
+#no-favs {
+    text-align: center;
+}
+
+#favs {
+    color: red;
+    grid-column: 2;
+    margin: auto;
+}
+
+#favs:hover {
+    color: red;
 }

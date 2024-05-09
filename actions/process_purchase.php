@@ -63,7 +63,7 @@
 ?>
 
 <?php
-    function addShiping(PDO $db, int $item, string $buyer, string $seller) {
+    function addShiping(PDO $db, int $item, string $buyer, string $seller){
         $stmt = $db->prepare('INSERT INTO Shipping (product, buyer, seller, purchaseDate)
                                 VALUES (?,?,?,?);
                               ');
