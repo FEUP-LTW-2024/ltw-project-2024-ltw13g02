@@ -117,6 +117,28 @@ function drawAnnouncements($announcements_ids)
     <?php } 
 ?>
 
+<?php
+function drawArchive($archive_ids)
+    { ?>
+        <section class="Products" id="Archive">
+            <h2>My Archive</h2>
+            <article>
+                <div class="sliding_offers_container"> <?php 
+                    foreach($archive_ids as $item_id)
+                    {
+                        $product = getProduct($item_id);
+
+                        $seller = $product->getSeller();
+                        ?>
+                        <div class="sliding_offer"> <?php
+                            drawProduct($product, $seller);  ?>
+                        </div> <?php 
+                    } ?>
+                </div>
+            </article>
+        </section>
+    <?php } 
+?>
 
 <?php
 function drawProduct(Product $product, $user){ ?>

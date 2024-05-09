@@ -11,12 +11,12 @@ class Product {
     private ?string $characteristic2;
     private ?string $characteristic3;
     private string $seller;
-    private ?int $buyer;
+    private ?string $buyer;
     private ?string $purchaseDate;
 
     public function __construct(int $idProduct, string $prodName, int $price, int $condition, string $description,
                                  ?string $characteristic1, ?string $characteristic2, ?string $characteristic3 , 
-                                string $seller, ?int $buyer, ?string $purchaseDate) {
+                                string $seller, ?string $buyer, ?string $purchaseDate) {
         $this->idProduct = $idProduct;
         $this->prodName = $prodName;
         $this->price = $price;

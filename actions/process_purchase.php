@@ -61,7 +61,7 @@
 ?>
 
 <?php
-    function addShiping(PDO $db, int $item, int $buyer, int $seller) {
+    function addShiping(PDO $db, int $item, string $buyer, int $seller) {
         $stmt = $db->prepare('INSERT INTO Shipping (product, buyer, seller, purchaseDate)
                                 VALUES (?,?,?,?);
                               ');
@@ -71,7 +71,7 @@
 ?>
 
 <?php
-    function uppdateBuyer(PDO $db, int $item, int $buyer) {
+    function uppdateBuyer(PDO $db, int $item, string $buyer) {
 
 
         $stmt = $db->prepare('UPDATE Product 
