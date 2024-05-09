@@ -24,7 +24,9 @@
 
     //photo upload
     $photoDir = __DIR__ . '/../images/userProfile/';
-    $photoName = uniqid('user_') . '_' . basename($_FILES["photo"]["name"]);
+    $userId = $session->getUser()->getId(); 
+    $photoExtension = pathinfo($_FILES["photo"]["name"], PATHINFO_EXTENSION);
+    $photoName = $userId . '.' . $photoExtension;
     $photoPath = $photoDir . $photoName;
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($photoPath, PATHINFO_EXTENSION));
