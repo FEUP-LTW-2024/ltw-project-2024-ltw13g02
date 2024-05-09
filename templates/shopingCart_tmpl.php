@@ -31,14 +31,23 @@
 <?php 
     function output_single_cart_item(Product $item){
         $photos = $item->getPhotos();
+        $session = new Session();
         ?>
-        <a href="../pages/productPage.php?product=<?=$item->getId()?>">
+        
             <article class='CartItem'>
-                <img src="../images/products/<?= $photos[0]['photo'] ?>">
-                <p id='cart_item_name'><?=$item->getName() ?> </p>
-                <p id='cart_item_price'><?=$item->getPrice() ?>€</p>
+                <a id="product_img" href="../pages/productPage.php?product=<?=$item->getId()?>">
+                    <img src="../images/products/<?= $photos[0]['photo'] ?>">
+                </a>
+                <p id='cart_item_name'> <a href="../pages/productPage.php?product=<?=$item->getId()?>">  <?=$item->getName()?> </a> </p>
+                <p id='cart_item_price'><a href="../pages/productPage.php?product=<?=$item->getId()?>"> <?=$item->getPrice() ?>€ </a> </p>
+                <form action="../actions/removeFromCart.php" method="post">
+                    <input type="hidden" name="product" value=<?=$item->getId()?>> </input>
+                    <input type="hidden" name="user" value="<?=$session->getUser()->getId()?>"> </input>
+                    <button type="submit" id="trashIcon">
+                        <i class="fa fa-trash-o"> </i>
+                    </button>
+                </form>
             </article>
-        </a>
     <?php }
 ?>
 

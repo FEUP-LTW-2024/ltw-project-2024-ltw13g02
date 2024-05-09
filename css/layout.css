@@ -550,3 +550,15 @@ footer {
     grid-column: 2 / span 3;
     margin: auto;
 }
+
+#seller_header {
+    display: grid;
+    grid-template-columns: 1fr 10em;
+    grid-template-rows: repeat(2,5em);
+}
+
+#seller_header #seller_pfp {
+    grid-row-end: span 2;
+    grid-column-start: 2;
+    grid-row-start: 1;
+}

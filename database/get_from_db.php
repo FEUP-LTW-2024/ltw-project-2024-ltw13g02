@@ -168,16 +168,17 @@ function getRecommended() {
     $db = getDatabaseConnection();
     $session = new Session();
     $user = $session->getUser();
-    if (isset($currentId)) {
+    if ($session->isLoggedIn()) {
         $stmt = $db->prepare('SELECT P.idProduct
                             FROM Product P
-                            WHERE P.seller != ?');
-        $stmt->execute(array( $user->getId()) );
+                            WHERE P.seller != ? and P.buyer is null;');
+        $stmt->execute(array( $user->getId()));
         $products_id = $stmt->fetchAll(PDO::FETCH_COLUMN);
         return $products_id;
     }else{
         $stmt = $db->prepare('SELECT P.idProduct
                             FROM Product P
+                            Where P.buyer is null;
                             ');
         $stmt->execute();
         $products_id = $stmt->fetchAll(PDO::FETCH_COLUMN);

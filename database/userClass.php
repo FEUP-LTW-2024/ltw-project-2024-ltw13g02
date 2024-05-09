@@ -141,7 +141,7 @@ class User {
         $stmt = $db->prepare('SELECT COUNT(*) as num_reviews
                                 FROM  Reviews R
                                 WHERE R.idUser = ?');
-        $stmt->execute(array($this->idUser) );
+        $stmt->execute(array($this->getId()) );
         $result = $stmt->fetch();
         return $result['num_reviews'];
     }

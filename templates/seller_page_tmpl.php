@@ -6,17 +6,27 @@
             <p id='user_fullname'><?= $user->name() ?> </p>
 
             <div id='user_reviews_info'>
-                <a href="main.html">
-                <?php
-                    for ($i = 0; $i < $user->stars ; $i++) { ?>
-                    <img class="userStartImg" src="images/logo.png" alt="seller star">
+                <a href="../pages/reviewsPage.php"> <!--TODO fix ref -->
+                <span class="stars">
+                    <h2 id="stars"> <?php
+                    drawStars($user->getStarsFromReviews()); ?>
+                    </h2> 
+                </span>   
                 </a>
-                <?php }
+                <?php
             ?>
-            <p id='average_of_reviews'><?= $user->stars?></p>    
+            <p id='average_of_reviews'><?= $user->getStarsFromReviews()?></p>    
             <p id='number_of_reviews'><?= $num_reviews?> reviews</p>    
             </div>
-            <img class="userStartImg" src="images/logo.png" alt="seller profile">
+            <?php
+                $user_photo = $user->getPhoto(); 
+                if ($user_photo !== "Sem FF") {?>
+                    <img class="userStartImg" src="../images/userProfile/<?=$user->getPhoto()?>" alt="seller profile"> <?php
+
+                }else{ ?>
+                    <i class="fa fa-user fa-1x user-icons" id="seller_pfp"></i> <?php  
+            }
+            ?>
             
         </article> 
     <?php }

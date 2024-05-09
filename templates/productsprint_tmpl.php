@@ -82,12 +82,15 @@ function drawRecommended($recommended_ids) { ?>
             <?php
             for ($i = 0; $i < 20; $i++)
             {
-                $item_id = $recommended_ids[$i];
-                $product = getProduct($item_id);
-                $seller = $product->getSeller();?>
-                <div class="static_offer"> <?php
-                    drawProduct($product, $seller);  ?>
-                </div> <?php
+                if(isset($recommended_ids[$i])){
+                    $item_id = $recommended_ids[$i];
+                    $product = getProduct($item_id);
+
+                    $seller = $product->getSeller();?>
+                    <div class="static_offer"> <?php
+                        drawProduct($product, $seller);  ?>
+                    </div> <?php
+                }
             } ?>
         </div>
     </section>

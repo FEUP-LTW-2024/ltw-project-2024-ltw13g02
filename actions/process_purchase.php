@@ -9,25 +9,25 @@
     $db = getDatabaseConnection();
     $db->beginTransaction();
     $items = $user->getShoppingCart();
+    if ($_POST['paymentAuthhorization'] !== 'paymentAuthorized')
+    {
+        header('Location: ../pages/cart_page.php');
+    }
     foreach($items as $item) {
         $product = getProduct($item);
 
         if ($product->getBuyer() !== null) {
-            echo'NANA';
             $db->rollBack();
-
             header('Location: ../pages/errorPage.php?error=Tried_to_buy_bought_item');
         }else{
             
-            echo"JOJO\n";
 
             removeFromCarts($db, $product->getId());
             removeFromRecent($db, $product->getId());            
             removeFromFavorites($db, $product->getId());
             $user = $session->getUser();
-            addShiping($db,$product->getId(),$user->getId(),$product->getSeller());
-            //sendMessage();  TODO descobrir se fazer isto ou não
-            uppdateBuyer($db,$product->idProduct ,$user->getId());
+            addShiping($db,$product->getId(),$user->getId(),$product->getSeller()->getId());
+            uppdateBuyer($db,$product->getId() ,$user->getId());
 
         }
     }
@@ -73,7 +73,7 @@
 ?>
 
 <?php
-    function uppdateBuyer(PDO $db, int $item, int $buyer) {
+    function uppdateBuyer(PDO $db, int $item, string $buyer) {
 
 
         $stmt = $db->prepare('UPDATE Product 
@@ -82,5 +82,4 @@
                               ');
         $stmt->execute(array($buyer, date('Y-m-d'), $item));
     }
-
 ?>
