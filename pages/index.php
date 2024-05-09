@@ -12,7 +12,11 @@
   require_once(__DIR__ . '/../templates/common_tmpl.php');
   require_once(__DIR__ . '/../templates/productsprint_tmpl.php');
 
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> 6e4a34fe6c72d7dd6014956a0bb2736bb450226d
   $db = getDatabaseConnection();
   $categories = getCategories($db);
   drawHeader($session);
