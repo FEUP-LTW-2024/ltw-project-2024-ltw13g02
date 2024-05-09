@@ -11,7 +11,9 @@ require_once(__DIR__ . '/../sessions/session.php');
         <div class="info">
             <?php $user = $session->getUser(); ?>
             <h2><?php echo "Editing Profile" ?></h2>
-            <a href="../pages/confirmLogin.php" class="change-password-button">Change Password</a>
+            <a href="../pages/confirmLogin2.php" class="change-buttons">Change Email</a>
+            <br><br>
+            <a href="../pages/confirmLogin.php" class="change-buttons">Change Password</a>
             <br><br>
             <form id="editProfileForm" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
                 <label for="first_name">First Name:</label>

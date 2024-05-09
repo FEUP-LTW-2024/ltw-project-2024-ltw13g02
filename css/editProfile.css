@@ -1,5 +1,4 @@
 body {
-    min-width: 40em;
     font-family: "Didact Gothic", sans-serif;
     font-weight: 400;
     font-style: normal;
@@ -25,6 +24,7 @@ form input[type="text"] {
     font-weight: 400;
     font-style: normal;
     padding: 3px;
+    min-width: 20em;
 }
 
 form select[name="country"] {
@@ -33,6 +33,7 @@ form select[name="country"] {
     height: 50px;
     padding: 0;
     border-radius: 0;
+    min-width: 25em;
 }
 
 form input[type="password"] {
@@ -41,4 +42,24 @@ form input[type="password"] {
     font-weight: 400;
     font-style: normal;
     padding: 3px;
+    min-width: 25em;
 }
+
+.change-buttons {
+    display: inline-block;
+    padding: 3px;
+    background-color: transparent; /* Button color */
+    color: black; /* Text color */
+    border:1px solid grey;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    min-width: 20em;
+}
+  
+.change-buttons:hover {
+    border-color: grey;
+    background-color: lightblue; /* Button color on hover */
+}
+  
