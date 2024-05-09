@@ -76,6 +76,10 @@ h1 {
     width: fit-content;
 }
 
+.static_offer {
+    padding: 2em 1em;
+}
+
 .offer a{
     text-decoration: none;
 }
@@ -86,6 +90,7 @@ body > header{
 
 .offer_info{
     font-family: Roboto;
+    height:min-content;
 }
 
 .offer_info p {
@@ -388,9 +393,6 @@ footer {
 }
 
 
-
-
-
 #Shopping_Cart h2{
     grid-column-start: 1;
     grid-column-end: span 2;
@@ -436,7 +438,7 @@ footer {
     height: 95%;
     width: 95%;
     border-radius: 1em;
-    object-fit:contain;
+    object-fit: contain;
 }
 
 .CartItem #cart_item_price{
@@ -499,10 +501,33 @@ footer {
 }
 
 #seller_header #seller_pfp {
-    font-size: 10em;
+    font-size: 150px;
 }
 
-#seller_header > p{
-    font-size: larger;
-    margin-left: 3em;
+#seller_info #user_fullname {
+    margin: 0;
+    font-size: 4em;
+    color: lightblue;
+}
+
+#seller_info #stars {
+    margin-bottom: 0;
+}
+
+#seller_header #average_of_reviews {
+    color: lightblue;
+    margin-bottom: 0;
+    font-weight: bold;
+    padding-left: 0.5em;
+    padding-top:  0.3em;
+    float: left;
+
+}
+
+#seller_header #number_of_reviews {
+    color: lightblue;
+    margin: 0;
+    font-weight: bold;
+    font-size: large;
+
 }

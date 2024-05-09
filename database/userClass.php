@@ -148,11 +148,11 @@ class User {
 
     function getSellingProducts() {
         $db = getDatabaseConnection();
-        $stmt = $db->prepare('SELECT *
+        $stmt = $db->prepare('SELECT P.idProduct
                                 FROM Product P
                                 WHERE P.seller = ? AND P.buyer is NULL');
         $stmt->execute(array($this->idUser));
-        $result = $stmt->fetchAll();
+        $result = $stmt->fetchAll(PDO::FETCH_COLUMN);
         return $result;
     }
 

@@ -98,6 +98,27 @@ function drawRecommended($recommended_ids) { ?>
 ?>
 
 <?php
+function drawSellerProducts($seller_items_ids) { ?>
+    <section class="Products" id="SellerProducts">
+        <h2>Seller Products</h2>
+        <div id="static_offer_container">
+            <?php
+            $firstProduct = getProduct($seller_items_ids[0]);
+            $seller = $firstProduct->getSeller();
+            foreach($seller_items_ids as $itemId)
+            { 
+                $product = getProduct($itemId) ?>   
+                <div class="static_offer"> <?php
+                    drawProduct($product, $seller);  ?>
+                </div> <?php
+            }
+            ?>
+        </div>
+    </section>
+<?php }
+?>
+
+<?php
 function drawAnnouncements($announcements_ids)
     { ?>
         <section class="Products" id="Announcements">
