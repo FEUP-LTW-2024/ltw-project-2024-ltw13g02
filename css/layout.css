@@ -560,3 +560,9 @@ footer {
 #user_reviews .stars{
     margin: auto;
 }
+
+#EMPTY_Shopping_Cart {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}

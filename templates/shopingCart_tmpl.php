@@ -2,7 +2,7 @@
     require_once(__DIR__ . '/../database/get_from_db.php');
 
     function output_empty_cart() { ?>
-        <main id='Shopping_Cart'>
+        <main id='EMPTY_Shopping_Cart'>
             <img class="empty_cart_img" src="../images/empty_cart.png">
             <h2>Your Shopping Cart is empty</h2>
         </main>
