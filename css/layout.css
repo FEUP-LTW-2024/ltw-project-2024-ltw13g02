@@ -39,47 +39,19 @@ h1 {
 .Products {
     width: 99%;
     height: auto;
-
 }
 
 .Products > article {
     border-radius: 12px;
     position: relative;
     display: flex;
-    overflow: hidden;
     height: 100%;
 }
 
 .Products .sliding_offers_container {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
     width: 100%;
-    overflow-y: hidden;
-}
-
-.Products button {
-    position: absolute;
-    height: 2em;
-    width: 2em;
-    border-radius: 50%;
-    border-color: transparent;
-    padding: auto;
-    margin: auto;
-}
-
-.Products button:first-of-type{
-    left: 0;
-    top: 50%;
-    bottom: 50%;
-
-}
-
-
-
-.Products button:last-of-type{
-    float: left;
-    right: 0;
-    top: 50%;
-    bottom: 50%;
 }
 
 .sliding_offer {
@@ -96,19 +68,13 @@ h1 {
     grid-template-rows: 3em 1fr 4em;
 }
 
-
 .sliding_offer a{
     text-decoration: none;
 }
 
-
-
-
 .static_offer {
     display: grid;
     grid-template-rows: 2.5em 1fr 2.5em;
-    
-
 }
 
 .static_offer .offer_img{

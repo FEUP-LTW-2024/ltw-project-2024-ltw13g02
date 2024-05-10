@@ -37,6 +37,11 @@
         grid-auto-rows: auto;
     }
 
+    .Products article .sliding_offers_container {
+        display: flex;
+        overflow-y: hidden;
+    }
+
     .product-grid .product-info {
         margin-left: 20px;
         margin-right: 20px;
