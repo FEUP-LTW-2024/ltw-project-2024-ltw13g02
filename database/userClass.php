@@ -133,6 +133,10 @@ class User {
         $stmt->execute(array($this->idUser));
         $result = $stmt->fetchAll(PDO::FETCH_COLUMN);
 
+        if (empty($result)) {
+            return [];
+        }
+
         for ($i = 0; $i < count($result); $i++) {
             $final[$i] = $result[count($result) - 1 - $i];
         }
