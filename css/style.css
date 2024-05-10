@@ -498,8 +498,8 @@ footer {
     border-style: none;
 }
 
-#address input,
-#address select {
+#addressShipping input,
+#addressShipping select {
     height: 1.3em;
     margin-right: 1em;
 }

@@ -74,11 +74,11 @@
         <aside id="shippingAdress">
             <h3>Checkout</h3> 
             <h5>Address</h5>
-        <form id ='address' action="../actions/process_purchase.php" method="post">
+        <form id ='addressShipping' action="../actions/process_purchase.php" method="post">
 
 
 
-                <div>Street:</div> <input type='text' name='address' required="required" value= "<?=$session->getUser()->getAddress()?>">
+                <div>Street:</div> <input type='text' name='addressShipping' required="required" value= "<?=$session->getUser()->getAddress()?>">
                 <div>Zipcode:</div> <input type='text' name='zipcode' required="required" value= "<?= $session->getUser()->getZipCode()?>">
                 <div>City:</div> <input type='text' name='city' required="required" value= "<?= $session->getUser()->getCity()?>">
                 <input type="hidden" name='paymentAuthhorization' value="paymentAuthorized">
