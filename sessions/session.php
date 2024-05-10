@@ -26,7 +26,7 @@ require_once(__DIR__ . "/../database/get_from_db.php");
       return $this->messages;
     }
 
-    public function setUser(User $user) {
+    public function setUser($user) {
       $_SESSION['user'] = $user;
     }
 

@@ -17,7 +17,7 @@ class User {
     private string $zipCode;
     private ?string $photo;
 
-    public function __construct(string $idUser, string $firstName, string $lastName, string $phone, string $email, string $userAddress, float $stars, string $city, int $idCountry, ?string $photo, string $zipCode) {
+    public function __construct(string $idUser, string $firstName, string $lastName, string $phone, string $email, string $userAddress, float $stars, string $city, int $idCountry, string $photo, string $zipCode) {
         $this->idUser = $idUser;
         $this->firstName = $firstName;
         $this->lastName = $lastName;

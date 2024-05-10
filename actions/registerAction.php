@@ -1,5 +1,8 @@
 <?php
 include_once('../database/connection_to_db.php');
+include_once('../database/get_from_db.php');
+include_once('../sessions/session.php');
+$session = new Session();
 
 
 try {
@@ -18,12 +21,11 @@ try {
 
     $db = getDatabaseConnection();
 
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    var_dump($_POST);
-    $stmt = $db->prepare("INSERT INTO User (idUser, firstName, lastName, phone, email, userPassword, idCountry, city, userAddress, zipCode) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->execute([$idUser, $firstName, $lastName, $phone, $email, $password, $idCountry, $city, $address, $zipCode]);
+    $stmt = $db->prepare("INSERT INTO User (idUser, firstName, lastName, phone, email, userPassword, idCountry, city, userAddress, zipCode) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->execute(array($idUser, $firstName, $lastName, $phone, $email, $password, $idCountry, $city, $address, $zipCode));
 
-    $db = null;
+    $user = getUserbyId($idUser);
+    $session->setUser($user);
 
     header("Location: ../pages");
     exit;
@@ -33,4 +35,4 @@ try {
     header("Location: ../pages/register.php");
     exit;
 }
-?>
+

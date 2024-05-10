@@ -29,7 +29,7 @@ require_once(__DIR__ . '/../sessions/session.php');
         <h2><?php drawPhoto($session, $user);?></h2>
         <div class="info">
         <?php
-          if($user != null) {
+          if($session->isLoggedIn()) {
         ?>
             <h2><?php echo "Name: " . $user->name(); ?></h2>
             <a href="reviewsPage.php"><h2 id="stars" class="stars">

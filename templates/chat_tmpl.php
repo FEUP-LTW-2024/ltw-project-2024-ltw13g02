@@ -14,7 +14,7 @@ require_once(__DIR__ . '/../utils/elapsedTime.php');
 
 <?php function drawChats(Session $session, $activePage) {
     $user = $session->getUser();
-    if ($user != null) {
+    if ($session->isLoggedIn()) {
         if ($activePage === 0) {
             $chats = $user->getChatsAsSellerFromDB();
         }
