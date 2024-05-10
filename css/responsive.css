@@ -101,7 +101,7 @@
     }
 }
 
-@media (max-width: 40em){
+@media (max-width: 45em){
     .offer {
         height: 100%;
         border: 1px solid lightgray;

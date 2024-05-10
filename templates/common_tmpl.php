@@ -38,14 +38,18 @@ require_once(__DIR__ . '/../sessions/session.php');
 <?php } ?>
 
 <?php function drawHamburguer(Session $session, $activePage) {
+    $admin = $session->getUser()->isAdmin();
     if($session->isLoggedIn()) { ?>
         <nav id="menu">
             <input type="checkbox" id="hamburger"/> 
             <label class="hamburger" for="hamburger"></label>
-            <ul>
+            <ul id=<?php echo $admin ? "Admin" : ""; ?>>
                 <li class=<?php echo $activePage === 0 ? "active" : ""; ?>><a href="../pages/profilePage.php"><i class="fa fa-user-secret icon_menu"></i> Personal Info</a></li>
-                <li class=<?php echo $activePage === 1 ? "active" : ""; ?>><a href="../pages/myAnnouncements.php"><i class="fa fa-bullhorn icon_menu"></i> My announcements</a></li>
+                <li class=<?php echo $activePage === 1 ? "active" : ""; ?>><a href="../pages/myAnnouncements.php"><i class="fa fa-bullhorn icon_menu"></i> Announcements</a></li>
                 <li class=<?php echo $activePage === 2 ? "active" : ""; ?>><a href="../pages/myArchive.php"><i class="fa fa-archive icon_menu"></i> Archive</a></li>
+                <?php if ($admin) { ?>
+                <li class=<?php echo $activePage === 4 ? "active" : ""; ?>><a href="../pages/aminPage.php"><i class="fa fa-key icon_menu"></i> Admin Page</a></li>
+                <?php } ?>
             </ul>
         </nav>
     <?php } 

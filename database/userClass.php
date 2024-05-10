@@ -1,8 +1,7 @@
 <?php
 require_once(__DIR__ . '/chatClass.php');
 require_once(__DIR__ . '/../database/connection_to_db.php');
-
-
+require_once(__DIR__ . '/../vendor/autoload.php');
 
 class User {
     private string $idUser;
@@ -77,6 +76,21 @@ class User {
         $stmt->execute(array($this->idCountry));
         $country = $stmt->fetch();
         return isset($country['country']) ? $country['country'] : null;
+    }
+
+    function isAdmin() : bool {
+        $db = getDatabaseConnection();
+        $stmt = $db->prepare('
+            SELECT UserAdmin.idUser
+            FROM UserAdmin
+            WHERE UserAdmin.idUser = ?
+        ');
+        $stmt->execute(array($this->idUser));
+        $admin = $stmt->fetch();
+        if ($admin) {
+            return true;
+        }
+        else return false;
     }
 
     function getFavorites() : ?array {
@@ -265,7 +279,6 @@ class User {
 
         return $chats;
     }
-    
     function getChatsAsBuyerFromDB(): ?array {
         $db = getDatabaseConnection();
         $stmt = $db->prepare('

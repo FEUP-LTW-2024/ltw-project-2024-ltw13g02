@@ -10,6 +10,7 @@ require_once(__DIR__ . '/user_tmpl.php');
 require_once(__DIR__ . '/../utils/elapsedTime.php');
 
 
+
 ?>
 
 <?php function drawChats(Session $session, $activePage) {
