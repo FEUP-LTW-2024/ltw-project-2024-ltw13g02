@@ -11,9 +11,8 @@
 
   require_once(__DIR__ . '/../templates/edit_tmpl.php');
 
-
   drawHeader($session);
   drawHamburguer($session, 0);
-  drawConfirmLogIn($session);
+  drawChangeEmailOrPassword($session);
   drawFooter();
 ?>

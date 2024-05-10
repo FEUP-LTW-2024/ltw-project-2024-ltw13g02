@@ -11,9 +11,8 @@ require_once(__DIR__ . '/../sessions/session.php');
         <div class="info">
             <?php $user = $session->getUser(); ?>
             <h2><?php echo "Editing Profile" ?></h2>
-            <a href="../pages/confirmLogin2.php" class="change-buttons">Change Email</a>
-            <br><br>
-            <a href="../pages/confirmLogin.php" class="change-buttons">Change Password</a>
+            <!--a href="../pages/confirmLogin2.php" class="change-buttons">Change Email</a-->
+            <a href="../pages/confirmLogin.php" class="change-buttons">Change Email or Password</a>
             <br><br>
             <form id="editProfileForm" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
                 <label for="first_name">First Name:</label>
@@ -108,6 +107,23 @@ require_once(__DIR__ . '/../sessions/session.php');
     </div>
 <?php } ?>
 
+<?php function drawChangeEmail($session) { ?>
+    <link rel="stylesheet" href="../css/editProfile.css">
+    <div class="user-info">
+        <div class="info">
+            <?php $user = $session->getUser(); ?>
+            <h2><?php echo "Change Email" ?></h2>
+            <form id="editChangeEmail" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
+                <label id="newEmail" class="required">New Email</label>
+                <input type="text" id="newEmail" name="newEmail" value="<?= $user->getEmail(); ?>" required>
+                
+                <br>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </div> 
+<?php } ?>
+
 
 <?php function drawChangePassword($session) { ?>
     <link rel="stylesheet" href="../css/editProfile.css">
@@ -124,6 +140,20 @@ require_once(__DIR__ . '/../sessions/session.php');
                 <br>
                 <input type="submit" value="Submit">
             </form>
+        </div>
+    </div> 
+<?php } ?>
+
+
+<?php function drawChangeEmailOrPassword($session){ ?>
+    <link rel="stylesheet" href="../css/editProfile.css">
+    <div class="user-info">
+        <div class="info">
+            <?php $user = $session->getUser(); ?>
+            <h2><?php echo "Editing Profile" ?></h2>
+            <a href="../pages/changeEmail.php" class="change-buttons">Change Email</a>
+            <br><br>
+            <a href="../pages/changePassword.php" class="change-buttons">Change Password</a>
         </div>
     </div> 
 <?php } ?>

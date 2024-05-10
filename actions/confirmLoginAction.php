@@ -11,7 +11,7 @@ if(isset($_POST['email']) && isset($_POST['password'])) {
     $user = getUser($_POST['email'], $_POST['password']);
     if ($user && $_POST['email'] == $session->getUser()->getEmail()) {
         $session->addMessage('success', 'Confirm Login successful!');
-        header("Location: ../pages/changePassword.php");
+        header("Location: ../pages/changeEmailOrPassword.php");
     } else {
         $session->addMessage('error', 'Wrong email or password!');
         header("Location: ../pages/confirmLogin.php");

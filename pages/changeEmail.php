@@ -11,9 +11,16 @@
 
   require_once(__DIR__ . '/../templates/edit_tmpl.php');
 
+  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    $newEmail = $_POST['email'];
+    
+    header("Location: /../actions/changeEmailAction.php?email=$newEmail");
+    exit();
+}
 
   drawHeader($session);
   drawHamburguer($session, 0);
-  drawConfirmLogIn($session);
+  //drawChangeEmail($session);
   drawFooter();
 ?>

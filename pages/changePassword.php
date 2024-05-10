@@ -25,6 +25,6 @@
 
   drawHeader($session);
   drawHamburguer($session, 0);
-  drawChangePassword($session);
+  //drawChangePassword($session);
   drawFooter();
 ?>
