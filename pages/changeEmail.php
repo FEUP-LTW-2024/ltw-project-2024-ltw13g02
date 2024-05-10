@@ -21,6 +21,6 @@
 
   drawHeader($session);
   drawHamburguer($session, 0);
-  //drawChangeEmail($session);
+  drawChangeEmail($session);
   drawFooter();
 ?>

@@ -13,18 +13,14 @@
 
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    $newPassword = $_POST['password'];
+    $newPassword = $_POST['newPassword'];
     
-    //$user = $session->getUser();
-    //$user->setPassword($newPassword);
-    
-
     header("Location: /../actions/changePasswordAction.php?password=$newPassword");
     exit();
 }
 
   drawHeader($session);
   drawHamburguer($session, 0);
-  //drawChangePassword($session);
+  drawChangePassword($session);
   drawFooter();
 ?>

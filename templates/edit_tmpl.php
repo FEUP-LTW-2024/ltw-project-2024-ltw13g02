@@ -114,8 +114,8 @@ require_once(__DIR__ . '/../sessions/session.php');
             <?php $user = $session->getUser(); ?>
             <h2><?php echo "Change Email" ?></h2>
             <form id="editChangeEmail" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
-                <label id="newEmail" class="required">New Email</label>
-                <input type="text" id="newEmail" name="newEmail" value="<?= $user->getEmail(); ?>" required>
+                <label id="email" class="required">New Email</label>
+                <input type="text" id="email" name="email" value="<?= $user->getEmail(); ?>" required>
                 
                 <br>
                 <input type="submit" value="Submit">
