@@ -39,9 +39,6 @@ h1 {
 .Products {
     width: 99%;
     height: auto;
-    margin-top: 10px;
-    margin-left: 0.5%;
-    margin-right: 0.5%;
 
 }
 
@@ -59,8 +56,17 @@ h1 {
     overflow-y: hidden;
 }
 
-.Products input:first-of-type{
+.Products button {
     position: absolute;
+    height: 2em;
+    width: 2em;
+    border-radius: 50%;
+    border-color: transparent;
+    padding: auto;
+    margin: auto;
+}
+
+.Products button:first-of-type{
     left: 0;
     top: 50%;
     bottom: 50%;
@@ -69,8 +75,7 @@ h1 {
 
 
 
-.Products input:last-of-type{
-    position: relative;
+.Products button:last-of-type{
     float: left;
     right: 0;
     top: 50%;
@@ -79,16 +84,16 @@ h1 {
 
 .sliding_offer {
     height: 100%; 
-    border: 3px solid lightgray;
+    padding: 0em 1em 1em 1em;
+
 
     align-items: center;
-    flex-basis: 20%;
     flex-shrink: 0;
     position: relative;
     border-style: none;
 
     display: grid;
-    grid-template-rows: 2.5em 1fr 2.5em;
+    grid-template-rows: 3em 1fr 4em;
 }
 
 
@@ -97,24 +102,19 @@ h1 {
 }
 
 
-.Products #static_offer_container {
-    display: grid;
-    grid-template-columns: repeat(4,1fr);
-    grid-auto-rows: auto;
-}
+
 
 .static_offer {
     display: grid;
     grid-template-rows: 2.5em 1fr 2.5em;
     
-    margin: 1em;
 
 }
 
 .static_offer .offer_img{
     height: 100%;
     width: 95%;
-    object-fit: contain;
+    object-fit: cover;
 }
 
 body > header{
@@ -139,33 +139,35 @@ header > a > img{
 .offer_info{
     position: relative;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
 }
 
 .offer_info h4{
     position: relative;
-    margin: 0.5em 0 0 0.5em;
+    padding: 0.5em 0 0 0.5em;
+    margin: 0;
     grid-column-end: span 2;
+    text-overflow: ellipsis
+
 }
 
 .offer_info h5{
     position: relative;
-    margin: 0.5em 0 0 0.5em;
-
+    margin: 0;
+    padding: 0.5em 0 0 0.5em;
+    text-overflow: ellipsis
 }
 
 .offer_info p {
-    margin-top: 0;
-    margin-right: 2em;
+    margin: 0;
     justify-self: end;
 }
 
 .sliding_offer .offer_img{
-    object-fit: scale-down;
-
     width: 95%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
 }
 
 .user_small_card p{
@@ -175,7 +177,7 @@ header > a > img{
 
 .user_small_card{
     display: flex;
-    margin-left: 0.5em;
+    
     margin-top: auto;
 }
 
@@ -548,5 +550,47 @@ footer {
 #add-to-cart {
     grid-row: 6;
     grid-column: 3 / span 4;
+    margin: auto;
+}
+
+#seller_header {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-template-rows: auto;
+    height: fit-content;
+}
+
+#seller_header #seller_pfp {
+    grid-row-end: span 2;
+    grid-column-start: 2;
+    grid-row-start: 1;
+    margin: auto;
+}
+
+#seller_info {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    margin: 50px auto auto auto
+}
+
+
+
+#seller_info .stars {
+    display: flex;
+    font-size: larger;
+}
+
+#seller_info #average_of_reviews {
+    font-size: larger;
+}
+
+#user_reviews {
+    display: grid;
+    grid-template-rows: 3em 1.5em;
+    grid-template-columns: 10em 1fr;
+}
+
+#user_reviews .stars{
     margin: auto;
 }

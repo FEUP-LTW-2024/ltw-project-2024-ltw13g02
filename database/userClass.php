@@ -161,18 +161,18 @@ class User {
         $stmt = $db->prepare('SELECT COUNT(*) as num_reviews
                                 FROM  Reviews R
                                 WHERE R.idUser = ?');
-        $stmt->execute(array($this->idUser) );
+        $stmt->execute(array($this->getId()) );
         $result = $stmt->fetch();
         return $result['num_reviews'];
     }
 
     function getSellingProducts() {
         $db = getDatabaseConnection();
-        $stmt = $db->prepare('SELECT *
+        $stmt = $db->prepare('SELECT P.idProduct
                                 FROM Product P
                                 WHERE P.seller = ? AND P.buyer is NULL');
         $stmt->execute(array($this->idUser));
-        $result = $stmt->fetchAll();
+        $result = $stmt->fetchAll(PDO::FETCH_COLUMN);
         return $result;
     }
 
@@ -189,7 +189,7 @@ class User {
     function getStarsFromReviews(): ?float {
         $reviews = $this->getReviewsFromDB();
         $sum = 0;
-        if(count($reviews) == 0) return 0;
+        if(count($reviews) === 0) return 0;
         for ($i = 0; $i < count($reviews); $i++) {
             $sum += $reviews[$i]['stars'];
         }
@@ -245,7 +245,7 @@ class User {
 
         foreach ($result as $data) {
             $chat = new Chat($data["idChat"], $data["idProduct"], $data["possibleBuyer"]);
-            if ($chat->getMessages() == NULL) {$chat->deleteChat();}
+            if ($chat->getMessages() === NULL) {$chat->deleteChat();}
             else {$chats[] = $chat;}
         }
 

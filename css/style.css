@@ -76,6 +76,10 @@ h1 {
     width: fit-content;
 }
 
+.static_offer {
+    padding: 2em 1em;
+}
+
 .offer a{
     text-decoration: none;
 }
@@ -86,6 +90,7 @@ body > header{
 
 .offer_info{
     font-family: Roboto;
+    height:min-content;
 }
 
 .offer_info p {
@@ -388,9 +393,6 @@ footer {
 }
 
 
-
-
-
 #Shopping_Cart h2{
     grid-column-start: 1;
     grid-column-end: span 2;
@@ -402,9 +404,7 @@ footer {
 
 }
 
-
-
-#Shopping_items > *  {
+#Shopping_items article {
     outline: solid;
     outline-color: lightblue;
     border-radius: 1em;
@@ -416,28 +416,51 @@ footer {
     margin-right: 1em;
 }
 
-#Shopping_items article:last-of-type{
+#Shopping_items #totalPayment{
     display: flex;
 }
 
 .CartItem {
-    margin-bottom: 0.5em;
-}
-
-.CartItem a{
 
     display: grid;
-    grid-template-columns: 6em 1fr;
+    grid-template-columns: 6em 1fr 6em;
     grid-template-rows: 1fr 1fr;
+
+    margin-bottom: 0.5em;
+    padding-left: 1em;
+}
+
+.CartItem #product_img {
+    grid-row-end: span 2;
 }
 
 .CartItem img {
-    height: 6em;
+    height: 95%;
+    width: 95%;
     border-radius: 1em;
-    grid-row-end: span 2;
-    object-fit:scale-down;
-    margin: auto 0 auto 0.5em;
+    object-fit: contain;
 }
+
+.CartItem #cart_item_price{
+    grid-row-start: 2;
+    grid-column-start: 2;
+}
+
+.CartItem form{
+    margin: auto;
+    grid-row-end: span 2;
+    
+}
+
+.CartItem #trashIcon{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 3em;
+
+    
+}
+
 
 #Shopping_Cart aside {
     display: flex;
@@ -445,8 +468,9 @@ footer {
 }
 
 #Shopping_Cart aside form{
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 10em 1fr;
+    grid-template-rows: repeat(4, 1.5em);
 }
 
 #shippingAdress h3{
@@ -472,7 +496,40 @@ footer {
 
 #address input,
 #address select {
-    height: 1.3em
+    height: 1.3em;
+    margin-right: 1em;
+}
+
+
+#seller_header #seller_pfp {
+    font-size: 150px;
+}
+
+#seller_info #user_fullname {
+    margin: 0;
+    font-size: 4em;
+    color: lightblue;
+}
+
+#seller_info #stars {
+    margin-bottom: 0;
+}
+
+#seller_header #average_of_reviews {
+    color: lightblue;
+    margin-bottom: 0;
+    font-weight: bold;
+    padding-left: 0.5em;
+    padding-top:  0.3em;
+    float: left;
+
+}
+
+#seller_header #number_of_reviews {
+    color: lightblue;
+    margin: 0;
+    font-weight: bold;
+    font-size: large;
 }
 
 #no-favs {

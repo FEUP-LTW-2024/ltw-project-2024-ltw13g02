@@ -15,7 +15,7 @@ require_once(__DIR__ . '/../utils/elapsedTime.php');
 <?php function drawChats(Session $session, $activePage) {
     $user = $session->getUser();
     if ($user != null) {
-        if ($activePage == 0) {
+        if ($activePage === 0) {
             $chats = $user->getChatsAsSellerFromDB();
         }
         else {
@@ -37,7 +37,7 @@ require_once(__DIR__ . '/../utils/elapsedTime.php');
                             <h2 class="with-user"><?php echo $seller->name(); ?></h2>
                             <h2 class="message-product"><?php echo $product->getName(); ?></h2>
                             <?php $lastmessage = $chat->getLastMessage(); 
-                            if ($lastmessage->getSender() == $session->getUser()->getId()) {?>
+                            if ($lastmessage->getSender() === $session->getUser()->getId()) {?>
                                 <h2 class="unchecked <?php echo $lastmessage->getSeen() ? "fa fa-check-circle" : "fa fa-check-circle-o"; ?>"></h2>
                                 <h2 class="message-content"><?php echo $lastmessage->getContent(); ?></h2>
                             <?php } else { ?>
@@ -52,7 +52,7 @@ require_once(__DIR__ . '/../utils/elapsedTime.php');
         }
         else { ?>
             <div id="info-to-user">
-                <h2 class="info-to-user">You don't have any <?php echo $activePage == 0 ? "sell" : "buy"; ?> messages yet.</h2>
+                <h2 class="info-to-user">You don't have any <?php echo $activePage === 0 ? "sell" : "buy"; ?> messages yet.</h2>
             </div>
     <?php }
     }
@@ -68,8 +68,8 @@ require_once(__DIR__ . '/../utils/elapsedTime.php');
         <input type="checkbox" id="hamburger"/> 
         <label class="hamburger" for="hamburger"></label>
         <ul class="chat-menu">
-            <li class=<?php echo $activePage == 0 ? "active" : ""; ?>><a href="../pages/chatsAsSellerPage.php"><i class="fa fa-money icon_menu"></i> To Sell</a></li>
-            <li class=<?php echo $activePage == 1 ? "active" : ""; ?>><a href="../pages/chatsAsBuyerPage.php"><i class="fa fa-shopping-bag icon_menu"></i> To Buy</a></li>
+            <li class=<?php echo $activePage === 0 ? "active" : ""; ?>><a href="../pages/chatsAsSellerPage.php"><i class="fa fa-money icon_menu"></i> To Sell</a></li>
+            <li class=<?php echo $activePage === 1 ? "active" : ""; ?>><a href="../pages/chatsAsBuyerPage.php"><i class="fa fa-shopping-bag icon_menu"></i> To Buy</a></li>
         </ul>
     </nav>
 <?php } ?>

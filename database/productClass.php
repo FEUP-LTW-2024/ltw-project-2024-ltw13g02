@@ -118,7 +118,10 @@ class Product {
         return $this->purchaseDate;
     }
 
-    function getBuyer() : array {
+    function getBuyer() : ?array {
+        if ($this->buyer === null) {
+            return null;
+        }
         $db = getDatabaseConnection();
         $stmt = $db->prepare('
             SELECT firstName, lastName, stars, country, city

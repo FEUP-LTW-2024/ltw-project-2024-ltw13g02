@@ -18,7 +18,7 @@
             <section id='Shopping_items'>
                 <?php
                 foreach ($items_ids as $item){
-                    $product = getProduct($item['product']);
+                    $product = getProduct($item);
                     output_single_cart_item($product);
                 }
                 output_total_payment($items_ids);
@@ -31,14 +31,25 @@
 <?php 
     function output_single_cart_item(Product $item){
         $photos = $item->getPhotos();
+
+        $session = new Session();
+
         ?>
-        <article class='CartItem'>
-            <a href='../pages/productPage.php?product=<?= $item->idProduct ?>'>
-                <img src="../images/products/<?= $photos[0]['photo'] ?>"> <!-- TODO add photo -->
-                <p id='cart_item_name'><?=$item->prodName ?> </p>
-                <p id='cart_item_price'><?=$item->price ?>€</p>
-            </a>
-        </article>
+        
+            <article class='CartItem'>
+                <a id="product_img" href="../pages/productPage.php?product=<?=$item->getId()?>">
+                    <img src="../images/products/<?= $photos[0]['photo'] ?>">
+                </a>
+                <p id='cart_item_name'> <a href="../pages/productPage.php?product=<?=$item->getId()?>">  <?=$item->getName()?> </a> </p>
+                <p id='cart_item_price'><a href="../pages/productPage.php?product=<?=$item->getId()?>"> <?=$item->getPrice() ?>€ </a> </p>
+                <form action="../actions/removeFromCart.php" method="post">
+                    <input type="hidden" name="product" value=<?=$item->getId()?>> </input>
+                    <input type="hidden" name="user" value="<?=$session->getUser()->getId()?>"> </input>
+                    <button type="submit" id="trashIcon">
+                        <i class="fa fa-trash-o"> </i>
+                    </button>
+                </form>
+            </article>
     <?php }
 ?>
 
@@ -46,11 +57,11 @@
     function output_total_payment($items){
         $total = 0;
         foreach ($items as $item){
-                $product = getProduct($item['product']);
-                $total += $product->price;
+                $product = getProduct($item);
+                $total += $product->getPrice();
             }  
         ?>
-        <article>
+        <article id="totalPayment">
             <p>Total:</p>
             <p><?= $total ?>€</p>
         </article>
@@ -67,9 +78,9 @@
 
 
 
-                <div>Street:</div> <input type='text' name='address' required="required" value= "<?=$session->getAddress()?>">
-                <div>Zipcode:</div> <input type='text' name='zipcode' required="required" value= "<?= $session->getZipCode()?>">
-                <div>City:</div> <input type='text' name='city' required="required" value= "<?= $session->getCity()?>">
+                <div>Street:</div> <input type='text' name='address' required="required" value= "<?=$session->getUser()->getAddress()?>">
+                <div>Zipcode:</div> <input type='text' name='zipcode' required="required" value= "<?= $session->getUser()->getZipCode()?>">
+                <div>City:</div> <input type='text' name='city' required="required" value= "<?= $session->getUser()->getCity()?>">
                 <input type="hidden" name='paymentAuthhorization' value="paymentAuthorized">
                 <?php
                 output_country_option($countries);
@@ -89,6 +100,7 @@
         
         <div class='address_field' id ='address_country'>
         Country:
+        </div>
             <select name='country'>
                 <?php 
                     foreach ($countries as $country){ 
@@ -103,21 +115,7 @@
                         }
                 ?>
             </select>
-        </div>
-        <select name='country'>
-            <?php 
-            foreach ($countries as $country){ 
-                if ($country['country'] === $session->getCountry())
-                { ?>
-                    <option value="<?=$country['country']?>" selected><?=$country['country']?></option>
-                <?php 
-                }else{ ?>
-                    <option value="<?=$country['country']?>"><?=$country['country']?></option>
-                    <?php }
-            }
-            ?>
-        </select>
-       
+
 
     <?php }
 ?>

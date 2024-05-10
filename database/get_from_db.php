@@ -49,7 +49,7 @@ function getCountryFromDB($idCountry) : ?string {
 function getStarsFromReviews($idUser): ?float {
     $reviews = getReviewsFromDB($idUser);
     $sum = 0;
-    if(count($reviews) == 0) return 0;
+    if(count($reviews) === 0) return 0;
     for ($i = 0; $i < count($reviews); $i++) {
         $sum += $reviews[$i]['stars'];
     }
@@ -168,16 +168,17 @@ function getRecommended() {
     $db = getDatabaseConnection();
     $session = new Session();
     $user = $session->getUser();
-    if (isset($currentId)) {
+    if ($session->isLoggedIn()) {
         $stmt = $db->prepare('SELECT P.idProduct
                             FROM Product P
-                            WHERE P.seller != ?');
-        $stmt->execute(array( $user->getId()) );
+                            WHERE P.seller != ? and P.buyer is null;');
+        $stmt->execute(array( $user->getId()));
         $products_id = $stmt->fetchAll(PDO::FETCH_COLUMN);
         return $products_id;
     }else{
         $stmt = $db->prepare('SELECT P.idProduct
                             FROM Product P
+                            Where P.buyer is null;
                             ');
         $stmt->execute();
         $products_id = $stmt->fetchAll(PDO::FETCH_COLUMN);

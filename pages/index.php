@@ -12,7 +12,7 @@
   require_once(__DIR__ . '/../templates/common_tmpl.php');
   require_once(__DIR__ . '/../templates/productsprint_tmpl.php');
 
-  
+
   $db = getDatabaseConnection();
   $categories = getCategories($db);
   drawHeader($session);
@@ -27,10 +27,7 @@
     
     if (sizeof($recent_ids) > 0) {drawRecent($recent_ids); }
 
-    $recommended_ids = getRecommended();
-  }else{
-    $recommended_ids = getRecommended();
   }
-
+  $recommended_ids = getRecommended();
   drawRecommended($recommended_ids);
   drawFooter();
