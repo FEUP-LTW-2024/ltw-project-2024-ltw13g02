@@ -68,7 +68,20 @@
     }
     
 
-  if ($uploadOk == 1) {
+    // Separate validation for each field
+    if (!preg_match("/^[a-zA-Z\s]+$/", $newFirstName) ||
+        !preg_match("/^[a-zA-Z\s]+$/", $newLastName) ||
+        !preg_match("/^\d{9}$/", $newPhone) ||
+        !preg_match("/^[a-zA-ZÀ-ÿ\s\-\.\*]+$/u", $newAddress) ||
+        !preg_match("/^[a-zA-Z\s]+$/", $newCountry) ||
+        !preg_match("/^[a-zA-Z\s]+$/", $newCity) ||
+        !preg_match("/^[0-9\-]+$/", $newZipCode)) { 
+        
+        echo "Invalid Input.";
+        exit();
+    }
+
+    // If all validations pass, proceed with updating user data
     $user = $session->getUser();
     $user->setFirstName($newFirstName);
     $user->setLastName($newLastName);
@@ -94,7 +107,6 @@
     header("Location: /../actions/editingProfileAction.php?first_name=$newFirstName&last_name=$newLastName&phone=$newPhone&address=$newAddress&city=$newCity&country=$newCountry&zipCode=$newZipCode&photo=$photoName");
     exit();
   }
-}
 
   drawHeader($session);
   drawHamburguer($session, 0);

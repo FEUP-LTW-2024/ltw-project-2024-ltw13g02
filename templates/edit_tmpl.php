@@ -11,7 +11,6 @@ require_once(__DIR__ . '/../sessions/session.php');
         <div class="info">
             <?php $user = $session->getUser(); ?>
             <h2><?php echo "Editing Profile" ?></h2>
-            <!--a href="../pages/confirmLogin2.php" class="change-buttons">Change Email</a-->
             <a href="../pages/confirmLogin.php" class="change-buttons">Change Email or Password</a>
             <br><br>
             <form id="editProfileForm" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
@@ -124,7 +123,6 @@ require_once(__DIR__ . '/../sessions/session.php');
     </div> 
 <?php } ?>
 
-
 <?php function drawChangePassword($session) { ?>
     <link rel="stylesheet" href="../css/editProfile.css">
     <div class="user-info">
@@ -132,14 +130,26 @@ require_once(__DIR__ . '/../sessions/session.php');
             <?php $user = $session->getUser(); ?>
             <h2><?php echo "Change Password" ?></h2>
             <form id="editChangePassword" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" onsubmit="return validatePassword()">
-                <label id="newPassword" class="required"></label>
-                <input type="password" id="newPassword" name="newPassword" placeholder=" New Password..." required>
-                
-                <label id="confirmPassword" class="required"></label>
-                <input type="password" id="confirmPassword" name="confirmPassword" placeholder=" Confirm New Password..." required>
+                <label for="newPassword" class="required">New Password:</label>
+                <input type="password" id="newPassword" name="newPassword" placeholder="New Password..." required>
+                <br>
+                <label for="confirmPassword" class="required">Confirm New Password:</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm New Password..." required>
                 <br>
                 <input type="submit" value="Submit">
             </form>
+            <script>
+                function validatePassword() {
+                    var newPassword = document.getElementById("newPassword").value;
+                    var confirmPassword = document.getElementById("confirmPassword").value;
+
+                    if (newPassword !== confirmPassword) {
+                        alert("Passwords do not match.");
+                        return false;
+                    }
+                    return true;
+                }
+            </script>
         </div>
     </div> 
 <?php } ?>
