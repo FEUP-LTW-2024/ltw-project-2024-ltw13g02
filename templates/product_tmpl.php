@@ -31,6 +31,9 @@ require_once(__DIR__ . '/user_tmpl.php');
 } ?> 
 
 <?php function drawProduct(Session $session, $idProduct) { 
+    $user = $session->getUser();
+    $user->addToRecents($idProduct);
+
     $product = getProduct($idProduct);
     $seller = $product->getSeller(); 
     $photos = $product->getPhotos(); ?>

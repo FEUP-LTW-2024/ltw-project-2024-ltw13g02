@@ -41,8 +41,6 @@ function drawRecent($recent_ids)
                         </div> <?php 
                     } ?>
                 </div>
-                <button class="move_button">&#60</button>
-                <button class="move_button">></button>
             </article>
         </section>
     <?php } 
@@ -53,11 +51,10 @@ function drawRecent($recent_ids)
 function drawFavorites($favorites_ids){ ?>
     <section class="Products" id="Favorites">
         <h2>Favorites</h2>
-        <article>
-            <div class="sliding_offers_container"> <?php 
+            <div id="static_offer_container"> <?php 
                 foreach($favorites_ids as $item_id)
                 {
-                    $product = getProduct($item_id);
+                    $product = getProduct($item_id['product']);
 
                     $seller = $product->getSeller();
                     ?>
@@ -66,9 +63,6 @@ function drawFavorites($favorites_ids){ ?>
                     </div> <?php 
                 } ?>
             </div>
-            <button class="move_button">&#60</button>
-            <button class="move_button">></button>
-        </article>
     </section>
  
 <?php }

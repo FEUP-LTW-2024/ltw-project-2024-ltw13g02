@@ -178,9 +178,9 @@ VALUES ('Afghanistan'), ('Albania'),
 ('Venezuela'),('Vietnam'),('Yemen'),('Zambia'),('Zimbabwe');
 
 INSERT OR REPLACE INTO User(idUser, firstName, lastName, phone, email, userPassword, photo, idCountry, city, userAddress, zipCode)
-VALUES ('6637ab278105554a8', 'Leonor', 'Couto', 987654321 , 'leonoremail@fake.com','$2y$10$6sucVUYDP6gbJh54fspvnucUuzsUbRcDQPE.qNvoW4GG1J8IRi6T6', 'leonorPhoto.jpeg', 139, 'Porto', 'Rua de camões', '2000-100'),
-('6637ab278105b4ffd', 'Filipa', 'Fidalgo', 975318642, 'filipaemail@fake.com', '$2y$10$6sucVUYDP6gbJh54fspvnucUuzsUbRcDQPE.qNvoW4GG1J8IRi6T6', 'filipaTest.png', 17, 'Gante', 'Rua da exAlbania', '1000'),
-('6637ab2781073badf', 'Pedro', 'Marta', 963852741, 'pedroemail@fake.com', '$2y$10$6sucVUYDP6gbJh54fspvnucUuzsUbRcDQPE.qNvoW4GG1J8IRi6T6', 'randomImage.jpg', 63, 'Düsseldorf', 'avenida da libete', '23458-872');
+VALUES ('6637ab278105554a8', 'Leonor', 'Couto', 987654321 , 'leonoremail@fake.com','$2y$10$6sucVUYDP6gbJh54fspvnucUuzsUbRcDQPE.qNvoW4GG1J8IRi6T6', '6637ab278105554a8.jpeg', 139, 'Porto', 'Rua de camões', '2000-100'),
+('6637ab278105b4ffd', 'Filipa', 'Fidalgo', 975318642, 'filipaemail@fake.com', '$2y$10$6sucVUYDP6gbJh54fspvnucUuzsUbRcDQPE.qNvoW4GG1J8IRi6T6', '6637ab278105b4ffd.png', 17, 'Gante', 'Rua da exAlbania', '1000'),
+('6637ab2781073badf', 'Pedro', 'Marta', 963852741, 'pedroemail@fake.com', '$2y$10$6sucVUYDP6gbJh54fspvnucUuzsUbRcDQPE.qNvoW4GG1J8IRi6T6', '6637ab2781073badf.jpg', 63, 'Düsseldorf', 'avenida da libete', '23458-872');
 INSERT OR REPLACE INTO User(idUser, firstName, lastName, phone, email, userPassword, idCountry, city, userAddress, zipCode)
 VALUES ('6637ab278105e5186', 'Admin', 'Admin', 999599999, 'admin@admin.com', '$2y$10$6sucVUYDP6gbJh54fspvnucUuzsUbRcDQPE.qNvoW4GG1J8IRi6T6', 139, 'Porto', 'Rua dos Admins', '9995-999'),
 ('6637ab278105f11e7', 'Alice', 'Johnson', 987654300, 'myemail@email.com', '$2y$10$6sucVUYDP6gbJh54fspvnucUuzsUbRcDQPE.qNvoW4GG1J8IRi6T6', 186, 'Los Angeles', '789 Oak St', '90001'),

@@ -1,6 +1,7 @@
 <?php
 require_once(__DIR__ . '/chatClass.php');
 require_once(__DIR__ . '/../database/connection_to_db.php');
+require_once(__DIR__ . '/../vendor/autoload.php');
 
 
 
@@ -79,7 +80,7 @@ class User {
         return isset($country['country']) ? $country['country'] : null;
     }
 
-    function getFavorites() : array {
+    function getFavorites() : ?array {
         $db = getDatabaseConnection();
         $stmt = $db->prepare('
             SELECT Favorites.product
@@ -87,15 +88,40 @@ class User {
             WHERE Favorites.user = ?
         ');
         $stmt->execute(array($this->idUser));
-        return $stmt->fetch();
+        $favs = $stmt->fetchAll();
+        if (count($favs) > 0) {
+            return $favs;
+        }
+        else return null;
     }
 
     function isFavorite($idProduct) : bool {
         $favs = $this->getFavorites();
         foreach ($favs as $f) {
-            if ($f == $idProduct) return true;
+            if ($f['product'] == $idProduct) return true;
         }
         return false;
+    }
+
+    function addToRecents($idProduct) {
+        $db = getDatabaseConnection();
+        $recents = $this->getRecent();
+
+        foreach ($recents as $recent) {
+            if ($recent == $idProduct) {
+                $stmt = $db->prepare('DELETE FROM Recent WHERE Recent.user = ? AND Recent.product = ?');
+                $stmt->execute(array($this->idUser, $idProduct));
+            }
+        }
+        $recents = $this->getRecent();
+        if (count($recents) > 4) {
+            for ($i = 4; $i < count($recents); $i++) {
+                $stmt = $db->prepare('DELETE FROM Recent WHERE Recent.user = ? AND Recent.product = ?');
+                $stmt->execute(array($this->idUser, $recents[$i]['product']));
+            }
+        }
+        $stmt = $db->prepare('INSERT INTO Recent(user, product) VALUES (?, ?)');
+        $stmt->execute(array($this->idUser, $idProduct));
     }
 
     function getRecent() : array {
@@ -106,8 +132,13 @@ class User {
             WHERE Recent.user = ?
         ');
         $stmt->execute(array($this->idUser));
+        $result = $stmt->fetchAll(PDO::FETCH_COLUMN);
 
-        return $stmt->fetchAll(PDO::FETCH_COLUMN);
+        for ($i = 0; $i < count($result); $i++) {
+            $final[$i] = $result[count($result) - 1 - $i];
+        }
+
+        return $final;
     }
 
     function getShoppingCart() : array {

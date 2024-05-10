@@ -9,17 +9,19 @@
     require_once(__DIR__ . '/../templates/common_tmpl.php');
 
     require_once(__DIR__ . '/../templates/productsprint_tmpl.php');
+
+    require_once(__DIR__ . '/../vendor/autoload.php');
     
     if (!$session->isLoggedIn()) { header('Location: /index.php'); } 
 
     drawHeader($session);
     $user = $session->getUser();
+
     $favorites_ids = $user->getFavorites();
-    dd($favourites_ids);
-    if ($favourites_ids != null) {drawFavorites($favourites_ids);}
-    else {
-        ?>
+    if ($favorites_ids == null) {?>
         <h2 id="no-favs">You don't have favorites yet! </h2>
-        <?php
+        <?php }
+    else {
+        drawFavorites($favorites_ids);
     }
     drawFooter();

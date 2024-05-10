@@ -48,7 +48,7 @@ require_once(__DIR__ . '/user_tmpl.php');
                     <h2 class="message-status <?php echo $message->getSeen() ? "fa fa-check-circle" : "fa fa-check-circle-o"; ?>"></h2>
                 </div>
                 <?php
-                if ($key < count($messages) - 1 && strtotime($message->getMessageDate()) - strtotime($messages[$key + 1]['messageDate']) < 3600) {
+                if ($key < count($messages) - 1 && strtotime($message->getMessageDate()) - strtotime($messages[$key + 1]->getMessageDate()) < 3600) {
                 } 
                 else { ?>
                     <div class="time">
@@ -58,7 +58,7 @@ require_once(__DIR__ . '/user_tmpl.php');
              } else { 
             ?>
             <div class="message-tile message other-message">
-                <p><?php echo $message->getContent(); ?></p>
+                <p><?php echo $message->getContent();?></p>
             </div>
             <?php
                 if ($key < count($messages) - 1 && strtotime($message->getMessageDate()) - strtotime($messages[$key + 1]['messageDate']) < 3600) {
@@ -68,7 +68,7 @@ require_once(__DIR__ . '/user_tmpl.php');
                         <p><?php echo $message->getMessageDate(); ?></p>
                     </div>
                 <?php }
-             } 
+             }
             } ?>
     </div>
 <?php } ?> 
