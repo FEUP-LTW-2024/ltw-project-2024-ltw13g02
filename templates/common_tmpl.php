@@ -38,8 +38,8 @@ require_once(__DIR__ . '/../sessions/session.php');
 <?php } ?>
 
 <?php function drawHamburguer(Session $session, $activePage) {
-    $admin = $session->getUser()->isAdmin();
-    if($session->isLoggedIn()) { ?>
+    if($session->isLoggedIn()) { 
+        $admin = $session->getUser()->isAdmin(); ?>
         <nav id="menu">
             <input type="checkbox" id="hamburger"/> 
             <label class="hamburger" for="hamburger"></label>
