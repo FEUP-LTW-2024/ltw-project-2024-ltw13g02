@@ -117,20 +117,18 @@ function drawAnnouncements($announcements_ids)
     { ?>
         <section class="Products" id="Announcements">
             <h2>My Announcements</h2>
-            <article>
-                <div class="sliding_offers_container"> <?php 
-                    foreach($announcements_ids as $item_id)
-                    {
-                        $product = getProduct($item_id);
+            <div id="static_offer_container"> <?php 
+                foreach($announcements_ids as $item_id)
+                {
+                    $product = getProduct($item_id);
 
-                        $seller = $product->getSeller();
-                        ?>
-                        <div class="sliding_offer"> <?php
-                            drawProduct($product, $seller);  ?>
-                        </div> <?php 
-                    } ?>
-                </div>
-            </article>
+                    $seller = $product->getSeller();
+                    ?>
+                    <div class="sliding_offer"> <?php
+                        drawProduct($product, $seller);  ?>
+                    </div> <?php 
+                } ?>
+            </div>
         </section>
     <?php } 
 ?>
@@ -140,20 +138,18 @@ function drawArchive($archive_ids)
     { ?>
         <section class="Products" id="Archive">
             <h2>My Archive</h2>
-            <article>
-                <div class="sliding_offers_container"> <?php 
-                    foreach($archive_ids as $item_id)
-                    {
-                        $product = getProduct($item_id);
+            <div id="static_offer_container"> <?php 
+                foreach($archive_ids as $item_id)
+                {
+                    $product = getProduct($item_id);
 
-                        $seller = $product->getSeller();
-                        ?>
-                        <div class="sliding_offer"> <?php
-                            drawProduct($product, $seller);  ?>
-                        </div> <?php 
-                    } ?>
-                </div>
-            </article>
+                    $seller = $product->getSeller();
+                    ?>
+                    <div class="sliding_offer"> <?php
+                        drawProduct($product, $seller);  ?>
+                    </div> <?php 
+                } ?>
+            </div>
         </section>
     <?php } 
 ?>
