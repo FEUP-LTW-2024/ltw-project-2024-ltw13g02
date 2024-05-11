@@ -34,7 +34,6 @@ require_once(__DIR__ . '/../sessions/session.php');
             <?php } ?> 
         </header>
         <body>
-    </html>
 <?php } ?>
 
 <?php function drawHamburguer(Session $session, $activePage) {
@@ -48,7 +47,7 @@ require_once(__DIR__ . '/../sessions/session.php');
                 <li class=<?php echo $activePage === 1 ? "active" : ""; ?>><a href="../pages/myAnnouncements.php"><i class="fa fa-bullhorn icon_menu"></i> Announcements</a></li>
                 <li class=<?php echo $activePage === 2 ? "active" : ""; ?>><a href="../pages/myArchive.php"><i class="fa fa-archive icon_menu"></i> Archive</a></li>
                 <?php if ($admin) { ?>
-                <li class=<?php echo $activePage === 4 ? "active" : ""; ?>><a href="../pages/aminPage.php"><i class="fa fa-key icon_menu"></i> Admin Page</a></li>
+                <li class=<?php echo $activePage === 4 ? "active" : ""; ?>><a href="../pages/adminPage.php"><i class="fa fa-key icon_menu"></i> Admin Page</a></li>
                 <?php } ?>
             </ul>
         </nav>
@@ -57,10 +56,10 @@ require_once(__DIR__ . '/../sessions/session.php');
 
 
 <?php function drawFooter() { ?>
-    </main>
-    <footer>
-            <p>&copy; Dealify </p>
-    </footer>
+        </body>
+        <footer>
+                <p>&copy; Dealify </p>
+        </footer>
     </body>
     </html>
 <?php } ?>

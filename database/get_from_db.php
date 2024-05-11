@@ -81,13 +81,25 @@ function getReviewsWithUsersFromDB($idUser): ?array {
 }
 
 
-function getCategories($db){
+function getCategories() {
+    $db = getDatabaseConnection();
     $stmt = $db->prepare("SELECT C.category 
                         FROM Category C ");
     $stmt->execute();
 
     $categories = $stmt->fetchAll();
     return $categories;  
+
+}
+
+function getTypes() {
+    $db = getDatabaseConnection();
+    $stmt = $db->prepare("SELECT type_name 
+                        FROM TypesInCategory ");
+    $stmt->execute();
+
+    $types = $stmt->fetchAll();
+    return $types;  
 
 }
 
@@ -135,6 +147,30 @@ function getUserbyId($idUser) : ?User {
     $db = getDatabaseConnection();
     $stmt = $db->prepare('SELECT * FROM User WHERE User.idUser = ?');
     $stmt->execute(array($idUser));
+    $user = $stmt->fetch();
+    if ($user) {
+        return new User(
+            $user['idUser'],
+            $user['firstName'],
+            $user['lastName'],
+            $user['phone'],
+            $user['email'],
+            $user['userAddress'],
+            $user['stars'],
+            $user['city'],
+            $user['idCountry'],
+            $user['photo'],
+            $user['zipCode'],
+        );
+    } else {
+        return null;
+    }
+}
+
+function getUserbyemail($email) : ?User {
+    $db = getDatabaseConnection();
+    $stmt = $db->prepare('SELECT * FROM User WHERE User.email = ?');
+    $stmt->execute(array($email));
     $user = $stmt->fetch();
     if ($user) {
         return new User(

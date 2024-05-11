@@ -13,6 +13,6 @@
   require_once(__DIR__ . '/../templates/admin_tmpl.php');
 
   drawHeader($session);
-  drawHamburguer($session, 0);
+  drawHamburguer($session, 4);
   drawAdmin($session);
   drawFooter();

@@ -14,7 +14,7 @@
 
 
   $db = getDatabaseConnection();
-  $categories = getCategories($db);
+  $categories = getCategories();
   drawHeader($session);
 
   drawSearchbar($categories);

@@ -13,7 +13,7 @@ class User {
     private string $city;
     private int $idCountry;
     private string $zipCode;
-    private ?string $photo;
+    private string $photo;
 
     public function __construct(string $idUser, string $firstName, string $lastName, string $phone, string $email, string $userAddress, float $stars, string $city, int $idCountry, string $photo, string $zipCode) {
         $this->idUser = $idUser;

@@ -570,3 +570,49 @@ footer {
     justify-content: center;
     text-align: center;
 }
+
+#admin {
+    padding: 5px 0;
+    text-align: center;
+}
+
+#admin h2 {
+    margin: 0 0 10px 0;
+}
+
+#admin form {
+    margin: 30px;
+}
+
+#admin label * {
+    font-family: "Didact Gothic", sans-serif;
+    grid-column-start: 1;
+    border: 1px solid #444444 ;
+    border-radius: 3px;
+    background-color: #ffffff;
+    height: 30px;
+    width: 220px;
+    padding: 0 0;
+    margin-right: 10px;
+    margin-bottom: 5px;
+}
+
+#admin button {
+    width: 70px;
+    height: 32.23px;
+    font-size: 15px;
+}
+
+#newCharacteristic, #newType {
+    display: grid;
+    grid-template-rows: auto auto auto auto;
+}
+
+#newCharacteristic input, #newType input,
+#newCharacteristic select, #newType select {
+    width: 305px;
+}
+
+#admin select {
+    color: #505050;
+}
