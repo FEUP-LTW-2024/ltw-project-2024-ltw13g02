@@ -1,7 +1,6 @@
 <?php
 require_once(__DIR__ . '/chatClass.php');
 require_once(__DIR__ . '/../database/connection_to_db.php');
-require_once(__DIR__ . '/../vendor/autoload.php');
 
 class User {
     private string $idUser;
