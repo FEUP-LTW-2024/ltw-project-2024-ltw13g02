@@ -32,8 +32,10 @@ require_once(__DIR__ . '/user_tmpl.php');
 
 <?php function drawProduct(Session $session, $idProduct) { 
     $user = $session->getUser();
-    $user->addToRecents($idProduct);
-
+    if ($user != null){
+        $user->addToRecents($idProduct);
+    }
+    
     $product = getProduct($idProduct);
     $seller = $product->getSeller(); 
     $photos = $product->getPhotos(); ?>
@@ -72,13 +74,15 @@ require_once(__DIR__ . '/user_tmpl.php');
             </div>
             <h2 id="product-page-description">Description: <?php echo $product->getDescription(); ?> </h2>
             <?php $user = $session->getUser();
-            $chat = $user->findBuyerChat($idProduct);
-            $idChat = $chat->getId(); 
-            if($seller->name() != $user->name()){?>
-                <button id="contact" class="button"><a href="../pages/messagesPage.php?chat=<?php echo $idChat ?>">Contact me</a></button>
-                <i class="fa fa-heart<?php echo $user->isFavorite($idProduct) ? " isFav" : "-o" ?> fa-2x icon" id="favs" data-product-id="<?php echo $idProduct ?>"></i>  
-                <button id="add-to-cart" class="button"><a href="">Add to cart</a></button>
-            <?php } ?>
+            if($user != null){
+                $chat = $user->findBuyerChat($idProduct);
+                $idChat = $chat->getId(); 
+                if($seller->name() != $user->name()){?>
+                    <button id="contact" class="button"><a href="../pages/messagesPage.php?chat=<?php echo $idChat ?>">Contact me</a></button>
+                    <i class="fa fa-heart<?php echo $user->isFavorite($idProduct) ? " isFav" : "-o" ?> fa-2x icon" id="favs" data-product-id="<?php echo $idProduct ?>"></i>  
+                    <button id="add-to-cart" class="button"><a href="">Add to cart</a></button>
+                <?php } 
+            }?>
         </div>
     </div>
 
