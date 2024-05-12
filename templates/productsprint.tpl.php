@@ -1,25 +1,83 @@
 <?php
 require_once(__DIR__ . '/../database/get_from_db.php');
-    function drawSearchbar($categories){ ?>
-        <body>
-            <main>
-            <form id="search">
-                <select name="category">
+
+function drawSearchbar(){ ?>
+    <body>
+        <main>
+        <form id="search">
+            <input id="searchbar" type="search" name="searchbar" required>
+        </form> 
+<?php 
+}
+?>
+
+<?php  
+function drawPath($category, $type, $characteristic) { 
+    if ($characteristic == NULL) {
+        if ($type != null) $characteristics = getCharacteristicsofType($type);
+        else if ($category != null) $types = getTypesofCategory($category);
+        else if ($category == null) $categories = getCategories();
+    } 
+?>
+<form id="filter" action="../pages/index.php" method="get">
+    <input type="hidden" name="category" value="<?php echo $category; ?>">
+    <input type="hidden" name="type" value="<?php echo $type; ?>">
+    <?php if ($category == NULL) { ?>
+        <select name="category">
+            <option value="All">All</option> 
+            <?php 
+                foreach($categories as $c){ 
+            ?>
+                    <option value="<?= $c['idCategory'] ?>"> 
+                        <?= $c['category'] ?>
+                    </option>    
+            <?php 
+                }
+            ?>
+        </select>
+        <button id="go-search" class="button" type="submit">Search</button>
+    <?php }  else { 
+        if ($type == NULL) { ?>
+            <h2 class="path"><?php echo getCategory($category) . " |" ?></h2>
+            <select name="type">
                 <option value="All">All</option> 
+                <?php 
+                    foreach($types as $t){ 
+                ?>
+                        <option value="<?= $t['idType'] ?>"> 
+                            <?= $t['type_name'] ?>
+                        </option>    
+                <?php 
+                    }
+                ?>
+            </select>
+            <button id="go-search" class="button" type="submit">Search</button>
+        <?php } else { ?>
+            <?php if ($characteristic == NULL) {?>
+                <h2 class="path"><?php echo getCategory($category) . " | " . getTypebyId($type) . " |" ?></h2>
+                <select name="characteristic">
+                    <option value="All">All</option> 
                     <?php 
-                        foreach($categories as $category){ ?>
-                            <option value="<?= $category['category'] ?>"> 
-                                <?= $category['category'] ?>
+                        foreach($characteristics as $ch){ 
+                    ?>
+                            <option value="<?= $ch['idCharacteristic'] ?>"> 
+                                <?= $ch['characteristic'] ?>
                             </option>    
-                        <?php 
+                    <?php 
                         }
                     ?>
                 </select>
-                <input id="searchbar" type="search" name="searchbar" required>
-            </form> 
-    <?php 
-    }
-?>
+                <button id="go-search" class="button" type="submit">Search</button>
+            <?php } else {?>
+                <h2 class="path"><?php echo getCategory($category) . " | " . getTypebyId($type) . " | " . getCharacteristic($characteristic) ?></h2>
+            <?php } ?>
+        <?php } ?>
+    <?php }?>
+</form>
+<?php } ?>
+
+
+
 
 <?php
 function drawRecent($recent_ids)
@@ -151,6 +209,25 @@ function drawArchive($archive_ids)
         </section>
     <?php } 
 ?>
+
+<?php function drawProductswithFilter($category, $type, $characteristic) { 
+    if ($characteristic != NULL) $products = getProductsWithCh($characteristic);
+    else if ($type != NULL)  $products = getProductsWithType($type);
+    else if ($category != NULL)  $products = getProductWithCategory($category); ?>
+    <section class="Products" id="ProductsWithFilter">
+        <div id="static_offer_container">
+            <?php
+            foreach($products as $id) {
+                $product = getProduct($id);
+
+                $seller = $product->getSeller();?>
+                <div class="static_offer"> <?php
+                    drawProduct($product, $seller);  ?>
+                </div> <?php
+            } ?>
+        </div>
+    </section>
+<?php } ?>
 
 <?php
 function drawProduct(Product $product, $user){ ?>

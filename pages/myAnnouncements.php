@@ -13,7 +13,6 @@
   require_once(__DIR__ . '/../templates/productsprint.tpl.php');
 
   $db = getDatabaseConnection();
-  $categories = getCategories();
 
   drawHeader($session);
   drawHamburguer($session, 1);

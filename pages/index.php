@@ -14,20 +14,26 @@
 
 
   $db = getDatabaseConnection();
-  $categories = getCategories();
   drawHeader($session);
 
-  drawSearchbar($categories);
+  drawPath($_GET['category'], $_GET['type'], $_GET['characteristic']);
 
-  if ($session->isLoggedIn()) 
-  {
+  drawSearchbar();
 
-    $user = $session->getUser();
-    $recent_ids = $user->getRecent();
-    
-    if (sizeof($recent_ids) > 0) {drawRecent($recent_ids); }
+  if ($_GET['category'] == NULL && $_GET['type'] == NULL && $_GET['characteristic'] == NULL) {
+    if ($session->isLoggedIn()) 
+    {
 
+      $user = $session->getUser();
+      $recent_ids = $user->getRecent();
+      
+      if (sizeof($recent_ids) > 0) {drawRecent($recent_ids); }
+
+    }
+    $recommended_ids = getRecommended();
+    drawRecommended($recommended_ids);
   }
-  $recommended_ids = getRecommended();
-  drawRecommended($recommended_ids);
+  else {
+    drawProductswithFilter($_GET['category'], $_GET['type'], $_GET['characteristic']);
+  }
   drawFooter();

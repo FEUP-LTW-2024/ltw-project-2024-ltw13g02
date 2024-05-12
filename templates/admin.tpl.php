@@ -8,10 +8,8 @@ require_once(__DIR__ . '/../database/get_from_db.php');
 <?php function drawAdmin(Session $session) { 
     $result = getCategories();
     $categories = "";
-    $i = 1;
     foreach($result as $row) {
-        $categories .= "<option value='$i'>" . $row['category'] . "</option>";
-        $i++;
+        $categories .= "<option value='" . $row['idCategory'] . "'>" . $row['category'] . "</option>";
     }
     $result = getTypes();
     $types = "";

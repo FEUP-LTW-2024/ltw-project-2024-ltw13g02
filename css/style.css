@@ -571,3 +571,33 @@ footer {
     font-weight: 400;
     font-style: normal;
 }
+
+#filter {
+    height: 30px;
+    width: 100%;
+    margin: 5px;
+}
+
+#filter select {
+    background-color: white;
+
+}
+
+.path {
+    font-size: 0.8em;
+    margin: 0;
+    padding: 0;
+}
+
+#go-search {
+    width: 70px;
+    height: 20px;
+    font-size: 0.8em;
+    background-color:#e6e6e6;
+    color: black;
+    border-radius: 3px;
+    border-color: black;
+}
+#go-search:hover {
+    background-color:#bbbbbb;
+}

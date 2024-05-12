@@ -6,6 +6,8 @@ require_once(__DIR__ . "/product.class.php");
 require_once('connection.db.php');
 require_once(__DIR__ . '/../database/user.class.php');
 require_once(__DIR__ . '/change_in_db.php');
+require_once(__DIR__ . '/../vendor/autoload.php');
+
 
 
 function getUser($email, $password) : ?User{
@@ -83,7 +85,7 @@ function getReviewsWithUsersFromDB($idUser): ?array {
 
 function getCategories() {
     $db = getDatabaseConnection();
-    $stmt = $db->prepare("SELECT C.category 
+    $stmt = $db->prepare("SELECT C.idCategory, C.category 
                         FROM Category C ");
     $stmt->execute();
 
@@ -102,6 +104,64 @@ function getTypes() {
     return $types;  
 
 }
+
+function getTypesofCategory($category) {
+    $db = getDatabaseConnection();
+    $stmt = $db->prepare("SELECT idType, type_name 
+                        FROM TypesInCategory 
+                        WHERE TypesInCategory.category = ?");
+    $stmt->execute(array($category));
+
+    $types = $stmt->fetchAll();
+    return $types;  
+
+}
+
+function getCategory($id) : string {
+    $db = getDatabaseConnection();
+    $stmt = $db->prepare("SELECT C.category 
+                        FROM Category C 
+                        WHERE C.idCategory = ?");
+    $stmt->execute(array($id));
+
+    $category = $stmt->fetch();
+    return $category['category'];  
+}
+
+function getTypebyId($id) : string {
+    $db = getDatabaseConnection();
+    $stmt = $db->prepare("SELECT T.type_name 
+                        FROM TypesInCategory T 
+                        WHERE T.idType = ?");
+    $stmt->execute(array($id));
+
+    $type = $stmt->fetch();
+    return $type['type_name'];  
+}
+
+function getCharacteristic($id) : string {
+    $db = getDatabaseConnection();
+    $stmt = $db->prepare("SELECT C.characteristic 
+                        FROM Characteristic C 
+                        WHERE C.idCharacteristic = ?");
+    $stmt->execute(array($id));
+
+    $ch = $stmt->fetch();
+    return $ch['characteristic'];  
+}
+
+function getCharacteristicsofType($type) {
+    $db = getDatabaseConnection();
+    $stmt = $db->prepare("SELECT idCharacteristic, characteristic 
+                        FROM Characteristic 
+                        WHERE Characteristic.idType = ?");
+    $stmt->execute(array($type));
+
+    $ch = $stmt->fetchAll();
+    return $ch;  
+
+}
+
 
 function getChat($idChat): ?Chat {
     $db = getDatabaseConnection();
@@ -220,4 +280,44 @@ function getRecommended() {
         $products_id = $stmt->fetchAll(PDO::FETCH_COLUMN);
         return $products_id;
     }
+}
+
+function getProductsWithCh($characteristic) {
+    $db = getDatabaseConnection();
+    $stmt = $db->prepare("SELECT P.* 
+                        FROM Characteristic C, Product P 
+                        WHERE C.idCharacteristic = ? AND (characteristic1 == C.idCharacteristic OR characteristic2 == C.idCharacteristic OR characteristic3 == C.idCharacteristic)");
+    $stmt->execute(array($characteristic));
+
+    $aux = $stmt->fetchAll(PDO::FETCH_COLUMN);
+    return $aux;  
+}
+
+function getProductWithCategory($category) {
+    $db = getDatabaseConnection();
+    $stmt = $db->prepare("SELECT T.idType 
+                        FROM Category C, TypesInCategory T
+                        WHERE C.idCategory = ? AND T.category = C.idCategory");
+    $stmt->execute(array($category));
+
+    $aux = $stmt->fetchAll(PDO::FETCH_COLUMN);
+    $products = [];
+    foreach($aux as $a) {
+        $products = array_merge($products, getProductsWithType($a));
+    }
+    return $products;
+}
+
+function getProductsWithType($type) {
+    $db = getDatabaseConnection();
+    $stmt = $db->prepare("SELECT C.idCharacteristic 
+                            FROM TypesInCategory T, Characteristic C 
+                            WHERE T.idType = C.idType AND T.idType = ?");
+    $stmt->execute(array($type));
+    $aux = $stmt->fetchAll(PDO::FETCH_COLUMN);
+    $products = [];
+    foreach($aux as $a) {
+        $products = array_merge($products, getProductsWithCh($a));
+    }
+    return $products;  
 }
