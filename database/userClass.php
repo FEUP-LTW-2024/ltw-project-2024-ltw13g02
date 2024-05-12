@@ -119,6 +119,7 @@ class User {
         $db = getDatabaseConnection();
         $recents = $this->getRecent();
 
+
         foreach ($recents as $recent) {
             if ($recent == $idProduct) {
                 $stmt = $db->prepare('DELETE FROM Recent WHERE Recent.user = ? AND Recent.product = ?');
