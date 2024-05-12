@@ -16,6 +16,7 @@ html {
     border-color: #b8c8d6;
     border-radius: 8px;
     font-size: 20px;
+    cursor: pointer;
 }
 
 h2 {
