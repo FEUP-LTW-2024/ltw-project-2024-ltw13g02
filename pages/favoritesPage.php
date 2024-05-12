@@ -7,7 +7,6 @@
     require_once(__DIR__ . '/../database/connection_to_db.php');
 
     require_once(__DIR__ . '/../templates/common_tmpl.php');
-
     require_once(__DIR__ . '/../templates/productsprint_tmpl.php');
 
     

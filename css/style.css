@@ -541,10 +541,14 @@ footer {
     text-align: center;
 }
 
-#favs {
-    color: red;
+#a_favs {
     grid-column: 2;
     margin: auto;
+}
+
+#favs {
+    color: red;
+    margin: 0;
 }
 
 #favs:hover {

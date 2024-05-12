@@ -1,51 +1,38 @@
 <?php
-// updateFavorites.php
 
-// Include necessary files and classes
-require_once '../database/userClass.php';
-require_once '../sessions/session.php';
+require_once(__DIR__ . "/../sessions/session.php");
+require_once(__DIR__ . "/../database/get_from_db.php");
+require_once(__DIR__ . "/../database/connection_to_db.php");
+require_once(__DIR__ . "/../database/get_from_db.php");
 
-// Initialize session
+if ( !preg_match ("/^[a-zA-Z0-9\s]+$/", $_GET['product'])) {
+    header('Location: ../index.php');
+}
+
 $session = new Session();
+$db = getDatabaseConnection();
+if (!$session->isLoggedIn()) {
+    header('Location: ../pages/index.php');
+}
 
-// Check if the request method is POST
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Check if the action and product ID are set in the request
-    if (isset($_POST['action'], $_POST['idProduct'])) {
-        $action = $_POST['action'];
-        $idProduct = $_POST['idProduct'];
+$user = $session->getUser();
+$product = getProduct($_GET['product']);
 
-        // Get the current user
-        $user = $session->getUser();
+if(isset($product) && isset($user)){
+    $favorites = $user->getFavorites();
 
-        // Perform the action based on the request
-        switch ($action) {
-            case 'add':
-                $user->addToFavorites($idProduct);
-                break;
-            case 'remove':
-                $user->removeFromFavorites($idProduct);
-                break;
-            default:
-                // Invalid action
-                http_response_code(400);
-                echo 'Invalid action.';
-                exit;
-        }
-
-        // Send a success response
-        http_response_code(200);
-        echo 'Favorites updated successfully.';
-        exit;
+    if($favorites != null && in_array($product->getId(), $favorites)) {
+        $stmt = $db->prepare('DELETE
+                              FROM Favorites
+                              WHERE user = ? and product = ?;');
+        $stmt->execute(array($user->getId(), $product->getId()));
     } else {
-        // Missing action or product ID
-        http_response_code(400);
-        echo 'Action or product ID is missing.';
-        exit;
+        $stmt = $db->prepare('INSERT INTO Favorites (user, product)
+                              VALUES(?,?);');
+        $stmt->execute(array($user->getId(), $product->getId()));
     }
+
+    header("Location: ../pages/productPage.php?product={$product->getId()}");
 } else {
-    // Invalid request method
-    http_response_code(405);
-    echo 'Method Not Allowed';
-    exit;
+    header('Location: ../pages/index.php');
 }

@@ -79,13 +79,18 @@ require_once(__DIR__ . '/user_tmpl.php');
                 $idChat = $chat->getId(); 
                 if($seller->getId() != $user->getId()){?>
                     <button id="contact" class="button"><a href="../pages/messagesPage.php?chat=<?php echo $idChat ?>">Contact me</a></button>
-                    <i class="fa fa-heart<?php echo $user->isFavorite($idProduct) ? " isFav" : "-o" ?> fa-2x icon" id="favs" data-product-id="<?php echo $idProduct ?>"></i>
                     <?php
+                        $favorites = $user->getFavorites();
+                        if($favorites != null && in_array($idProduct, $favorites)) { ?>
+                            <a href="../actions/updateFavorites.php?product=<?=$product->getId()?>" id="a_favs"><i class="fa fa-heart isFav fa-2x icon" id="favs"></i></a> <?php
+                        } else { ?>
+                            <a href="../actions/updateFavorites.php?product=<?=$product->getId()?>" id="a_favs"><i class="fa fa-heart-o fa-2x icon" id="favs"></i></a> <?php
+                        }
                         $shoppingCart = $user->getShoppingCart();
                         if(in_array($idProduct, $shoppingCart))
                         { ?>
                             <button id="remove-from-cart" class="button"><a href="../actions/updateCart.php?product=<?=$product->getId()?>">Take From Cart</a></button> <?php
-                        }else{ ?>
+                        } else{ ?>
                             <button id="add-to-cart" class="button"><a href="../actions/updateCart.php?product=<?=$product->getId()?>">Add to cart</a></button> <?php
                         }
                     ?>
@@ -107,34 +112,5 @@ require_once(__DIR__ . '/user_tmpl.php');
             }
             document.getElementById('product-image').src = "../images/products/" + photos[currentIndex]['photo'];
         }
-    </script>
-    <script>
-        document.getElementById('favs').addEventListener('click', function() {
-        var idProduct = this.getAttribute('data-product-id');
-        var isFavorite = this.classList.contains('isFav');
-
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', '../actions/updateFavorites.php', true);
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                if (xhr.status === 200) {
-                    if (isFavorite) {
-                        document.getElementById('favs').classList.remove('isFav');
-                    } else {
-                        document.getElementById('favs').classList.add('isFav');
-                    }
-                } else {
-                    console.error('Error:', xhr.status);
-                }
-            }
-        };
-
-        if (isFavorite) {
-            xhr.send('action=remove&idProduct=' + encodeURIComponent(idProduct));
-        } else {
-            xhr.send('action=add&idProduct=' + encodeURIComponent(idProduct));
-        }
-    });
     </script>
 <?php } ?> 

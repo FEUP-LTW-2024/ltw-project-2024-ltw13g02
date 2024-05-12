@@ -1,6 +1,5 @@
 <?php
 require_once(__DIR__ . '/../database/get_from_db.php');
-
     function drawSearchbar($categories){ ?>
         <body>
             <main>
@@ -53,7 +52,7 @@ function drawFavorites($favorites_ids){ ?>
             <div id="static_offer_container"> <?php 
                 foreach($favorites_ids as $item_id)
                 {
-                    $product = getProduct($item_id['product']);
+                    $product = getProduct($item_id);
 
                     $seller = $product->getSeller();
                     ?>
@@ -63,8 +62,8 @@ function drawFavorites($favorites_ids){ ?>
                 } ?>
             </div>
     </section>
- 
-<?php }
+<?php 
+}
 ?>
 
 <?php

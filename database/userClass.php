@@ -100,7 +100,7 @@ class User {
             WHERE Favorites.user = ?
         ');
         $stmt->execute(array($this->idUser));
-        $favs = $stmt->fetchAll();
+        $favs = $stmt->fetchAll(PDO::FETCH_COLUMN);
         if (count($favs) > 0) {
             return $favs;
         }
