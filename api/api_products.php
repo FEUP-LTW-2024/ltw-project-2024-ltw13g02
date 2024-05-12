@@ -5,7 +5,7 @@
   $session = new Session();
 
   require_once(__DIR__ . '/../database/connection.db.php');
-  require_once(__DIR__ . '/../database/artist.class.php');
+  require_once(__DIR__ . '/../database/productClass.php');
 
   $db = getDatabaseConnection();
 
