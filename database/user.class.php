@@ -2,21 +2,22 @@
 require_once(__DIR__ . '/chat.class.php');
 require_once(__DIR__ . '/../database/connection.db.php');
 
-class User {
-    private string $idUser;
-    private string $firstName;
-    private string $lastName;
-    private string $phone;
-    private string $email;
-    private string $userAddress;
-    private float $stars;
-    private string $city;
-    private int $idCountry;
-    private string $zipCode;
-    private string $photo;
 
-    public function __construct(string $idUser, string $firstName, string $lastName, string $phone, string $email, string $userAddress, float $stars, string $city, int $idCountry, string $photo, string $zipCode) {
-        $this->idUser = $idUser;
+class User {
+    public string $id;
+    public string $firstName;
+    public string $lastName;
+    public string $phone;
+    public string $email;
+    public string $userAddress;
+    public float $stars;
+    public string $city;
+    public int $idCountry;
+    public string $zipCode;
+    public string $photo;
+
+    public function __construct(string $id, string $firstName, string $lastName, string $phone, string $email, string $userAddress, float $stars, string $city, int $idCountry, string $photo, string $zipCode) {
+        $this->id = $id;
         $this->firstName = $firstName;
         $this->lastName = $lastName;
         $this->phone = $phone;
@@ -31,42 +32,6 @@ class User {
 
     function name(): string {
         return $this->firstName . ' ' . $this->lastName;
-    }
-
-    function getFirstName(): string {
-        return $this->firstName;
-    }
-
-    function getLastName(): string {
-        return $this->lastName;
-    }
-
-    function getId(): string {
-        return $this->idUser;
-    }
-
-    function getAddress(): string {
-        return $this->userAddress;
-    }
-
-    function getCity(): string {
-        return $this->city;
-    }
-
-    function getPhone(): string {
-        return $this->phone;
-    }
-
-    function getEmail(): string {
-        return $this->email;
-    }
-
-    function getZipCode(): string {
-        return $this->zipCode;
-    }
-
-    function getPhoto(): string {
-        return $this->photo;
     }
 
     function getCountry() : ?string {
@@ -84,7 +49,7 @@ class User {
             FROM UserAdmin
             WHERE UserAdmin.idUser = ?
         ');
-        $stmt->execute(array($this->idUser));
+        $stmt->execute(array($this->id));
         $admin = $stmt->fetch();
         if ($admin) {
             return true;
@@ -99,7 +64,7 @@ class User {
             FROM Favorites
             WHERE Favorites.user = ?
         ');
-        $stmt->execute(array($this->idUser));
+        $stmt->execute(array($this->id));
         $favs = $stmt->fetchAll(PDO::FETCH_COLUMN);
         if (count($favs) > 0) {
             return $favs;
@@ -123,18 +88,18 @@ class User {
         foreach ($recents as $recent) {
             if ($recent == $idProduct) {
                 $stmt = $db->prepare('DELETE FROM Recent WHERE Recent.user = ? AND Recent.product = ?');
-                $stmt->execute(array($this->idUser, $idProduct));
+                $stmt->execute(array($this->id, $idProduct));
             }
         }
         $recents = $this->getRecent();
         if (count($recents) > 4) {
             for ($i = 4; $i < count($recents); $i++) {
                 $stmt = $db->prepare('DELETE FROM Recent WHERE Recent.user = ? AND Recent.product = ?');
-                $stmt->execute(array($this->idUser, $recents[$i]));
+                $stmt->execute(array($this->id, $recents[$i]));
             }
         }
         $stmt = $db->prepare('INSERT INTO Recent(user, product) VALUES (?, ?)');
-        $stmt->execute(array($this->idUser, $idProduct));
+        $stmt->execute(array($this->id, $idProduct));
     }
 
     function getRecent() : array {
@@ -144,7 +109,7 @@ class User {
             FROM Recent
             WHERE Recent.user = ?
         ');
-        $stmt->execute(array($this->idUser));
+        $stmt->execute(array($this->id));
         $result = $stmt->fetchAll(PDO::FETCH_COLUMN);
 
         if (empty($result)) {
@@ -165,7 +130,7 @@ class User {
             FROM ShoppingCart
             WHERE ShoppingCart.user = ?
         ');
-        $stmt->execute(array($this->idUser));
+        $stmt->execute(array($this->id));
 
         return $stmt->fetchAll(PDO::FETCH_COLUMN);
     }
@@ -178,7 +143,7 @@ class User {
             WHERE seller = ? 
             AND buyer IS NULL
         ');
-        $stmt->execute(array($this->idUser));
+        $stmt->execute(array($this->id));
 
         return $stmt->fetchAll(PDO::FETCH_COLUMN);
     }
@@ -191,7 +156,7 @@ class User {
             WHERE seller = ? 
             AND buyer IS NOT NULL
         ');
-        $stmt->execute(array($this->idUser));
+        $stmt->execute(array($this->id));
 
         return $stmt->fetchAll(PDO::FETCH_COLUMN);
     }
@@ -199,7 +164,7 @@ class User {
     function getReviewsFromDB(): ?array {
         $db = getDatabaseConnection();
         $stmt = $db->prepare("SELECT stars, reviewsDescription FROM Reviews WHERE idUser = ?");
-        $stmt->execute(array($this->idUser));
+        $stmt->execute(array($this->id));
         $reviews = $stmt->fetchAll();
         return $reviews;
     }
@@ -209,7 +174,7 @@ class User {
         $stmt = $db->prepare('SELECT COUNT(*) as num_reviews
                                 FROM  Reviews R
                                 WHERE R.idUser = ?');
-        $stmt->execute(array($this->getId()) );
+        $stmt->execute(array($this->id) );
         $result = $stmt->fetch();
         return $result['num_reviews'];
     }
@@ -219,7 +184,7 @@ class User {
         $stmt = $db->prepare('SELECT P.idProduct
                                 FROM Product P
                                 WHERE P.seller = ? AND P.buyer is NULL');
-        $stmt->execute(array($this->idUser));
+        $stmt->execute(array($this->id));
         $result = $stmt->fetchAll(PDO::FETCH_COLUMN);
         return $result;
     }
@@ -229,7 +194,7 @@ class User {
         $stmt = $db->prepare('SELECT *
                                 FROM Product P
                                 WHERE P.seller = ? AND P.buyer IS NOT NULL');
-        $stmt->execute(array($this->idUser) );
+        $stmt->execute(array($this->id) );
         $products = $stmt->fetchAll();
         return $products;
     }
@@ -245,7 +210,7 @@ class User {
     
         $db = getDatabaseConnection();
         $stmt = $db->prepare("UPDATE User SET stars = ? WHERE idUser = ?");
-        $stmt->execute(array($average, $this->idUser));
+        $stmt->execute(array($average, $this->id));
     
         return $average;
     }
@@ -255,7 +220,7 @@ class User {
         $stmt = $db->prepare("SELECT U.firstName, U.lastName, R.* FROM Reviews R 
         LEFT JOIN User U ON R.idUserFrom = U.idUser
         WHERE R.idUser = ?");
-        $stmt->execute(array($this->idUser));
+        $stmt->execute(array($this->id));
         $reviews = $stmt->fetchAll();
         return $reviews;
     }
@@ -267,7 +232,7 @@ class User {
             FROM Product, Chat
             WHERE Product.seller = ? AND Chat.product = Product.idProduct
         ');
-        $stmt->execute(array($this->idUser));
+        $stmt->execute(array($this->id));
         $result = $stmt->fetchAll();
         $chats = [];
 
@@ -286,7 +251,7 @@ class User {
             FROM Product, Chat
             WHERE Chat.product = Product.idProduct AND Chat.possibleBuyer = ?
         ');
-        $stmt->execute(array($this->idUser));
+        $stmt->execute(array($this->id));
         $result = $stmt->fetchAll();
         $chats = [];
         foreach ($result as $data) {
@@ -305,7 +270,7 @@ class User {
             FROM Chat
             WHERE Chat.product = ? AND Chat.possibleBuyer = ?
         ');
-        $stmt->execute(array($idProduct, $this->idUser));
+        $stmt->execute(array($idProduct, $this->id));
         $result = $stmt->fetch();
         if ($result) {
             return new Chat($result["idChat"], $idProduct, $result["possibleBuyer"]);
@@ -318,7 +283,7 @@ class User {
                 FROM Chat
                 WHERE Chat.product = ? AND Chat.possibleBuyer = ?
             ');
-            $stmt->execute(array($idProduct, $this->idUser));
+            $stmt->execute(array($idProduct, $this->id));
             $result = $stmt->fetch();
             return new Chat($result["idChat"], $idProduct, $result["possibleBuyer"]);
         };
@@ -330,7 +295,7 @@ class User {
             INSERT INTO Chat(product, possibleBuyer)
             VALUES (?, ?)
         ');
-        $stmt->execute(array($idProduct, $this->idUser));
+        $stmt->execute(array($idProduct, $this->id));
     }
 
     function addToFavorites($idProduct) {
@@ -339,7 +304,7 @@ class User {
             INSERT INTO Favorites(user, product)
             VALUES (?, ?)
         ');
-        $stmt->execute(array($this->idUser, $idProduct));
+        $stmt->execute(array($this->id, $idProduct));
     }
 
     function removeFromFavorites($idProduct) {
@@ -348,53 +313,13 @@ class User {
             DELETE FROM Favorites
             WHERE user=? AND product=?
         ');
-        $stmt->execute(array($this->idUser, $idProduct));
-    }
-
-    function setId(string $id) {
-        $this->idUser = $id;
-    }
-
-    function setFirstName(string $fn) {
-        $this->firstName = $fn;
-    }
-
-    function setLastName(string $ln) {
-        $this->firstName = $ln;
-    }
-
-    function setPhone(int $phone) {
-        $this->phone = $phone;
-    }
-
-    function setCountry(int $id) {
-        $this->idCountry = $id;
-    }
-
-    function setCity(string $city) {
-        $this->city = $city;
-    }
-
-    function setEmail(string $email) {
-        $this->email = $email;
-    }
-
-    function setZipCode(string $zipCode) {
-        $this->zipCode = $zipCode;
-    }
-
-    function setAddress(string $userAddress) {
-        $this->userAddress = $userAddress;
-    }
-
-    function setPhoto(string $photo) {
-        $this->photo = $photo;
+        $stmt->execute(array($this->id, $idProduct));
     }
 
     function deleteUser() {
         $db = getDatabaseConnection();
         $stmt = $db->prepare('DELETE FROM User WHERE idUser=:idUser');
-        $stmt->bindParam(':idUser', $this->idUser);
+        $stmt->bindParam(':idUser', $this->id);
         $stmt->execute();
     }
 }

@@ -16,14 +16,14 @@
     $db = getDatabaseConnection();
 
     if (isset($user)) {
-        $seller = getUserbyId($user->getId());
+        $seller = getUserbyId($user->id);
 
         $products = $seller->getSellingProducts();
     } else {
         header('Location: /index.php');
         exit();
     }
-    if ((!$session->isLoggedIn()) or ($session->isLoggedIn() and ($session->getUser()->getId() !== $user->getId())) ) {
+    if ((!$session->isLoggedIn()) or ($session->isLoggedIn() and ($session->getUser()->id !== $user->id)) ) {
         drawHeader($session);
         output_seller_header($db, $user);
         if (sizeof($products) > 0) {

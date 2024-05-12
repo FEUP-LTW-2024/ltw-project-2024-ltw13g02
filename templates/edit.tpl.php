@@ -15,22 +15,22 @@ require_once(__DIR__ . '/../sessions/session.php');
             <br><br>
             <form id="editProfileForm" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
                 <label for="first_name">First Name:</label>
-                <input type="text" id="first_name" name="first_name" value="<?= $user->getFirstName(); ?>">
+                <input type="text" id="first_name" name="first_name" value="<?= $user->firstName; ?>">
 
                 <label for="last_name">Last Name:</label>
-                <input type="text" id="last_name" name="last_name" value="<?= $user->getLastName(); ?>">
+                <input type="text" id="last_name" name="last_name" value="<?= $user->lastName; ?>">
 
                 <label for="phone">Phone:</label>
-                <input type="text" id="phone" name="phone" value="<?= $user->getPhone(); ?>">
+                <input type="text" id="phone" name="phone" value="<?= $user->phone; ?>">
             
                 <label for="address">Address:</label>
-                <input type="text" id="address" name="address" value="<?= $user->getAddress(); ?>">
+                <input type="text" id="address" name="address" value="<?= $user->userAddress; ?>">
                 
                 <label for="country">Country: </label>
                 <label id="country" class="required"> 
                     <select name="country" required>
                         <?php
-                        $currentCountry = $user->getCountry();
+                        $currentCountry = $user->country;
 
                         echo "<option value='$currentCountry'>$currentCountry</option>";
 
@@ -65,10 +65,10 @@ require_once(__DIR__ . '/../sessions/session.php');
                     </select>
                 </label>
                 <label for="city">City:</label>
-                <input type="text" id="city" name="city" value="<?= $user->getCity(); ?>">
+                <input type="text" id="city" name="city" value="<?= $user->city; ?>">
                 
                 <label for="zipCode">Zip Code:</label>
-                <input type="text" id="zipCode" name="zipCode" value="<?= $user->getZipCode(); ?>">
+                <input type="text" id="zipCode" name="zipCode" value="<?= $user->zipCode; ?>">
 
                 <label for="photo">Photo:</label>
                 <input type="file" name="photo" id="photo">

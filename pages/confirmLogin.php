@@ -14,6 +14,6 @@
 
   drawHeader($session);
   drawHamburguer($session, 0);
-  drawConfirmLogIn($session);
+  drawConfirmLogIn();
   drawFooter();
 ?>

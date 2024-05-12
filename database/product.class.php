@@ -1,24 +1,24 @@
 <?php
 
 class Product {
-    private int $idProduct;
-    private string $prodName;
-    private int $price;
-    private int $condition;
-    private int $category;
-    private string $description;
-    private ?string $characteristic1;
-    private ?string $characteristic2;
-    private ?string $characteristic3;
-    private string $seller;
-    private ?string $buyer;
-    private ?string $purchaseDate;
+    public int $id;
+    public string $name;
+    public int $price;
+    public int $condition;
+    public int $category;
+    public string $description;
+    public ?string $characteristic1;
+    public ?string $characteristic2;
+    public ?string $characteristic3;
+    public string $seller;
+    public ?string $buyer;
+    public ?string $purchaseDate;
 
-    public function __construct(int $idProduct, string $prodName, int $price, int $condition, string $description,
+    public function __construct(int $id, string $name, int $price, int $condition, string $description,
                                  ?string $characteristic1, ?string $characteristic2, ?string $characteristic3 , 
                                 string $seller, ?string $buyer, ?string $purchaseDate) {
-        $this->idProduct = $idProduct;
-        $this->prodName = $prodName;
+        $this->id = $id;
+        $this->name = $name;
         $this->price = $price;
         $this->condition = $condition;
         $this->description = $description;
@@ -43,28 +43,6 @@ class Product {
         return $products;
     }
 
-    function getId(): string {
-        return $this->idProduct;
-    }
-
-    function getName(): string {
-        return $this->prodName;
-    }
-
-    function getPrice(): string {
-        return $this->price;
-    }
-
-    function getCondition(): string {
-        return $this->condition;
-    }
-
-    function getDescription(): string {
-        return $this->description;
-    }
-
-    
-
     function getCharacteristics(): array {
         $db = getDatabaseConnection();
         $characteristics = [];
@@ -76,7 +54,7 @@ class Product {
                 JOIN Product ON Characteristic.idCharacteristic = Product.characteristic1
                 WHERE Product.idProduct = ?
             ');
-            $stmt->execute([$this->idProduct]);
+            $stmt->execute([$this->id]);
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
             if ($result) {
                 $characteristics[] = $result['characteristic'];
@@ -90,7 +68,7 @@ class Product {
                 JOIN Product ON Characteristic.idCharacteristic = Product.characteristic2
                 WHERE Product.idProduct = ?
             ');
-            $stmt->execute([$this->idProduct]);
+            $stmt->execute([$this->id]);
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
             if ($result) {
                 $characteristics[] = $result['characteristic'];
@@ -104,7 +82,7 @@ class Product {
                 JOIN Product ON Characteristic.idCharacteristic = Product.characteristic3
                 WHERE Product.idProduct = ?
             ');
-            $stmt->execute([$this->idProduct]);
+            $stmt->execute([$this->id]);
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
             if ($result) {
                 $characteristics[] = $result['characteristic'];
@@ -122,7 +100,7 @@ class Product {
                 FROM Characteristic, Category, TypesInCategory, Product
                 WHERE Product.idProduct = ? AND Product.characteristic1 = Characteristic.idCharacteristic AND Characteristic.idType = TypesInCategory.idType AND TypesInCategory.category = Category.idCategory
             ');
-        $stmt->execute([$this->idProduct]);
+        $stmt->execute([$this->id]);
         $result = $stmt->fetch();
         return $result['category'];
     }
@@ -179,7 +157,7 @@ class Product {
             FROM Photo
             WHERE Photo.idProduct = ?
         ');
-        $stmt->execute(array($this->idProduct));
+        $stmt->execute(array($this->id));
         $photos = $stmt->fetchAll();
         return $photos;
     }

@@ -6,8 +6,6 @@ require_once(__DIR__ . "/product.class.php");
 require_once('connection.db.php');
 require_once(__DIR__ . '/../database/user.class.php');
 require_once(__DIR__ . '/change_in_db.php');
-require_once(__DIR__ . '/../vendor/autoload.php');
-
 
 
 function getUser($email, $password) : ?User{
@@ -268,7 +266,7 @@ function getRecommended() {
         $stmt = $db->prepare('SELECT P.idProduct
                             FROM Product P
                             WHERE P.seller != ? and P.buyer is null;');
-        $stmt->execute(array( $user->getId()));
+        $stmt->execute(array( $user->id));
         $products_id = $stmt->fetchAll(PDO::FETCH_COLUMN);
         return $products_id;
     }else{

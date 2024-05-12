@@ -24,7 +24,7 @@
 
     //photo upload
     $photoDir = __DIR__ . '/../images/userProfile/';
-    $userId = $session->getUser()->getId(); 
+    $userId = $session->getUser()->id; 
     $photoExtension = pathinfo($_FILES["photo"]["name"], PATHINFO_EXTENSION);
     $photoName = $userId . '.' . $photoExtension;
     $photoPath = $photoDir . $photoName;
@@ -64,7 +64,7 @@
           }
       }
     } else {
-      $photoName = $session->getUser()->getPhoto();
+      $photoName = $session->getUser()->photo;
     }
     
 
@@ -83,12 +83,12 @@
 
     // If all validations pass, proceed with updating user data
     $user = $session->getUser();
-    $user->setFirstName($newFirstName);
-    $user->setLastName($newLastName);
+    $user->firstName = $newFirstName;
+    $user->lastName = $newLastName;
     $newPhone = intval($newPhone);
-    $user->setPhone($newPhone);
-    $user->setAddress($newAddress);
-    $user->setCity($newCity);
+    $user->phone = $newPhone;
+    $user->userAddress = $newAddress;
+    $user->city = $newCity;
 
     $db = getDatabaseConnection();
     
@@ -96,13 +96,13 @@
     $stmt->execute(array($newCountry));
     $country = $stmt->fetch(PDO::FETCH_ASSOC);    
     if ($country) {
-        $user->setCountry((int)$country['idCountry']);
+        $user->country = (int)$country['idCountry'];
         $newCountry = (int)$country['idCountry'];
     } else {
         return; // Country Invalid
     }
 
-    $user->setZipCode($newZipCode);
+    $user->zipCode = $newZipCode;
 
     header("Location: /../actions/editingProfileAction.php?first_name=$newFirstName&last_name=$newLastName&phone=$newPhone&address=$newAddress&city=$newCity&country=$newCountry&zipCode=$newZipCode&photo=$photoName");
     exit();

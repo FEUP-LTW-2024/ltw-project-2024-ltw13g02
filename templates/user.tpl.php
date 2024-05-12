@@ -38,12 +38,12 @@ require_once(__DIR__ . '/../sessions/session.php');
               drawStars($stars);
             ?>
             </h2></a>
-            <h2><?php echo "Email: " . $user->getEmail(); ?></h2>
-            <h2><?php echo "Phone: " . $user->getPhone(); ?></h2>
+            <h2><?php echo "Email: " . $user->email; ?></h2>
+            <h2><?php echo "Phone: " . $user->phone; ?></h2>
             <h2><?php echo "Country: " . $user->getCountry(); ?></h2>
-            <h2><?php echo "City: " . $user->getCity(); ?></h2>
-            <h2><?php echo "Address: " . $user->getAddress(); ?></h2>
-            <h2><?php echo "zipCode: " . $user->getZipCode(); ?></h2>
+            <h2><?php echo "City: " . $user->city; ?></h2>
+            <h2><?php echo "Address: " . $user->userAddress; ?></h2>
+            <h2><?php echo "zipCode: " . $user->zipCode; ?></h2>
         <?php
           }
           else {
@@ -60,7 +60,7 @@ require_once(__DIR__ . '/../sessions/session.php');
 <?php function drawPhoto($session, $user) {
     $user = $session->getUser();
     if($user !== null) { ?>
-        <?php $photo = $user->getPhoto(); ?>
+        <?php $photo = $user->photo; ?>
         <div class="user-photo-container">
             <?php if ($photo === "Sem FF") { ?>
                 <a href="../pages/editingProfile.php" class="user-icon-link">

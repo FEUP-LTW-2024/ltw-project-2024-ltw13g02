@@ -21,9 +21,9 @@ require_once(dirname(__FILE__) . "/../templates/productsprint.tpl.php");
             ?>
             </div>
             <?php
-                $user_photo = $user->getPhoto(); 
+                $user_photo = $user->photo; 
                 if ($user_photo !== "Sem FF") {?>
-                    <img class="userStartImg" id="seller_pfp" src="../images/userProfile/<?=$user->getPhoto()?>" alt="seller profile"> <?php
+                    <img class="userStartImg" id="seller_pfp" src="../images/userProfile/<?=$user->photo?>" alt="seller profile"> <?php
 
                 }else{ ?>
                     <i class="fa fa-user fa-1x user-icons" id="seller_pfp"></i> <?php  

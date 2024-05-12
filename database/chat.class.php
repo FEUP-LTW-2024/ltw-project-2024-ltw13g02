@@ -5,10 +5,10 @@ require_once(__DIR__ . "/user.class.php");
 require_once(__DIR__ ."/get_from_db.php");
 
 class Chat {
-    private int $id;
-    private int $product;
-    private string $possibleBuyer;
-    private array $messages;
+    public int $id;
+    public int $product;
+    public string $possibleBuyer;
+    public array $messages;
 
     public function __construct(int $id, int $product, string $possibleBuyer) {
         $this->id = $id;
@@ -25,22 +25,9 @@ class Chat {
         $this->possibleBuyer = $possibleBuyer;
     }
 
-    public function getId(): int {
-        return $this->id;
-    }
-
-    public function setId(int $id): void {
-        $this->id = $id;
-    }
-
     public function getProduct(): Product {
         return getProduct($this->product);
     }
-
-    public function setProduct(int $product): void {
-        $this->product = $product;
-    }
-    
 
     public function getMessages(): array {
         $db = getDatabaseConnection();

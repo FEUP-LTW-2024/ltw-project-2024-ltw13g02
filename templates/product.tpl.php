@@ -33,7 +33,7 @@ require_once(__DIR__ . '/user.tpl.php');
 <?php function drawProduct(Session $session, $idProduct) { 
     $user = $session->getUser();
     $product = getProduct($idProduct);
-    if ($user != null && $product->getSeller()->getId() != $user->getId()) {
+    if ($user != null && $product->getSeller()->id != $user->id) {
         $user->addToRecents($idProduct);
     }
     
@@ -53,8 +53,8 @@ require_once(__DIR__ . '/user.tpl.php');
         </div>
 
         <div class="product-info">
-            <h2 id="product-page-name"><?php echo $product->getName(); ?> </h2>
-            <h2 id="product-page-price"><?php echo $product->getPrice(); ?> € </h2>
+            <h2 id="product-page-name"><?php echo $product->name; ?> </h2>
+            <h2 id="product-page-price"><?php echo $product->price; ?> € </h2>
             <a href="" class="product-page-seller"><h2 class="product-page-seller"><?php echo $seller->name(); ?> </h2></a>
             <a href="" class="product-page-stars"><h2 class="product-page-stars stars">
                 <?php
@@ -72,26 +72,26 @@ require_once(__DIR__ . '/user.tpl.php');
                     <a href="" class="product-characteristic"><h2 id="product-characteristic"> <?php echo $c ?> </h2></a>
                 <?php } ?>
             </div>
-            <h2 id="product-page-description">Description: <?php echo $product->getDescription(); ?> </h2>
+            <h2 id="product-page-description">Description: <?php echo $product->description; ?> </h2>
             <?php $user = $session->getUser();
             if($user != null){
                 $chat = $user->findBuyerChat($idProduct);
-                $idChat = $chat->getId(); 
-                if($seller->getId() != $user->getId()){?>
+                $idChat = $chat->id; 
+                if($seller->id != $user->id){?>
                     <button id="contact" class="button"><a href="../pages/messagesPage.php?chat=<?php echo $idChat ?>">Contact me</a></button>
                     <?php
                         $favorites = $user->getFavorites();
                         if($favorites != null && in_array($idProduct, $favorites)) { ?>
-                            <a href="../actions/updateFavorites.php?product=<?=$product->getId()?>" id="a_favs"><i class="fa fa-heart isFav fa-2x icon" id="favs"></i></a> <?php
+                            <a href="../actions/updateFavorites.php?product=<?=$product->id?>" id="a_favs"><i class="fa fa-heart isFav fa-2x icon" id="favs"></i></a> <?php
                         } else { ?>
-                            <a href="../actions/updateFavorites.php?product=<?=$product->getId()?>" id="a_favs"><i class="fa fa-heart-o fa-2x icon" id="favs"></i></a> <?php
+                            <a href="../actions/updateFavorites.php?product=<?=$product->id?>" id="a_favs"><i class="fa fa-heart-o fa-2x icon" id="favs"></i></a> <?php
                         }
                         $shoppingCart = $user->getShoppingCart();
                         if(in_array($idProduct, $shoppingCart))
                         { ?>
-                            <button id="remove-from-cart" class="button"><a href="../actions/updateCart.php?product=<?=$product->getId()?>">Take From Cart</a></button> <?php
+                            <button id="remove-from-cart" class="button"><a href="../actions/updateCart.php?product=<?=$product->id?>">Take From Cart</a></button> <?php
                         } else{ ?>
-                            <button id="add-to-cart" class="button"><a href="../actions/updateCart.php?product=<?=$product->getId()?>">Add to cart</a></button> <?php
+                            <button id="add-to-cart" class="button"><a href="../actions/updateCart.php?product=<?=$product->id?>">Add to cart</a></button> <?php
                         }
                     ?>
                 <?php } 

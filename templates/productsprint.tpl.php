@@ -3,9 +3,11 @@ require_once(__DIR__ . '/../database/get_from_db.php');
 
 function drawSearchbar(){ ?>
     <body>
+        <script src="../javascript/search.js" defer></script>
         <main>
         <form id="search">
-            <input id="searchbar" type="search" name="searchbar" required>
+            <button id="searchButton"><i class="fa fa-search fa-1x icon"></i></button>
+            <input id="searchbar" type="search" name="searchbar" placeholder="Search..." required>
         </form> 
 <?php 
 }
@@ -231,20 +233,20 @@ function drawArchive($archive_ids)
 
 <?php
 function drawProduct(Product $product, $user){ ?>
-        <a href="../pages/seller_page.php?user=<?=$user->getId()?>" class="user_small_card">
-            <?php if ($user->getPhoto() != "Sem FF") { ?>
-                <img class="user_small_pfp" src="../images/userProfile/<?=$user->getPhoto()?>"> 
+        <a href="../pages/seller_page.php?user=<?=$user->id?>" class="user_small_card">
+            <?php if ($user->photo != "Sem FF") { ?>
+                <img class="user_small_pfp" src="../images/userProfile/<?=$user->photo?>"> 
             <?php } else { ?>
                <h2><i class="fa fa-user fa-1x user-icons"></i></h2>
             <?php } ?>
             <p><?=$user->name() ?></p>
         </a>
-        <a href="../pages/productPage.php?product=<?=$product->getId()?>"><img class="offer_img" src="../images/products/<?= $product->getPhotos()[0]['photo']?>"></a>
+        <a href="../pages/productPage.php?product=<?=$product->id?>"><img class="offer_img" src="../images/products/<?= $product->getPhotos()[0]['photo']?>"></a>
 
-        <a class="offer_info" href="../pages/productPage.php?product=<?=$product->getId()?>">
-            <h4><?=substr($product->getName(),0,30) ?></h4>
-            <h5><?= $user->getCity() . ", " . $user->getCountry()?></h5>
-            <p><?=$product->getPrice()?>€</p>
+        <a class="offer_info" href="../pages/productPage.php?product=<?=$product->id?>">
+            <h4><?=substr($product->name,0,30) ?></h4>
+            <h5><?= $user->city . ", " . $user->getCountry()?></h5>
+            <p><?=$product->price?>€</p>
         </a>
 <?php 
 } 
