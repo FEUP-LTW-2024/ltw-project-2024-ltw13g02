@@ -5,20 +5,19 @@ require_once(__DIR__ . '/../database/get_from_db.php');
         <body>
             <main>
             <form id="search">
-            <select name="category">
-            <option value="All">All</option> 
-
-                <?php 
-                    foreach($categories as $category){ ?>
-                        <option value="<?= $category['category'] ?>"> 
-                            <?= $category['category'] ?>
-                        </option>    
+                <select name="category">
+                <option value="All">All</option> 
                     <?php 
-                    }
-                ?>
-            </select>
-            <input type="search" name="searchbar" required>
-        </form> 
+                        foreach($categories as $category){ ?>
+                            <option value="<?= $category['category'] ?>"> 
+                                <?= $category['category'] ?>
+                            </option>    
+                        <?php 
+                        }
+                    ?>
+                </select>
+                <input id="searchbar" type="search" name="searchbar" required>
+            </form> 
     <?php 
     }
 ?>
