@@ -289,10 +289,9 @@ class User {
         $stmt->execute(array($this->idUser));
         $result = $stmt->fetchAll();
         $chats = [];
-
         foreach ($result as $data) {
             $chat = new Chat($data["idChat"], $data["idProduct"], $data["possibleBuyer"]);
-            if ($chat->getMessages() === NULL) {$chat->deleteChat();}
+            if ($chat->getMessages() === []) {$chat->deleteChat();}
             else {$chats[] = $chat;}
         }
 
