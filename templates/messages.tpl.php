@@ -7,7 +7,7 @@ require_once(__DIR__ . '/../database/get_from_db.php');
 
 require_once(__DIR__ . '/../database/change_in_db.php');
 
-require_once(__DIR__ . '/user_tmpl.php');
+require_once(__DIR__ . '/user.tpl.php');
 
 
 ?>

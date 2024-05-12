@@ -4,11 +4,11 @@
   require_once(__DIR__ . '/../sessions/session.php');
   $session = new Session();
 
-  require_once(__DIR__ . '/../database/connection_to_db.php');
+  require_once(__DIR__ . '/../database/connection.db.php');
 
   require_once(__DIR__ . '/../database/get_from_db.php');
 
-  require_once(__DIR__ . '/../templates/login_tmpl.php');
+  require_once(__DIR__ . '/../templates/login.tpl.php');
 
   $db = getDatabaseConnection();
 

@@ -10,7 +10,7 @@
     require_once(__DIR__ . '/../templates/archive.php');
 
 
-    require_once(__DIR__ . '/../templates/common_tmpl.php');
+    require_once(__DIR__ . '/../templates/common.tpl.php');
 
     $session = new Session();
 

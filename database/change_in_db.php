@@ -1,5 +1,5 @@
 <?php
-include_once('connection_to_db.php');
+include_once('connection.db.php');
 
 function addUser(int $idUser, string $firstName, string $lastName, string $phone, string $email, string $password, string $address, string $city, string $idCountry, string $zipCode) {
     $db = getDatabaseConnection();

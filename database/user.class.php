@@ -1,6 +1,6 @@
 <?php
-require_once(__DIR__ . '/chatClass.php');
-require_once(__DIR__ . '/../database/connection_to_db.php');
+require_once(__DIR__ . '/chat.class.php');
+require_once(__DIR__ . '/../database/connection.db.php');
 
 class User {
     private string $idUser;

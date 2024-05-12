@@ -1,5 +1,5 @@
 <?php
-include_once('../database/connection_to_db.php');
+include_once('../database/connection.db.php');
 include_once('../database/get_from_db.php');
 include_once('../sessions/session.php');
 $session = new Session();

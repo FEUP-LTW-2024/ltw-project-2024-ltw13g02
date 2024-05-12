@@ -1,5 +1,5 @@
 <?php
-require_once(dirname(__FILE__) ."/../templates/productsprint_tmpl.php"); 
+require_once(dirname(__FILE__) . "/../templates/productsprint.tpl.php");
 
     function output_seller_header($db, User $user) {
         $num_reviews = $user->getNumberOfReviews();

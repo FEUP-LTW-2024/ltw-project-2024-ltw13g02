@@ -3,7 +3,7 @@ declare(strict_types = 1);
 
 require_once(__DIR__ . '/../sessions/session.php');
 
-require_once(__DIR__ . "/user_tmpl.php");
+require_once(__DIR__ . "/user.tpl.php");
 
 ?>
 

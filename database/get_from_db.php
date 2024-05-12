@@ -1,10 +1,10 @@
 <?php
-require_once(__DIR__ . '/connection_to_db.php');
-require_once(__DIR__ . '/userClass.php');
-require_once(__DIR__ . "/productClass.php");
+require_once(__DIR__ . '/connection.db.php');
+require_once(__DIR__ . '/user.class.php');
+require_once(__DIR__ . "/product.class.php");
 
-require_once('connection_to_db.php');
-require_once(__DIR__ . '/../database/userClass.php');
+require_once('connection.db.php');
+require_once(__DIR__ . '/../database/user.class.php');
 require_once(__DIR__ . '/change_in_db.php');
 
 

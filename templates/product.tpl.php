@@ -5,12 +5,12 @@ require_once(__DIR__ . '/../sessions/session.php');
 $session = new Session();
 
 require_once(__DIR__ . '/../database/get_from_db.php');
-require_once(__DIR__ . '/../database/userClass.php');
-require_once(__DIR__ . '/../database/productClass.php');
-require_once(__DIR__ . '/../database/chatClass.php');
+require_once(__DIR__ . '/../database/user.class.php');
+require_once(__DIR__ . '/../database/product.class.php');
+require_once(__DIR__ . '/../database/chat.class.php');
 require_once(__DIR__ . '/../database/change_in_db.php');
 
-require_once(__DIR__ . '/user_tmpl.php');
+require_once(__DIR__ . '/user.tpl.php');
 
 
 ?>

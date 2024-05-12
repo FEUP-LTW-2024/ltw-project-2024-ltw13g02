@@ -2,7 +2,7 @@
 
 require_once(__DIR__ . "/../sessions/session.php");
 require_once(__DIR__ . "/../database/get_from_db.php");
-require_once(__DIR__ . "/../database/connection_to_db.php");
+require_once(__DIR__ . "/../database/connection.db.php");
 require_once(__DIR__ . "/../database/get_from_db.php");
 
 if ( !preg_match ("/^[a-zA-Z0-9\s]+$/", $_GET['product'])) {

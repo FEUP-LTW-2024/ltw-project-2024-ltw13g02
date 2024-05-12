@@ -4,13 +4,13 @@
   require_once(__DIR__ . '/../sessions/session.php');
   $session = new Session();
 
-  require_once(__DIR__ . '/../database/connection_to_db.php');
+  require_once(__DIR__ . '/../database/connection.db.php');
 
   require_once(__DIR__ . '/../database/get_from_db.php');
 
-  require_once(__DIR__ . '/../templates/common_tmpl.php');
+  require_once(__DIR__ . '/../templates/common.tpl.php');
 
-  require_once(__DIR__ . '/../templates/admin_tmpl.php');
+  require_once(__DIR__ . '/../templates/admin.tpl.php');
 
   drawHeader($session);
   drawHamburguer($session, 4);

@@ -1,7 +1,7 @@
 <?php
-require_once(__DIR__ ."/messageClass.php");
-require_once(__DIR__ ."/productClass.php");
-require_once(__DIR__ ."/userClass.php");
+require_once(__DIR__ . "/message.class.php");
+require_once(__DIR__ . "/product.class.php");
+require_once(__DIR__ . "/user.class.php");
 require_once(__DIR__ ."/get_from_db.php");
 
 class Chat {

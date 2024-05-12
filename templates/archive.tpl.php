@@ -1,6 +1,6 @@
 <?php
 require_once(__DIR__ . "/../database/get_from_db.php");
-require_once(__DIR__ . "/../database/userClass.php");
+require_once(__DIR__ . "/../database/user.class.php");
 
     function output_archive_user_profile(Session $session) { ?>
         <main id='archive page'>

@@ -1,5 +1,5 @@
 <?php
-    require_once(dirname(__FILE__) ."/../database/connection_to_db.php");
+    require_once(dirname(__FILE__) . "/../database/connection.db.php");
     $db = getDatabaseConnection();
     $itemId = $_POST["product"];
     $userId = $_POST["user"];

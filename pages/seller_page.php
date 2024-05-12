@@ -1,9 +1,9 @@
 <?php
     require_once(__DIR__ . '/../database/get_from_db.php');
 
-    require_once(__DIR__ . '/../templates/common_tmpl.php');
-    require_once(__DIR__ . '/../templates/user_tmpl.php');
-    require_once(__DIR__ . '/../templates/seller_page_tmpl.php');
+    require_once(__DIR__ . '/../templates/common.tpl.php');
+    require_once(__DIR__ . '/../templates/user.tpl.php');
+    require_once(__DIR__ . '/../templates/seller.tpl.php');
 
     require_once(__DIR__ . '/../sessions/session.php');
 
