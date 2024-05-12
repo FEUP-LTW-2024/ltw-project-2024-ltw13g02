@@ -13,6 +13,9 @@
     {
         header('Location: ../pages/cart_page.php');
     }
+    
+
+
     foreach($items as $item) {
         $product = getProduct($item);
 

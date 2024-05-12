@@ -517,7 +517,8 @@ footer {
     margin: auto;
 }
 
-#add-to-cart {
+#add-to-cart,
+#remove-from-cart {
     grid-row: 6;
     grid-column: 3 / span 4;
     margin: auto;

@@ -77,10 +77,18 @@ require_once(__DIR__ . '/user_tmpl.php');
             if($user != null){
                 $chat = $user->findBuyerChat($idProduct);
                 $idChat = $chat->getId(); 
-                if($seller->name() != $user->name()){?>
+                if($seller->getId() != $user->getId()){?>
                     <button id="contact" class="button"><a href="../pages/messagesPage.php?chat=<?php echo $idChat ?>">Contact me</a></button>
-                    <i class="fa fa-heart<?php echo $user->isFavorite($idProduct) ? " isFav" : "-o" ?> fa-2x icon" id="favs" data-product-id="<?php echo $idProduct ?>"></i>  
-                    <button id="add-to-cart" class="button"><a href="">Add to cart</a></button>
+                    <i class="fa fa-heart<?php echo $user->isFavorite($idProduct) ? " isFav" : "-o" ?> fa-2x icon" id="favs" data-product-id="<?php echo $idProduct ?>"></i>
+                    <?php
+                        $shoppingCart = $user->getShoppingCart();
+                        if(in_array($idProduct, $shoppingCart))
+                        { ?>
+                            <button id="remove-from-cart" class="button"><a href="../actions/updateCart.php?product=<?=$product->getId()?>">Take From Cart</a></button> <?php
+                        }else{ ?>
+                            <button id="add-to-cart" class="button"><a href="../actions/updateCart.php?product=<?=$product->getId()?>">Add to cart</a></button> <?php
+                        }
+                    ?>
                 <?php } 
             }?>
         </div>
