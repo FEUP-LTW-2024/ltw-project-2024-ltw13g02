@@ -30,6 +30,19 @@ class Product {
         $this->purchaseDate = $purchaseDate;
     }
 
+    static function searchProduct(string $search) : array {
+        $db = getDatabaseConnection();
+        $stmt = $db->prepare('SELECT idProduct FROM Product WHERE prodName LIKE ?');
+        $stmt->execute(array('%' . $search . '%'));
+    
+        $products = array();
+        while ($product = $stmt->fetch()) {
+            $products[] = getProduct($product);
+        }
+    
+        return $products;
+    }
+
     function getId(): string {
         return $this->idProduct;
     }

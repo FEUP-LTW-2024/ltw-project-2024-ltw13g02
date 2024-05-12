@@ -32,11 +32,11 @@ require_once(__DIR__ . '/user_tmpl.php');
 
 <?php function drawProduct(Session $session, $idProduct) { 
     $user = $session->getUser();
-    if ($user != null){
+    $product = getProduct($idProduct);
+    if ($user != null && $product->getSeller()->getId() != $user->getId()) {
         $user->addToRecents($idProduct);
     }
     
-    $product = getProduct($idProduct);
     $seller = $product->getSeller(); 
     $photos = $product->getPhotos(); ?>
     <div class="product-grid" id="product-grid">
@@ -113,14 +113,12 @@ require_once(__DIR__ . '/user_tmpl.php');
         var idProduct = this.getAttribute('data-product-id');
         var isFavorite = this.classList.contains('isFav');
 
-        // Send AJAX request to add or remove from favorites
         var xhr = new XMLHttpRequest();
         xhr.open('POST', '../actions/updateFavorites.php', true);
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         xhr.onreadystatechange = function() {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 if (xhr.status === 200) {
-                    // Toggle the isFav class based on response
                     if (isFavorite) {
                         document.getElementById('favs').classList.remove('isFav');
                     } else {
@@ -132,7 +130,6 @@ require_once(__DIR__ . '/user_tmpl.php');
             }
         };
 
-        // Send the appropriate action based on current favorite state
         if (isFavorite) {
             xhr.send('action=remove&idProduct=' + encodeURIComponent(idProduct));
         } else {
