@@ -129,7 +129,7 @@ class User {
         if (count($recents) > 4) {
             for ($i = 4; $i < count($recents); $i++) {
                 $stmt = $db->prepare('DELETE FROM Recent WHERE Recent.user = ? AND Recent.product = ?');
-                $stmt->execute(array($this->idUser, $recents[$i]['product']));
+                $stmt->execute(array($this->idUser, $recents[$i]));
             }
         }
         $stmt = $db->prepare('INSERT INTO Recent(user, product) VALUES (?, ?)');
