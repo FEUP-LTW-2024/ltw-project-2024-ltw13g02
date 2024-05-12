@@ -15,6 +15,10 @@ function drawSearchbar(){ ?>
 
 <?php  
 function drawPath($category, $type, $characteristic) { 
+    if ($category == 'All')$category = NULL;
+    else if ($type == 'All') $type = NULL;
+    else if ($characteristic == 'All') $characteristic = NULL;
+
     if ($characteristic == NULL) {
         if ($type != null) $characteristics = getCharacteristicsofType($type);
         else if ($category != null) $types = getTypesofCategory($category);
@@ -26,7 +30,7 @@ function drawPath($category, $type, $characteristic) {
     <input type="hidden" name="type" value="<?php echo $type; ?>">
     <?php if ($category == NULL) { ?>
         <select name="category">
-            <option value="All">All</option> 
+            <option></option> 
             <?php 
                 foreach($categories as $c){ 
             ?>
@@ -42,7 +46,7 @@ function drawPath($category, $type, $characteristic) {
         if ($type == NULL) { ?>
             <h2 class="path"><?php echo getCategory($category) . " |" ?></h2>
             <select name="type">
-                <option value="All">All</option> 
+                <option></option> 
                 <?php 
                     foreach($types as $t){ 
                 ?>
@@ -58,7 +62,7 @@ function drawPath($category, $type, $characteristic) {
             <?php if ($characteristic == NULL) {?>
                 <h2 class="path"><?php echo getCategory($category) . " | " . getTypebyId($type) . " |" ?></h2>
                 <select name="characteristic">
-                    <option value="All">All</option> 
+                    <option></option> 
                     <?php 
                         foreach($characteristics as $ch){ 
                     ?>

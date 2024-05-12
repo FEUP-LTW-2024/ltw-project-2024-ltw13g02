@@ -1,4 +1,6 @@
 <?php
+require_once(__DIR__ . '/../vendor/autoload.php');
+
 
 class Product {
     public int $id;
@@ -39,6 +41,8 @@ class Product {
         while ($product = $stmt->fetch()) {
             $products[] = getProduct($product);
         }
+
+        dd($products);
     
         return $products;
     }
