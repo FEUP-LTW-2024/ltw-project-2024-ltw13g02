@@ -77,7 +77,7 @@ h1 {
     grid-template-rows: 2.5em 1fr 2.5em;
 }
 
-.static_offer .offer_img{
+.offer_img{
     height: 100%;
     width: 95%;
     object-fit: cover;
@@ -128,12 +128,6 @@ header > a > img{
 .offer_info p {
     margin: 0;
     justify-self: end;
-}
-
-.sliding_offer .offer_img{
-    width: 95%;
-    height: 100%;
-    object-fit: cover;
 }
 
 .user_small_card p{
