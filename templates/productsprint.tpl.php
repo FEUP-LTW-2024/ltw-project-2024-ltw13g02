@@ -1,8 +1,6 @@
 <?php
 require_once(__DIR__ . '/../database/get_from_db.php');
 require_once(__DIR__ . '/../utils/filter.php');
-require_once(__DIR__ . '/../vendor/autoload.php');
-
 
 function drawSearchbar(){ ?>
     <body>
@@ -12,6 +10,7 @@ function drawSearchbar(){ ?>
             <button id="searchButton"><i class="fa fa-search fa-1x icon"></i></button>
             <input id="searchbar" type="search" name="searchbar" placeholder="Search..." required>
         </form> 
+        <div id="search-results"></div>
 <?php 
 }
 ?>

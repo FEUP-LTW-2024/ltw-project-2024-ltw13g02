@@ -6,8 +6,6 @@ require_once(__DIR__ . "/product.class.php");
 require_once('connection.db.php');
 require_once(__DIR__ . '/../database/user.class.php');
 require_once(__DIR__ . '/change_in_db.php');
-require_once(__DIR__ . '/../vendor/autoload.php');
-
 
 
 function getUser($email, $password) : ?User{
