@@ -95,8 +95,19 @@ class Product {
         
         return $characteristics;
     }
-    
 
+    function getCondition() : string {
+        $db = getDatabaseConnection();
+        $stmt = $db->prepare('
+                SELECT Condition.condition
+                FROM Condition, Product
+                WHERE Product.idProduct = ? AND Product.condition = Condition.idCondition
+            ');
+        $stmt->execute([$this->id]);
+        $result = $stmt->fetch();
+        return $result['condition'];
+    }
+    
     function getCategory() : string {
         $db = getDatabaseConnection();
         $stmt = $db->prepare('

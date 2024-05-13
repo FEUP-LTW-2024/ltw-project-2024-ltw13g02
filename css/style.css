@@ -546,11 +546,6 @@ footer {
     text-align: center;
 }
 
-#a_favs {
-    grid-column: 2;
-    margin: auto;
-}
-
 #favs {
     color: red;
     margin: 0;

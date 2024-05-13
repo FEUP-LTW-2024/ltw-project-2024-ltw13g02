@@ -6,6 +6,8 @@ require_once(__DIR__ . "/product.class.php");
 require_once('connection.db.php');
 require_once(__DIR__ . '/../database/user.class.php');
 require_once(__DIR__ . '/change_in_db.php');
+require_once(__DIR__ . '/../vendor/autoload.php');
+
 
 
 function getUser($email, $password) : ?User{
@@ -89,6 +91,17 @@ function getCategories() {
 
     $categories = $stmt->fetchAll();
     return $categories;  
+
+}
+
+function getConditions() {
+    $db = getDatabaseConnection();
+    $stmt = $db->prepare("SELECT C.idCondition, C.condition 
+                        FROM Condition C ");
+    $stmt->execute();
+
+    $conditions = $stmt->fetchAll();
+    return $conditions;  
 
 }
 
@@ -282,7 +295,7 @@ function getRecommended() {
 
 function getProductsWithCh($characteristic) {
     $db = getDatabaseConnection();
-    $stmt = $db->prepare("SELECT P.* 
+    $stmt = $db->prepare("SELECT P.idProduct
                         FROM Characteristic C, Product P 
                         WHERE C.idCharacteristic = ? AND (characteristic1 == C.idCharacteristic OR characteristic2 == C.idCharacteristic OR characteristic3 == C.idCharacteristic)");
     $stmt->execute(array($characteristic));
@@ -304,6 +317,17 @@ function getProductWithCategory($category) {
         $products = array_merge($products, getProductsWithType($a));
     }
     return $products;
+}
+
+function getCondition($condition) :string {
+    $db = getDatabaseConnection();
+    $stmt = $db->prepare("SELECT C.condition 
+                        FROM Condition C
+                        WHERE C.idCondition = ?");
+    $stmt->execute(array($condition));
+
+    $aux = $stmt->fetch();
+    return $aux['condition'];
 }
 
 function getProductsWithType($type) {

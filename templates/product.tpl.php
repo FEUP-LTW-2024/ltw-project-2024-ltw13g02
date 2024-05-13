@@ -65,11 +65,13 @@ require_once(__DIR__ . '/user.tpl.php');
             <?php
             $characteristics = $product->getCharacteristics();
             $category = $product->getCategory();
+            $condition = $product->getCondition();
             ?>
-            <a href="" class="product-category"><h2 class="product-category">Category: <?php echo $category ?> </h2></a>
+            <h2 id="product-condition"> Condition: <?php echo $condition ?> </h2>
+            <h2 class="product-category">Category: <?php echo $category ?> </h2>
             <div id="product-characteristics"> 
                 <?php foreach ($characteristics as $c) { ?> 
-                    <a href="" class="product-characteristic"><h2 id="product-characteristic"> <?php echo $c ?> </h2></a>
+                    <h2 id="product-characteristic"> <?php echo $c ?> </h2>
                 <?php } ?>
             </div>
             <h2 id="product-page-description">Description: <?php echo $product->description; ?> </h2>

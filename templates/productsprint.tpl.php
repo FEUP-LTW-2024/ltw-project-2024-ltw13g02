@@ -1,5 +1,8 @@
 <?php
 require_once(__DIR__ . '/../database/get_from_db.php');
+require_once(__DIR__ . '/../utils/filter.php');
+require_once(__DIR__ . '/../vendor/autoload.php');
+
 
 function drawSearchbar(){ ?>
     <body>
@@ -14,20 +17,13 @@ function drawSearchbar(){ ?>
 ?>
 
 <?php  
-function drawPath($category, $type, $characteristic) { 
-    if ($category == 'All')$category = NULL;
-    else if ($type == 'All') $type = NULL;
-    else if ($characteristic == 'All') $characteristic = NULL;
-
-    if ($characteristic == NULL) {
-        if ($type != null) $characteristics = getCharacteristicsofType($type);
-        else if ($category != null) $types = getTypesofCategory($category);
-        else if ($category == null) $categories = getCategories();
-    } 
+function drawPath() { 
+    $category = $_GET["category"];
+    if ($category != null) $types = getTypesofCategory($category);
+    else $categories = getCategories();
+    $conditions = getConditions();
 ?>
 <form id="filter" action="../pages/index.php" method="get">
-    <input type="hidden" name="category" value="<?php echo $category; ?>">
-    <input type="hidden" name="type" value="<?php echo $type; ?>">
     <?php if ($category == NULL) { ?>
         <select name="category">
             <option></option> 
@@ -41,44 +37,46 @@ function drawPath($category, $type, $characteristic) {
                 }
             ?>
         </select>
-        <button id="go-search" class="button" type="submit">Search</button>
     <?php }  else { 
-        if ($type == NULL) { ?>
-            <h2 class="path"><?php echo getCategory($category) . " |" ?></h2>
-            <select name="type">
-                <option></option> 
-                <?php 
-                    foreach($types as $t){ 
-                ?>
-                        <option value="<?= $t['idType'] ?>"> 
-                            <?= $t['type_name'] ?>
-                        </option>    
-                <?php 
-                    }
-                ?>
-            </select>
-            <button id="go-search" class="button" type="submit">Search</button>
-        <?php } else { ?>
-            <?php if ($characteristic == NULL) {?>
-                <h2 class="path"><?php echo getCategory($category) . " | " . getTypebyId($type) . " |" ?></h2>
-                <select name="characteristic">
-                    <option></option> 
+        ?> <input type="hidden" name="category" value="<?php echo $category; ?>"> <?php
+            for ($i = 0; $i < count($types); $i++) {
+                $characteristics = getCharacteristicsofType($types[$i]['idType']); ?>
+                <select name="characteristic<?php echo $i + 1 ?>">
                     <?php 
-                        foreach($characteristics as $ch){ 
-                    ?>
-                            <option value="<?= $ch['idCharacteristic'] ?>"> 
-                                <?= $ch['characteristic'] ?>
-                            </option>    
-                    <?php 
+                    echo $_GET["characteristic" . $i + 1] != NULL ? "<option value='" . $_GET["characteristic" . $i + 1] . "'>" . getCharacteristic($_GET["characteristic" . $i + 1]) . "</option> <option></option>" : "<option></option>";
+                    foreach($characteristics as $c) { 
+                        if ($_GET["characteristic" . $i + 1] != NULL && $c['characteristic'] == getCharacteristic($_GET["characteristic" . $i + 1])) {
+                            continue;
                         }
-                    ?>
+                        else { ?>
+                        <option value="<?= $c['idCharacteristic'] ?>"> 
+                            <?= $c['characteristic'] ?>
+                        </option>    
+                    <?php }
+                    } ?>
                 </select>
-                <button id="go-search" class="button" type="submit">Search</button>
-            <?php } else {?>
-                <h2 class="path"><?php echo getCategory($category) . " | " . getTypebyId($type) . " | " . getCharacteristic($characteristic) ?></h2>
-            <?php } ?>
-        <?php } ?>
-    <?php }?>
+        <?php }
+        } ?>
+    <select name="condition">
+        <?php 
+            echo $_GET["condition"] != NULL ? "<option value='" . $_GET["condition"] . "'>" . getCondition($_GET["condition"]) . "</option> <option></option>" : "<option></option>";
+            foreach($conditions as $c) { 
+                if ($_GET["condition"] != NULL && $c['condition'] == getCondition($_GET["condition"])) {
+                    continue;
+                }
+                else {
+        ?>
+                <option value="<?= $c['idCondition'] ?>"> 
+                    <?= $c['condition'] ?>
+                </option>    
+        <?php 
+                }
+            }
+        ?>
+    </select>
+    <input type="text" class="price-filter" name="price-min" placeholder=" Min Price" value="<?= $_GET["price-min"] === NULL ? "" : $_GET["price-min"] ?>">
+    <input type="text" class="price-filter" name="price-max" placeholder=" Max Price" value="<?= $_GET["price-max"] === NULL ? "" : $_GET["price-max"] ?>">
+    <button id="go-search" class="button" type="submit">Search</button>
 </form>
 <?php } ?>
 
@@ -215,11 +213,16 @@ function drawArchive($archive_ids)
         </section>
     <?php } 
 ?>
-
-<?php function drawProductswithFilter($category, $type, $characteristic) { 
-    if ($characteristic != NULL) $products = getProductsWithCh($characteristic);
-    else if ($type != NULL)  $products = getProductsWithType($type);
-    else if ($category != NULL)  $products = getProductWithCategory($category); ?>
+<?php function drawProductswithFilter() { 
+    if ($_GET['characteristic1'] != NULL) {
+        $products = getProductsWithCh($_GET['characteristic1']);
+        if ($_GET['characteristic2'] != NULL) $products = array_merge($products, getProductsWithCh($_GET['characteristic2']));
+        if ($_GET['characteristic3'] != NULL) $products = array_merge($products, getProductsWithCh($_GET['characteristic3']));
+    }
+    else if ($_GET['category'] != NULL)  $products = getProductWithCategory($_GET['category']); 
+    else $products = getRecommended(); 
+    if ($_GET['condition'] != NULL) $products = filterByCondition($products, $_GET['condition']);
+    if ($_GET['price-min'] != NULL || $_GET['price-max'] != NULL) $products = filterByPrice($products, $_GET['price-min'], $_GET['price-max']);?>
     <section class="Products" id="ProductsWithFilter">
         <div id="static_offer_container">
             <?php
@@ -236,7 +239,7 @@ function drawArchive($archive_ids)
 <?php } ?>
 
 <?php
-function drawProduct(Product $product, $user){ ?>
+function drawProduct(Product $product, $user) { ?>
         <a href="../pages/seller_page.php?user=<?=$user->id?>" class="user_small_card">
             <?php if ($user->photo != "Sem FF") { ?>
                 <img class="user_small_pfp" src="../images/userProfile/<?=$user->photo?>"> 
@@ -248,10 +251,8 @@ function drawProduct(Product $product, $user){ ?>
         <a href="../pages/productPage.php?product=<?=$product->id?>"><img class="offer_img" src="../images/products/<?= $product->getPhotos()[0]['photo']?>"></a>
 
         <a class="offer_info" href="../pages/productPage.php?product=<?=$product->id?>">
-            <h4><?=substr($product->name,0,30) ?></h4>
+            <h4><?=substr($product->name, 0, 30) ?></h4>
             <h5><?= $user->city . ", " . $user->getCountry()?></h5>
             <p><?=$product->price?>€</p>
         </a>
-<?php 
-} 
-?>
+<?php } ?>

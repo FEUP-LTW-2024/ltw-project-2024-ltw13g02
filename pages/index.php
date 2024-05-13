@@ -16,11 +16,11 @@
   $db = getDatabaseConnection();
   drawHeader($session);
 
-  drawPath($_GET['category'], $_GET['type'], $_GET['characteristic']);
+  drawPath();
 
   drawSearchbar();
 
-  if ($_GET['category'] == NULL && $_GET['type'] == NULL && $_GET['characteristic'] == NULL) {
+  if ($_GET['category'] == NULL && $_GET['type'] == NULL && $_GET['characteristic1'] == NULL && $_GET['condition'] == NULL && $_GET['price-min'] == NULL && $_GET['price-max'] == NULL) {
     if ($session->isLoggedIn()) 
     {
 
@@ -34,6 +34,6 @@
     drawRecommended($recommended_ids);
   }
   else {
-    drawProductswithFilter($_GET['category'], $_GET['type'], $_GET['characteristic']);
+    drawProductswithFilter();
   }
   drawFooter();
