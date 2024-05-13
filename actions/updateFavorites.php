@@ -21,18 +21,18 @@ $product = getProduct($_GET['product']);
 if(isset($product) && isset($user)){
     $favorites = $user->getFavorites();
 
-    if($favorites != null && in_array($product->getId(), $favorites)) {
+    if($favorites != null && in_array($product->id, $favorites)) {
         $stmt = $db->prepare('DELETE
                               FROM Favorites
                               WHERE user = ? and product = ?;');
-        $stmt->execute(array($user->getId(), $product->getId()));
+        $stmt->execute(array($user->id, $product->id));
     } else {
         $stmt = $db->prepare('INSERT INTO Favorites (user, product)
                               VALUES(?,?);');
-        $stmt->execute(array($user->getId(), $product->getId()));
+        $stmt->execute(array($user->id, $product->id));
     }
 
-    header("Location: ../pages/productPage.php?product={$product->getId()}");
+    header("Location: ../pages/productPage.php?product={$product->id}");
 } else {
     header('Location: ../pages/index.php');
 }

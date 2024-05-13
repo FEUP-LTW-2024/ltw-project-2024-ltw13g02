@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
     $photoName = $_GET['photo'];
 
 
-    $email = $session->getUser()->getEmail();
+    $email = $session->getUser()->email;
     updateUser($session, $email, $newFirstName, $newLastName, $newPhone, $newAddress, $newCity, $newCountry, $newZipCode, $photoName);
 
     header("Location: /../pages/profilePage.php");
@@ -33,5 +33,5 @@ function updateUser(Session $session, string $email, string $newFirstName, strin
     $stmt = $db->prepare('UPDATE User SET firstName = :firstName, lastName = :lastName, phone = :phone, userAddress = :address, city = :city, idCountry = :idCountry, zipCode = :zipCode, photo = :photoName WHERE email = :email');
     $stmt->execute(array(':firstName' => $newFirstName, ':lastName' => $newLastName, ':email' => $email, ':phone' => $newPhone, ':address' => $newAddress, ':city' => $newCity, ':idCountry' => $newCountry, ':zipCode' => $newZipCode, ':photoName' => $photoName));
     
-    $session->setUser(getUserbyId($user->getId()));
+    $session->setUser(getUserbyId($user->id));
 }

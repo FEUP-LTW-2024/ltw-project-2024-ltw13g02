@@ -11,7 +11,7 @@ $db = getDatabaseConnection();
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
     $newEmail = $_GET['email'];
 
-    $id = $session->getUser()->getId();
+    $id = $session->getUser()->id;
     updateUserPassword($session, $id, $newEmail);
 
     header("Location: /../pages/profilePage.php");
@@ -25,5 +25,5 @@ function updateUserPassword(Session $session, string $id, string $newEmail) {
     $stmt = $db->prepare('UPDATE User SET email = :email WHERE idUser = :id');
     $stmt->execute(array(':id' => $id, ':email' => $newEmail));
     
-    $session->setUser(getUserbyId($user->getId()));
+    $session->setUser(getUserbyId($user->id));
 }

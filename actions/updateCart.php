@@ -25,19 +25,19 @@ if(isset($product) && isset($user)){
 
     $shoppingCart = $user->getShoppingCart();
 
-    if(in_array($product->getId(), $shoppingCart))
+    if(in_array($product->id, $shoppingCart))
     {
 
         $stmt = $db->prepare('DELETE
                               FROM ShoppingCart
                               WHERE user = ? and product = ?;');
-        $stmt->execute(array($user->getId(), $product->getId()));
+        $stmt->execute(array($user->id, $product->id));
     }else{
         $stmt = $db->prepare('INSERT OR REPLACE INTO ShoppingCart (user, product)
                               VALUES(?,?);');
-        $stmt->execute(array($user->getId(), $product->getId()));
+        $stmt->execute(array($user->id, $product->id));
     }
-    header("Location: ../pages/productPage.php?product={$product->getId()}");
+    header("Location: ../pages/productPage.php?product={$product->id}");
 }else{
     header('Location: ../pages/index.php');
 }

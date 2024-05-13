@@ -11,7 +11,7 @@ $db = getDatabaseConnection();
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
     $newPassword = password_hash($_GET['password'], PASSWORD_BCRYPT);
 
-    $email = $session->getUser()->getEmail();
+    $email = $session->getUser()->email;
     updateUserPassword($session, $email, $newPassword);
 
     header("Location: /../pages/profilePage.php");
@@ -25,5 +25,5 @@ function updateUserPassword(Session $session, string $email, string $newPassword
     $stmt = $db->prepare('UPDATE User SET userPassword = :userPassword WHERE email = :email');
     $stmt->execute(array(':userPassword' => $newPassword, ':email' => $email));
     
-    $session->setUser(getUserbyId($user->getId()));
+    $session->setUser(getUserbyId($user->id));
 }

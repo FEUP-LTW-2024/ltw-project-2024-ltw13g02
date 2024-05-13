@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($user) {
         $stmt = $db->prepare("INSERT INTO UserAdmin(idUser) VALUES (?)");
-        $stmt->execute(array($user->getId()));
+        $stmt->execute(array($user->id));
     }
 
     header("Location: /../pages/adminPage.php");

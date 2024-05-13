@@ -25,12 +25,12 @@
         }else{
             
 
-            removeFromCarts($db, $product->getId());
-            removeFromRecent($db, $product->getId());            
-            removeFromFavorites($db, $product->getId());
+            removeFromCarts($db, $product->id);
+            removeFromRecent($db, $product->id);            
+            removeFromFavorites($db, $product->id);
             $user = $session->getUser();
-            addShiping($db,$product->getId(),$user->getId(),$product->getSeller()->getId());
-            uppdateBuyer($db,$product->getId() ,$user->getId());
+            addShiping($db,$product->id,$user->id,$product->getSeller()->id);
+            uppdateBuyer($db,$product->id ,$user->id);
 
         }
     }

@@ -9,7 +9,7 @@ require_once(__DIR__ . '/../database/get_from_db.php');
 
 if(isset($_POST['email']) && isset($_POST['password'])) {
     $user = getUser($_POST['email'], $_POST['password']);
-    if ($user && $_POST['email'] == $session->getUser()->getEmail()) {
+    if ($user && $_POST['email'] == $session->getUser()->email) {
         $session->addMessage('success', 'Confirm Login successful!');
         header("Location: ../pages/changeEmailOrPassword.php");
     } else {

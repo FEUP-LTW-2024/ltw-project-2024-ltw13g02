@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($user) {
         $stmt = $db->prepare("DELETE FROM UserAdmin WHERE idUser=?");
-        $stmt->execute(array($user->getId()));
+        $stmt->execute(array($user->id));
     }
 
     header("Location: /../pages/adminPage.php");
