@@ -5,7 +5,7 @@ require_once(__DIR__ . '/../utils/filter.php');
 function drawSearchbar(){ ?>
     <body>
         <main>
-        <input id="searchbar" type="text" name="searchbar" placeholder="Search...">
+        <input id="searchbar" type="text" name="searchbar" oninput="myFunction()" placeholder="Search...">
         <div id="search-results"></div>
 <?php 
 }
@@ -92,7 +92,7 @@ function drawRecent($recent_ids)
                         $seller = $product->getSeller();
                         ?>
                         <div class="sliding_offer"> <?php
-                            drawProduct($product, $seller);  ?>
+                            drawSmallProduct($product, $seller);  ?>
                         </div> <?php 
                     } ?>
                 </div>
@@ -114,7 +114,7 @@ function drawFavorites($favorites_ids){ ?>
                     $seller = $product->getSeller();
                     ?>
                     <div class="sliding_offer"> <?php
-                        drawProduct($product, $seller);  ?>
+                        drawSmallProduct($product, $seller);  ?>
                     </div> <?php 
                 } ?>
             </div>
@@ -137,7 +137,7 @@ function drawRecommended($recommended_ids) { ?>
 
                     $seller = $product->getSeller();?>
                     <div class="static_offer"> <?php
-                        drawProduct($product, $seller);  ?>
+                        drawSmallProduct($product, $seller);  ?>
                     </div> <?php
                 }
             } ?>
@@ -158,7 +158,7 @@ function drawSellerProducts($seller_items_ids) { ?>
             { 
                 $product = getProduct($itemId) ?>   
                 <div class="static_offer"> <?php
-                    drawProduct($product, $seller);  ?>
+                    drawSmallProduct($product, $seller);  ?>
                 </div> <?php
             }
             ?>
@@ -180,7 +180,7 @@ function drawAnnouncements($announcements_ids)
                     $seller = $product->getSeller();
                     ?>
                     <div class="sliding_offer"> <?php
-                        drawProduct($product, $seller);  ?>
+                        drawSmallProduct($product, $seller);  ?>
                     </div> <?php 
                 } ?>
             </div>
@@ -201,7 +201,7 @@ function drawArchive($archive_ids)
                     $seller = $product->getSeller();
                     ?>
                     <div class="sliding_offer"> <?php
-                        drawProduct($product, $seller);  ?>
+                        drawSmallProduct($product, $seller);  ?>
                     </div> <?php 
                 } ?>
             </div>
@@ -226,7 +226,7 @@ function drawArchive($archive_ids)
 
                 $seller = $product->getSeller();?>
                 <div class="static_offer"> <?php
-                    drawProduct($product, $seller);  ?>
+                    drawSmallProduct($product, $seller);  ?>
                 </div> <?php
             } ?>
         </div>
@@ -234,20 +234,20 @@ function drawArchive($archive_ids)
 <?php } ?>
 
 <?php
-function drawProduct(Product $product, $user) { ?>
-        <a href="../pages/seller_page.php?user=<?=$user->id?>" class="user_small_card">
-            <?php if ($user->photo != "Sem FF") { ?>
-                <img class="user_small_pfp" src="../images/userProfile/<?=$user->photo?>"> 
-            <?php } else { ?>
-               <h2><i class="fa fa-user fa-1x user-icons"></i></h2>
-            <?php } ?>
-            <p><?=$user->name() ?></p>
-        </a>
-        <a href="../pages/productPage.php?product=<?=$product->id?>"><img class="offer_img" src="../images/products/<?= $product->getPhotos()[0]['photo']?>"></a>
+function drawSmallProduct(Product $product, $user) { ?>
+    <a href="../pages/seller_page.php?user=<?=$user->id?>" class="user_small_card">
+        <?php if ($user->photo != "Sem FF") { ?>
+            <img class="user_small_pfp" src="../images/userProfile/<?=$user->photo?>"> 
+        <?php } else { ?>
+            <h2><i class="fa fa-user fa-1x user-icons"></i></h2>
+        <?php } ?>
+        <p><?=$user->name() ?></p>
+    </a>
+    <a href="../pages/productPage.php?product=<?=$product->id?>"><img class="offer_img" src="../images/products/<?= $product->getPhotos()[0]['photo']?>"></a>
 
-        <a class="offer_info" href="../pages/productPage.php?product=<?=$product->id?>">
-            <h4><?=substr($product->name, 0, 30) ?></h4>
-            <h5><?= $user->city . ", " . $user->getCountry()?></h5>
-            <p><?=$product->price?>€</p>
-        </a>
+    <a class="offer_info" href="../pages/productPage.php?product=<?=$product->id?>">
+        <h4><?=substr($product->name, 0, 30) ?></h4>
+        <h5><?= $user->city . ", " . $user->getCountry()?></h5>
+        <p><?=$product->price?>€</p>
+    </a>
 <?php } ?>
