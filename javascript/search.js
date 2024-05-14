@@ -21,7 +21,7 @@ if (searchProducts) {
 
         for (const product of products) {
             const div = document.createElement('div');
-            div.className = "static_offer";
+            div.className = "static_offer_container";
 
             fetchProductSeller(product.seller)
                 .then(seller => {

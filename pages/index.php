@@ -20,7 +20,7 @@
 
   drawSearchbar();
 
-  if ($_GET['category'] == NULL && $_GET['type'] == NULL && $_GET['characteristic1'] == NULL && $_GET['condition'] == NULL && $_GET['price-min'] == NULL && $_GET['price-max'] == NULL) {
+  if ($_GET['searchbar'] == NULL && $_GET['category'] == NULL && $_GET['type'] == NULL && $_GET['characteristic'] == NULL && $_GET['condition'] == NULL && $_GET['price-min'] == NULL && $_GET['price-max'] == NULL) {
     if ($session->isLoggedIn()) 
     {
 

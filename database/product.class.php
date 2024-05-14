@@ -40,8 +40,6 @@ class Product {
         while ($product = $stmt->fetch()) {
             $products[] = getProduct($product);
         }
-
-        dd($products);
     
         return $products;
     }

@@ -6,10 +6,8 @@ function drawSearchbar(){ ?>
     <body>
         <script src="../javascript/search.js" defer></script>
         <main>
-        <form id="search">
-            <button id="searchButton"><i class="fa fa-search fa-1x icon"></i></button>
-            <input id="searchbar" type="search" name="searchbar" placeholder="Search..." required>
-        </form> 
+        <button id="searchButton"><i class="fa fa-search fa-1x icon"></i></button>
+        <input id="searchbar" type="text" name="searchbar" placeholder="Search...">
         <div id="search-results"></div>
 <?php 
 }
@@ -24,7 +22,7 @@ function drawPath() {
 ?>
 <form id="filter" action="../pages/index.php" method="get">
     <?php if ($category == NULL) { ?>
-        <select name="category">
+        <select name="category" id="category">
             <option></option> 
             <?php 
                 foreach($categories as $c){ 
@@ -40,7 +38,7 @@ function drawPath() {
         ?> <input type="hidden" name="category" value="<?php echo $category; ?>"> <?php
             for ($i = 0; $i < count($types); $i++) {
                 $characteristics = getCharacteristicsofType($types[$i]['idType']); ?>
-                <select name="characteristic<?php echo $i + 1 ?>">
+                <select name="characteristic<?php echo $i + 1 ?>" class="characteristic">
                     <?php 
                     echo $_GET["characteristic" . $i + 1] != NULL ? "<option value='" . $_GET["characteristic" . $i + 1] . "'>" . getCharacteristic($_GET["characteristic" . $i + 1]) . "</option> <option></option>" : "<option></option>";
                     foreach($characteristics as $c) { 
@@ -56,7 +54,7 @@ function drawPath() {
                 </select>
         <?php }
         } ?>
-    <select name="condition">
+    <select name="condition" id="condition">
         <?php 
             echo $_GET["condition"] != NULL ? "<option value='" . $_GET["condition"] . "'>" . getCondition($_GET["condition"]) . "</option> <option></option>" : "<option></option>";
             foreach($conditions as $c) { 
