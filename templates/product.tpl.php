@@ -80,27 +80,29 @@ require_once(__DIR__ . '/user.tpl.php');
                 $chat = $user->findBuyerChat($idProduct);
                 $idChat = $chat->id; 
                 if($seller->id != $user->id){?>
-                    <button id="contact" class="button"><a href="../pages/messagesPage.php?chat=<?php echo $idChat ?>">Contact me</a></button>
-                    <?php
-                        $favorites = $user->getFavorites();
-                        if($favorites != null && in_array($idProduct, $favorites)) { ?>
-                            <a href="../actions/updateFavorites.php?product=<?=$product->id?>" id="a_favs"><i class="fa fa-heart isFav fa-2x icon" id="favs"></i></a> <?php
-                        } else { ?>
-                            <a href="../actions/updateFavorites.php?product=<?=$product->id?>" id="a_favs"><i class="fa fa-heart-o fa-2x icon" id="favs"></i></a> <?php
-                        }
-                        $shoppingCart = $user->getShoppingCart();
+                    <button id="contact" class="button"><a href="../pages/messagesPage.php?chat=<?php echo $idChat ?>">Contact me</a></button> <?php
+                    $favorites = $user->getFavorites();
+                    if($favorites != null && in_array($idProduct, $favorites)) { ?>
+                        <a href="../actions/updateFavorites.php?product=<?=$product->id?>" id="a_favs"><i class="fa fa-heart isFav fa-2x icon" id="favs"></i></a> <?php
+                    } else { ?>
+                        <a href="../actions/updateFavorites.php?product=<?=$product->id?>" id="a_favs"><i class="fa fa-heart-o fa-2x icon" id="favs"></i></a> <?php
+                    }
+                    $shoppingCart = $user->getShoppingCart();
+                    if ($product->getBuyer() == null){
                         if(in_array($idProduct, $shoppingCart))
                         { ?>
                             <button id="remove-from-cart" class="button"><a href="../actions/updateCart.php?product=<?=$product->id?>">Take From Cart</a></button> <?php
                         } else{ ?>
                             <button id="add-to-cart" class="button"><a href="../actions/updateCart.php?product=<?=$product->id?>">Add to cart</a></button> <?php
                         }
+                    }
+                }
                     ?>
                 <?php } 
             }?>
         </div>
     </div>
-
+    
     <script>
         var currentIndex = 0;
         var photos = <?php echo json_encode($photos); ?>;
@@ -115,4 +117,3 @@ require_once(__DIR__ . '/user.tpl.php');
             document.getElementById('product-image').src = "../images/products/" + photos[currentIndex]['photo'];
         }
     </script>
-<?php } ?> 

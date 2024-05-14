@@ -7,7 +7,7 @@ $session = new Session();
 drawHeader($session);
 
 if ( !preg_match ("/^[a-zA-Z0-9\s]+$/", $_GET['error'])) {
-    header('Location: pages/index.php');
+    header('Location: ../pages/index.php');
 }
 
 if ($_GET['error']==="Tried_to_buy_bought_item"){ ?>
