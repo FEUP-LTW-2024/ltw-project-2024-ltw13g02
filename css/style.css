@@ -592,23 +592,6 @@ footer {
     background-color:#bbbbbb;
 }
 
-#searchButton {
-    background-color: transparent;
-    width: 20px;
-    height: 20px;
-    margin: 5px;
-    border: none;
-}
-
-#searchButton i {
-    margin: 0;
-    border: none;
-}
-
-#searchButton i:hover {
-    color: lightblue;
-}
-
 #category, #condition, .characteristic, .price-filter {
     border-color: #276a9f;
     font-family: "Didact Gothic", sans-serif;

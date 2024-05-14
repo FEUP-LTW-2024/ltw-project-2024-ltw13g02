@@ -8,6 +8,10 @@
 
   require_once(__DIR__ . '/../templates/common.tpl.php');
   require_once(__DIR__ . '/../templates/messages.tpl.php');
+
+  if ( !preg_match ("/^[a-zA-Z0-9\s]+$/", $_GET['chat'])) {
+    header('Location: pages/index.php');
+  }
   
   drawHeader($session);
   drawChatHeader($session, $_GET['chat']);

@@ -8,7 +8,7 @@ class Product {
     public int $condition;
     public int $category;
     public string $description;
-    public ?string $characteristic1;
+    public string $characteristic1;
     public ?string $characteristic2;
     public ?string $characteristic3;
     public string $seller;

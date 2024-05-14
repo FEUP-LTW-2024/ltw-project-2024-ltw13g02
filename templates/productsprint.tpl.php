@@ -4,9 +4,7 @@ require_once(__DIR__ . '/../utils/filter.php');
 
 function drawSearchbar(){ ?>
     <body>
-        <script src="../javascript/search.js" defer></script>
         <main>
-        <button id="searchButton"><i class="fa fa-search fa-1x icon"></i></button>
         <input id="searchbar" type="text" name="searchbar" placeholder="Search...">
         <div id="search-results"></div>
 <?php 
@@ -23,7 +21,7 @@ function drawPath() {
 <form id="filter" action="../pages/index.php" method="get">
     <?php if ($category == NULL) { ?>
         <select name="category" id="category">
-            <option></option> 
+            <option value="">Category</option> 
             <?php 
                 foreach($categories as $c){ 
             ?>
@@ -40,7 +38,7 @@ function drawPath() {
                 $characteristics = getCharacteristicsofType($types[$i]['idType']); ?>
                 <select name="characteristic<?php echo $i + 1 ?>" class="characteristic">
                     <?php 
-                    echo $_GET["characteristic" . $i + 1] != NULL ? "<option value='" . $_GET["characteristic" . $i + 1] . "'>" . getCharacteristic($_GET["characteristic" . $i + 1]) . "</option> <option></option>" : "<option></option>";
+                    echo $_GET["characteristic" . $i + 1] != NULL ? "<option value='" . $_GET["characteristic" . $i + 1] . "'>" . getCharacteristic($_GET["characteristic" . $i + 1]) . "</option> <option value=''>" . $types[$i]['type_name'] . "</option> " : "<option value=''>" . $types[$i]['type_name'] . "</option> ";
                     foreach($characteristics as $c) { 
                         if ($_GET["characteristic" . $i + 1] != NULL && $c['characteristic'] == getCharacteristic($_GET["characteristic" . $i + 1])) {
                             continue;
@@ -56,7 +54,7 @@ function drawPath() {
         } ?>
     <select name="condition" id="condition">
         <?php 
-            echo $_GET["condition"] != NULL ? "<option value='" . $_GET["condition"] . "'>" . getCondition($_GET["condition"]) . "</option> <option></option>" : "<option></option>";
+            echo $_GET["condition"] != NULL ? "<option value='" . $_GET["condition"] . "'>" . getCondition($_GET["condition"]) . "</option> <option value=''>Condition</option>" : "<option value=''>Condition</option>";
             foreach($conditions as $c) { 
                 if ($_GET["condition"] != NULL && $c['condition'] == getCondition($_GET["condition"])) {
                     continue;

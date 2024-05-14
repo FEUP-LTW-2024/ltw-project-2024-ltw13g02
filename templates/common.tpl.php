@@ -19,7 +19,7 @@ require_once(__DIR__ . '/../sessions/session.php');
             <link rel="preconnect" href="https://fonts.googleapis.com">
             <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
             <link rel="stylesheet" href="../fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-            
+            <script src="../javascript/search.js" defer></script>
         </head>
         <header>
             <a href="../pages/index.php"><h2 id="mainLogo">Dealify</h2></a>

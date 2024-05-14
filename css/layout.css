@@ -20,20 +20,10 @@ h1 {
     margin: 17px;
 }
 
-#search {
-    display: flex;
-    padding-left: 0.5em;
-    padding-right: 0.5em;
-    margin: auto;
-
-    margin-top: 0.5em;
-}
-
-#search input{
-    margin: auto;
-    width: 99%;
-    border-radius: 1em;
-    padding-left: 1em;
+#searchbar {
+    margin: 5px 0 0 20px;
+    width: 443px;
+    border-radius: 3px;
 }
 
 .Products {
