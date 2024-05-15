@@ -13,11 +13,9 @@ class Product {
     public ?string $characteristic3;
     public string $seller;
     public ?string $buyer;
-    public ?string $purchaseDate;
-
     public function __construct(int $id, string $name, int $price, int $condition, string $description,
                                  ?string $characteristic1, ?string $characteristic2, ?string $characteristic3 , 
-                                string $seller, ?string $buyer, ?string $purchaseDate) {
+                                string $seller, ?string $buyer) {
         $this->id = $id;
         $this->name = $name;
         $this->price = $price;
@@ -28,7 +26,6 @@ class Product {
         $this->characteristic3 = $characteristic3;
         $this->seller = $seller;
         $this->buyer = $buyer;
-        $this->purchaseDate = $purchaseDate;
     }
 
     static function searchProduct(string $search) : array {
@@ -117,10 +114,6 @@ class Product {
         $stmt->execute([$this->id]);
         $result = $stmt->fetch();
         return $result['category'];
-    }
-
-    function getPurchaseDate(): string {
-        return $this->purchaseDate;
     }
 
     function getBuyer() : ?array {

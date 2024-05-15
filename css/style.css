@@ -413,7 +413,6 @@ footer {
     outline: solid;
     outline-color: lightblue;
     border-radius: 1em;
-    margin-left: 0.5em;
 
 }
 
@@ -432,11 +431,12 @@ footer {
     grid-template-rows: 1fr 1fr;
 
     margin-bottom: 0.5em;
-    padding-left: 1em;
+    padding-left: 0.3em;
 }
 
-.CartItem #product_img {
+.CartItem .product_img {
     grid-row-end: span 2;
+    display: flex;
 }
 
 .CartItem img {
@@ -444,6 +444,8 @@ footer {
     width: 95%;
     border-radius: 1em;
     object-fit: contain;
+    align-self: center;
+    justify-self: center;
 }
 
 .CartItem #cart_item_price{
@@ -569,7 +571,6 @@ footer {
 
 #filter {
     height: 50px;
-    width: 100%;
     margin: 10px 0 0 20px;
 }
 

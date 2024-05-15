@@ -17,16 +17,14 @@ require_once(__DIR__ . "/../database/user.class.php");
 <?php
 
     function output_archive_user_products($products) { ?>
-        <section id='archive_products'>
-        <?php
-        foreach ($products as $product) {
-            $archived_product = getProduct($product);
-            $db = getDatabaseConnection();
-            $buyer = getUserbyId($product->buyer);
-
-            output_single_product($archived_product,$buyer);
-        }
-        ?>
+        <section class="Products" id='archive_products'>
+            <div id="static_offer_container"> <?php
+            foreach ($products as $product) {
+                $archived_product = getProduct($product);
+                $buyer = getUserbyId($archived_product->buyer);
+                output_single_product($archived_product,$buyer);
+            }  ?>
+            </div>
         </section>
 
     </main>

@@ -33,9 +33,14 @@ if(isset($product) && isset($user)){
                               WHERE user = ? and product = ?;');
         $stmt->execute(array($user->id, $product->id));
     }else{
-        $stmt = $db->prepare('INSERT OR REPLACE INTO ShoppingCart (user, product)
-                              VALUES(?,?);');
-        $stmt->execute(array($user->id, $product->id));
+        $db->beginTransaction();
+        $buyer = $product->getBuyer();
+        if (!isset($buyer)) {
+            $stmt = $db->prepare('INSERT OR REPLACE INTO ShoppingCart (user, product)
+                                VALUES(?,?);');
+            $stmt->execute(array($user->id, $product->id));
+        }
+        $db->commit();
     }
     header("Location: ../pages/productPage.php?product={$product->id}");
 }else{

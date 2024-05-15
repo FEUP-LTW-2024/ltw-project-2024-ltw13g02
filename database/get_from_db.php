@@ -205,7 +205,6 @@ function getProduct($idProduct) : ?Product {
             $product['characteristic3'],
             $product['seller'],
             $product['buyer'],
-            $product['purchaseDate']
         );
     } else {
         return null;
@@ -340,4 +339,31 @@ function getProductsWithType($type) {
         $products = array_merge($products, getProductsWithCh($a));
     }
     return $products;  
+}
+
+function getShipping(int $shipping_id) :Shipping | null{
+    $db = getDatabaseConnection();
+    $stmt = $db->prepare('SELECT * FROM Shipping S WHERE S.idShipping = ?');
+    $stmt->execute(array($shipping_id));
+    $shippment = $stmt->fetch();
+    if ($shippment) {
+        $buyer = getUserbyId($shippment['buyer']);
+        $seller = getUserbyId($shippment['seller']);
+        return new Shipping(
+            $buyer,
+            $shippment['buyerCountry'],
+            $shippment['buyerCity'],
+            $shippment['buyerAddress'],
+            $shippment['buyerZipcode'],
+            $seller,
+            $shippment['sellerCountry'],
+            $shippment['sellerCity'],
+            $shippment['sellerAddress'],
+            $shippment['sellerZipCode'],
+            $shippment['purchaseDate'],
+            $shippment['total']
+        );
+    } else {
+        return null;
+    }
 }
