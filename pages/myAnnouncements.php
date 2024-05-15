@@ -22,7 +22,7 @@
     $user = $session->getUser();
     $announcements_ids = $user->getAnnouncements();
 
-    if (sizeof($announcements_ids) > 0) {drawAnnouncements($announcements_ids); }
+    if (sizeof($announcements_ids) > 0) {drawAnnouncements($announcements_ids, $user); }
   else { ?>
     <div class="user-info">
       <h2><?php echo "No Announcements"; ?></h2>
