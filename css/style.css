@@ -48,11 +48,6 @@ h1 {
     text-align: center;
 }
 
-#search *{
-    border-color: gray;
-    border-style: solid;
-}
-
 #search input:focus{
     background-color: lightgrey;
 }
@@ -598,17 +593,30 @@ footer {
     background-color:#bbbbbb;
 }
 
-#searchButton {
-    background-color: transparent;
-    width: 20px;
-    height: 20px;
-    margin: 5px;
-    border: none;
+#category, #condition, .characteristic, .price-filter {
+    border-color: #276a9f;
+    font-family: "Didact Gothic", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    border-radius: 3px;
 }
-#searchButton i {
-    margin: 0;
-    border: none;
+
+#go-search {
+    border-color: lightblue;
+    background-color: lightblue;
+    font-family: "Didact Gothic", sans-serif;
+    font-weight: 400;
+    font-style: normal;
 }
-#searchButton i:hover {
-    color: lightblue;
+
+
+#go-search:hover {
+    border-color: #276a9f;
+    background-color: #276a9f;
+    color: white;
+}
+
+#searchbar {
+    border-color: #276a9f;
+    background-color: white;
 }
