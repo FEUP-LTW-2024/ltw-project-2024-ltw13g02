@@ -5,6 +5,7 @@ require_once(__DIR__ . "/product.class.php");
 
 require_once('connection.db.php');
 require_once(__DIR__ . '/../database/user.class.php');
+require_once(__DIR__ . '/../database/shiping.class.php');
 require_once(__DIR__ . '/change_in_db.php');
 
 
@@ -341,7 +342,7 @@ function getProductsWithType($type) {
     return $products;  
 }
 
-function getShipping(int $shipping_id) :Shipping | null{
+function getShipping(int $shipping_id) : Shipping | null{
     $db = getDatabaseConnection();
     $stmt = $db->prepare('SELECT * FROM Shipping S WHERE S.idShipping = ?');
     $stmt->execute(array($shipping_id));
@@ -350,11 +351,12 @@ function getShipping(int $shipping_id) :Shipping | null{
         $buyer = getUserbyId($shippment['buyer']);
         $seller = getUserbyId($shippment['seller']);
         return new Shipping(
+            $shipping_id,
             $buyer,
             $shippment['buyerCountry'],
             $shippment['buyerCity'],
             $shippment['buyerAddress'],
-            $shippment['buyerZipcode'],
+            $shippment['buyerZipCode'],
             $seller,
             $shippment['sellerCountry'],
             $shippment['sellerCity'],

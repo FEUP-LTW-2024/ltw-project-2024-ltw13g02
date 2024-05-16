@@ -19,6 +19,7 @@
     {
         //Suspicious transaction
         //TODO change == to ===
+        //TODO use var or let
         header('Location: ../pages/cart_page.php');
     }
     $contry  =  htmlspecialchars(trim($contry), ENT_QUOTES, 'UTF-8');

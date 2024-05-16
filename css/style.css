@@ -435,10 +435,10 @@ footer {
 }
 
 .CartItem img {
-    height: 95%;
+    height: 7em;
     width: 95%;
     border-radius: 1em;
-    object-fit: contain;
+    object-fit: cover;
     align-self: center;
     justify-self: center;
 }

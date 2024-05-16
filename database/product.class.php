@@ -116,21 +116,11 @@ class Product {
         return $result['category'];
     }
 
-    function getBuyer() : ?array {
-        if ($this->buyer === null) {
+    function getBuyer() : ?User {
+        if (!isset($this->buyer)) {
             return null;
         }
-        $db = getDatabaseConnection();
-        $stmt = $db->prepare('
-            SELECT firstName, lastName, stars, country, city
-            FROM Product
-            INNER JOIN User ON Product.buyer = User.idUser
-            INNER JOIN Country ON User.idCountry = Country.idCountry
-            WHERE Product.idProduct = ?
-        ');
-        $stmt->execute(array($this->buyer));
-
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return getUserbyId($this->buyer);
     }
 
     function getSeller() : ?User {
@@ -192,4 +182,17 @@ class Product {
         $final .= "</div></section>";
         return $final;
     }
+
+    function getShipping() :Shipping | null{
+        $db = getDatabaseConnection();
+        $stmt = $db->prepare('SELECT P.shipping FROM Product P WHERE P.idProduct = ?');
+        $stmt->execute(array($this->id));
+        $shippment_id = $stmt->fetch(PDO::FETCH_COLUMN);
+        if (isset($shippment_id)) {
+            return getShipping($shippment_id);
+        } else {
+            return null;
+        }
+    }
+
 }
