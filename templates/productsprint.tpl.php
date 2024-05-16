@@ -201,7 +201,7 @@ function drawArchive($archive_ids)
                     $seller = $product->getSeller();
                     ?>
                     <div class="sliding_offer"> <?php
-                        drawSmallProduct($product, $seller, null);  ?>
+                        drawSmallProduct($product, $seller, $product->getBuyer());  ?>
                     </div> <?php 
                 } ?>
             </div>
@@ -234,27 +234,29 @@ function drawArchive($archive_ids)
 <?php } ?>
 
 <?php
-function drawSmallProduct(Product $product, $seller, $user) { ?>
+function drawSmallProduct(Product $product, User $seller, ?User $user) { 
+    ?>
     <a href="../pages/seller_page.php?user=<?=$seller->id?>" class="user_small_card">
         <?php if ($seller->photo != "Sem FF") { ?>
-            <img class="user_small_pfp" src="../images/userProfile/<?=$seller->photo?>"> 
+                    <img class="user_small_pfp" src="../images/userProfile/<?=$seller->photo?>"> 
         <?php } else { ?>
-            <h2><i class="fa fa-user fa-1x user-icons"></i></h2>
+                    <h2><i class="fa fa-user fa-1x user-icons"></i></h2>
         <?php } ?>
         <p><?=$seller->name() ?></p>
     </a>
-    <?php if ($user == null){ ?>
-        <a href="../pages/productPage.php?product=<?=$product->id?>"><img class="offer_img" src="../images/products/<?= $product->getPhotos()[0]['photo']?>"></a>
+    <?php if (!isset($user)){?>
+                <a href="../pages/productPage.php?product=<?=$product->id?>"><img class="offer_img" src="../images/products/<?= $product->getPhotos()[0]['photo']?>"></a>
     
-        <a class="offer_info" href="../pages/productPage.php?product=<?=$product->id?>">
-            <h4><?=substr($product->name, 0, 30) ?></h4>
-            <h5><?= $seller->city . ", " . $seller->getCountry()?></h5>
-            <p><?=$product->price?>€</p>
-        </a>
-    <?php } else { ?>
-        <a href="../pages/myProduct.php?product=<?=$product->id?>"><img class="offer_img" src="../images/products/<?= $product->getPhotos()[0]['photo']?>"></a>
+            <a class="offer_info" href="../pages/productPage.php?product=<?=$product->id?>">
+                <h4><?=substr($product->name, 0, 30) ?></h4>
+                <h5><?= $seller->city . ", " . $seller->getCountry()?></h5>
+                <p><?=$product->price?>€</p>
+             </a>
+    <?php } else {
+                $imagePageLink = !isset($product->buyer) ? "product={$product->id}" : "shipping={$product->getShipping()->id}"; ?>
+        <a href="../pages/shipmentPage.php?<?=$imagePageLink?>"><img class="offer_img" src="../images/products/<?= $product->getPhotos()[0]['photo']?>"></a>
     
-        <a class="offer_info" href="../pages/myProduct.php?product=<?=$product->id?>">
+        <a class="offer_info" href="../pages/shipmentPage.php?<?=$imagePageLink?>">
             <h4><?=substr($product->name, 0, 30) ?></h4>
             <h5><?= $seller->city . ", " . $seller->getCountry()?></h5>
             <p><?=$product->price?>€</p>

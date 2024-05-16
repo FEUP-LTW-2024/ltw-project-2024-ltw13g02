@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS Product (
     characteristic3 INTEGER REFERENCES Characteristic (idCharacteristic),
     seller VARCHAR REFERENCES User (idUser) NOT NULL,
     buyer VARCHAR REFERENCES User(idUser) DEFAULT NULL,
-    purchaseDate DATETIME DEFAULT NULL
+    shipping INTEGER REFERENCES Shipping(idShipping) DEFAULT NULL
 );
 
 CREATE TABLE IF NOT EXISTS Chat (
@@ -125,11 +125,20 @@ CREATE TABLE IF NOT EXISTS Recent (
 );
 
 CREATE TABLE IF NOT EXISTS Shipping (
-    product INTEGER REFERENCES Product (idProduct) NOT NULL PRIMARY KEY,
+    idShipping INTEGER PRIMARY KEY NOT NULL,
     buyer VARCHAR REFERENCES User (idUser) NOT NULL,
+    buyerCountry VARCHAR NOT NULL,
+    buyerCity VARCHAR NOT NULL,
+    buyerAddress VARCHAR NOT NULL,
+    buyerZipCode VARCHAR NOT NULL,
     seller VARCHAR REFERENCES User (idUser) NOT NULL,
-    purchaseDate TEXT REFERENCES Product (purchaseDate) NOT NULL
-);
+    sellerCountry VARCHAR NOT NULL,
+    sellerCity VARCHAR NOT NULL,
+    sellerAddress VARCHAR NOT NULL,
+    sellerZipCode VARCHAR NOT NULL,
+    purchaseDate DATETIME NOT NULL,
+    total INTEGER
+    );
 
 CREATE TABLE IF NOT EXISTS Photo (
     idPhoto INTEGER PRIMARY KEY NOT NULL, 

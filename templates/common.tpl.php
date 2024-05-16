@@ -61,6 +61,5 @@ require_once(__DIR__ . '/../sessions/session.php');
         <footer>
                 <p>&copy; Dealify </p>
         </footer>
-    </body>
     </html>
 <?php } ?>

@@ -37,7 +37,7 @@
         ?>
         
             <article class='CartItem'>
-                <a id="product_img" href="../pages/productPage.php?product=<?=$item->id?>">
+                <a class="product_img" href="../pages/productPage.php?product=<?=$item->id?>">
                     <img src="../images/products/<?= $photos[0]['photo'] ?>">
                 </a>
                 <p id='cart_item_name'> <a href="../pages/productPage.php?product=<?=$item->id?>">  <?=$item->name?> </a> </p>
@@ -78,10 +78,10 @@
 
 
 
-                <div>Street:</div> <input type='text' name='addressShipping' required="required" value= "<?=$session->getUser()->userAddress?>">
-                <div>Zipcode:</div> <input type='text' name='zipcode' required="required" value= "<?= $session->getUser()->zipCode?>">
+                <div>Street:</div> <input type='text' name='address' required="required" value= "<?=$session->getUser()->userAddress?>">
                 <div>City:</div> <input type='text' name='city' required="required" value= "<?= $session->getUser()->city?>">
-                <input type="hidden" name='paymentAuthhorization' value="paymentAuthorized">
+                <div>Zipcode:</div> <input type='text' name='zipcode' required="required" value= "<?= $session->getUser()->zipCode?>">
+                <input type="hidden" name='paymentAuthhorization' value="<?=$session->getCSRF()?>">
                 <?php
                 output_country_option($countries);
                 

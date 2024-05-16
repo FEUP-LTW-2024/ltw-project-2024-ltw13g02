@@ -1,0 +1,25 @@
+main {
+    margin: 0 auto;
+}
+
+#ShippingProducts {
+    margin-bottom: 2em;
+}
+
+.ShippingProduct {
+    display: flex;
+    margin-bottom: 1em;
+}
+
+.ShippingProduct *{
+    margin: 0;
+}
+
+span {
+    flex: 1;
+    border-bottom: 1px dotted gray;
+}
+
+footer {
+    width: 100%;
+}

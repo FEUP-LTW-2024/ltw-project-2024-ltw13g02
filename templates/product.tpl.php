@@ -30,7 +30,7 @@ require_once(__DIR__ . '/user.tpl.php');
     <?php }
 } ?> 
 
-<?php function drawProduct(Session $session, $idProduct) { 
+<?php function drawProduct(Session $session, $idProduct) {
     $user = $session->getUser();
     $product = getProduct($idProduct);
     if ($user != null && $product->getSeller()->id != $user->id) {
@@ -79,7 +79,7 @@ require_once(__DIR__ . '/user.tpl.php');
             if($user != null){
                 $chat = $user->findBuyerChat($idProduct);
                 $idChat = $chat->id; 
-                if($seller->id != $user->id){?>
+                if($seller->id !== $user->id ){?>
                     <button id="contact" class="button"><a href="../pages/messagesPage.php?chat=<?php echo $idChat ?>">Contact me</a></button> <?php
                     $favorites = $user->getFavorites();
                     if($favorites != null && in_array($idProduct, $favorites)) { ?>
@@ -88,8 +88,8 @@ require_once(__DIR__ . '/user.tpl.php');
                         <a href="../actions/updateFavorites.php?product=<?=$product->id?>" id="a_favs"><i class="fa fa-heart-o fa-2x icon" id="favs"></i></a> <?php
                     }
                     $shoppingCart = $user->getShoppingCart();
-                    if ($product->getBuyer() == null){
-                        if(in_array($idProduct, $shoppingCart))
+                    if ($product->getBuyer() === null){
+                        if(in_array($idProduct, $shoppingCart) )
                         { ?>
                             <button id="remove-from-cart" class="button"><a href="../actions/updateCart.php?product=<?=$product->id?>">Take From Cart</a></button> <?php
                         } else{ ?>
@@ -99,9 +99,11 @@ require_once(__DIR__ . '/user.tpl.php');
                 }
                     ?>
                 <?php } 
-            }?>
+            ?>
         </div>
     </div>
+    <?php 
+    } ?>
     
     <script>
         var currentIndex = 0;
