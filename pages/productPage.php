@@ -14,6 +14,22 @@
   }
 
   drawHeader($session);
-  drawProductHeader($session, $_GET['product']);
-  drawProduct($session, $_GET['product']);
+  $product = getProduct($_GET['product']);
+
+if($product == null){ ?>
+    <h2 style="text-align: center;"><?php echo "This product is not available!"; ?></h2>
+    <br>
+<?php } else {
+    if($product->getBuyer() != null && $product->getSeller() == $session->getUser()->id) {
+        header('Location: ../pages/shipmentPage.php');
+    } else if($product->getBuyer() != null) { ?>
+        <h2 style="text-align: center;"><?php echo "This product is not available!"; ?></h2>
+    <?php } else if ($product->getSeller() == $session->getUser()->id) {
+        header('Location: ../pages/myAnnouncements.php');
+    } else {
+        drawProductHeader($session, $_GET['product']);
+        drawProduct($session, $_GET['product']);
+    }
+}
   drawFooter();
+?>  
