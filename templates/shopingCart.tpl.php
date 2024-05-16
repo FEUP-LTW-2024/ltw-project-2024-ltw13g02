@@ -78,15 +78,15 @@
 
 
 
-                <div>Street:</div> <input type='text' name='address' required="required" value= "<?=$session->getUser()->userAddress?>">
-                <div>City:</div> <input type='text' name='city' required="required" value= "<?= $session->getUser()->city?>">
-                <div>Zipcode:</div> <input type='text' name='zipcode' required="required" value= "<?= $session->getUser()->zipCode?>">
+                <div>Street:</div> <input type='text' id ='addressFiel' name='address' required="required" value= "<?=$session->getUser()->userAddress?>">
+                <div>City:</div> <input type='text' id ='cityFiel' name='city' required="required" value= "<?= $session->getUser()->city?>">
+                <div>Zipcode:</div> <input type='text' id ='zipcodeField' name='zipcode' required="required" value= "<?= $session->getUser()->zipCode?>">
                 <input type="hidden" name='paymentAuthhorization' value="<?=$session->getCSRF()?>">
                 <?php
                 output_country_option($countries);
                 
                 ?>
-                <input type="submit" value="Pay Now">
+                <input type="submit" id="submitButton" value="Pay Now">
         </form>
         </aside>
         </main>
@@ -98,7 +98,7 @@
         $session = new Session();
         ?>
         
-        <div class='address_field' id ='address_country'>
+        <div class='address_field' id ='countryField'>
         Country:
         </div>
             <select name='country'>

@@ -22,10 +22,11 @@
         //TODO use var or let
         header('Location: ../pages/cart_page.php');
     }
-    $contry  =  htmlspecialchars(trim($contry), ENT_QUOTES, 'UTF-8');
-    $city    =  htmlspecialchars(trim($city), ENT_QUOTES, 'UTF-8');
-    $address =  htmlspecialchars(trim($address), ENT_QUOTES, 'UTF-8');
-    $zipcode =  htmlspecialchars(trim($zipcode), ENT_QUOTES, 'UTF-8');
+    
+    $country =  trim($country);
+    $city    =  trim($city);
+    $address =  trim($address);
+    $zipcode =  trim($zipcode);
 
     $db->beginTransaction();
     $items = $user->getShoppingCart();
