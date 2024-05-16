@@ -7,7 +7,14 @@ body {
 
 form {
     display: grid;
-    grid-template-rows: repeat(17, 2.5em);
+    grid-template-rows: repeat(18, 2.5em);
+    font-size: 1em;
+    text-align: center;
+}
+
+#newProductForm{
+    display: grid;
+    grid-template-rows: repeat(19, 2.5em);
     font-size: 1em;
     text-align: center;
 }
@@ -29,6 +36,7 @@ form input[type="text"] {
     font-style: normal;
     padding: 3px;
     min-width: 20em;
+    margin-bottom: 5px;
 }
 
 form select[name="country"] {
@@ -49,12 +57,12 @@ form input[type="password"] {
     min-width: 25em;
 }
 
-.change-buttons, #submit{
+.change-buttons, #submit, #submitProd {
     display: inline-block;
     padding: 3px;
     background-color: #b8c8d6; /* Button color */
     color: white; /* Text color */
-    border:1px solid #b8c8d6;
+    border: 1px solid #b8c8d6;
     text-decoration: none;
     font-size: 16px;
     cursor: pointer;
@@ -63,7 +71,11 @@ form input[type="password"] {
 }
 
 #submit {
-    margin-bottom: 10px;
+    grid-row: 17;
+}
+
+#submitProd {
+    grid-row: 18;
 }
   
 .change-buttons:hover {
@@ -71,6 +83,19 @@ form input[type="password"] {
     background-color: lightblue; /* Button color on hover */
 }
 
-#photo {
+#photo, label[name = "photosProd"] {
     margin-bottom: 10px;
+    grid-row: 15;
+}
+
+#photosProd{
+    grid-row: 16;
+}
+
+.characteristic {
+    display: block;
+    margin-top: 5px;
+    text-align: center;
+    margin-bottom: 0em;
+    min-width: 25em;
 }

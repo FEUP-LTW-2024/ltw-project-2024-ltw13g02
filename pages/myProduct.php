@@ -17,3 +17,4 @@
   drawProductHeader($session, $_GET['product']);
   drawProduct($session, $_GET['product']);
   drawFooter();
+?>  

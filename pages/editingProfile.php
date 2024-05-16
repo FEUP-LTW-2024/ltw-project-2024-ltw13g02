@@ -68,20 +68,18 @@
     }
     
 
-    // Separate validation for each field
-    if (!preg_match("/^[a-zA-Z\s]+$/", $newFirstName) ||
-        !preg_match("/^[a-zA-Z\s]+$/", $newLastName) ||
+    if (!preg_match("/^[a-zA-ZÀ-ÿ\s]+$/", $newFirstName) ||
+        !preg_match("/^[a-zA-ZÀ-ÿ\s]+$/", $newLastName) ||
         !preg_match("/^\d{9}$/", $newPhone) ||
         !preg_match("/^[a-zA-ZÀ-ÿ\s\-\.\*]+$/u", $newAddress) ||
-        !preg_match("/^[a-zA-Z\s]+$/", $newCountry) ||
-        !preg_match("/^[a-zA-Z\s]+$/", $newCity) ||
+        !preg_match("/^[a-zA-ZÀ-ÿ\s]+$/", $newCountry) ||
+        !preg_match("/^[a-zA-ZÀ-ÿ\s]+$/", $newCity) ||
         !preg_match("/^[0-9\-]+$/", $newZipCode)) { 
         
         echo "Invalid Input.";
         exit();
     }
 
-    // If all validations pass, proceed with updating user data
     $user = $session->getUser();
     $user->firstName = $newFirstName;
     $user->lastName = $newLastName;
