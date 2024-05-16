@@ -15,5 +15,6 @@
   drawHeader($session);
   drawHamburguer($session, 0);
   drawFilterBar($session);
-  drawReviews($session);
+  if (!isset($_GET['classification'])) drawReviews($session, -1);
+  else drawReviews($session, $_GET['classification']);
   drawFooter();

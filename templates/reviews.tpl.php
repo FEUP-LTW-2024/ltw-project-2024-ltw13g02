@@ -28,25 +28,28 @@ require_once(__DIR__ . "/user.tpl.php");
                 <span class="rating-score"><?php echo round($stars, 2); ?></span>
             </div>
             <div class="filters">
-                <label for="classification">Classification:</label>
-                <select id="classification">
-                    <option value="highest">Highest first</option>
-                    <option value="lowest">Lowest first</option>
-                </select>
-                <label for="order">Order:</label>
-                <select id="order">
-                    <option value="newest">Newest first</option>
-                    <option value="oldest">Oldest first</option>
-                </select>
+                <form action="../pages/reviewsPage.php" method="get">
+                    <label class="classification" for="classification">Classification:</label>
+                    <select id="classific-select" class="classification" name="classification"> <!-- Added name attribute -->
+                        <option value="-1"></option>
+                        <option value="5"> 5 </option>
+                        <option value="4"> 4 </option>
+                        <option value="3"> 3 </option>
+                        <option value="2"> 2 </option>
+                        <option value="1"> 1 </option>
+                        <option value="0"> 0 </option>
+                    </select>
+                    <button id="go" class="button" type="submit">Go</button>
+                </form>
             </div>
         </div>
     </body>
     </html>
 <?php } ?>
 
-<?php function drawReviews(Session $session) { 
+<?php function drawReviews(Session $session, $classification) { 
     $user = $session->getUser();
-    $reviews = $user->getReviewsWithUsersFromDB();
+    $reviews = $user->getReviewsWithUsersFromDB($classification);
     ?>
     <!DOCTYPE html>
     <html lang="en">
