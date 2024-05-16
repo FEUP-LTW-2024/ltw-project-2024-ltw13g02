@@ -394,7 +394,7 @@ footer {
 }
 
 
-#Shopping_Cart h2{
+#Shopping_Cart h2 {
     grid-column-start: 1;
     grid-column-end: span 2;
     font-weight: bold;
@@ -412,11 +412,11 @@ footer {
 
 }
 
-#Shopping_items{
+#Shopping_items {
     margin-right: 1em;
 }
 
-#Shopping_items #totalPayment{
+#Shopping_items #totalPayment {
     display: flex;
 }
 
@@ -444,18 +444,18 @@ footer {
     justify-self: center;
 }
 
-.CartItem #cart_item_price{
+.CartItem #cart_item_price {
     grid-row-start: 2;
     grid-column-start: 2;
 }
 
-.CartItem form{
+.CartItem form {
     margin: auto;
     grid-row-end: span 2;
     
 }
 
-.CartItem #trashIcon{
+.CartItem #trashIcon {
     background-color: transparent;
     border: none;
     cursor: pointer;
@@ -471,27 +471,27 @@ footer {
     font-style: normal;
 }
 
-#Shopping_Cart aside form{
+#Shopping_Cart aside form {
     display: grid;
     grid-template-columns: 10em 1fr;
     grid-template-rows: repeat(4, 1.5em);
 }
 
-#Shopping_Cart aside form select{
+#Shopping_Cart aside form select {
     height: 21.56px;
 }
 
-#shippingAdress h3{
+#shippingAdress h3 {
     font-size: 2.5em;
     margin: 0;
 }
 
-#shippingAdress h5{
+#shippingAdress h5 {
     font-size: larger;
     margin-bottom: 1em;
 }
 
-#shippingAdress input[type="submit"]{
+#shippingAdress input[type="submit"] {
     grid-column-end: span 2;
     height: 2.5em;
     margin-top: 10px;
@@ -566,7 +566,8 @@ footer {
 }
 
 #filter {
-    height: 50px;
+    height: 21px;
+    width: 100%;
     margin: 10px 0 0 20px;
 }
 
@@ -590,6 +591,7 @@ footer {
     border-radius: 3px;
     border-color: black;
 }
+
 #go-search:hover {
     background-color:#bbbbbb;
 }
@@ -610,6 +612,630 @@ footer {
     font-style: normal;
 }
 
+#go-search:hover {
+    border-color: #276a9f;
+    background-color: #276a9f;
+    color: white;
+}
+
+#searchbar {
+    border-color: #276a9f;
+    background-color: white;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Didact+Gothic&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&display=swap');
+
+html {
+    min-width: 30em;
+}
+
+.button {
+    margin: 0 auto auto auto;
+    height: 40px;
+    width: 180px;
+    color: white;
+    background-color: #b8c8d6;
+    border-color: #b8c8d6;
+    border-radius: 8px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+h2 {
+    font-family: "Didact Gothic", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.userIconPhoto {
+    color: black;
+    padding: 40px 0 40px 0;
+}
+
+#mainLogo {
+    color:  #293fa1;
+    font-family: "Syncopate", sans-serif;
+    font-weight: 400;
+    font-size: 2.5em;
+    font-style: normal;
+}
+
+button:hover {
+    background: #276a9f;
+}
+
+h1 {
+    color: #ffffff;
+    font-size: 3em;
+    text-align: center;
+}
+
+#search input:focus{
+    background-color: lightgrey;
+}
+
+#search select{
+    border-radius: 1em;
+}
+
+.Products {
+    padding: 5px;
+}
+
+.Products article {
+    outline: solid;
+    outline-color: lightblue;
+}
+
+.Products h2 {
+    color: gray;
+    font-size: 2em;
+    margin: 0;
+}
+
+.Products input{
+    height: fit-content;
+    width: fit-content;
+}
+
+.static_offer {
+    padding: 2em 1em;
+}
+
+.offer a{
+    text-decoration: none;
+}
+
+body > header{
+    background-color: lightblue;
+}
+
+.offer_info{
+    font-family: Roboto;
+    height:min-content;
+}
+
+.offer_info p {
+    font-weight: bold;
+    font-size: large;
+}
+
+.offer .offer_img{
+    border-radius: 10%;
+}
+
+.user_small_card .user_small_pfp{
+    border-radius: 100%;
+}
+
+.user-icons {
+    color: black;
+    margin: 5px 10px;
+}
+
+.center-text {
+    text-align: center;
+}
+
+.user-info {
+    margin-bottom: 0px; 
+}
+
+.user-info h2 {
+    margin: 10px 0;
+}
+
+.links {
+    flex-direction: column;
+    align-items: center;
+}
+
+.links a {
+    margin: 0px 0;
+}
+
+.star{
+    width: 30px;
+    height: auto;
+    margin: 5px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    text-align: center;
+    margin: 0;
+}
+
+#hamburger {
+    display: none;
+}
+
+ul li {
+    border-bottom: 1px solid #525252;
+}
+
+nav a { 
+    margin: 0;
+    display: inline-block;
+    color: black;
+    font-size: 1.2em;
+    font-family: "Didact Gothic", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    text-decoration: none;
+}
+
+.icon {
+    color: #293fa1;
+    margin: 20px;
+    margin-top: 25px;
+}
+
+.header-icons {
+    font-size: 2em;
+    margin: 0;
+    margin-bottom: 20px;
+}
+
+.icon:hover {
+    color: white;
+}
+
+.edit-icon {
+    color: white;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.stars {
+    color: rgb(216, 182, 30);
+}
+
+ul li:hover {
+    background-color: rgb(135, 141, 163);
+    transition: color .2s;
+}
+
+.active,
+.active a,
+li:hover a {
+    background-color: rgb(135, 141, 163);
+    color: white;
+    transition: color .2s;
+}
+
+.filterBar-container, .review {
+    width: 80%;
+    margin: auto;
+    background: #f2f2f2;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.average-rating {
+    font-size: 24px;
+}
+
+.stars {
+    color: #ffd700; /* Star color */
+    margin-right: 10px;
+}
+
+.rating-score {
+    font-weight: bold;
+}
+
+.filters {
+    margin-top: 20px;
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
+}
+
+.created-at {
+    font-size: 1em;
+}
+
+.review-user, .review-description {
+    margin: 0;
+}
+
+.chat-tile {
+    border-bottom: 1px solid #ccc;
+}
+
+#message-date {
+    margin-top: 5px;
+    color: #888;
+    font-size: 17px;
+}
+
+.message-content {
+    font-style: italic;
+    font-size: 1.3em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: calc(100% - 100px);
+}
+
+.message-product {
+    font-size: 1.5em;
+}
+
+.with-user {
+    font-size: 1em;
+    color:rgb(131, 131, 131)
+}
+
+.unseen {
+    color: greenyellow;
+}
+
+.chat-header {
+    background-color: #f5f5f5;
+}
+
+.message-tile {
+    font-family: "Didact Gothic", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.column-of-messages {
+    height: 100%;
+    overflow: auto;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.column-of-messages .own-message {
+    box-sizing: border-box;
+    padding: 0.5rem 1rem;
+    margin: 1rem 1rem 1rem auto;
+    border-radius: 1.125rem 1.125rem 0 1.125rem;
+    background: #333;
+    color: white;
+    min-height: 2.25rem;
+    width: fit-content;
+    max-width: 66%;
+    box-shadow: 0 0 2rem rgba(0, 0, 0, 0.075), 0rem 1rem 1rem -1rem rgba(0, 0, 0, 0.1);
+}
+
+.column-of-messages .other-message {
+    box-sizing: border-box;
+    padding: 0.5rem 1rem;
+    margin: 1rem;
+    background: #FFF;
+    border-radius: 1.125rem 1.125rem 1.125rem 0;
+    min-height: 2.25rem;
+    width: fit-content;
+    max-width: 66%;
+    box-shadow: 0 0 2rem rgba(0, 0, 0, 0.075), 0rem 1rem 1rem -1rem rgba(0, 0, 0, 0.1);
+}
+
+.time {
+    font-family: "Didact Gothic", sans-serif;
+    font-size: 0.8rem;
+    background: #EEE;
+    padding: 0.25rem 1rem;
+    border-radius: 2rem;
+    color: #999;
+    width: fit-content;
+    margin: 10px auto 0 auto;
+}
+
+footer {
+    background-color: #f5f5f5;
+    text-align: center;
+    font-family: "Didact Gothic", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.input {
+    margin-top: auto;
+    box-sizing: border-box;
+    flex-basis: 4rem;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    padding: 0 0.5rem 0 1.5rem;
+}
+
+.input input {
+    border: none;
+    background-image: none;
+    background-color: white;
+    padding: 0.5rem 1rem;
+    margin-right: 0.7rem;
+    border-radius: 1.125rem;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1), 0rem 1rem 1rem -1rem rgba(0, 0, 0, 0.2);
+    font-family: "Didact Gothic", sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.025em;
+    grid-column: 1;
+}
+
+.Send, .Send:hover {
+    margin: 0;
+    height: 40px;
+    width: 40px;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.Send i {
+    margin: 0;
+    font-size: 20px;
+    grid-column: 2;
+}
+
+.Send i:hover {
+    color: lightblue;
+}
+
+.prev-button, .next-button {
+    border-radius: 200px;
+    border-color: lightblue;
+    background-color: lightblue;
+}
+
+.prev-button:hover, .next-button:hover {
+    border-color: #293fa1;
+    background-color: #293fa1;
+}
+
+.prev-icon, .next-icon {
+    color: white;
+}
+
+
+#Shopping_Cart h2 {
+    grid-column-start: 1;
+    grid-column-end: span 2;
+    font-weight: bold;
+    font-size: xx-large;
+    padding: 0.5 0;
+    margin-left: 0.2em;
+    color: #276a9f;
+
+}
+
+#Shopping_items article {
+    outline: solid;
+    outline-color: lightblue;
+    border-radius: 1em;
+
+}
+
+#Shopping_items {
+    margin-right: 1em;
+}
+
+#Shopping_items #totalPayment {
+    display: flex;
+}
+
+.CartItem {
+
+    display: grid;
+    grid-template-columns: 6em 1fr 6em;
+    grid-template-rows: 1fr 1fr;
+
+    margin-bottom: 0.5em;
+    padding-left: 0.3em;
+}
+
+.CartItem .product_img {
+    grid-row-end: span 2;
+    display: flex;
+}
+
+.CartItem img {
+    height: 7em;
+    width: 95%;
+    border-radius: 1em;
+    object-fit: cover;
+    align-self: center;
+    justify-self: center;
+}
+
+.CartItem #cart_item_price {
+    grid-row-start: 2;
+    grid-column-start: 2;
+}
+
+.CartItem form {
+    margin: auto;
+    grid-row-end: span 2;
+    
+}
+
+.CartItem #trashIcon {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 3em;
+}
+
+
+#Shopping_Cart aside {
+    display: flex;
+    flex-direction: column;
+    font-family: "Didact Gothic", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+#Shopping_Cart aside form {
+    display: grid;
+    grid-template-columns: 10em 1fr;
+    grid-template-rows: repeat(4, 1.5em);
+}
+
+#Shopping_Cart aside form select {
+    height: 21.56px;
+}
+
+#shippingAdress h3 {
+    font-size: 2.5em;
+    margin: 0;
+}
+
+#shippingAdress h5 {
+    font-size: larger;
+    margin-bottom: 1em;
+}
+
+#shippingAdress input[type="submit"] {
+    grid-column-end: span 2;
+    height: 2.5em;
+    margin-top: 10px;
+    border-radius: 1em;
+
+    background-color: lightblue;
+    color: white;
+    border-style: none;
+}
+
+#addressShipping input,
+#addressShipping select {
+    height: 1.3em;
+    margin-right: 1em;
+}
+
+
+#seller_header #seller_pfp {
+    font-size: 150px;
+}
+
+#seller_info #user_fullname {
+    margin: 0;
+    font-size: 4em;
+    color: lightblue;
+}
+
+#seller_info #stars {
+    margin-bottom: 0;
+}
+
+#seller_header #average_of_reviews {
+    color: lightblue;
+    margin-bottom: 0;
+    font-weight: bold;
+    padding-left: 0.5em;
+    padding-top:  0.3em;
+    float: left;
+
+}
+
+#seller_header #number_of_reviews {
+    color: lightblue;
+    margin: 0;
+    font-weight: bold;
+    font-size: large;
+}
+
+#no-favs {
+    text-align: center;
+}
+
+#favs {
+    color: red;
+    margin: 0;
+}
+
+#favs:hover {
+    color: red;
+}
+
+.Products #static_offer_container {
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+    grid-auto-rows: auto;
+}
+
+.Products p, .Products h4, .Products  h5{
+    font-family: "Didact Gothic", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+#filter {
+    height: 21px;
+    width: 100%;
+    margin: 10px 0 0 20px;
+}
+
+#filter select {
+    background-color: white;
+
+}
+
+.path {
+    font-size: 0.8em;
+    margin: 0 0 10px 0;
+    padding: 0;
+}
+
+#go-search {
+    width: 70px;
+    height: 20px;
+    font-size: 0.8em;
+    background-color:#e6e6e6;
+    color: black;
+    border-radius: 3px;
+    border-color: black;
+}
+
+#go-search:hover {
+    background-color:#bbbbbb;
+}
+
+#category, #condition, .characteristic, .price-filter {
+    border-color: #276a9f;
+    font-family: "Didact Gothic", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    border-radius: 3px;
+}
+
+#go-search {
+    border-color: lightblue;
+    background-color: lightblue;
+    font-family: "Didact Gothic", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
 
 #go-search:hover {
     border-color: #276a9f;
