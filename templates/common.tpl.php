@@ -23,6 +23,7 @@ require_once(__DIR__ . '/../sessions/session.php');
         </head>
         <header>
             <a href="../pages/index.php"><h2 id="mainLogo">Dealify</h2></a>
+            <a href="../pages/newProduct.php"><h2 class="header-icons"><i class="fa fa-plus fa-1x icon"></i></h2></a>
             <a href="../pages/favoritesPage.php"><h2 class="header-icons"><i class="fa fa-heart fa-1x icon"></i></h2></a>
             <a href="../pages/cart_page.php"><h2 class="header-icons"><i class="fa fa-shopping-cart fa-1x icon"></i></h2></a>
             <a href="../pages/chatsAsSellerPage.php"><h2 class="header-icons"><i class="fa fa-comments fa-1x icon"></i></h2></a>
@@ -60,6 +61,5 @@ require_once(__DIR__ . '/../sessions/session.php');
         <footer>
                 <p>&copy; Dealify </p>
         </footer>
-    </body>
     </html>
 <?php } ?>

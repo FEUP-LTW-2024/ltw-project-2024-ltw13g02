@@ -5,6 +5,7 @@ require_once(__DIR__ . "/product.class.php");
 
 require_once('connection.db.php');
 require_once(__DIR__ . '/../database/user.class.php');
+require_once(__DIR__ . '/../database/shiping.class.php');
 require_once(__DIR__ . '/change_in_db.php');
 
 
@@ -205,7 +206,6 @@ function getProduct($idProduct) : ?Product {
             $product['characteristic3'],
             $product['seller'],
             $product['buyer'],
-            $product['purchaseDate']
         );
     } else {
         return null;
@@ -340,4 +340,46 @@ function getProductsWithType($type) {
         $products = array_merge($products, getProductsWithCh($a));
     }
     return $products;  
+}
+
+
+function getCharacteristicsByType($db, $typeId) {
+    $stmt = $db->prepare('SELECT idCharacteristic, characteristic FROM Characteristic WHERE idType = ?');
+    $stmt->execute([$typeId]);
+    return $stmt->fetchAll();
+}
+
+function getTypesByCategory($db, $categoryId) {
+    $stmt = $db->prepare('SELECT idType, type_name FROM TypesInCategory WHERE category = ?');
+    $stmt->execute([$categoryId]);
+    return $stmt->fetchAll();
+
+}
+
+function getShipping(int $shipping_id) : Shipping | null{
+    $db = getDatabaseConnection();
+    $stmt = $db->prepare('SELECT * FROM Shipping S WHERE S.idShipping = ?');
+    $stmt->execute(array($shipping_id));
+    $shippment = $stmt->fetch();
+    if ($shippment) {
+        $buyer = getUserbyId($shippment['buyer']);
+        $seller = getUserbyId($shippment['seller']);
+        return new Shipping(
+            $shipping_id,
+            $buyer,
+            $shippment['buyerCountry'],
+            $shippment['buyerCity'],
+            $shippment['buyerAddress'],
+            $shippment['buyerZipCode'],
+            $seller,
+            $shippment['sellerCountry'],
+            $shippment['sellerCity'],
+            $shippment['sellerAddress'],
+            $shippment['sellerZipCode'],
+            $shippment['purchaseDate'],
+            $shippment['total']
+        );
+    } else {
+        return null;
+    }
 }

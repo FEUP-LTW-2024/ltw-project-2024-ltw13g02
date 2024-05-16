@@ -2,34 +2,52 @@
 <?php
     require_once(__DIR__. '/../database/get_from_db.php');
     require_once(__DIR__ . '/../sessions/session.php');
+    require_once(__DIR__ . '/../database/addressInfo.php');
+
 
 
     $session = new Session();
     $user = $session->getUser();
     $db = getDatabaseConnection();
-    $db->beginTransaction();
-    $items = $user->getShoppingCart();
-    if ($_POST['paymentAuthhorization'] !== 'paymentAuthorized')
+    $country = $_POST['country'];
+    $city = $_POST['city'];
+    $address = $_POST['address'];
+    $zipcode = $_POST['zipcode'];
+
+    if ($_POST['paymentAuthhorization'] !== $session->getCSRF() or
+        !isset($country) or !isset($city) or !isset($address) or !isset($zipcode))
     {
+        //Suspicious transaction
+        //TODO change == to ===
+        //TODO use var or let
         header('Location: ../pages/cart_page.php');
     }
-    
+    $contry  =  htmlspecialchars(trim($contry), ENT_QUOTES, 'UTF-8');
+    $city    =  htmlspecialchars(trim($city), ENT_QUOTES, 'UTF-8');
+    $address =  htmlspecialchars(trim($address), ENT_QUOTES, 'UTF-8');
+    $zipcode =  htmlspecialchars(trim($zipcode), ENT_QUOTES, 'UTF-8');
 
+    $db->beginTransaction();
+    $items = $user->getShoppingCart();
+    $products = array();
+    $buyerAddressInfo = new ShippingAddressInfo($country,$city,$address,$zipcode);
 
-    foreach($items as $item) {
-        $product = getProduct($item);
-
+    $total = 0;
+    foreach ($items as $item){
+        $products[] = getProduct($item);
+    }
+    $date = date('Y-m-d H:i:s');
+    foreach($products as $product) {
+        addShipping($db, $product, $user, $product->getSeller(), $buyerAddressInfo, $date, $product->price);
         if ($product->getBuyer() !== null) {
             $db->rollBack();
             header('Location: ../pages/errorPage.php?error=Tried_to_buy_bought_item');
         }else{
-            
-
             removeFromCarts($db, $product->id);
             removeFromRecent($db, $product->id);            
             removeFromFavorites($db, $product->id);
-            $user = $session->getUser();
-            addShiping($db,$product->id,$user->id,$product->getSeller()->id);
+            $buyer = $session->getUser();
+
             uppdateBuyer($db,$product->id ,$user->id);
 
         }
@@ -48,7 +66,7 @@
 ?>
 
 <?php
-    function removeFromRecent(PDO $db, $item) {
+    function removeFromRecent(PDO $db, int $item) {
         $stmt = $db->prepare('DELETE 
                             FROM Recent
                             WHERE product = ? ');
@@ -57,7 +75,7 @@
 ?>
 
 <?php
-    function removeFromFavorites(PDO $db, $item) {
+    function removeFromFavorites(PDO $db, int $item) {
         $stmt = $db->prepare('DELETE 
                             FROM Favorites
                             WHERE product = ? ');
@@ -66,12 +84,37 @@
 ?>
 
 <?php
+    function addShipping(PDO $db, Product $product, User $buyer, User $seller, ShippingAddressInfo $buyerAddressInfo, string $date, int $total) {
+        $query = $db->prepare('SELECT idShipping
+                                FROM Shipping
+                                WHERE purchaseDate = ? AND buyer = ? AND seller = ?');
+        $query->execute(array($date, $buyer->id, $seller->id));
+        $shipping = $query->fetch(PDO::FETCH_ASSOC);
+        if (empty($shipping)) {
+            $stmt = $db->prepare('  INSERT INTO Shipping (buyer, buyerCountry, buyerCity, buyerAddress, buyerZipCode,
+                                    seller, sellerCountry, sellerCity, sellerAddress, sellerZipCode,
+                                    purchaseDate, total)
+                                    VALUES (?,?,?,?,?,?,?,?,?,?,?,?);
+                                ');
 
-    function addShiping(PDO $db, int $item, string $buyer, string $seller){
-        $stmt = $db->prepare('INSERT INTO Shipping (product, buyer, seller, purchaseDate)
-                                VALUES (?,?,?,?);
-                              ');
-        $stmt->execute(array($item, $buyer, $seller, date('Y-m-d')));
+            $stmt->execute(array($buyer->id, $buyerAddressInfo->country, $buyerAddressInfo->city, $buyerAddressInfo->address, $buyerAddressInfo->zipCode,
+                                    $seller->id, $seller->getCountry(), $seller->city, $seller->userAddress, $seller->zipCode,
+                                    $date, $total));
+            $shippingId = $db->lastInsertId();
+        }else{
+            $shippingId = $shipping['idShipping'];
+        }
+        
+
+        $stmt = $db->prepare(' UPDATE Product
+                                SET shipping = ?
+                                WHERE idProduct = ?');
+        $stmt->execute(array($shippingId,$product->id));
+
+        $stmt = $db->prepare(' UPDATE Shipping
+                                SET total = total + ?
+                                WHERE idShipping = ?');
+        $stmt->execute(array($product->price,$shippingId));
     }
 
 ?>
@@ -81,9 +124,9 @@
 
 
         $stmt = $db->prepare('UPDATE Product 
-                                SET buyer = (?), purchaseDate = (?)
+                                SET buyer = (?)
                                 WHERE idProduct=(?);
                               ');
-        $stmt->execute(array($buyer, date('Y-m-d'), $item));
+        $stmt->execute(array($buyer, $item));
     }
 ?>

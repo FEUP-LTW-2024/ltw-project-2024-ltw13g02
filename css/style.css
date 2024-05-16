@@ -166,7 +166,8 @@ nav a {
 
 .icon {
     color: #293fa1;
-    margin: 25px;
+    margin: 20px;
+    margin-top: 25px;
 }
 
 .header-icons {
@@ -408,7 +409,6 @@ footer {
     outline: solid;
     outline-color: lightblue;
     border-radius: 1em;
-    margin-left: 0.5em;
 
 }
 
@@ -427,18 +427,21 @@ footer {
     grid-template-rows: 1fr 1fr;
 
     margin-bottom: 0.5em;
-    padding-left: 1em;
+    padding-left: 0.3em;
 }
 
-.CartItem #product_img {
+.CartItem .product_img {
     grid-row-end: span 2;
+    display: flex;
 }
 
 .CartItem img {
-    height: 95%;
+    height: 7em;
     width: 95%;
     border-radius: 1em;
-    object-fit: contain;
+    object-fit: cover;
+    align-self: center;
+    justify-self: center;
 }
 
 .CartItem #cart_item_price {

@@ -316,6 +316,17 @@ class User {
         $stmt->execute(array($this->id, $idProduct));
     }
 
+    function getShippings() :array {
+        $db = getDatabaseConnection();
+        $stmt = $db->prepare("  SELECT S.idShipping
+                                FROM Shipping S
+                                WHERE S.seller = ?");
+        $stmt->execute(array($this->id));
+        $result = $stmt->fetchAll(PDO::FETCH_COLUMN);
+        return $result;
+    }
+
+
     function deleteUser() {
         $db = getDatabaseConnection();
         $stmt = $db->prepare('DELETE FROM User WHERE idUser=:idUser');

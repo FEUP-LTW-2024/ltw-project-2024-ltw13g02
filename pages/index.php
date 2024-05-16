@@ -40,8 +40,7 @@
   drawPath();
 
   drawSearchbar();
-
-  if ($_GET['searchbar'] == NULL && $_GET['category'] == NULL && $_GET['type'] == NULL && $_GET['characteristic'] == NULL && $_GET['condition'] == NULL && $_GET['price-min'] == NULL && $_GET['price-max'] == NULL) {
+  if (!isset($_GET['searchbar']) && !isset($_GET['category']) && !isset($_GET['type']) && !isset($_GET['characteristic']) && !isset($_GET['condition']) && !isset($_GET['price-min']) && !isset($_GET['price-max'])) {
     if ($session->isLoggedIn()) 
     {
 

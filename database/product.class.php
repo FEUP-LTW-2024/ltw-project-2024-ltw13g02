@@ -1,5 +1,4 @@
 <?php
-require_once(__DIR__ . '/../vendor/autoload.php');
 require_once(__DIR__ . '/../database/connection.db.php');
 require_once(__DIR__ . '/../database/get_from_db.php');
 
@@ -17,11 +16,9 @@ class Product {
     public ?string $characteristic3;
     public string $seller;
     public ?string $buyer;
-    public ?string $purchaseDate;
-
     public function __construct(int $id, string $name, int $price, int $condition, string $description,
                                  ?string $characteristic1, ?string $characteristic2, ?string $characteristic3 , 
-                                string $seller, ?string $buyer, ?string $purchaseDate) {
+                                string $seller, ?string $buyer) {
         $this->id = $id;
         $this->name = $name;
         $this->price = $price;
@@ -32,7 +29,6 @@ class Product {
         $this->characteristic3 = $characteristic3;
         $this->seller = $seller;
         $this->buyer = $buyer;
-        $this->purchaseDate = $purchaseDate;
     }
 
     static function searchProduct(string $search) : array {
@@ -120,25 +116,11 @@ class Product {
         return $result['category'];
     }
 
-    function getPurchaseDate(): string {
-        return $this->purchaseDate;
-    }
-
-    function getBuyer() : ?array {
-        if ($this->buyer === null) {
+    function getBuyer() : ?User {
+        if (!isset($this->buyer)) {
             return null;
         }
-        $db = getDatabaseConnection();
-        $stmt = $db->prepare('
-            SELECT firstName, lastName, stars, country, city
-            FROM Product
-            INNER JOIN User ON Product.buyer = User.idUser
-            INNER JOIN Country ON User.idCountry = Country.idCountry
-            WHERE Product.idProduct = ?
-        ');
-        $stmt->execute(array($this->buyer));
-
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return getUserbyId($this->buyer);
     }
 
     function getSeller() : ?User {
@@ -200,4 +182,17 @@ class Product {
         $final .= "</div></section>";
         return $final;
     }
+
+    function getShipping() :Shipping | null{
+        $db = getDatabaseConnection();
+        $stmt = $db->prepare('SELECT P.shipping FROM Product P WHERE P.idProduct = ?');
+        $stmt->execute(array($this->id));
+        $shippment_id = $stmt->fetch(PDO::FETCH_COLUMN);
+        if (isset($shippment_id)) {
+            return getShipping($shippment_id);
+        } else {
+            return null;
+        }
+    }
+
 }
