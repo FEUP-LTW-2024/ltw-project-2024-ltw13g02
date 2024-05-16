@@ -116,12 +116,7 @@ require_once(__DIR__ . '/user.tpl.php');
             }
             document.getElementById('product-image').src = "../images/products/" + photos[currentIndex]['photo'];
         }
-<<<<<<< HEAD
     </script>
-=======
-    </script>
-<?php } ?> 
-
 
 <?php function drawNewProduct(Session $session, array $conditions, array $categories) { ?>
     <link rel="stylesheet" href="../css/editProfile.css">
@@ -202,4 +197,4 @@ require_once(__DIR__ . '/user.tpl.php');
     </script>
 <?php } ?>
 
->>>>>>> 2a8f2a9b3bb28d02f668decf0bbbfbb83b4ca68c
+
