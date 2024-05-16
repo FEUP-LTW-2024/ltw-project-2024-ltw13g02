@@ -30,7 +30,7 @@ require_once(__DIR__ . '/../sessions/session.php');
                 <label id="country" class="required"> 
                     <select name="country" required>
                         <?php
-                        $currentCountry = $user->country;
+                        $currentCountry = $user->getCountry();
 
                         echo "<option value='$currentCountry'>$currentCountry</option>";
 

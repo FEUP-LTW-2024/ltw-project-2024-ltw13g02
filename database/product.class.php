@@ -1,4 +1,7 @@
 <?php
+require_once(__DIR__ . '/../database/connection.db.php');
+require_once(__DIR__ . '/../database/get_from_db.php');
+
 
 
 class Product {
@@ -8,7 +11,7 @@ class Product {
     public int $condition;
     public int $category;
     public string $description;
-    public ?string $characteristic1;
+    public string $characteristic1;
     public ?string $characteristic2;
     public ?string $characteristic3;
     public string $seller;
@@ -35,14 +38,11 @@ class Product {
         $db = getDatabaseConnection();
         $stmt = $db->prepare('SELECT idProduct FROM Product WHERE prodName LIKE ?');
         $stmt->execute(array('%' . $search . '%'));
-    
+        $result = $stmt->fetchAll(PDO::FETCH_COLUMN);
         $products = array();
-        while ($product = $stmt->fetch()) {
-            $products[] = getProduct($product);
+        foreach ($result as $id) {
+            $products[] = getProduct($id);
         }
-
-        dd($products);
-    
         return $products;
     }
 
@@ -176,4 +176,27 @@ class Product {
         return $photos;
     }
 
+    static function ajaxGetProducts ($value=null) : string {
+        $products = Product::searchProduct($value);
+    
+        $final = "<section id='searchedProducts' class='Products'><div id='static_offer_container'> ";
+        foreach ($products as $product) { 
+            $user = getUserbyId($product->seller);
+            $final .= "<div class='static_offer'>";
+            $final .= "<a href='../pages/seller_page.php?user=$user->id' class='user_small_card'>";
+            if ($user->photo != "Sem FF") {
+                $final .= "<img class='user_small_pfp' src='../images/userProfile/$user->photo'> ";
+            } else {
+                $final .= "<h2><i class='fa fa-user fa-1x user-icons'></i></h2>";
+            }
+            $final .= "<p>" .$user->name() . "</p></a>";
+            $final .= "<a href='../pages/productPage.php?product=$product->id'><img class='offer_img' src='../images/products/" . $product->getPhotos()[0]['photo']. "'></a>";
+            $final .= "<a class='offer_info' href='../pages/productPage.php?product=$product->id'>";
+            $final .= "<h4>" . substr($product->name, 0, 30) . "</h4>";
+            $final .= "<h5>" . $user->city . ', ' . $user->getCountry() . "</h5>";
+            $final .= "<p>$product->price€</p></a></div>";
+        }
+        $final .= "</div></section>";
+        return $final;
+    }
 }

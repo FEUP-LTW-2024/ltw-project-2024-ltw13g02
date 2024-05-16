@@ -341,3 +341,16 @@ function getProductsWithType($type) {
     }
     return $products;  
 }
+
+
+function getCharacteristicsByType($db, $typeId) {
+    $stmt = $db->prepare('SELECT idCharacteristic, characteristic FROM Characteristic WHERE idType = ?');
+    $stmt->execute([$typeId]);
+    return $stmt->fetchAll();
+}
+
+function getTypesByCategory($db, $categoryId) {
+    $stmt = $db->prepare('SELECT idType, type_name FROM TypesInCategory WHERE category = ?');
+    $stmt->execute([$categoryId]);
+    return $stmt->fetchAll();
+}

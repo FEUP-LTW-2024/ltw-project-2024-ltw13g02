@@ -4,12 +4,8 @@ require_once(__DIR__ . '/../utils/filter.php');
 
 function drawSearchbar(){ ?>
     <body>
-        <script src="../javascript/search.js" defer></script>
         <main>
-        <form id="search">
-            <button id="searchButton"><i class="fa fa-search fa-1x icon"></i></button>
-            <input id="searchbar" type="search" name="searchbar" placeholder="Search..." required>
-        </form> 
+        <input id="searchbar" type="text" name="searchbar" oninput="myFunction()" placeholder="Search...">
         <div id="search-results"></div>
 <?php 
 }
@@ -24,8 +20,8 @@ function drawPath() {
 ?>
 <form id="filter" action="../pages/index.php" method="get">
     <?php if ($category == NULL) { ?>
-        <select name="category">
-            <option></option> 
+        <select name="category" id="category">
+            <option value="">Category</option> 
             <?php 
                 foreach($categories as $c){ 
             ?>
@@ -40,9 +36,9 @@ function drawPath() {
         ?> <input type="hidden" name="category" value="<?php echo $category; ?>"> <?php
             for ($i = 0; $i < count($types); $i++) {
                 $characteristics = getCharacteristicsofType($types[$i]['idType']); ?>
-                <select name="characteristic<?php echo $i + 1 ?>">
+                <select name="characteristic<?php echo $i + 1 ?>" class="characteristic">
                     <?php 
-                    echo $_GET["characteristic" . $i + 1] != NULL ? "<option value='" . $_GET["characteristic" . $i + 1] . "'>" . getCharacteristic($_GET["characteristic" . $i + 1]) . "</option> <option></option>" : "<option></option>";
+                    echo $_GET["characteristic" . $i + 1] != NULL ? "<option value='" . $_GET["characteristic" . $i + 1] . "'>" . getCharacteristic($_GET["characteristic" . $i + 1]) . "</option> <option value=''>" . $types[$i]['type_name'] . "</option> " : "<option value=''>" . $types[$i]['type_name'] . "</option> ";
                     foreach($characteristics as $c) { 
                         if ($_GET["characteristic" . $i + 1] != NULL && $c['characteristic'] == getCharacteristic($_GET["characteristic" . $i + 1])) {
                             continue;
@@ -56,9 +52,9 @@ function drawPath() {
                 </select>
         <?php }
         } ?>
-    <select name="condition">
+    <select name="condition" id="condition">
         <?php 
-            echo $_GET["condition"] != NULL ? "<option value='" . $_GET["condition"] . "'>" . getCondition($_GET["condition"]) . "</option> <option></option>" : "<option></option>";
+            echo $_GET["condition"] != NULL ? "<option value='" . $_GET["condition"] . "'>" . getCondition($_GET["condition"]) . "</option> <option value=''>Condition</option>" : "<option value=''>Condition</option>";
             foreach($conditions as $c) { 
                 if ($_GET["condition"] != NULL && $c['condition'] == getCondition($_GET["condition"])) {
                     continue;
@@ -96,7 +92,7 @@ function drawRecent($recent_ids)
                         $seller = $product->getSeller();
                         ?>
                         <div class="sliding_offer"> <?php
-                            drawProduct($product, $seller);  ?>
+                            drawSmallProduct($product, $seller, null);  ?>
                         </div> <?php 
                     } ?>
                 </div>
@@ -118,7 +114,7 @@ function drawFavorites($favorites_ids){ ?>
                     $seller = $product->getSeller();
                     ?>
                     <div class="sliding_offer"> <?php
-                        drawProduct($product, $seller);  ?>
+                        drawSmallProduct($product, $seller, null);  ?>
                     </div> <?php 
                 } ?>
             </div>
@@ -141,7 +137,7 @@ function drawRecommended($recommended_ids) { ?>
 
                     $seller = $product->getSeller();?>
                     <div class="static_offer"> <?php
-                        drawProduct($product, $seller);  ?>
+                        drawSmallProduct($product, $seller, null);  ?>
                     </div> <?php
                 }
             } ?>
@@ -162,7 +158,7 @@ function drawSellerProducts($seller_items_ids) { ?>
             { 
                 $product = getProduct($itemId) ?>   
                 <div class="static_offer"> <?php
-                    drawProduct($product, $seller);  ?>
+                    drawSmallProduct($product, $seller, null);  ?>
                 </div> <?php
             }
             ?>
@@ -172,7 +168,7 @@ function drawSellerProducts($seller_items_ids) { ?>
 ?>
 
 <?php
-function drawAnnouncements($announcements_ids)
+function drawAnnouncements($announcements_ids, $user)
     { ?>
         <section class="Products" id="Announcements">
             <h2>My Announcements</h2>
@@ -184,7 +180,7 @@ function drawAnnouncements($announcements_ids)
                     $seller = $product->getSeller();
                     ?>
                     <div class="sliding_offer"> <?php
-                        drawProduct($product, $seller);  ?>
+                        drawSmallProduct($product, $seller, $user);  ?>
                     </div> <?php 
                 } ?>
             </div>
@@ -205,7 +201,7 @@ function drawArchive($archive_ids)
                     $seller = $product->getSeller();
                     ?>
                     <div class="sliding_offer"> <?php
-                        drawProduct($product, $seller);  ?>
+                        drawSmallProduct($product, $seller, null);  ?>
                     </div> <?php 
                 } ?>
             </div>
@@ -230,7 +226,7 @@ function drawArchive($archive_ids)
 
                 $seller = $product->getSeller();?>
                 <div class="static_offer"> <?php
-                    drawProduct($product, $seller);  ?>
+                    drawSmallProduct($product, $seller, null);  ?>
                 </div> <?php
             } ?>
         </div>
@@ -238,20 +234,31 @@ function drawArchive($archive_ids)
 <?php } ?>
 
 <?php
-function drawProduct(Product $product, $user) { ?>
-        <a href="../pages/seller_page.php?user=<?=$user->id?>" class="user_small_card">
-            <?php if ($user->photo != "Sem FF") { ?>
-                <img class="user_small_pfp" src="../images/userProfile/<?=$user->photo?>"> 
-            <?php } else { ?>
-               <h2><i class="fa fa-user fa-1x user-icons"></i></h2>
-            <?php } ?>
-            <p><?=$user->name() ?></p>
-        </a>
+function drawSmallProduct(Product $product, $seller, $user) { ?>
+    <a href="../pages/seller_page.php?user=<?=$seller->id?>" class="user_small_card">
+        <?php if ($seller->photo != "Sem FF") { ?>
+            <img class="user_small_pfp" src="../images/userProfile/<?=$seller->photo?>"> 
+        <?php } else { ?>
+            <h2><i class="fa fa-user fa-1x user-icons"></i></h2>
+        <?php } ?>
+        <p><?=$seller->name() ?></p>
+    </a>
+    <?php if ($user == null){ ?>
         <a href="../pages/productPage.php?product=<?=$product->id?>"><img class="offer_img" src="../images/products/<?= $product->getPhotos()[0]['photo']?>"></a>
-
+    
         <a class="offer_info" href="../pages/productPage.php?product=<?=$product->id?>">
             <h4><?=substr($product->name, 0, 30) ?></h4>
-            <h5><?= $user->city . ", " . $user->getCountry()?></h5>
+            <h5><?= $seller->city . ", " . $seller->getCountry()?></h5>
             <p><?=$product->price?>€</p>
         </a>
+    <?php } else { ?>
+        <a href="../pages/myProduct.php?product=<?=$product->id?>"><img class="offer_img" src="../images/products/<?= $product->getPhotos()[0]['photo']?>"></a>
+    
+        <a class="offer_info" href="../pages/myProduct.php?product=<?=$product->id?>">
+            <h4><?=substr($product->name, 0, 30) ?></h4>
+            <h5><?= $seller->city . ", " . $seller->getCountry()?></h5>
+            <p><?=$product->price?>€</p>
+        </a>
+    <?php } ?>
+    
 <?php } ?>

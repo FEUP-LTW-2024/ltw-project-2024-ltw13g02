@@ -7,13 +7,14 @@
   require_once(__DIR__ . '/../database/connection.db.php');
 
   require_once(__DIR__ . '/../templates/common.tpl.php');
-  require_once(__DIR__ . '/../templates/messages.tpl.php');
+  require_once(__DIR__ . '/../templates/product.tpl.php');
 
-  if ( !preg_match ("/^[a-zA-Z0-9\s]+$/", $_GET['chat'])) {
+  if ( !preg_match ("/^[a-zA-Z0-9\s]+$/", $_GET['product'])) {
     header('Location: pages/index.php');
   }
-  
+
   drawHeader($session);
-  drawChatHeader($session, $_GET['chat']);
-  drawMessages($session, $_GET['chat']);
-  drawMessagesFooter($session, $_GET['chat']);
+  drawProductHeader($session, $_GET['product']);
+  drawProduct($session, $_GET['product']);
+  drawFooter();
+?>  
