@@ -200,3 +200,41 @@ require_once(__DIR__ . '/user.tpl.php');
 <?php } ?>
 
 
+<?php function drawEditProduct(Session $session, $idProduct) {
+    $user = $session->getUser();
+    $product = getProduct($idProduct);
+    $photos = $product->getPhotos(); ?>
+    <div class="product-grid" id="product-grid">
+        <div class="product-image-container">
+            <?php if (count($photos) === 0) { ?>
+                <img id="product-image" src="../images/products/no_images_big.png" alt="Photo">
+            <?php } else { ?>
+                <img id="product-image" src="../images/products/<?php echo $photos[0]['photo']; ?>" alt="photo">
+            <?php } ?>
+            <?php if (count($photos) > 1) { ?>
+                <button class="prev-button" onclick="changePhoto(-1)"><i class="fa fa-angle-left fa-2x prev-icon"></i></button>
+                <button class="next-button" onclick="changePhoto(1)"><i class="fa fa-angle-right fa-2x next-icon"></i></button>
+            <?php } ?>
+        </div>
+
+        <div class="product-info">
+            <h2 id="product-page-name"><?php echo $product->name; ?> </h2>
+            <h2 id="product-page-price"><?php echo $product->price; ?> € </h2>
+            <?php
+            $characteristics = $product->getCharacteristics();
+            $category = $product->getCategory();
+            $condition = $product->getCondition();
+            ?>
+            <h2 id="product-condition"> Condition: <?php echo $condition ?> </h2>
+            <h2 class="product-category">Category: <?php echo $category ?> </h2>
+            <div id="product-characteristics"> 
+                <?php foreach ($characteristics as $c) { ?> 
+                    <h2 id="product-characteristic"> <?php echo $c ?> </h2>
+                <?php } ?>
+            </div>
+            <h2 id="product-page-description">Description: <?php echo $product->description; ?> </h2>
+            
+        </div>
+    </div>
+    <?php 
+} ?>

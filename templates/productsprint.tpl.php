@@ -252,11 +252,19 @@ function drawSmallProduct(Product $product, User $seller, ?User $user) {
                 <h5><?= $seller->city . ", " . $seller->getCountry()?></h5>
                 <p><?=$product->price?>€</p>
              </a>
-    <?php } else {
+    <?php } else if ($product->getBuyer() != null) {
                 $imagePageLink = !isset($product->buyer) ? "product={$product->id}" : "shipping={$product->getShipping()->id}"; ?>
         <a href="../pages/shipmentPage.php?<?=$imagePageLink?>"><img class="offer_img" src="../images/products/<?= $product->getPhotos()[0]['photo']?>"></a>
     
         <a class="offer_info" href="../pages/shipmentPage.php?<?=$imagePageLink?>">
+            <h4><?=substr($product->name, 0, 30) ?></h4>
+            <h5><?= $seller->city . ", " . $seller->getCountry()?></h5>
+            <p><?=$product->price?>€</p>
+        </a>
+    <?php } else { ?>
+        <a href="../pages/myProduct.php?product=<?=$product->id?>"><img class="offer_img" src="../images/products/<?= $product->getPhotos()[0]['photo']?>"></a>
+    
+        <a class="offer_info" href="../pages/myProduct.php?product=<?=$product->id?>">
             <h4><?=substr($product->name, 0, 30) ?></h4>
             <h5><?= $seller->city . ", " . $seller->getCountry()?></h5>
             <p><?=$product->price?>€</p>
