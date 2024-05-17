@@ -33,9 +33,6 @@ require_once(__DIR__ . "/user.tpl.php");
                     </select>
                 <form action="../pages/reviewsPage.php" method="get">
                     <label class="classification" for="classification">Classification:</label>
-                    <input type="hidden" name="user" value="<?=$user->id?>">
-                <form action="../pages/reviewsPage.php" method="get">
-                    <label class="classification" for="classification">Classification:</label>
                     <select id="classific-select" class="classification" name="classification"> <!-- Added name attribute -->
                         <option value="-1"></option>
                         <option value="5"> 5 </option>
@@ -44,6 +41,7 @@ require_once(__DIR__ . "/user.tpl.php");
                         <option value="2"> 2 </option>
                         <option value="1"> 1 </option>
                         <option value="0"> 0 </option>
+                        <input type="hidden" name="user" value="<?=$user->id?>">
                     </select>
                     <button id="go" class="button" type="submit">Go</button>
                 </form>
@@ -77,23 +75,24 @@ require_once(__DIR__ . "/user.tpl.php");
         $session = new Session()?>
         <div id="reviewForm" class="review">
             <form action="../actions/addReview.php" method="post">
-            <div id="starsForm">
-                <div><strong>Stars:</strong></div>
-                <select name='stars'>
-                    <option value='5'>5</option>
-                    <option value='4'>4</option>
-                    <option value='3'>3</option>
-                    <option value='2'>2</option>
-                    <option value='1'>1</option>
-                    <option value='0'>0</option>
-                </select>
-            </div>
-                <label for="userReviewForm"></label>
-                <textarea id="userReviewForm" name="reviewText" maxlength="500" placeholder="Review text..." required="required"></textarea>
+                <input type="hidden" name='csrf' value="<?=$session->getCSRF()?>">
+                <div id="starsForm">
+                    <div><strong>Stars:</strong></div>
+                    <select name='stars'>
+                        <option value='5'>5</option>
+                        <option value='4'>4</option>
+                        <option value='3'>3</option>
+                        <option value='2'>2</option>
+                        <option value='1'>1</option>
+                        <option value='0'>0</option>
+                    </select>
+                </div>
+                    <label for="userReviewForm"></label>
+                    <textarea id="userReviewForm" name="reviewText" maxlength="500" placeholder="Review text..." required="required"></textarea>
 
-                <input type="hidden" name="reviewedUser" value="<?=$user->id?>">
-                <input type="hidden" name="CSRF" value="<?=$session->getCSRF()?>">
-                <button class="submitButton" type="submit">Send</button>
+                    <input type="hidden" name="reviewedUser" value="<?=$user->id?>">
+                    <input type="hidden" name="csrf" value="<?=$session->getCSRF()?>">
+                    <button class="submitButton" type="submit">Send</button>
             </form> 
         </div><?php
     }

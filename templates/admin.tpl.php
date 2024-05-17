@@ -21,6 +21,7 @@ require_once(__DIR__ . '/../database/get_from_db.php');
     ?>
     <div id="admin">
         <form id = "adminGive" action="../actions/giveAdminStatus.php" method="post">
+            <input type="hidden" name='csrf' value="<?=$session->getCSRF()?>">
             <h2>Give the admin status to a user:</h2>
             <label id="userGiveEmail" class="required">
                 <input type="text" name="email" placeholder=" User email..." required>
@@ -28,6 +29,7 @@ require_once(__DIR__ . '/../database/get_from_db.php');
             <button id="adminB" class="button" type="submit">Submit</button>
         </form>
         <form id = "adminRemove" action="../actions/removeAdminStatus.php" method="post">
+            <input type="hidden" name='csrf' value="<?=$session->getCSRF()?>">
             <h2>Remove the admin status to a user:</h2>
             <label id="userRemoveEmail" class="required">
                 <input type="text" name="email" placeholder=" User email..." required>
@@ -35,6 +37,7 @@ require_once(__DIR__ . '/../database/get_from_db.php');
             <button id="adminB" class="button" type="submit">Submit</button>
         </form>
         <form id = "newCategory" action="../actions/newCategory.php" method="post">
+            <input type="hidden" name='csrf' value="<?=$session->getCSRF()?>">
             <h2>New Category:</h2>
             <label id="newC" class="required">
                 <input type="text" name="category" placeholder=" Category..." required>
@@ -42,6 +45,7 @@ require_once(__DIR__ . '/../database/get_from_db.php');
             <button id="categoryB" class="button" type="submit">Submit</button>
         </form>
         <form id = "newType" action="../actions/newType.php" method="post">
+            <input type="hidden" name='csrf' value="<?=$session->getCSRF()?>">
             <h2>New Type of Characteristic:</h2>
             <label id="newC" class="required">
                 <select name="category" required>
@@ -55,6 +59,7 @@ require_once(__DIR__ . '/../database/get_from_db.php');
             <button id="typeB" class="button" type="submit">Submit</button>
         </form>
         <form id = "newCharacteristic" action="../actions/newCharacteristic.php" method="post">
+            <input type="hidden" name='csrf' value="<?=$session->getCSRF()?>">
             <h2>New Characteristic:</h2>
             <label id="characteristicType" class="required">
                 <select name="type" required>

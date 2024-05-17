@@ -14,6 +14,7 @@ require_once(__DIR__ . '/../sessions/session.php');
             <a href="../pages/confirmLogin.php" class="change-buttons">Change Email or Password</a>
             <br><br>
             <form id="editProfileForm" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
+                <input type="hidden" name='csrf' value="<?=$session->getCSRF()?>">
                 <label for="first_name">First Name:</label>
                 <input type="text" id="first_name" name="first_name" value="<?= $user->firstName; ?>">
 
@@ -113,8 +114,9 @@ require_once(__DIR__ . '/../sessions/session.php');
             <?php $user = $session->getUser(); ?>
             <h2><?php echo "Change Email" ?></h2>
             <form id="editChangeEmail" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
+                <input type="hidden" name='csrf' value="<?=$session->getCSRF()?>">
                 <label id="email" class="required">New Email</label>
-                <input type="text" id="email" name="email" value="<?= $user->getEmail(); ?>" required>
+                <input type="text" id="email" name="email" value="<?= $user->email; ?>" required>
                 
                 <br>
                 <input type="submit" value="Submit">
@@ -130,6 +132,7 @@ require_once(__DIR__ . '/../sessions/session.php');
             <?php $user = $session->getUser(); ?>
             <h2><?php echo "Change Password" ?></h2>
             <form id="editChangePassword" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" onsubmit="return validatePassword()">
+                <input type="hidden" name='csrf' value="<?=$session->getCSRF()?>">
                 <label for="newPassword" class="required">New Password:</label>
                 <input type="password" id="newPassword" name="newPassword" placeholder="New Password..." required>
                 <br>

@@ -80,6 +80,7 @@ require_once(__DIR__ . '/../database/product.class.php');
 <?php function drawMessagesFooter(Session $session, $idChat) { ?>
         <div class="input">
             <form method="post" action="" class="messages-input-form">
+                <input type="hidden" name='csrf' value="<?=$session->getCSRF()?>">
                 <input name="message" placeholder="Type your message here!" type="text">
                 <button id="Send" type="submit" class="Send"><i class="fa fa-paper-plane fa-1x icon send-icon"></i></button>
             </form>    

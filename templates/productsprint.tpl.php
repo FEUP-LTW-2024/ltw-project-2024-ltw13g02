@@ -70,8 +70,8 @@ function drawPath() {
             }
         ?>
     </select>
-    <input type="text" class="price-filter" id="price-min" name="price-min" placeholder=" Min Price" value="<?= $_GET["price-min"] === NULL ? "" : $_GET["price-min"] ?>">
-    <input type="text" class="price-filter" id="price-max" name="price-max" placeholder=" Max Price" value="<?= $_GET["price-max"] === NULL ? "" : $_GET["price-max"] ?>">
+    <input type="text" oninput="myFunction()" class="price-filter" id="price-min" name="price-min" placeholder=" Min Price" value="<?= $_GET["price-min"] === NULL ? "" : $_GET["price-min"] ?>">
+    <input type="text" oninput="myFunction()" class="price-filter" id="price-max" name="price-max" placeholder=" Max Price" value="<?= $_GET["price-max"] === NULL ? "" : $_GET["price-max"] ?>">
     <!-- TODO <button id="go-search" class="button" type="submit">Search</button> -->
 </form>
 <?php } ?>

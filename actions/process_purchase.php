@@ -12,7 +12,7 @@
     $address = $_POST['address'];
     $zipcode = $_POST['zipcode'];
 
-    if ($_POST['paymentAuthhorization'] !== $session->getCSRF() or
+    if ($_POST['csrf'] !== $session->getCSRF() or
         !isset($country) or !isset($city) or !isset($address) or !isset($zipcode))
     {
         //Suspicious transaction

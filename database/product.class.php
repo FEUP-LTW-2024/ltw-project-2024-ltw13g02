@@ -1,6 +1,8 @@
 <?php
 require_once(__DIR__ . '/../database/connection.db.php');
 require_once(__DIR__ . '/../database/get_from_db.php');
+require_once(__DIR__ . '/../vendor/autoload.php');
+
 
 
 
@@ -49,18 +51,25 @@ class Product {
         $query = substr($query,0,strlen($query)-5);
 
         $db = getDatabaseConnection();
-        $stmt = $db->prepare("SELECT idProduct,prodName FROM Product p
-        left join Characteristic c1 on c1.idCharacteristic=p.characteristic1
-        left join Characteristic c2 on c2.idCharacteristic=p.characteristic2
-        left join Characteristic c3 on c3.idCharacteristic=p.characteristic3
-        left join TypesInCategory t on t.idType=c1.idType
-        left join Category c on c.idCategory=t.category
-        left join Condition co on co.idCondition=p.condition
-        WHERE $query"
-        );
-        $stmt->execute($values);
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+        if ($query) {
+            $stmt = $db->prepare("SELECT idProduct,prodName FROM Product p
+            left join Characteristic c1 on c1.idCharacteristic=p.characteristic1
+            left join Characteristic c2 on c2.idCharacteristic=p.characteristic2
+            left join Characteristic c3 on c3.idCharacteristic=p.characteristic3
+            left join TypesInCategory t on t.idType=c1.idType
+            left join Category c on c.idCategory=t.category
+            left join Condition co on co.idCondition=p.condition
+            WHERE $query"
+            );
+            $stmt->execute($values);
+        }
+        else {
+            $stmt = $db->prepare("SELECT idProduct,prodName FROM Product");
+            $stmt->execute([]);
+        }
+
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         $products = array();
         foreach ($result as $product) {

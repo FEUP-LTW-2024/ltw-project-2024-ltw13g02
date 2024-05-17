@@ -128,6 +128,7 @@ require_once(__DIR__ . '/user.tpl.php');
             <h2><?php echo "New Product" ?></h2>
             <br>
             <form id="newProductForm" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
+                <input type="hidden" name='csrf' value="<?=$session->getCSRF()?>">
                 <label for="prodName">Product Name:</label>
                 <input type="text" id="prodName" name="prodName" required>
                 
@@ -221,6 +222,7 @@ require_once(__DIR__ . '/user.tpl.php');
         <div class="product-info">
             <div class="edits">
                 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
+                    <input type="hidden" name='csrf' value="<?=$session->getCSRF()?>">
                     <input type="hidden" name="product_id" value="<?php echo $idProduct; ?>">
                     <!--h2 id="product-page-name">< ?php echo $product->name; ?> </h2-->
                     <h2><label for="prodName">Name:</label></h2>

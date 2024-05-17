@@ -6,6 +6,8 @@ include_once('../sessions/session.php');
 $session = new Session();
 $db = getDatabaseConnection();
 
+if ($_SESSION['csrf'] !== $_POST['csrf']) header('Location: ../pages/errorPage.php?error=noAuthorizationAccess');
+
 if ($_SERVER["REQUEST_METHOD"] === "GET") {
     $prodName = $_GET['prodName'];
     $prodDescription = $_GET['prodDescription'];

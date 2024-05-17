@@ -7,6 +7,7 @@ $session = new Session();
 require_once(__DIR__ . '/../database/connection.db.php');
 $db = getDatabaseConnection();
 
+if ($_SESSION['csrf'] !== $_POST['csrf']) header('Location: ../pages/errorPage.php?error=noAuthorizationAccess');
 
 if ($_SERVER["REQUEST_METHOD"] === "GET") {
     $newFirstName = $_GET['first_name'];
