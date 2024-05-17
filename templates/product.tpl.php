@@ -102,9 +102,6 @@ require_once(__DIR__ . '/user.tpl.php');
             ?>           
         </div>
     </div>
-    <?php 
-    } ?>
-    
     <script>
         var currentIndex = 0;
         var photos = <?php echo json_encode($photos); ?>;
@@ -119,6 +116,8 @@ require_once(__DIR__ . '/user.tpl.php');
             document.getElementById('product-image').src = "../images/products/" + photos[currentIndex]['photo'];
         }
     </script>
+    <?php 
+    } ?>
 
 <?php function drawNewProduct(Session $session, array $conditions, array $categories) { ?>
     <link rel="stylesheet" href="../css/editProfile.css">

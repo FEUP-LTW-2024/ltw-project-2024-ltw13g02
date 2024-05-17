@@ -10,9 +10,8 @@
   require_once(__DIR__ . '/../templates/product.tpl.php');
 
   if ( !preg_match ("/^[a-zA-Z0-9\s]+$/", $_GET['product'])) {
-    header('Location: pages/index.php');
+    header('Location: /../pages/index.php');
   }
-
   drawHeader($session);
   $product = getProduct($_GET['product']);
 

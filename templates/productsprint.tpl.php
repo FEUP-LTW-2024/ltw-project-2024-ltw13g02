@@ -4,9 +4,8 @@ require_once(__DIR__ . '/../utils/filter.php');
 
 
 function drawSearchbar(){ ?>
-    <body>
         <main>
-        <input id="searchbar" type="text" name="searchbar" oninput="myFunction()" placeholder="Search...">
+        <input id="searchbar" type="text" name="searchbar" oninput="myFunction()" placeholder="Search..."/>
         <div id="search-results"></div>
 <?php 
 }
@@ -19,6 +18,7 @@ function drawPath() {
     else $categories = getCategories();
     $conditions = getConditions();
 ?>
+<script src="../javascript/search.js" defer></script>
 <form id="filter" action="../pages/index.php" method="get">
     <?php if ($category == NULL) { ?>
         <select name="category" id="category" oninput="myFunction()">
@@ -34,7 +34,7 @@ function drawPath() {
             ?>
         </select>
     <?php }  else { 
-        ?> <input type="hidden" name="category" value="<?php echo $category; ?>"> <?php
+        ?> <input type="hidden" name="category" value="<?php echo $category; ?>"/> <?php
             for ($i = 0; $i < count($types); $i++) {
                 $characteristics = getCharacteristicsofType($types[$i]['idType']); ?>
                 <select id="characteristic<?php echo $i + 1 ?>" name="characteristic<?php echo $i + 1 ?>" class="characteristic" oninput="myFunction()">
@@ -70,8 +70,8 @@ function drawPath() {
             }
         ?>
     </select>
-    <input type="text" oninput="myFunction()" class="price-filter" id="price-min" name="price-min" placeholder=" Min Price" value="<?= $_GET["price-min"] === NULL ? "" : $_GET["price-min"] ?>">
-    <input type="text" oninput="myFunction()" class="price-filter" id="price-max" name="price-max" placeholder=" Max Price" value="<?= $_GET["price-max"] === NULL ? "" : $_GET["price-max"] ?>">
+    <input type="text" oninput="myFunction()" class="price-filter" id="price-min" name="price-min" placeholder=" Min Price" value="<?= $_GET["price-min"] === NULL ? "" : $_GET["price-min"] ?>"/>
+    <input type="text" oninput="myFunction()" class="price-filter" id="price-max" name="price-max" placeholder=" Max Price" value="<?= $_GET["price-max"] === NULL ? "" : $_GET["price-max"] ?>"/>
     <!-- TODO <button id="go-search" class="button" type="submit">Search</button> -->
 </form>
 <?php } ?>

@@ -19,8 +19,8 @@ require_once(__DIR__ . '/../sessions/session.php');
             <link rel="preconnect" href="https://fonts.googleapis.com">
             <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
             <link rel="stylesheet" href="../fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-            <script src="../javascript/search.js" defer></script>
         </head>
+        <body>
         <header>
             <a href="../pages/index.php"><h2 id="mainLogo">Dealify</h2></a>
             <a href="../pages/newProduct.php"><h2 class="header-icons"><i class="fa fa-plus fa-1x icon"></i></h2></a>
@@ -34,7 +34,6 @@ require_once(__DIR__ . '/../sessions/session.php');
                 <a href="../pages/login.php"><h2 class="header-icons"><i class="fa fa-sign-in fa-1x icon"></i></h2></a>
             <?php } ?> 
         </header>
-        <body>
 <?php } ?>
 
 <?php function drawHamburguer(Session $session, $activePage) {
@@ -57,9 +56,9 @@ require_once(__DIR__ . '/../sessions/session.php');
 
 
 <?php function drawFooter() { ?>
-        </body>
         <footer>
                 <p>&copy; Dealify </p>
         </footer>
+        </body>
     </html>
 <?php } ?>
