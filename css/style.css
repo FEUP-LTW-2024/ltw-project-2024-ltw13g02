@@ -19,7 +19,7 @@ html {
     cursor: pointer;
 }
 
-h2 {
+h2, .classification {
     font-family: "Didact Gothic", sans-serif;
     font-weight: 400;
     font-style: normal;
@@ -398,7 +398,7 @@ footer {
 }
 
 
-#Shopping_Cart h2{
+#Shopping_Cart h2 {
     grid-column-start: 1;
     grid-column-end: span 2;
     font-weight: bold;
@@ -416,11 +416,11 @@ footer {
 
 }
 
-#Shopping_items{
+#Shopping_items {
     margin-right: 1em;
 }
 
-#Shopping_items #totalPayment{
+#Shopping_items #totalPayment {
     display: flex;
 }
 
@@ -448,18 +448,18 @@ footer {
     justify-self: center;
 }
 
-.CartItem #cart_item_price{
+.CartItem #cart_item_price {
     grid-row-start: 2;
     grid-column-start: 2;
 }
 
-.CartItem form{
+.CartItem form {
     margin: auto;
     grid-row-end: span 2;
     
 }
 
-.CartItem #trashIcon{
+.CartItem #trashIcon {
     background-color: transparent;
     border: none;
     cursor: pointer;
@@ -475,28 +475,32 @@ footer {
     font-style: normal;
 }
 
-#Shopping_Cart aside form{
+#Shopping_Cart aside form {
     display: grid;
     grid-template-columns: 10em 1fr;
     grid-template-rows: repeat(3, 1.5em) 1.8em;
     row-gap: 5px;
 }
 
-#Shopping_Cart aside form select{
+#Shopping_Cart aside form select {
     height: 21.56px;
 }
 
-#shippingAdress h3{
+#shippingAdress h3 {
     font-size: 2.5em;
     margin: 0;
 }
 
-#shippingAdress h5{
+#shippingAdress h5 {
     font-size: larger;
     margin-bottom: 1em;
 }
 
+<<<<<<< HEAD
 .submitButton{
+=======
+#shippingAdress input[type="submit"] {
+>>>>>>> 2a774e963fb0ea00f245b3cad31b98c1484e453d
     grid-column-end: span 2;
     height: 2.5em;
     margin-top: 10px;
@@ -570,7 +574,8 @@ footer {
 }
 
 #filter {
-    height: 50px;
+    height: 21px;
+    width: 100%;
     margin: 10px 0 0 20px;
 }
 
@@ -594,6 +599,7 @@ footer {
     border-radius: 3px;
     border-color: black;
 }
+
 #go-search:hover {
     background-color:#bbbbbb;
 }
@@ -614,7 +620,6 @@ footer {
     font-style: normal;
 }
 
-
 #go-search:hover {
     border-color: #276a9f;
     background-color: #276a9f;
@@ -626,6 +631,7 @@ footer {
     background-color: white;
 }
 
+<<<<<<< HEAD
 #reviewForm {
     margin-top: 1em;
     position: relative;
@@ -639,4 +645,27 @@ textarea {
 
 #shippingUsers {
     font-size: 20px;
+=======
+#go {
+    border-color: #dddddd;
+    background-color: #f2f2f2;
+    font-family: "Didact Gothic", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    width: 40px;
+    height: 26px;
+
+    color: rgb(59, 59, 59);
+    font-size: 15px;
+}
+
+#classific-select {
+    border-color: #dddddd;
+    font-family: "Didact Gothic", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    border-radius: 3px;
+
+    height: 26px;
+>>>>>>> 2a774e963fb0ea00f245b3cad31b98c1484e453d
 }

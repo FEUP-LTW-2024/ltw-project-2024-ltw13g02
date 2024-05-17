@@ -215,13 +215,29 @@ class User {
         return $average;
     }
 
-    function getReviewsWithUsersFromDB(): ?array {
+    function getReviewsWithUsersFromDB($classification): ?array {
         $db = getDatabaseConnection();
+<<<<<<< HEAD
         $stmt = $db->prepare("SELECT U.firstName, U.lastName, R.* FROM Reviews R 
         LEFT JOIN User U ON R.idUserFrom = U.idUser
         WHERE R.idUser = ?
         ORDER BY R.stars DESC;");
         $stmt->execute(array($this->id));
+=======
+        if ($classification == -1) {
+            $stmt = $db->prepare("SELECT U.firstName, U.lastName, R.* FROM Reviews R 
+                            LEFT JOIN User U ON R.idUserFrom = U.idUser
+                            WHERE R.idUser = ?");
+            $stmt->execute(array($this->id));
+        }
+        else {
+            $stmt = $db->prepare("SELECT U.firstName, U.lastName, R.* FROM Reviews R 
+                            LEFT JOIN User U ON R.idUserFrom = U.idUser
+                            WHERE R.idUser = ? AND R.stars = ?");
+            $stmt->execute(array($this->id, $classification));
+        }
+        
+>>>>>>> 2a774e963fb0ea00f245b3cad31b98c1484e453d
         $reviews = $stmt->fetchAll();
         return $reviews;
     }

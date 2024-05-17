@@ -25,6 +25,7 @@
   ?> <script src="../javascript/reviews.js" defer></script> <?php
   $currentUser = $session->getUser();
   drawHeader($session);
+<<<<<<< HEAD
   if ($currentUser->id === $user->id) { //Same user
     drawHamburguer($session, 0);
     drawFilterBar($user);
@@ -35,4 +36,10 @@
     drawFilterBar($user); 
   }
   drawReviews($user);
+=======
+  drawHamburguer($session, 0);
+  drawFilterBar($session);
+  if (!isset($_GET['classification'])) drawReviews($session, -1);
+  else drawReviews($session, $_GET['classification']);
+>>>>>>> 2a774e963fb0ea00f245b3cad31b98c1484e453d
   drawFooter();

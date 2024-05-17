@@ -20,7 +20,6 @@
         //TODO change == to ===
         //TODO use var or let
         //TODO update sql so that reviews only go up to minutes
-        //TODO sort reviews
 
         header('Location: ../pages/cart_page.php');
     }

@@ -37,4 +37,5 @@ function myFunction() {
     } catch(err) {
         alert("Request failed");
     }
+
 }

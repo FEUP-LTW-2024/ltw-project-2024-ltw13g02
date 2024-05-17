@@ -24,6 +24,7 @@ require_once(__DIR__ . "/user.tpl.php");
                 <div><?=$user->name()?></div>
             </div>
             <div class="filters">
+<<<<<<< HEAD
                 <label for="reviewOrder"><strong>Order:</strong></label>
                     <select id="reviewOrder">
                         <option value="highest">Highest first</option>
@@ -31,12 +32,33 @@ require_once(__DIR__ . "/user.tpl.php");
                         <option value="newest">Newest first</option>
                         <option value="oldest">Oldest first</option>
                     </select>
+=======
+                <form action="../pages/reviewsPage.php" method="get">
+                    <label class="classification" for="classification">Classification:</label>
+                    <select id="classific-select" class="classification" name="classification"> <!-- Added name attribute -->
+                        <option value="-1"></option>
+                        <option value="5"> 5 </option>
+                        <option value="4"> 4 </option>
+                        <option value="3"> 3 </option>
+                        <option value="2"> 2 </option>
+                        <option value="1"> 1 </option>
+                        <option value="0"> 0 </option>
+                    </select>
+                    <button id="go" class="button" type="submit">Go</button>
+                </form>
+>>>>>>> 2a774e963fb0ea00f245b3cad31b98c1484e453d
             </div>
         </div>
 <?php } ?>
 
+<<<<<<< HEAD
 <?php function drawReviews(User $user) { 
     $reviews = $user->getReviewsWithUsersFromDB();
+=======
+<?php function drawReviews(Session $session, $classification) { 
+    $user = $session->getUser();
+    $reviews = $user->getReviewsWithUsersFromDB($classification);
+>>>>>>> 2a774e963fb0ea00f245b3cad31b98c1484e453d
     ?>
         <div id="review-list">
         <?php
@@ -52,6 +74,7 @@ require_once(__DIR__ . "/user.tpl.php");
             }
             ?>
         </div>
+<<<<<<< HEAD
     </main>
 <?php } ?>
 
@@ -81,3 +104,8 @@ require_once(__DIR__ . "/user.tpl.php");
         </div><?php
     }
 ?>
+=======
+    </body>
+    </html>
+<?php } ?>
+>>>>>>> 2a774e963fb0ea00f245b3cad31b98c1484e453d
