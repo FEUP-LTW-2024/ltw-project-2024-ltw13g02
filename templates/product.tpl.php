@@ -12,13 +12,12 @@ require_once(__DIR__ . '/../database/change_in_db.php');
 
 require_once(__DIR__ . '/user.tpl.php');
 
-
 ?>
 
 <?php function drawProductHeader(Session $session, $idProduct) { 
     if ($_GET['chat'] != null) { 
         $chat = getChat($_GET['chat']);
-        if ($chat->getInfo()['idProduct'] === $idProduct) { ?>
+        if ($chat->product == $idProduct) { ?>
             <a href="../pages/messagesPage.php?chat=<?php echo $_GET['chat'] ?>"><i class="fa fa-angle-left fa-2x chat-back-button"></i></a>
 <?php   }
         else { ?>

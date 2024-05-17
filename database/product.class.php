@@ -29,7 +29,7 @@ class Product {
         $this->buyer = $buyer;
     }
 
-    static function searchProduct($parameters) : array {        
+    static function searchProduct($parameters=null) : array {        
         $query = '';
         $values = [];
         foreach($_GET as $key => $value) {

@@ -247,7 +247,9 @@ class User {
 
         foreach ($result as $data) {
             if ($data['idChat'] != NULL) {
-                $chats[] = new Chat($data["idChat"], $data["idProduct"], $data["possibleBuyer"]);
+                $chat = new Chat($data["idChat"], $data["idProduct"], $data["possibleBuyer"]);
+                if ($chat->getMessages() === []) {$chat->deleteChat();}
+                else {$chats[] = $chat;}
             }
         }
 
