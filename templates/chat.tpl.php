@@ -8,9 +8,6 @@ require_once(__DIR__ . '/../database/get_from_db.php');
 require_once(__DIR__ . '/user.tpl.php');
 
 require_once(__DIR__ . '/../utils/elapsedTime.php');
-
-
-
 ?>
 
 <?php function drawChats(Session $session, $activePage) {
@@ -29,13 +26,14 @@ require_once(__DIR__ . '/../utils/elapsedTime.php');
                         <?php 
                         $product = $chat->getProduct();
                         $seller = $product->getSeller();
+                        $buyer = getUserbyId($chat->possibleBuyer);
                         $photos = $product->getPhotos();
                         ?>
                         <div class="chat-product-photo-container">
                             <img class="chat-productphoto" src="../images/products/<?php echo $photos[0]["photo"]; ?>" alt="Photo">
                         </div>
                         <div class="chat-info">
-                            <h2 class="with-user"><?php echo $seller->name(); ?></h2>
+                            <h2 class="with-user"><?php echo $user->id === $seller->id ? $buyer->name() : $seller->name(); ?></h2>
                             <h2 class="message-product"><?php echo $product->name; ?></h2>
                             <?php $lastmessage = $chat->getLastMessage(); 
                             if ($lastmessage->sender === $session->getUser()->id) {?>
