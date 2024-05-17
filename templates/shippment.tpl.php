@@ -1,9 +1,9 @@
 <?php
-    function drawShippingHeader(string $purchaseDate) { 
-        list($day,$hour) = explode(' ',$purchaseDate)?>
+    function drawShippingHeader(string $purchaseDate) { ?>
+        
         <main id="shippingForm">
         <h2>Shipping Form</h2>
-        <h3><?="Transaction Ocoured on {$day} at {$hour}"?></h3>
+        <h3><?="Transaction Ocoured on {$purchaseDate}"?></h3>
         <?php
     }
 ?>

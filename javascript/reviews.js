@@ -8,8 +8,8 @@ function reorderReviews() {
             let starsA = a.querySelectorAll('.fa-star').length;
             let starsB = b.querySelectorAll('.fa-star').length;
             if (starsA - starsB === 0){
-                var dateA = new Date(a.querySelector('.created-at').textContent);
-                var dateB = new Date(b.querySelector('.created-at').textContent);
+                let dateA = new Date(a.querySelector('.created-at').textContent);
+                let dateB = new Date(b.querySelector('.created-at').textContent);
                 return dateB - dateA;
             }
             return starsB - starsA;
@@ -19,22 +19,22 @@ function reorderReviews() {
             let starsA = a.querySelectorAll('.fa-star').length;
             let starsB = b.querySelectorAll('.fa-star').length;
             if (starsA - starsB === 0){
-                var dateA = new Date(a.querySelector('.created-at').textContent);
-                var dateB = new Date(b.querySelector('.created-at').textContent);
+                let dateA = new Date(a.querySelector('.created-at').textContent);
+                let dateB = new Date(b.querySelector('.created-at').textContent);
                 return dateB - dateA;
             }
             return starsA - starsB;
         });
     }else if (reviewOrder === 'newest') {
         reviews.sort((a, b) => {
-            var dateA = new Date(a.querySelector('.created-at').textContent);
-            var dateB = new Date(b.querySelector('.created-at').textContent);
+            let dateA = new Date(a.querySelector('.created-at').textContent);
+            let dateB = new Date(b.querySelector('.created-at').textContent);
             return dateB - dateA;
         });
     } else if (reviewOrder === 'oldest') {
         reviews.sort((a, b) => {
-            var dateA = new Date(a.querySelector('.created-at').textContent);
-            var dateB = new Date(b.querySelector('.created-at').textContent);
+            let dateA = new Date(a.querySelector('.created-at').textContent);
+            let dateB = new Date(b.querySelector('.created-at').textContent);
             return dateA - dateB;
         });
     }

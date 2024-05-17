@@ -8,6 +8,8 @@ $session = new Session();
 $CSRF= $session->getCSRF();
 
 
+
+
 if (!isset($reviewText) or !isset($reviewedUser) or !isset($stars) or
     strlen($reviewText) > 500 or $reviewedUser->id === $session->getUser()  or !preg_match("/^[0-5]$/", $stars) or $CSRF !== $session->getCSRF()) {
 
@@ -16,12 +18,15 @@ if (!isset($reviewText) or !isset($reviewedUser) or !isset($stars) or
 }
 $reviewText = trim($reviewText);
 $reviewText = htmlspecialchars($reviewText);
+$stars = intval($stars);
 
 
 if (strlen($reviewText) === 0) {
     header("Location: ../pages/reviewsPage.php?user={$reviewedUser->id}");
     exit;
 }
+
+
 
 $db = getDatabaseConnection();
 $stmt = $db->prepare("INSERT INTO Reviews (stars, idUser, reviewsDescription, idUserFrom, created_at)

@@ -156,7 +156,7 @@ ul {
     justify-items: stretch;
 }
 
-#Admin {
+#adminHeader {
     grid-template-columns: repeat(4, 25%);
 }
 

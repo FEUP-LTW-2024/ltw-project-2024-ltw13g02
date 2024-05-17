@@ -496,11 +496,7 @@ footer {
     margin-bottom: 1em;
 }
 
-<<<<<<< HEAD
 .submitButton{
-=======
-#shippingAdress input[type="submit"] {
->>>>>>> 2a774e963fb0ea00f245b3cad31b98c1484e453d
     grid-column-end: span 2;
     height: 2.5em;
     margin-top: 10px;
@@ -631,7 +627,6 @@ footer {
     background-color: white;
 }
 
-<<<<<<< HEAD
 #reviewForm {
     margin-top: 1em;
     position: relative;
@@ -645,7 +640,8 @@ textarea {
 
 #shippingUsers {
     font-size: 20px;
-=======
+}
+
 #go {
     border-color: #dddddd;
     background-color: #f2f2f2;
@@ -667,5 +663,4 @@ textarea {
     border-radius: 3px;
 
     height: 26px;
->>>>>>> 2a774e963fb0ea00f245b3cad31b98c1484e453d
 }

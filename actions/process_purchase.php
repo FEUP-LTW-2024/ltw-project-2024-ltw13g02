@@ -18,7 +18,6 @@
         //Suspicious transaction
         //TODO card payment
         //TODO change == to ===
-        //TODO use var or let
         //TODO update sql so that reviews only go up to minutes
 
         header('Location: ../pages/cart_page.php');
@@ -38,7 +37,7 @@
     foreach ($items as $item){
         $products[] = getProduct($item);
     }
-    $date = date('Y-m-d H:i:s');
+    $date = date('Y-m-d');
     foreach($products as $product) {
         addShipping($db, $product, $user, $product->getSeller(), $buyerAddressInfo, $date, $product->price);
         if ($product->getBuyer() !== null) {
@@ -101,7 +100,7 @@
 
             $stmt->execute(array($buyer->id, $buyerAddressInfo->country, $buyerAddressInfo->city, $buyerAddressInfo->address, $buyerAddressInfo->zipCode,
                                     $seller->id, $seller->getCountry(), $seller->city, $seller->userAddress, $seller->zipCode,
-                                    $date, $total));
+                                    $date, 0));
             $shippingId = $db->lastInsertId();
         }else{
             $shippingId = $shipping['idShipping'];

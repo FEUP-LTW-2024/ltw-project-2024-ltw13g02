@@ -10,7 +10,7 @@ require_once(__DIR__ . '/../sessions/session.php');
         <head>
             <link rel="stylesheet" href="../css/style.css">
             <link rel="stylesheet" href="../css/responsive.css">
-             <link rel="stylesheet" href="../css/layout.css">
+            <link rel="stylesheet" href="../css/layout.css">
             <title>Dealify</title>
             <meta charset="utf-8">
 
@@ -43,7 +43,7 @@ require_once(__DIR__ . '/../sessions/session.php');
         <nav id="menu">
             <input type="checkbox" id="hamburger"/> 
             <label class="hamburger" for="hamburger"></label>
-            <ul id=<?php echo $admin ? "Admin" : ""; ?>>
+            <ul id=<?php echo $admin ? "adminHeader" : ""; ?>>
                 <li class=<?php echo $activePage === 0 ? "active" : ""; ?>><a href="../pages/profilePage.php"><i class="fa fa-user-secret icon_menu"></i> Personal Info</a></li>
                 <li class=<?php echo $activePage === 1 ? "active" : ""; ?>><a href="../pages/myAnnouncements.php"><i class="fa fa-bullhorn icon_menu"></i> Announcements</a></li>
                 <li class=<?php echo $activePage === 2 ? "active" : ""; ?>><a href="../pages/myArchive.php"><i class="fa fa-archive icon_menu"></i> Archive</a></li>
