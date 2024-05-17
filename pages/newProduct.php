@@ -14,7 +14,11 @@ $db = getDatabaseConnection();
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $prodName = $_POST['prodName'];
     $prodDescription = $_POST['prodDescription'];
+    
     $price = $_POST['price'];
+    $price = str_replace(',', '.', $price);
+    $price = floatval($price);
+
     $condition = $_POST['condition'];
     $category = $_POST['category'];
 

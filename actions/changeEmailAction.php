@@ -8,7 +8,7 @@ require_once(__DIR__ . '/../database/connection.db.php');
 $db = getDatabaseConnection();
 
 
-if ($_SERVER["REQUEST_METHOD"] == "GET") {
+if ($_SERVER["REQUEST_METHOD"] === "GET") {
     $newEmail = $_GET['email'];
 
     $id = $session->getUser()->id;

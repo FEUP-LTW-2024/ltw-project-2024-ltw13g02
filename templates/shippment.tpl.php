@@ -1,9 +1,9 @@
 <?php
-    function drawShippingHeader(string $purchaseDate) { 
-        list($day,$hour) = explode(' ',$purchaseDate)?>
-        <main>
+    function drawShippingHeader(string $purchaseDate) { ?>
+        
+        <main id="shippingForm">
         <h2>Shipping Form</h2>
-        <h3><?="Transaction Ocoured on {$day} at {$hour}"?></h3>
+        <h3><?="Transaction Ocoured on {$purchaseDate}"?></h3>
         <?php
     }
 ?>
@@ -43,10 +43,10 @@
     $seller = $shipping->seller;
     $buyer = $shipping->buyer;
     ?>
-    <section>
-        <p><strong>Seller:</strong> <?=$seller->name()?></p>
+    <section id="shippingUsers">
+        <a href="../pages/seller_page.php?user=<?=$seller->id?>"><p><strong>Seller:</strong> <?=$seller->name()?></p></a>
         <p><strong>Shipping from:</strong> <?=$shipping->drawSellerFullAddress()?></p>
-        <p><strong>Buyer:</strong> <?=$buyer->name()?></p>
+        <a href="../pages/seller_page.php?user=<?=$buyer->id?>"><p><strong>Buyer:</strong> <?=$buyer->name()?></p></a>
         <p><strong>Shipping to:</strong> <?=$shipping->drawBuyerFullAddress()?></p>
     </section>
     </main>

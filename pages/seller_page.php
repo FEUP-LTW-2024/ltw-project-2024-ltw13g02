@@ -7,8 +7,8 @@
 
     require_once(__DIR__ . '/../sessions/session.php');
 
-    if ( !preg_match ("/^[a-zA-Z0-9\s]+$/", $_GET['user'])) {
-        header('Location: pages/index.php');
+    if ( !isset($_GET['user']) or !preg_match ("/^[a-zA-Z0-9\s]+$/", $_GET['user'])) {
+        header('Location: /index.php');
     }
 
     $session = new Session();
@@ -31,7 +31,7 @@
         }
         drawFooter();
     } else {
-        header('Location: /index.php');
+        header('Location: /pages/profilePage.php');
         exit();
     }
     

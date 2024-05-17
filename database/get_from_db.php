@@ -198,7 +198,7 @@ function getProduct($idProduct) : ?Product {
         return new Product(
             $product['idProduct'],
             $product['prodName'],
-            $product['price'],
+            floatval($product['price']),
             $product['condition'],
             $product['prodDescription'],
             $product['characteristic1'],
@@ -295,7 +295,7 @@ function getProductsWithCh($characteristic) {
     $db = getDatabaseConnection();
     $stmt = $db->prepare("SELECT P.idProduct
                         FROM Characteristic C, Product P 
-                        WHERE C.idCharacteristic = ? AND (characteristic1 == C.idCharacteristic OR characteristic2 == C.idCharacteristic OR characteristic3 == C.idCharacteristic)");
+                        WHERE C.idCharacteristic = ? AND (characteristic1 === C.idCharacteristic OR characteristic2 === C.idCharacteristic OR characteristic3 === C.idCharacteristic)");
     $stmt->execute(array($characteristic));
 
     $aux = $stmt->fetchAll(PDO::FETCH_COLUMN);

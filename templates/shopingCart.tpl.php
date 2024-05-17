@@ -113,7 +113,7 @@
         $session = new Session();
         ?>
         
-        <div class='address_field' id ='address_country'>
+        <div class='address_field' id ='countryField'>
         Country:
         </div>
             <select name='country'>

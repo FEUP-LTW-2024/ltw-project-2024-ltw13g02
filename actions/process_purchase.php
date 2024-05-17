@@ -4,8 +4,6 @@
     require_once(__DIR__ . '/../sessions/session.php');
     require_once(__DIR__ . '/../database/addressInfo.php');
 
-
-
     $session = new Session();
     $user = $session->getUser();
     $db = getDatabaseConnection();
@@ -18,14 +16,15 @@
         !isset($country) or !isset($city) or !isset($address) or !isset($zipcode))
     {
         //Suspicious transaction
-        //TODO change == to ===
-        //TODO use var or let
+        //TODO card payment
+
         header('Location: ../pages/cart_page.php');
     }
-    $contry  =  htmlspecialchars(trim($contry), ENT_QUOTES, 'UTF-8');
-    $city    =  htmlspecialchars(trim($city), ENT_QUOTES, 'UTF-8');
-    $address =  htmlspecialchars(trim($address), ENT_QUOTES, 'UTF-8');
-    $zipcode =  htmlspecialchars(trim($zipcode), ENT_QUOTES, 'UTF-8');
+    
+    $country =  trim($country);
+    $city    =  trim($city);
+    $address =  trim($address);
+    $zipcode =  trim($zipcode);
 
     $db->beginTransaction();
     $items = $user->getShoppingCart();
@@ -36,12 +35,12 @@
     foreach ($items as $item){
         $products[] = getProduct($item);
     }
-    $date = date('Y-m-d H:i:s');
+    $date = date('Y-m-d');
     foreach($products as $product) {
         addShipping($db, $product, $user, $product->getSeller(), $buyerAddressInfo, $date, $product->price);
         if ($product->getBuyer() !== null) {
             $db->rollBack();
-            header('Location: ../pages/errorPage.php?error=Tried_to_buy_bought_item');
+            header('Location: /../pages/errorPage.php?error=Tried_to_buy_bought_item');
         }else{
             removeFromCarts($db, $product->id);
             removeFromRecent($db, $product->id);            
@@ -99,7 +98,7 @@
 
             $stmt->execute(array($buyer->id, $buyerAddressInfo->country, $buyerAddressInfo->city, $buyerAddressInfo->address, $buyerAddressInfo->zipCode,
                                     $seller->id, $seller->getCountry(), $seller->city, $seller->userAddress, $seller->zipCode,
-                                    $date, $total));
+                                    $date, 0));
             $shippingId = $db->lastInsertId();
         }else{
             $shippingId = $shipping['idShipping'];

@@ -212,10 +212,14 @@ li:hover a {
     background: #f2f2f2;
     padding: 20px;
     border-radius: 5px;
+    word-wrap: break-word;}
+
+.average-ratting {
+    font-size: 24px;
 }
 
-.average-rating {
-    font-size: 24px;
+.average-ratting :last-child{
+    margin-left: auto;
 }
 
 .stars {
@@ -223,7 +227,7 @@ li:hover a {
     margin-right: 10px;
 }
 
-.rating-score {
+.ratting-score {
     font-weight: bold;
 }
 
@@ -332,6 +336,7 @@ footer {
     font-family: "Didact Gothic", sans-serif;
     font-weight: 400;
     font-style: normal;
+    margin-top: auto;
 }
 
 .input {
@@ -474,7 +479,8 @@ footer {
 #Shopping_Cart aside form {
     display: grid;
     grid-template-columns: 10em 1fr;
-    grid-template-rows: repeat(4, 1.5em);
+    grid-template-rows: repeat(3, 1.5em) 1.8em;
+    row-gap: 5px;
 }
 
 #Shopping_Cart aside form select {
@@ -491,6 +497,7 @@ footer {
     margin-bottom: 1em;
 }
 
+.submitButton,
 #shippingAdress input[type="submit"] {
     grid-column-end: span 2;
     height: 2.5em;
@@ -504,7 +511,6 @@ footer {
 
 #addressShipping input,
 #addressShipping select {
-    height: 1.3em;
     margin-right: 1em;
 }
 
@@ -623,6 +629,21 @@ footer {
     background-color: white;
 }
 
+#reviewForm {
+    margin-top: 1em;
+    position: relative;
+    font-family: "Didact Gothic", sans-serif;
+
+}
+
+textarea {
+    resize: none;
+}
+
+#shippingUsers {
+    font-size: 20px;
+}
+
 #go {
     border-color: #dddddd;
     background-color: #f2f2f2;
@@ -642,6 +663,32 @@ footer {
     font-weight: 400;
     font-style: normal;
     border-radius: 3px;
+}
 
-    height: 26px;
+.product-info input[type="text"],
+.product-info textarea {
+    border: 1px solid grey;
+    font-family: "Didact Gothic", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    padding: 3px;
+    min-width: 20em;
+    margin-bottom: 5px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+/* Additional button styling to match the provided styles */
+.product-info .edits button {
+    display: inline-block;
+    padding: 3px;
+    background-color: #b8c8d6; /* Button color */
+    color: white; /* Text color */
+    border: 1px solid #b8c8d6;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    min-width: 20em;
+    margin-top: 1em; /* Add some space above the button */
 }

@@ -41,7 +41,7 @@ function drawPath() {
                     <?php 
                     echo $_GET["characteristic" . $i + 1] != NULL ? "<option value='" . $_GET["characteristic" . $i + 1] . "'>" . getCharacteristic($_GET["characteristic" . $i + 1]) . "</option> <option value=''>" . $types[$i]['type_name'] . "</option> " : "<option value=''>" . $types[$i]['type_name'] . "</option> ";
                     foreach($characteristics as $c) { 
-                        if ($_GET["characteristic" . $i + 1] != NULL && $c['characteristic'] == getCharacteristic($_GET["characteristic" . $i + 1])) {
+                        if ($_GET["characteristic" . $i + 1] != NULL && $c['characteristic'] === getCharacteristic($_GET["characteristic" . $i + 1])) {
                             continue;
                         }
                         else { ?>
@@ -57,7 +57,7 @@ function drawPath() {
         <?php 
             echo $_GET["condition"] != NULL ? "<option value='" . $_GET["condition"] . "'>" . getCondition($_GET["condition"]) . "</option> <option value=''>Condition</option>" : "<option value=''>Condition</option>";
             foreach($conditions as $c) { 
-                if ($_GET["condition"] != NULL && $c['condition'] == getCondition($_GET["condition"])) {
+                if ($_GET["condition"] != NULL && $c['condition'] === getCondition($_GET["condition"])) {
                     continue;
                 }
                 else {
@@ -212,7 +212,9 @@ function drawArchive($archive_ids)
 
 <?php
 function drawSmallProduct(Product $product, User $seller, ?User $user) { 
+    $buyer = $product->getBuyer();
     ?>
+
     <a href="../pages/seller_page.php?user=<?=$seller->id?>" class="user_small_card">
         <?php if ($seller->photo != "Sem FF") { ?>
                     <img class="user_small_pfp" src="../images/userProfile/<?=$seller->photo?>"> 
@@ -221,7 +223,8 @@ function drawSmallProduct(Product $product, User $seller, ?User $user) {
         <?php } ?>
         <p><?=$seller->name() ?></p>
     </a>
-    <?php if (!isset($user)){?>
+
+    <?php if (!isset($user)) { ?>
                 <a href="../pages/productPage.php?product=<?=$product->id?>"><img class="offer_img" src="../images/products/<?= $product->getPhotos()[0]['photo']?>"></a>
     
             <a class="offer_info" href="../pages/productPage.php?product=<?=$product->id?>">
@@ -229,8 +232,8 @@ function drawSmallProduct(Product $product, User $seller, ?User $user) {
                 <h5><?= $seller->city . ", " . $seller->getCountry()?></h5>
                 <p><?=$product->price?>€</p>
              </a>
-    <?php } else if ($product->getBuyer() != null) {
-                $imagePageLink = !isset($product->buyer) ? "product={$product->id}" : "shipping={$product->getShipping()->id}"; ?>
+    <?php } else if (isset($buyer)) {
+        $imagePageLink = !isset($product->buyer) ? "product={$product->id}" : "shipping={$product->getShipping()->id}"; ?>
         <a href="../pages/shipmentPage.php?<?=$imagePageLink?>"><img class="offer_img" src="../images/products/<?= $product->getPhotos()[0]['photo']?>"></a>
     
         <a class="offer_info" href="../pages/shipmentPage.php?<?=$imagePageLink?>">
