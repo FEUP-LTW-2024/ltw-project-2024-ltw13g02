@@ -34,6 +34,8 @@ require_once(__DIR__ . "/user.tpl.php");
                 <form action="../pages/reviewsPage.php" method="get">
                     <label class="classification" for="classification">Classification:</label>
                     <input type="hidden" name="user" value="<?=$user->id?>">
+                <form action="../pages/reviewsPage.php" method="get">
+                    <label class="classification" for="classification">Classification:</label>
                     <select id="classific-select" class="classification" name="classification"> <!-- Added name attribute -->
                         <option value="-1"></option>
                         <option value="5"> 5 </option>
@@ -96,3 +98,4 @@ require_once(__DIR__ . "/user.tpl.php");
         </div><?php
     }
 ?>
+

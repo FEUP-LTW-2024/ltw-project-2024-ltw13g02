@@ -39,4 +39,8 @@
   if (!isset($_GET['classification'])) drawReviews($user, -1);
   else drawReviews($user, $_GET['classification']);
 
+  drawHamburguer($session, 0);
+  drawFilterBar($session);
+  if (!isset($_GET['classification'])) drawReviews($session, -1);
+  else drawReviews($session, $_GET['classification']);
   drawFooter();

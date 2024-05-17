@@ -229,6 +229,7 @@ class User {
                             WHERE R.idUser = ? AND R.stars = ?");
             $stmt->execute(array($this->id, $classification));
         }
+
         $reviews = $stmt->fetchAll();
         return $reviews;
     }
@@ -236,7 +237,7 @@ class User {
     function getChatsAsSellerFromDB(): ?array {
         $db = getDatabaseConnection();
         $stmt = $db->prepare('
-            SELECT idChat,  Product.idProduct, Product.prodName
+            SELECT idChat,  Product.idProduct, Chat.possibleBuyer
             FROM Product, Chat
             WHERE Product.seller = ? AND Chat.product = Product.idProduct
         ');
@@ -246,7 +247,7 @@ class User {
 
         foreach ($result as $data) {
             if ($data['idChat'] != NULL) {
-                $chats[] = new Chat($data["idChat"], $data["idProduct"], $data["prodName"]);
+                $chats[] = new Chat($data["idChat"], $data["idProduct"], $data["possibleBuyer"]);
             }
         }
 
