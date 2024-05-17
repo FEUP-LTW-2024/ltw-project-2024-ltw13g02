@@ -198,7 +198,7 @@ function getProduct($idProduct) : ?Product {
         return new Product(
             $product['idProduct'],
             $product['prodName'],
-            $product['price'],
+            floatval($product['price']),
             $product['condition'],
             $product['prodDescription'],
             $product['characteristic1'],

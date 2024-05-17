@@ -99,7 +99,7 @@ require_once(__DIR__ . '/user.tpl.php');
                 }
                     ?>
                 <?php } 
-            ?>
+            ?>           
         </div>
     </div>
     <?php 
@@ -203,7 +203,8 @@ require_once(__DIR__ . '/user.tpl.php');
 <?php function drawEditProduct(Session $session, $idProduct) {
     $user = $session->getUser();
     $product = getProduct($idProduct);
-    $photos = $product->getPhotos(); ?>
+    $photos = $product->getPhotos(); 
+    $seller = $product->getSeller(); ?> 
     <div class="product-grid" id="product-grid">
         <div class="product-image-container">
             <?php if (count($photos) === 0) { ?>
@@ -218,22 +219,42 @@ require_once(__DIR__ . '/user.tpl.php');
         </div>
 
         <div class="product-info">
-            <h2 id="product-page-name"><?php echo $product->name; ?> </h2>
-            <h2 id="product-page-price"><?php echo $product->price; ?> € </h2>
-            <?php
-            $characteristics = $product->getCharacteristics();
-            $category = $product->getCategory();
-            $condition = $product->getCondition();
-            ?>
-            <h2 id="product-condition"> Condition: <?php echo $condition ?> </h2>
-            <h2 class="product-category">Category: <?php echo $category ?> </h2>
-            <div id="product-characteristics"> 
-                <?php foreach ($characteristics as $c) { ?> 
-                    <h2 id="product-characteristic"> <?php echo $c ?> </h2>
-                <?php } ?>
+            <div class="edits">
+                <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
+                    <input type="hidden" name="product_id" value="<?php echo $idProduct; ?>">
+                    <!--h2 id="product-page-name">< ?php echo $product->name; ?> </h2-->
+                    <h2><label for="prodName">Name:</label></h2>
+                    <h2><input type="text" id="prodName" name="prodName" value="<?php echo htmlspecialchars($product->name); ?>"></h2>
+                    
+                    <h2><label for="price">Price:</label></h2>
+                    <h2><input type="text" id="price" name="price" value="<?php echo htmlspecialchars(strval($product->price)); ?>"></h2>
+                    
+                    <a href="" class="product-page-seller"><h2 class="product-page-seller"><?php echo $seller->name(); ?> </h2></a>
+                    <a href="" class="product-page-stars"><h2 class="product-page-stars stars">
+                        <?php
+                        $stars = $seller->getStarsFromReviews();
+                        drawStars($stars);
+                        ?>
+                    </h2></a>
+                    <?php
+                    $characteristics = $product->getCharacteristics();
+                    $category = $product->getCategory();
+                    $condition = $product->getCondition();
+                    ?>
+                    <h2 id="product-condition"> Condition: <?php echo $condition ?> </h2>
+                    <h2 class="product-category">Category: <?php echo $category ?> </h2>
+                    <div id="product-characteristics"> 
+                        <?php foreach ($characteristics as $c) { ?> 
+                            <h2 id="product-characteristic"> <?php echo $c ?> </h2>
+                        <?php } ?>
+                    </div>
+                    
+                    <h2><label for="prodDescription">Description:</label></h2>
+                    <h2><textarea id="prodDescription" name="prodDescription"><?php echo htmlspecialchars($product->description); ?></textarea></h2>
+                    
+                    <button type="submit">Submit</button>
+                </form>
             </div>
-            <h2 id="product-page-description">Description: <?php echo $product->description; ?> </h2>
-            
         </div>
     </div>
     <?php 

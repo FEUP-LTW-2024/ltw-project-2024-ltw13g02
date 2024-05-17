@@ -7,7 +7,7 @@ require_once(__DIR__ . '/../database/get_from_db.php');
 class Product {
     public int $id;
     public string $name;
-    public int $price;
+    public float $price;
     public int $condition;
     public int $category;
     public string $description;
@@ -16,7 +16,7 @@ class Product {
     public ?string $characteristic3;
     public string $seller;
     public ?string $buyer;
-    public function __construct(int $id, string $name, int $price, int $condition, string $description,
+    public function __construct(int $id, string $name, float $price, int $condition, string $description,
                                  ?string $characteristic1, ?string $characteristic2, ?string $characteristic3 , 
                                 string $seller, ?string $buyer) {
         $this->id = $id;
