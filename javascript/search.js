@@ -13,8 +13,8 @@ if (characteristic1) characteristic1.addEventListener("oninput", myFunction);
 if (characteristic2) characteristic2.addEventListener("oninput", myFunction);
 if (characteristic3) characteristic3.addEventListener("oninput", myFunction);
 condition.addEventListener("oninput", myFunction);
-// minPrice.addEventListener("oninput", myFunction);
-// maxPrice.addEventListener("oninput", myFunction);
+minPrice.addEventListener("oninput", myFunction);
+maxPrice.addEventListener("oninput", myFunction);
 
 function myFunction() {
     if ((searchProducts && category && characteristic1 && characteristic2 && characteristic3

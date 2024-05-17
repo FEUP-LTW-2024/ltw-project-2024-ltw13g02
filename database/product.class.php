@@ -206,7 +206,7 @@ class Product {
             $final .= "<a class='offer_info' href='../pages/productPage.php?product=$product->id'>";
             $final .= "<h4>" . substr($product->name, 0, 30) . "</h4>";
             $final .= "<h5>" . $user->city . ', ' . $user->getCountry() . "</h5>";
-            $final .= "<p>$product->price€</p></a></div>";
+            $final .= "<p>$product->price €</p></a></div>";
         }
         $final .= "</div></section>";
         return $final;
