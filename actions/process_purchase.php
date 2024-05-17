@@ -17,8 +17,6 @@
     {
         //Suspicious transaction
         //TODO card payment
-        //TODO change == to ===
-        //TODO update sql so that reviews only go up to minutes
 
         header('Location: ../pages/cart_page.php');
     }

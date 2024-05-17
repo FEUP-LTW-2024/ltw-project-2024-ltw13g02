@@ -54,7 +54,7 @@
           $uploadOk = 0;
       }
 
-      if ($uploadOk == 0) {
+      if ($uploadOk === 0) {
           echo "Sorry, your file was not uploaded.";
       } else {
           if (move_uploaded_file($_FILES["photo"]["tmp_name"], $photoPath)) {

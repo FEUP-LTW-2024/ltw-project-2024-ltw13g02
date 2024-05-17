@@ -5,7 +5,7 @@ $session = new Session();
 require_once(__DIR__ . '/../database/connection.db.php');
 $db = getDatabaseConnection();
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $category = $_POST['category'];
     $type = $_POST['type'];
 

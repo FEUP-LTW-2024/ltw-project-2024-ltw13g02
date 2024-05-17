@@ -19,7 +19,7 @@ function drawPath() {
     $conditions = getConditions();
 ?>
 <form id="filter" action="../pages/index.php" method="get">
-    <?php if ($category == NULL) { ?>
+    <?php if ($category === NULL) { ?>
         <select name="category" id="category">
             <option value="">Category</option> 
             <?php 
@@ -40,7 +40,7 @@ function drawPath() {
                     <?php 
                     echo $_GET["characteristic" . $i + 1] != NULL ? "<option value='" . $_GET["characteristic" . $i + 1] . "'>" . getCharacteristic($_GET["characteristic" . $i + 1]) . "</option> <option value=''>" . $types[$i]['type_name'] . "</option> " : "<option value=''>" . $types[$i]['type_name'] . "</option> ";
                     foreach($characteristics as $c) { 
-                        if ($_GET["characteristic" . $i + 1] != NULL && $c['characteristic'] == getCharacteristic($_GET["characteristic" . $i + 1])) {
+                        if ($_GET["characteristic" . $i + 1] != NULL && $c['characteristic'] === getCharacteristic($_GET["characteristic" . $i + 1])) {
                             continue;
                         }
                         else { ?>
@@ -56,7 +56,7 @@ function drawPath() {
         <?php 
             echo $_GET["condition"] != NULL ? "<option value='" . $_GET["condition"] . "'>" . getCondition($_GET["condition"]) . "</option> <option value=''>Condition</option>" : "<option value=''>Condition</option>";
             foreach($conditions as $c) { 
-                if ($_GET["condition"] != NULL && $c['condition'] == getCondition($_GET["condition"])) {
+                if ($_GET["condition"] != NULL && $c['condition'] === getCondition($_GET["condition"])) {
                     continue;
                 }
                 else {

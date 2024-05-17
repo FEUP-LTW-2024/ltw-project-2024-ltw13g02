@@ -11,7 +11,7 @@
 
   require_once(__DIR__ . '/../templates/edit.tpl.php');
 
-  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     $newPassword = $_POST['newPassword'];
     

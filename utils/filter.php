@@ -6,7 +6,7 @@ function filterByCondition($products, $condition) : array {
     $f = [];
     foreach ($products as $id) {
         $product = getProduct($id);
-        if ($product->getCondition() == getCondition($condition)) {
+        if ($product->getCondition() === getCondition($condition)) {
             $f[] = $id;
         }
     }

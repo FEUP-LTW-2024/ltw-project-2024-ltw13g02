@@ -75,7 +75,7 @@ class User {
     function isFavorite($idProduct) : bool {
         $favs = $this->getFavorites();
         foreach ($favs as $f) {
-            if ($f['product'] == $idProduct) return true;
+            if ($f['product'] === $idProduct) return true;
         }
         return false;
     }
@@ -86,7 +86,7 @@ class User {
 
 
         foreach ($recents as $recent) {
-            if ($recent == $idProduct) {
+            if ($recent === $idProduct) {
                 $stmt = $db->prepare('DELETE FROM Recent WHERE Recent.user = ? AND Recent.product = ?');
                 $stmt->execute(array($this->id, $idProduct));
             }
@@ -217,7 +217,7 @@ class User {
 
     function getReviewsWithUsersFromDB($classification): ?array {
         $db = getDatabaseConnection();
-        if ($classification == -1) {
+        if ($classification === -1) {
             $stmt = $db->prepare("SELECT U.firstName, U.lastName, R.* FROM Reviews R 
                             LEFT JOIN User U ON R.idUserFrom = U.idUser
                             WHERE R.idUser = ?");

@@ -16,16 +16,16 @@
   drawHeader($session);
   $product = getProduct($_GET['product']);
 
-if($product == null){ ?>
+if($product === null){ ?>
     <br>
     <h2 class = "notAvailable"><?php echo "This product is not available!"; ?></h2>
 <?php } else {
-    if($product->getBuyer() != null && $product->getSeller() == $session->getUser()->id) {
+    if($product->getBuyer() != null && $product->getSeller() === $session->getUser()->id) {
         header('Location: ../pages/shipmentPage.php');
     } else if($product->getBuyer() != null) { ?>
         <br>
         <h2 class = "notAvailable"><?php echo "This product is not available!"; ?></h2>
-    <?php } else if ($product->getSeller() == $session->getUser()->id) {
+    <?php } else if ($product->getSeller() === $session->getUser()->id) {
         header("Location: ../pages/myProduct.php?product={$product->id}");
     } else {
         drawProductHeader($session, $_GET['product']);
