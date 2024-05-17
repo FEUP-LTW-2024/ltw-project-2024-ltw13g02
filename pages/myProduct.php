@@ -11,9 +11,6 @@ require_once(__DIR__ . '/../templates/product.tpl.php');
 
 $db = getDatabaseConnection();
 
-/*if ( !preg_match ("/^[a-zA-Z0-9\s]+$/", $_GET['product'])) {
-  header('Location: ../pages/index.php');
-}*/
 
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -32,6 +29,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 }
 
 $db = getDatabaseConnection();
+
+if ( !preg_match ("/^[a-zA-Z0-9\s]+$/", $_GET['product'])) {
+  header('Location: ../pages/index.php');
+}
 
 $idProduct = $_GET['product'];
 drawHeader($session);
