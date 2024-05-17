@@ -19,8 +19,8 @@
 
     $countries = getAllCountries();
     
-    drawHeader($session);
-    ?><script src="../javascript/cart.js" defer></script> <?php
+    drawHeader($session); ?>
+    <script src="../javascript/cart.js" defer></script> <?php
     if (sizeof($items_ids) > 0) {
         output_cart_items($items_ids);
         output_shipping_address($session, $countries);

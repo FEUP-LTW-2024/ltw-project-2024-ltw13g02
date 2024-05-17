@@ -6,14 +6,17 @@ function attachSubmitEvent() {
 
     let zipCodeRegex = /^\d{4}-\d{3}$/;
 
-    let submitButton = document.getElementById("submitButton");
+    let submitButton = document.getElementById("formSubmitButton");
     
-
     submitButton.addEventListener('click', function (event) {
 
-        let city = document.getElementById("cityFiel").value;
-        let address = document.getElementById("addressFiel").value;
+        let city = document.getElementById("cityField").value;
+        let address = document.getElementById("addressField").value;
         let zipCode = document.getElementById("zipcodeField").value;
+        console.log(city);
+        console.log(address);
+        console.log(zipCode);
+
         let isCityValid     = cityRegex.test(city);
         let isAddressValid  = addressRegex.test(address);
         let isZipCodeValid  = zipCodeRegex.test(zipCode);

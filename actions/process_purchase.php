@@ -4,8 +4,6 @@
     require_once(__DIR__ . '/../sessions/session.php');
     require_once(__DIR__ . '/../database/addressInfo.php');
 
-
-
     $session = new Session();
     $user = $session->getUser();
     $db = getDatabaseConnection();
@@ -18,8 +16,12 @@
         !isset($country) or !isset($city) or !isset($address) or !isset($zipcode))
     {
         //Suspicious transaction
+        //TODO card payment
         //TODO change == to ===
         //TODO use var or let
+        //TODO update sql so that reviews only go up to minutes
+        //TODO sort reviews
+
         header('Location: ../pages/cart_page.php');
     }
     
@@ -42,7 +44,7 @@
         addShipping($db, $product, $user, $product->getSeller(), $buyerAddressInfo, $date, $product->price);
         if ($product->getBuyer() !== null) {
             $db->rollBack();
-            header('Location: ../pages/errorPage.php?error=Tried_to_buy_bought_item');
+            header('Location: /../pages/errorPage.php?error=Tried_to_buy_bought_item');
         }else{
             removeFromCarts($db, $product->id);
             removeFromRecent($db, $product->id);            

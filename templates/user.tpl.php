@@ -32,7 +32,7 @@ require_once(__DIR__ . '/../sessions/session.php');
           if($session->isLoggedIn()) {
         ?>
             <h2><?php echo "Name: " . $user->name(); ?></h2>
-            <a href="reviewsPage.php"><h2 id="stars" class="stars">
+            <a href="reviewsPage.php?user=<?=$user->id?>"><h2 id="stars" class="stars">
             <?php
               $stars = $user->getStarsFromReviews();
               drawStars($stars);

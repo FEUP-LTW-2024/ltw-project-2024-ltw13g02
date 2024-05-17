@@ -73,20 +73,19 @@
     function output_shipping_address(Session $session,$countries){ ?>
         <aside id="shippingAdress">
             <h3>Checkout</h3> 
-            <h5>Address</h5>
+            <h5>Address</h5> 
         <form id ='addressShipping' action="../actions/process_purchase.php" method="post">
 
 
 
-                <div>Street:</div> <input type='text' id ='addressFiel' name='address' required="required" value= "<?=$session->getUser()->userAddress?>">
-                <div>City:</div> <input type='text' id ='cityFiel' name='city' required="required" value= "<?= $session->getUser()->city?>">
+                <div>Street:</div> <input type='text' id ='addressField' name='address' required="required" value= "<?=$session->getUser()->userAddress?>">
+                <div>City:</div> <input type='text' id ='cityField' name='city' required="required" value= "<?= $session->getUser()->city?>">
                 <div>Zipcode:</div> <input type='text' id ='zipcodeField' name='zipcode' required="required" value= "<?= $session->getUser()->zipCode?>">
-                <input type="hidden" name='paymentAuthhorization' value="<?=$session->getCSRF()?>">
-                <?php
+                <input type="hidden" name='paymentAuthhorization' value="<?=$session->getCSRF()?>"> <?php
                 output_country_option($countries);
                 
                 ?>
-                <input type="submit" id="submitButton" value="Pay Now">
+                <input type="submit" id="formSubmitButton" class="submitButton" value="Pay Now">
         </form>
         </aside>
         </main>

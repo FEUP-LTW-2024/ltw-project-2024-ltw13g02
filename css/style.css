@@ -212,10 +212,14 @@ li:hover a {
     background: #f2f2f2;
     padding: 20px;
     border-radius: 5px;
+    word-wrap: break-word;}
+
+.average-ratting {
+    font-size: 24px;
 }
 
-.average-rating {
-    font-size: 24px;
+.average-ratting :last-child{
+    margin-left: auto;
 }
 
 .stars {
@@ -223,7 +227,7 @@ li:hover a {
     margin-right: 10px;
 }
 
-.rating-score {
+.ratting-score {
     font-weight: bold;
 }
 
@@ -474,7 +478,8 @@ footer {
 #Shopping_Cart aside form{
     display: grid;
     grid-template-columns: 10em 1fr;
-    grid-template-rows: repeat(4, 1.5em);
+    grid-template-rows: repeat(3, 1.5em) 1.8em;
+    row-gap: 5px;
 }
 
 #Shopping_Cart aside form select{
@@ -491,7 +496,7 @@ footer {
     margin-bottom: 1em;
 }
 
-#shippingAdress input[type="submit"]{
+.submitButton{
     grid-column-end: span 2;
     height: 2.5em;
     margin-top: 10px;
@@ -504,7 +509,6 @@ footer {
 
 #addressShipping input,
 #addressShipping select {
-    height: 1.3em;
     margin-right: 1em;
 }
 
@@ -620,4 +624,19 @@ footer {
 #searchbar {
     border-color: #276a9f;
     background-color: white;
+}
+
+#reviewForm {
+    margin-top: 1em;
+    position: relative;
+    font-family: "Didact Gothic", sans-serif;
+
+}
+
+textarea {
+    resize: none;
+}
+
+#shippingUsers {
+    font-size: 20px;
 }

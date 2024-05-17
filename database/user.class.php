@@ -219,7 +219,8 @@ class User {
         $db = getDatabaseConnection();
         $stmt = $db->prepare("SELECT U.firstName, U.lastName, R.* FROM Reviews R 
         LEFT JOIN User U ON R.idUserFrom = U.idUser
-        WHERE R.idUser = ?");
+        WHERE R.idUser = ?
+        ORDER BY R.stars DESC;");
         $stmt->execute(array($this->id));
         $reviews = $stmt->fetchAll();
         return $reviews;

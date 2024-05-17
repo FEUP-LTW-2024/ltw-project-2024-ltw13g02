@@ -8,7 +8,7 @@ require_once(dirname(__FILE__) . "/../templates/productsprint.tpl.php");
 
             <div id='seller_info'>
                 <p id='user_fullname'><?= $user->name() ?> </p>
-                <a href="../pages/reviewsPage.php"> <!--TODO fix ref -->
+                <a href="../pages/reviewsPage.php?user=<?=$user->id?>"> <!--TODO fix ref -->
                     <span class="stars">
                         <h2 id="stars"> <?php
                             drawStars($user->getStarsFromReviews()); ?>

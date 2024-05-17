@@ -12,8 +12,27 @@
 
   require_once(__DIR__ . '/../templates/reviews.tpl.php');
 
+  if (!isset($_GET['user'])) {
+    header('Location: ../index.php');
+  }
+  if (!preg_match("/^[0-9a-zA-Z]+$/", $_GET['user'])) {
+    header('Location: ../index.php');
+  }
+  $user = getUserbyId($_GET['user']);
+  if (!isset($user)) {
+    header('Location: ../index.php');
+  }
+  ?> <script src="../javascript/reviews.js" defer></script> <?php
+  $currentUser = $session->getUser();
   drawHeader($session);
-  drawHamburguer($session, 0);
-  drawFilterBar($session);
-  drawReviews($session);
+  if ($currentUser->id === $user->id) { //Same user
+    drawHamburguer($session, 0);
+    drawFilterBar($user);
+  }else if (isset($currentUser)){       //Diferent users
+    drawFilterBar($user); 
+    drawReviewForm($user);
+  }else{                                //NO account
+    drawFilterBar($user); 
+  }
+  drawReviews($user);
   drawFooter();
