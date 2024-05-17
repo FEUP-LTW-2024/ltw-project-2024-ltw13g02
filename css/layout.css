@@ -619,3 +619,36 @@ footer {
 .hidden {
     display: none;
 }
+
+#addressShipping {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#addressShipping div {
+    margin-bottom: 10px;
+}
+
+.radio-group {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 10px 5px;
+}
+
+.radio-item {
+    display: contents; /* Ensures that grid layout applies to children */
+}
+
+.radio-item input[type="radio"] {
+    margin: 0;
+    grid-column: 1;
+}
+
+.radio-item label {
+    grid-column: 2;
+    align-self: center;
+    margin: 0;
+}

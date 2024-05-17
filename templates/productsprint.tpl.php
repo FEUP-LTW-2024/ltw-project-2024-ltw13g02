@@ -2,6 +2,7 @@
 require_once(__DIR__ . '/../database/get_from_db.php');
 require_once(__DIR__ . '/../utils/filter.php');
 
+
 function drawSearchbar(){ ?>
     <body>
         <main>
@@ -20,7 +21,7 @@ function drawPath() {
 ?>
 <form id="filter" action="../pages/index.php" method="get">
     <?php if ($category == NULL) { ?>
-        <select name="category" id="category">
+        <select name="category" id="category" oninput="myFunction()">
             <option value="">Category</option> 
             <?php 
                 foreach($categories as $c){ 
@@ -36,7 +37,7 @@ function drawPath() {
         ?> <input type="hidden" name="category" value="<?php echo $category; ?>"> <?php
             for ($i = 0; $i < count($types); $i++) {
                 $characteristics = getCharacteristicsofType($types[$i]['idType']); ?>
-                <select name="characteristic<?php echo $i + 1 ?>" class="characteristic">
+                <select id="characteristic<?php echo $i + 1 ?>" name="characteristic<?php echo $i + 1 ?>" class="characteristic" oninput="myFunction()">
                     <?php 
                     echo $_GET["characteristic" . $i + 1] != NULL ? "<option value='" . $_GET["characteristic" . $i + 1] . "'>" . getCharacteristic($_GET["characteristic" . $i + 1]) . "</option> <option value=''>" . $types[$i]['type_name'] . "</option> " : "<option value=''>" . $types[$i]['type_name'] . "</option> ";
                     foreach($characteristics as $c) { 
@@ -52,7 +53,7 @@ function drawPath() {
                 </select>
         <?php }
         } ?>
-    <select name="condition" id="condition">
+    <select name="condition" id="condition" oninput="myFunction()">
         <?php 
             echo $_GET["condition"] != NULL ? "<option value='" . $_GET["condition"] . "'>" . getCondition($_GET["condition"]) . "</option> <option value=''>Condition</option>" : "<option value=''>Condition</option>";
             foreach($conditions as $c) { 
@@ -69,9 +70,9 @@ function drawPath() {
             }
         ?>
     </select>
-    <input type="text" class="price-filter" name="price-min" placeholder=" Min Price" value="<?= $_GET["price-min"] === NULL ? "" : $_GET["price-min"] ?>">
-    <input type="text" class="price-filter" name="price-max" placeholder=" Max Price" value="<?= $_GET["price-max"] === NULL ? "" : $_GET["price-max"] ?>">
-    <button id="go-search" class="button" type="submit">Search</button>
+    <input type="text" class="price-filter" id="price-min" name="price-min" placeholder=" Min Price" value="<?= $_GET["price-min"] === NULL ? "" : $_GET["price-min"] ?>">
+    <input type="text" class="price-filter" id="price-max" name="price-max" placeholder=" Max Price" value="<?= $_GET["price-max"] === NULL ? "" : $_GET["price-max"] ?>">
+    <!-- TODO <button id="go-search" class="button" type="submit">Search</button> -->
 </form>
 <?php } ?>
 
@@ -208,30 +209,6 @@ function drawArchive($archive_ids)
         </section>
     <?php } 
 ?>
-<?php function drawProductswithFilter() { 
-    if ($_GET['characteristic1'] != NULL) {
-        $products = getProductsWithCh($_GET['characteristic1']);
-        if ($_GET['characteristic2'] != NULL) $products = array_merge($products, getProductsWithCh($_GET['characteristic2']));
-        if ($_GET['characteristic3'] != NULL) $products = array_merge($products, getProductsWithCh($_GET['characteristic3']));
-    }
-    else if ($_GET['category'] != NULL)  $products = getProductWithCategory($_GET['category']); 
-    else $products = getRecommended(); 
-    if ($_GET['condition'] != NULL) $products = filterByCondition($products, $_GET['condition']);
-    if ($_GET['price-min'] != NULL || $_GET['price-max'] != NULL) $products = filterByPrice($products, $_GET['price-min'], $_GET['price-max']);?>
-    <section class="Products" id="ProductsWithFilter">
-        <div id="static_offer_container">
-            <?php
-            foreach($products as $id) {
-                $product = getProduct($id);
-
-                $seller = $product->getSeller();?>
-                <div class="static_offer"> <?php
-                    drawSmallProduct($product, $seller, null);  ?>
-                </div> <?php
-            } ?>
-        </div>
-    </section>
-<?php } ?>
 
 <?php
 function drawSmallProduct(Product $product, User $seller, ?User $user) { 

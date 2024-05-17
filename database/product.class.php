@@ -31,14 +31,42 @@ class Product {
         $this->buyer = $buyer;
     }
 
-    static function searchProduct(string $search) : array {
+    static function searchProduct($parameters) : array {        
+        $query = '';
+        $values = [];
+        foreach($_GET as $key => $value) {
+            if($value) {
+                if($key=='minPrice') $query .= "price >= ? and ";
+                elseif($key=='maxPrice') $query .= "price <= ? and ";
+                elseif($key=='search') continue;
+                elseif($key=='category') $query .= "t.category = ? and ";
+                elseif($key=='condition') $query .= "p.condition = ? and ";
+                else $query .= $key."= ? and ";
+                $values[] = $value;
+            }
+        }
+
+        $query = substr($query,0,strlen($query)-5);
+
         $db = getDatabaseConnection();
-        $stmt = $db->prepare('SELECT idProduct FROM Product WHERE prodName LIKE ?');
-        $stmt->execute(array('%' . $search . '%'));
-        $result = $stmt->fetchAll(PDO::FETCH_COLUMN);
+        $stmt = $db->prepare("SELECT idProduct,prodName FROM Product p
+        left join Characteristic c1 on c1.idCharacteristic=p.characteristic1
+        left join Characteristic c2 on c2.idCharacteristic=p.characteristic2
+        left join Characteristic c3 on c3.idCharacteristic=p.characteristic3
+        left join TypesInCategory t on t.idType=c1.idType
+        left join Category c on c.idCategory=t.category
+        left join Condition co on co.idCondition=p.condition
+        WHERE $query"
+        );
+        $stmt->execute($values);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
         $products = array();
-        foreach ($result as $id) {
-            $products[] = getProduct($id);
+        foreach ($result as $product) {
+            if( empty($parameters['search']) || (! empty($parameters['search']) && str_contains(strtolower($product['prodName']),strtolower($parameters['search'])))) {
+                $products[] = getProduct($product['idProduct']);
+            }
         }
         return $products;
     }
@@ -159,8 +187,9 @@ class Product {
         return $photos;
     }
 
-    static function ajaxGetProducts ($value=null) : string {
-        $products = Product::searchProduct($value);
+    static function ajaxGetProducts ($parameters) : string {
+        
+        $products = Product::searchProduct($parameters);
     
         $final = "<section id='searchedProducts' class='Products'><div id='static_offer_container'> ";
         foreach ($products as $product) { 

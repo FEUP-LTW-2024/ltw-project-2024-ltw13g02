@@ -74,20 +74,35 @@
         <aside id="shippingAdress">
             <h3>Checkout</h3> 
             <h5>Address</h5>
-        <form id ='addressShipping' action="../actions/process_purchase.php" method="post">
+            <form id ='addressShipping' action="../actions/process_purchase.php" method="post">
 
 
 
-                <div>Street:</div> <input type='text' name='address' required="required" value= "<?=$session->getUser()->userAddress?>">
-                <div>City:</div> <input type='text' name='city' required="required" value= "<?= $session->getUser()->city?>">
-                <div>Zipcode:</div> <input type='text' name='zipcode' required="required" value= "<?= $session->getUser()->zipCode?>">
-                <input type="hidden" name='paymentAuthhorization' value="<?=$session->getCSRF()?>">
-                <?php
-                output_country_option($countries);
-                
-                ?>
-                <input type="submit" value="Pay Now">
-        </form>
+                    <div>Street:</div> <input type='text' name='address' required="required" value= "<?=$session->getUser()->userAddress?>">
+                    <div>City:</div> <input type='text' name='city' required="required" value= "<?= $session->getUser()->city?>">
+                    <div>Zipcode:</div> <input type='text' name='zipcode' required="required" value= "<?= $session->getUser()->zipCode?>">
+                    <input type="hidden" name='paymentAuthhorization' value="<?=$session->getCSRF()?>">
+                    <?php
+                    output_country_option($countries);
+                    ?>
+                    <div>Please select your payment method:</div> <br>
+                        <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" id="paypal" name="method" value="paypal" checked>
+                            <label for="paypal">PayPal</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="mbway" name="method" value="mbway">
+                            <label for="mbway">MBway</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="mb" name="method" value="mb">
+                            <label for="mb">MB</label>
+                        </div>
+                    </div>
+
+                    <input type="submit" value="Pay Now">
+            </form>
         </aside>
         </main>
     <?php }
