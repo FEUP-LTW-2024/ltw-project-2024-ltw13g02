@@ -8,6 +8,10 @@ require_once(__DIR__ . '/../database/get_from_db.php');
 require_once(__DIR__ . '/../database/change_in_db.php');
 
 require_once(__DIR__ . '/user.tpl.php');
+require_once(__DIR__ . '/../database/message.class.php');
+require_once(__DIR__ . '/../database/chat.class.php');
+require_once(__DIR__ . '/../database/user.class.php');
+require_once(__DIR__ . '/../database/product.class.php');
 
 
 ?>
@@ -41,34 +45,34 @@ require_once(__DIR__ . '/user.tpl.php');
     <div class="column-of-messages">
         <?php foreach ($messages as $key => $message) { ?>
             <?php if ($message->sender === $session->getUser()->id) { ?>
-                <div class="message-container">
-                    <div class="message-tile message own-message">
-                        <p><?php echo $message->content; ?></p>
+                    <div class="message-container">
+                        <div class="message-tile message own-message">
+                            <p><?php echo $message->content; ?></p>
+                        </div>
+                        <h2 class="message-status <?php echo $message->seen ? "fa fa-check-circle" : "fa fa-check-circle-o"; ?>"></h2>
                     </div>
-                    <h2 class="message-status <?php echo $message->seen ? "fa fa-check-circle" : "fa fa-check-circle-o"; ?>"></h2>
-                </div>
-                <?php
-                if ($key < count($messages) - 1 && strtotime($message->messageDate) - strtotime($messages[$key + 1]->messageDate) < 3600) {
-                } 
-                else { ?>
-                    <div class="time">
-                        <p><?php echo $message->messageDate; ?></p>
+                    <?php
+                    if ($key < count($messages) - 1 && strtotime($message->messageDate) - strtotime($messages[$key + 1]->messageDate) < 3600) {
+                    } 
+                    else { ?>
+                        <div class="time">
+                            <p><?php echo $message->messageDate; ?></p>
+                        </div>
+                    <?php } 
+                } else { 
+                    ?>
+                    <div class="message-tile message other-message">
+                        <p><?php echo $message->content;?></p>
                     </div>
-                <?php } 
-             } else { 
-            ?>
-            <div class="message-tile message other-message">
-                <p><?php echo $message->content;?></p>
-            </div>
-            <?php
-                if ($key < count($messages) - 1 && strtotime($message->messageDate) - strtotime($messages[$key + 1]['messageDate']) < 3600) {
-                } 
-                else { ?>
-                    <div class="time">
-                        <p><?php echo $message->messageDate; ?></p>
-                    </div>
-                <?php }
-             }
+                    <?php
+                    if ($key < count($messages) - 1 && strtotime($message->messageDate) - strtotime($messages[$key + 1]->messageDate) < 3600) {
+                    } 
+                    else { ?>
+                        <div class="time">
+                            <p><?php echo $message->messageDate; ?></p>
+                        </div>
+                    <?php }
+                }
             } ?>
     </div>
 <?php } ?> 
