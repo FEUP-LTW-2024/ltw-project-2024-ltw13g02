@@ -86,7 +86,7 @@ class User {
 
 
         foreach ($recents as $recent) {
-            if ($recent === $idProduct) {
+            if ($recent == $idProduct) {
                 $stmt = $db->prepare('DELETE FROM Recent WHERE Recent.user = ? AND Recent.product = ?');
                 $stmt->execute(array($this->id, $idProduct));
             }
