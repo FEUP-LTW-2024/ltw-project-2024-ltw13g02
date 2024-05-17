@@ -22,6 +22,9 @@ if (!preg_match("/^[0-9]+$/", $_GET['shipping'])) {
   header('Location: ../index.php');
 }
 $shipping = getShipping((int) $_GET['shipping']);
+if (!isset($shipping)) {
+  header('Location: ../index.php');
+}
 $user = $session->getUser();
 
 if ($session->isLoggedIn() and $shipping->seller->id === $user->id) {
@@ -32,5 +35,7 @@ if ($session->isLoggedIn() and $shipping->seller->id === $user->id) {
   drawShippingUsers($shipping);
   drawFooter();
 
+}else{
+  header('Location: ../index.php');
 }
 ?>

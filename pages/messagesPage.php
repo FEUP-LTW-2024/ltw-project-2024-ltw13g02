@@ -12,6 +12,12 @@
   if ( !preg_match ("/^[a-zA-Z0-9\s]+$/", $_GET['chat'])) {
     header('Location: pages/index.php');
   }
+
+  if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['message'])) {
+    $chat = getChat($_GET['chat']);
+    $message = $_POST['message'];
+    $chat->addMessage($session->getUser()->id, $message);
+  }
   
   drawHeader($session);
   drawChatHeader($session, $_GET['chat']);

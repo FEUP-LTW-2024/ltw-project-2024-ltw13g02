@@ -10,6 +10,6 @@
 
   $db = getDatabaseConnection();
 
-  $products = Product::searchProduct($_GET['search']);
+  $products = Product::searchProduct("");
 
   echo json_encode($products);

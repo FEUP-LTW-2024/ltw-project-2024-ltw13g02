@@ -75,7 +75,7 @@ class User {
     function isFavorite($idProduct) : bool {
         $favs = $this->getFavorites();
         foreach ($favs as $f) {
-            if ($f['product'] == $idProduct) return true;
+            if ($f['product'] === $idProduct) return true;
         }
         return false;
     }
@@ -86,7 +86,7 @@ class User {
 
 
         foreach ($recents as $recent) {
-            if ($recent == $idProduct) {
+            if ($recent === $idProduct) {
                 $stmt = $db->prepare('DELETE FROM Recent WHERE Recent.user = ? AND Recent.product = ?');
                 $stmt->execute(array($this->id, $idProduct));
             }
@@ -217,7 +217,7 @@ class User {
 
     function getReviewsWithUsersFromDB($classification): ?array {
         $db = getDatabaseConnection();
-        if ($classification == -1) {
+        if ($classification === -1) {
             $stmt = $db->prepare("SELECT U.firstName, U.lastName, R.* FROM Reviews R 
                             LEFT JOIN User U ON R.idUserFrom = U.idUser
                             WHERE R.idUser = ?");
@@ -229,7 +229,7 @@ class User {
                             WHERE R.idUser = ? AND R.stars = ?");
             $stmt->execute(array($this->id, $classification));
         }
-        
+
         $reviews = $stmt->fetchAll();
         return $reviews;
     }
@@ -237,7 +237,7 @@ class User {
     function getChatsAsSellerFromDB(): ?array {
         $db = getDatabaseConnection();
         $stmt = $db->prepare('
-            SELECT idChat,  Product.idProduct, Product.prodName
+            SELECT idChat,  Product.idProduct, Chat.possibleBuyer
             FROM Product, Chat
             WHERE Product.seller = ? AND Chat.product = Product.idProduct
         ');
@@ -247,7 +247,7 @@ class User {
 
         foreach ($result as $data) {
             if ($data['idChat'] != NULL) {
-                $chats[] = new Chat($data["idChat"], $data["idProduct"], $data["prodName"]);
+                $chats[] = new Chat($data["idChat"], $data["idProduct"], $data["possibleBuyer"]);
             }
         }
 

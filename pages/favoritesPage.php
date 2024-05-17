@@ -16,7 +16,7 @@
     $user = $session->getUser();
 
     $favorites_ids = $user->getFavorites();
-    if ($favorites_ids == null) {?>
+    if ($favorites_ids === null) {?>
         <h2 id="no-favs">You don't have favorites yet! </h2>
         <?php }
     else {

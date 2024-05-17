@@ -1,5 +1,6 @@
 main {
     margin: 0 auto;
+    width: 60%;
 }
 
 #ShippingProducts {
@@ -22,4 +23,18 @@ span {
 
 footer {
     width: 100%;
+}
+
+@media print {
+     body > header {
+        display: none;
+     }
+
+     footer {
+        display: none;
+     }
+
+     *{
+        font-family: Arial, Helvetica, sans-serif !important;
+     }
 }

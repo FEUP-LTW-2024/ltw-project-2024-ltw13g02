@@ -87,11 +87,4 @@ require_once(__DIR__ . '/../database/product.class.php');
     </body>
 </html>
 <?php
-    if ($_SERVER["REQUEST_METHOD"] === "POST") {
-        $chat = getChat($idChat);
-        $message = $_POST['message'];
-        $chat->addMessage($session->getUser()->id, $message);
-
-        header("Location: ".$_SERVER['PHP_SELF']."?chat=".urlencode($idChat));
-    }
 } ?> 
