@@ -84,7 +84,7 @@
     $user->firstName = $newFirstName;
     $user->lastName = $newLastName;
     $newPhone = intval($newPhone);
-    $user->phone = $newPhone;
+    $user->phone = strval($newPhone);
     $user->userAddress = $newAddress;
     $user->city = $newCity;
 

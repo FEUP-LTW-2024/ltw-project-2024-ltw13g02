@@ -76,13 +76,13 @@ form input[type="password"] {
     background-color: lightblue; /* Button color on hover */
 }
 
-#photo, label[name = "photosProd"] {
+#photo, #photosProd {
     margin-bottom: 10px;
-    grid-row: 15;
+    grid-row: 16;
 }
 
-#photosProd{
-    grid-row: 16;
+label[name = "photosProd"]{
+    grid-row: 15;
 }
 
 .characteristic {

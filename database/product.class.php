@@ -192,6 +192,18 @@ class Product {
         return $photos;
     }
 
+    function getPhotosId(): ?array {
+        $db = getDatabaseConnection();
+        $stmt = $db->prepare('
+            SELECT idPhoto, photo
+            FROM Photo
+            WHERE Photo.idProduct = ?
+        ');
+        $stmt->execute(array($this->id));
+        $photos = $stmt->fetchAll();
+        return $photos;
+    }
+
     static function ajaxGetProducts ($parameters) : string {
         
         $products = Product::searchProduct($parameters);

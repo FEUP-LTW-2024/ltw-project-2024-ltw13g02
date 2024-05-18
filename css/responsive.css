@@ -13,6 +13,12 @@
         grid-template-rows: 2.5em auto 2.5em;
     }
 
+    #edit-product-container #product-grid {
+        grid-template-columns: auto; 
+        grid-template-rows: auto auto;
+        min-height: 1700px;
+    }
+
     #Shopping_Cart {
     
         display: grid;
@@ -27,10 +33,53 @@
     .sliding_offer {
         flex-basis: 20%;
     }
+
+    .thumbnail-container {
+        grid-row: 2;
+        grid-column: 1;
+        height: 100%;
+        width: 90%;
+        object-fit: contain;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-left: 5%;
+    }
+
+    .thumbnail-wrapper {
+        position: relative;
+    }
+    .product-thumbnail {
+        width: 100px;
+        height: 100px;
+        margin: 5px;
+        object-fit: cover;
+        border: 1px solid #ccc;
+    }
+    .delete-icon {
+        position: absolute;
+        top: 7%;
+        left: 10%;
+        transform: translate(-50%, -50%);
+        color: red;
+        cursor: pointer;
+        /*font-size: 100px;*/ /* Increased font size for a larger icon */
+        display: none;
+        /*position: relative;*/
+        /*display: inline-block;*/
+    }   
+    
 }
 
 
 @media (max-width: 80em) {
+
+    #edit-product-container #product-grid {
+        grid-template-columns: auto; 
+        grid-template-rows: auto auto;
+        min-height: 1600px;
+    }
+
     .Products #static_offer_container {
         display: grid;
         grid-template-columns: repeat(4,1fr);
@@ -51,6 +100,7 @@
     button.button {
         width: 120px;
     }
+
 }
 
 @media (max-width: 50em) {
@@ -72,7 +122,15 @@
     #product-grid {
         grid-template-columns: auto; 
         grid-template-rows: auto auto;
-        min-height: 1200px;
+        min-height: 1600px;
+    }
+
+    .product-grid {
+        display: grid;
+        grid-template-columns: auto; 
+        grid-template-rows: auto auto;
+        min-height: 1500px;
+        position: relative;
     }
 
     .product-grid .product-image-container {
@@ -84,9 +142,11 @@
         margin-right: 65px;
         grid-column: 1;
         grid-row: 2;
-        grid-template-rows: repeat(4, auto);
+        grid-template-rows: repeat(5, auto);
         grid-template-columns: 45% 10% 10% 35%;
     }
+
+    
 
     #product-page-name, 
     #product-page-price,
@@ -99,6 +159,7 @@
     .product-info #contact, .product-info #add-to-cart {
         margin: 10px auto;
     }
+
 }
 
 @media (max-width: 45em){
@@ -176,4 +237,5 @@
     #Shopping_Cart {
         display: block;
     }
+
 }

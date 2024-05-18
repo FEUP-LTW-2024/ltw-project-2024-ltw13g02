@@ -161,7 +161,6 @@ require_once(__DIR__ . '/user.tpl.php');
                 <label name="photosProd" for="photosProd">Photos:</label>
                 <input type="file" id="photosProd" name="photosProd[]" accept="image/*" multiple>
 
-
                 <input id="submitProd" type="submit" value="Submit">
             </form>
         </div>
@@ -194,7 +193,14 @@ require_once(__DIR__ . '/user.tpl.php');
                     characteristicsDiv.appendChild(select);
                 });
             });
+    }
+
+    document.getElementById('photosProd').addEventListener('change', function() {
+        if (this.files.length > 5) {
+            alert("You can only upload a maximum of 5 photos.");
+            this.value = ""; // Clear the input
         }
+    });
     </script>
 <?php } ?>
 
@@ -202,26 +208,31 @@ require_once(__DIR__ . '/user.tpl.php');
 <?php function drawEditProduct(Session $session, $idProduct) {
     $user = $session->getUser();
     $product = getProduct($idProduct);
-    $photos = $product->getPhotos(); 
-    $seller = $product->getSeller(); ?> 
-    <div class="product-grid" id="product-grid">
-        <div class="product-image-container">
-            <?php if (count($photos) === 0) { ?>
-                <img id="product-image" src="../images/products/no_images_big.png" alt="Photo">
-            <?php } else { ?>
-                <img id="product-image" src="../images/products/<?php echo $photos[0]['photo']; ?>" alt="photo">
-            <?php } ?>
-            <?php if (count($photos) > 1) { ?>
-                <button class="prev-button" onclick="changePhoto(-1)"><i class="fa fa-angle-left fa-2x prev-icon"></i></button>
-                <button class="next-button" onclick="changePhoto(1)"><i class="fa fa-angle-right fa-2x next-icon"></i></button>
-            <?php } ?>
-        </div>
-        <form id="editing-form" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
-            <div class="product-info edits">
+    $photos = $product->getPhotosId();
+    $seller = $product->getSeller(); ?>
+    <div id="edit-product-container" class="product-edit-container">
+        <div class="product-grid" id="product-grid">
+            <div class="product-image-container">
+                <?php if (count($photos) === 0) { ?>
+                    <img id="product-image" src="../images/products/no_images_big.png" alt="Photo">
+                <?php } else { ?>
+                    <img id="product-image" src="../images/products/<?php echo $photos[0]['photo']; ?>" alt="photo">
+                <?php } ?>
+                <?php if (count($photos) > 1) { ?>
+                    <button class="prev-button" onclick="changePhoto(-1)"><i class="fa fa-angle-left fa-2x prev-icon"></i></button>
+                    <button class="next-button" onclick="changePhoto(1)"><i class="fa fa-angle-right fa-2x next-icon"></i></button>
+                <?php } ?>
+            </div>
+
+            <button class="button" onclick="document.getElementById('photo-input').click()">Add Photo</button>
+            <input type="file" id="photo-input" style="display: none;" accept="image/*" onchange="uploadPhoto(this.files)">
+
+            <form id="editing-form" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
+                <div class="product-info edits">
                     <input type="hidden" name='csrf' value="<?=$session->getCSRF()?>">
                     <input type="hidden" name="product_id" value="<?php echo $idProduct; ?>">
-                    <!--h2 id="product-page-name">< ?php echo $product->name; ?> </h2-->
-                    <h2 id="product-page-name">Title: <input type="text" id="product-name-input" name="prodName" value="<?php echo htmlspecialchars($product->name); ?>"></h2>
+                    
+                    <h2 id="product-page-name">Title: <br><input type="text" id="product-name-input" name="prodName" value="<?php echo htmlspecialchars($product->name); ?>"></h2>
                     
                     <h2 id="product-page-price">Price: <input type="text" id="price-input" name="price" value="<?php echo htmlspecialchars(strval($product->price)); ?>"></h2>
                     
@@ -250,12 +261,54 @@ require_once(__DIR__ . '/user.tpl.php');
                     </div>
                     <button type="submit" class="button">Submit</button>
                 </div>
+            </form>
+            <div class="thumbnail-container">
+                <?php foreach ($photos as $index => $photo) { ?>
+                    <div class="thumbnail-wrapper">
+                        <img class="product-thumbnail" src="../images/products/<?php echo $photo['photo']; ?>" data-index="<?php echo $index; ?>" alt="Thumbnail">
+                        <span class="delete-icon" onclick="confirmDeletePhoto(<?php echo $index; ?>)"><i class="fa fa-times fa-1x"></i></span>
+                    </div>
+                <?php } ?>
             </div>
-        </form>
-    </div>
+        </div>
+    </div>    
     <script>
         var currentIndex = 0;
         var photos = <?php echo json_encode($photos); ?>;
+
+        function uploadPhoto(files) {
+            var photo = files[0];
+            var productId = "<?php echo $idProduct; ?>";
+            var photosCount = <?php echo count($photos); ?>;
+
+            // Check if the number of existing photos is less than 5
+            if (photosCount >= 5) {
+                alert("Limit of 5 photos reached.");
+                return; // Exit the function
+            }
+
+            var formData = new FormData();
+            formData.append('photo', photo);
+            formData.append('product_id', productId);
+
+            fetch('../actions/upload_photo.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert("Photo uploaded successfully!");
+                    location.reload();
+                } else {
+                    alert("Failed to upload photo: " + data.error);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
 
         function changePhoto(delta) {
             currentIndex += delta;
@@ -266,6 +319,52 @@ require_once(__DIR__ . '/user.tpl.php');
             }
             document.getElementById('product-image').src = "../images/products/" + photos[currentIndex]['photo'];
         }
+
+        function confirmDeletePhoto(index) {
+            var result = confirm("Are you sure you want to delete this photo?");
+            if (result) {
+                var idPhoto = photos[index]['idPhoto'];
+                var productId = "<?php echo $idProduct; ?>";
+
+                fetch('../actions/delete_photo.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        idPhoto: idPhoto,
+                        product_id: productId, 
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.message === "Photo deleted successfully") {
+                        alert("Photo deleted!");
+                        location.reload();
+                    } else {
+                        alert(data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            }
+        }
+
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const thumbnails = document.querySelectorAll('.thumbnail-wrapper');
+            thumbnails.forEach((thumbnailWrapper) => {
+                const deleteIcon = thumbnailWrapper.querySelector('.delete-icon');
+                thumbnailWrapper.addEventListener('mouseover', () => {
+                    deleteIcon.style.display = 'block';
+                });
+                thumbnailWrapper.addEventListener('mouseout', () => {
+                    deleteIcon.style.display = 'none';
+                });
+            });
+        });
+
     </script>
-    <?php 
+<?php 
 } ?>
