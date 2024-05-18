@@ -221,9 +221,9 @@ require_once(__DIR__ . '/user.tpl.php');
                     <input type="hidden" name='csrf' value="<?=$session->getCSRF()?>">
                     <input type="hidden" name="product_id" value="<?php echo $idProduct; ?>">
                     <!--h2 id="product-page-name">< ?php echo $product->name; ?> </h2-->
-                    <h2 id="product-page-name"><input type="text" id="product-name-input" name="prodName" value="<?php echo htmlspecialchars($product->name); ?>"></h2>
+                    <h2 id="product-page-name">Title: <input type="text" id="product-name-input" name="prodName" value="<?php echo htmlspecialchars($product->name); ?>"></h2>
                     
-                    <h2 id="product-page-price"><input type="text" id="price-input" name="price" value="<?php echo htmlspecialchars(strval($product->price)); ?>"></h2>
+                    <h2 id="product-page-price">Price: <input type="text" id="price-input" name="price" value="<?php echo htmlspecialchars(strval($product->price)); ?>"></h2>
                     
                     <a href="" class="product-page-seller"><h2 class="product-page-seller"><?php echo $seller->name(); ?> </h2></a>
                     <a href="" class="product-page-stars"><h2 class="product-page-stars stars">

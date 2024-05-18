@@ -714,3 +714,8 @@ footer {
 #price-input {
     width: 100% !important;
 }
+
+.edits #product-page-price, .edits #product-page-name  {
+    text-align: left;
+    font-size: 15px;
+}

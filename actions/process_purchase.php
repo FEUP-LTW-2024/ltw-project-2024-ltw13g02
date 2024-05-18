@@ -29,6 +29,7 @@
 
     $db->beginTransaction();
     $items = $user->getShoppingCart();
+
     $products = array();
     $buyerAddressInfo = new ShippingAddressInfo($country,$city,$address,$zipcode);
 
@@ -40,6 +41,7 @@
     $date = date('Y-m-d');
     foreach($products as $product) {
         addShipping($db, $product, $user, $product->getSeller(), $buyerAddressInfo, $date, $product->price);
+        sendMessage($db, $product, $user);
         if ($product->getBuyer() !== null) {
             $db->rollBack();
             header('Location: /../pages/errorPage.php?error=Tried_to_buy_bought_item');
@@ -132,8 +134,7 @@
 ?>
 
 <?php
-function sendMessage($product, $user) {
-    $db = getDatabaseConnection();
+function sendMessage(PDO $db, $product, $user) {
     
     // Try to find the existing chat
     $stmt = $db->prepare('
@@ -141,12 +142,14 @@ function sendMessage($product, $user) {
         FROM Chat
         WHERE product = ? AND possibleBuyer = ?
     ');
+
     $stmt->execute(array($product->id, $user->id));
     $result = $stmt->fetch();
-    
+
     if ($result) {
         // Chat exists, get the chat ID
         $chatId = $result["idChat"];
+
     } else {
         // Chat doesn't exist, create a new chat
         $stmt = $db->prepare('
@@ -154,7 +157,7 @@ function sendMessage($product, $user) {
             VALUES (?, ?)
         ');
         $stmt->execute(array($product->id, $user->id));
-        
+        $result = $stmt->fetch();
         // Get the new chat ID
         $chatId = $db->lastInsertId();
     }
