@@ -70,35 +70,55 @@
 ?>
 
 <?php
-    function output_shipping_address(Session $session,$countries){ ?>
+    function output_shipping_address(Session $session,$countries){ 
+        $user = $session->getUser(); ?>
+        <script src="../javascript/paymentMethod.js" defer></script>
         <aside id="shippingAdress">
             <h3>Checkout</h3> 
-            <h5>Address</h5>
             <form id ='addressShipping' action="../actions/process_purchase.php" method="post">
-                <div>Street:</div> <input type='text' id="addressField" name='address' required="required" value= "<?=$session->getUser()->userAddress?>">
+                <div>Street:</div><input type='text' id="addressField" name='address' required="required" value= "<?=$session->getUser()->userAddress?>">
                 <div>City:</div> <input type='text' id="cityField" name='city' required="required" value= "<?= $session->getUser()->city?>">
                 <div>Zipcode:</div> <input type='text' id="zipcodeField" name='zipcode' required="required" value= "<?= $session->getUser()->zipCode?>">
                 <input type="hidden" name='csrf' value="<?=$session->getCSRF()?>">
                 <?php
                 output_country_option($countries);
                 ?>
-                <div>Please select your payment method:</div> <br>
-                    <div class="radio-group">
+                <h5 id="please-select">Please select your payment method:</h5> <br>
+                <div class="radio-group">
                     <div class="radio-item">
-                        <input type="radio" id="paypal" name="method" value="paypal" checked>
-                        <label for="paypal">PayPal</label>
-                    </div>
-                    <div class="radio-item">
-                        <input type="radio" id="mbway" name="method" value="mbway">
+                        <input type="radio" name="method" value="mbway" onclick="clicked()" checked>
                         <label for="mbway">MBway</label>
+                        <div id="mbway-form" class="info-payment">
+                            <label for="phone" class="label-pay">Phone:</label>
+                            <input type="text" id="phone" class="input-pay" name="phone" value="<?= $user->phone; ?>">
+                        </div>
+                    </div>
+                    <div class="radio-item" >
+                        <input type="radio" name="method" onclick="clicked()" value="paypal">
+                        <label for="paypal">PayPal</label>
+                        <div id="paypal-form" class="info-payment hidden">
+                            <label id="email" class="label-pay" required>Email</label>
+                            <input type="text" id="email" class="input-pay" name="email" value="<?= $user->email; ?>">
+                        </div>
                     </div>
                     <div class="radio-item">
-                        <input type="radio" id="mb" name="method" value="mb">
+                        <input type="radio" name="method" onclick="clicked()" value="mb">
                         <label for="mb">MB</label>
+                        <div id="mb-form" class="info-payment hidden">
+                            <div>Entity: 12345</div>
+                            <div id="reference">Reference: 123456789</div>
+                        </div>
                     </div>
                 </div>
 
-                <input id = "formSubmitButton" type="submit" value="Pay Now">
+                <button id = "formSubmitButton" class="submitButton" type="button" onclick="submitClick()" value="Pay Now">Pay Now</button>
+                <div id="confirmationModal" class="modal hidden">
+                    <div class="modal-content">
+                        <p>Do you want to proceed to checkout?</p>
+                        <button id="confirmYes" type="submit" class="submitButton">Yes</button>
+                        <button id="confirmNo" type="button" class="submitButton">No</button>
+                    </div>
+                </div>
             </form>
         </aside>
         </main>

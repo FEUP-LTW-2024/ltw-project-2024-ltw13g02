@@ -622,7 +622,7 @@ footer {
 }
 
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 #addressShipping {
@@ -653,7 +653,6 @@ footer {
 }
 
 .radio-item label {
-    grid-column: 2;
     align-self: center;
     margin: 0;
 }
@@ -669,4 +668,32 @@ footer {
     font-family: "Didact Gothic", sans-serif;
     margin-bottom: 1em;
     gap: 10px
+}
+
+.info-payment {
+    grid-column: 1 / span 2;
+    padding-left: 32px;
+    display: grid;
+    grid-template-columns: 10em 1fr;
+}
+
+#please-select {
+    grid-column: 1 / span 2;
+}
+
+.radio-group {
+    grid-column: 1;
+    grid-row: 6;
+}
+
+.input-pay {
+    grid-column: 2;
+}
+
+.label-pay {
+    grid-column: 1;
+}
+
+#reference {
+    grid-row:2;
 }
