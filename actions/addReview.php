@@ -31,6 +31,7 @@ if (strlen($reviewText) === 0) {
 $db = getDatabaseConnection();
 $stmt = $db->prepare("INSERT INTO Reviews (stars, idUser, reviewsDescription, idUserFrom, created_at)
                         VALUES (?,?,?,?,?);");
+date_default_timezone_set('Europe/Lisbon');
 $stmt->execute(array($stars,$reviewedUser->id,$reviewText,$session->getUser()->id,date('Y-m-d H:i')));
 
 header("Location: ../pages/reviewsPage.php?user={$reviewedUser->id}");

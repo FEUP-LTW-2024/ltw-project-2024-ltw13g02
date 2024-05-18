@@ -75,9 +75,9 @@
             <h3>Checkout</h3> 
             <h5>Address</h5>
             <form id ='addressShipping' action="../actions/process_purchase.php" method="post">
-                <div>Street:</div> <input type='text' name='address' required="required" value= "<?=$session->getUser()->userAddress?>">
-                <div>City:</div> <input type='text' name='city' required="required" value= "<?= $session->getUser()->city?>">
-                <div>Zipcode:</div> <input type='text' name='zipcode' required="required" value= "<?= $session->getUser()->zipCode?>">
+                <div>Street:</div> <input type='text' id="addressField" name='address' required="required" value= "<?=$session->getUser()->userAddress?>">
+                <div>City:</div> <input type='text' id="cityField" name='city' required="required" value= "<?= $session->getUser()->city?>">
+                <div>Zipcode:</div> <input type='text' id="zipcodeField" name='zipcode' required="required" value= "<?= $session->getUser()->zipCode?>">
                 <input type="hidden" name='csrf' value="<?=$session->getCSRF()?>">
                 <?php
                 output_country_option($countries);
@@ -98,7 +98,7 @@
                     </div>
                 </div>
 
-                <input type="submit" value="Pay Now">
+                <input id = "formSubmitButton" type="submit" value="Pay Now">
             </form>
         </aside>
         </main>

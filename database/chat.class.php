@@ -84,6 +84,7 @@ class Chat {
         }
         
         $db = getDatabaseConnection();
+        date_default_timezone_set('Europe/Lisbon');
         $date = date('Y-m-d H:i:s');
         $stmt = $db->prepare('INSERT INTO Messages (messageDate, sender, chat, content, seen) VALUES (?, ?, ?, ?, 0)');
         $stmt->execute(array($date, $idUser, $this->id, $content));

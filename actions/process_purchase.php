@@ -35,6 +35,7 @@
     foreach ($items as $item){
         $products[] = getProduct($item);
     }
+    date_default_timezone_set('Europe/Lisbon');
     $date = date('Y-m-d');
     foreach($products as $product) {
         addShipping($db, $product, $user, $product->getSeller(), $buyerAddressInfo, $date, $product->price);

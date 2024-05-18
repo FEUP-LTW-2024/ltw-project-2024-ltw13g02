@@ -32,7 +32,8 @@ require_once(__DIR__ . '/../sessions/session.php');
                 <a href="../pages/logout.php"><h2 class="header-icons"><i class="fa fa-sign-out fa-1x icon"></i></h2></a>
             <?php } else { ?>
                 <a href="../pages/login.php"><h2 class="header-icons"><i class="fa fa-sign-in fa-1x icon"></i></h2></a>
-            <?php } ?> 
+            <?php } 
+            ?> 
         </header>
 <?php } ?>
 
