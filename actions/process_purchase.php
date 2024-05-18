@@ -5,8 +5,6 @@
     require_once(__DIR__. '/../database/chat.class.php');
     require_once(__DIR__ . '/../sessions/session.php');
     require_once(__DIR__ . '/../database/addressInfo.php');
-    require_once(__DIR__ . '/../vendor/autoload.php');
-
 
     $session = new Session();
     $user = $session->getUser();

@@ -158,8 +158,8 @@ require_once(__DIR__ . '/user.tpl.php');
                     </label>
                 </div>
                 
-                <label name = "photosProd" for="photosProd">Photos:</label>
-                <input type="file" id="photosProd" name="photosProd" accept="image/*">
+                <label name="photosProd" for="photosProd">Photos:</label>
+                <input type="file" id="photosProd" name="photosProd[]" accept="image/*" multiple>
 
 
                 <input id="submitProd" type="submit" value="Submit">
@@ -253,5 +253,19 @@ require_once(__DIR__ . '/user.tpl.php');
             </div>
         </form>
     </div>
+    <script>
+        var currentIndex = 0;
+        var photos = <?php echo json_encode($photos); ?>;
+
+        function changePhoto(delta) {
+            currentIndex += delta;
+            if (currentIndex < 0) {
+                currentIndex = photos.length - 1;
+            } else if (currentIndex >= photos.length) {
+                currentIndex = 0;
+            }
+            document.getElementById('product-image').src = "../images/products/" + photos[currentIndex]['photo'];
+        }
+    </script>
     <?php 
 } ?>

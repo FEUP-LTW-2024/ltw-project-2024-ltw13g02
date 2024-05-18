@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
     $characteristic1 = $_GET['characteristic1'] ?? null;
     $characteristic2 = $_GET['characteristic2'] ?? null;
     $characteristic3 = $_GET['characteristic3'] ?? null;
-    $photosProd = $_GET['photosProd'];
+    $photosProd = json_decode($_GET['photosProd'], true);
     $seller = $session->getUser()->id;
 
 
@@ -33,10 +33,11 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
     $prodId = $stmt->fetch();
 
 
-    if($photosProd != null){
-        $photoName = basename($photosProd);
-        $stmt = $db->prepare("INSERT INTO Photo (idProduct, photo) VALUES (?, ?)");
-        $stmt->execute(array($prodId['idProduct'], $photoName));
+    if(!empty($photosProd)){
+        foreach ($photosProd as $photoName) {
+            $stmt = $db->prepare("INSERT INTO Photo (idProduct, photo) VALUES (?, ?)");
+            $stmt->execute(array($prodId['idProduct'], $photoName));
+        }
     }
     
     header("Location: ../pages/myAnnouncements.php");

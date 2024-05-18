@@ -12,13 +12,6 @@ form {
     text-align: center;
 }
 
-#newProductForm{
-    display: grid;
-    grid-template-rows: repeat(19, 2.5em);
-    font-size: 1em;
-    text-align: center;
-}
-
 #editProfileForm label {
     margin-top: 10px;
 }
@@ -75,7 +68,7 @@ form input[type="password"] {
 }
 
 #submitProd {
-    grid-row: 18;
+    grid-row: 17;
 }
   
 .change-buttons:hover {

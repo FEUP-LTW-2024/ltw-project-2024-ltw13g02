@@ -24,23 +24,23 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     $userId = $session->getUser()->id;
     $photoDir = __DIR__ . '/../images/products/';
-    if($_FILES["photosProd"]["name"] != null){
-        $photoOriginalName = $_FILES["photosProd"]["name"];
-        $photoExtension = pathinfo($photoOriginalName, PATHINFO_EXTENSION);
-        $photoName = $userId . '_' . $photoOriginalName;
-        $photoTmpName = $_FILES["photosProd"]["tmp_name"];
-        $photoPath = $photoDir . $photoName;
-        
-        if (move_uploaded_file($photoTmpName, $photoPath)) {
-            echo "The file " . htmlspecialchars($photoName) . " has been uploaded.";
-        } else {
-            echo "Sorry, there was an error uploading your file.";
+    $photoNames = [];
+
+    if (!empty($_FILES["photosProd"]["name"][0])) {
+        foreach ($_FILES["photosProd"]["name"] as $key => $photoOriginalName) {
+            $photoExtension = pathinfo($photoOriginalName, PATHINFO_EXTENSION);
+            $photoName = $userId . '_' . $photoOriginalName;
+            $photoTmpName = $_FILES["photosProd"]["tmp_name"][$key];
+            $photoPath = $photoDir . $photoName;
+            
+            if (move_uploaded_file($photoTmpName, $photoPath)) {
+                $photoNames[] = $photoName;
+            } else {
+                echo "Sorry, there was an error uploading file: " . htmlspecialchars($photoOriginalName);
+            }
         }
-    } else {
-        $photoName = null;
     }
 
-    
     
     $nonNullCharacteristics = [];
     foreach ($_POST['characteristics'] as $characteristic) {
@@ -53,7 +53,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $char2 = $nonNullCharacteristics[1] ?? null;
     $char3 = $nonNullCharacteristics[2] ?? null;
 
-    header("Location: ../actions/newProdAction.php?prodName=$prodName&prodDescription=$prodDescription&price=$price&condition=$condition&characteristic1=$char1&characteristic2=$char2&characteristic3=$char3&photosProd=$photoName");
+    $photoNamesJson = json_encode($photoNames);
+
+    header("Location: ../actions/newProdAction.php?prodName=$prodName&prodDescription=$prodDescription&price=$price&condition=$condition&characteristic1=$char1&characteristic2=$char2&characteristic3=$char3&photosProd=$photoNamesJson");
     exit;
 }
 
