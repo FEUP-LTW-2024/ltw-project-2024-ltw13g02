@@ -697,3 +697,20 @@ footer {
 #reference {
     grid-row:2;
 }
+
+#editing-form {
+    height: 100%;
+}
+
+.edits {
+    height: 100%;
+}
+
+#product-name-input {
+    width: 95%;
+    margin: 0 0 0 0;
+}
+
+#price-input {
+    width: 40px !important;
+}

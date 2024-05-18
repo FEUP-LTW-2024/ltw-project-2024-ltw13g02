@@ -1,8 +1,12 @@
 
 <?php
     require_once(__DIR__. '/../database/get_from_db.php');
+    require_once(__DIR__. '/../database/user.class.php');
+    require_once(__DIR__. '/../database/chat.class.php');
     require_once(__DIR__ . '/../sessions/session.php');
     require_once(__DIR__ . '/../database/addressInfo.php');
+    require_once(__DIR__ . '/../vendor/autoload.php');
+
 
     $session = new Session();
     $user = $session->getUser();
@@ -15,10 +19,7 @@
     if ($_POST['csrf'] !== $session->getCSRF() or
         !isset($country) or !isset($city) or !isset($address) or !isset($zipcode))
     {
-        //Suspicious transaction
-        //TODO card payment
-
-        header('Location: ../pages/cart_page.php');
+        header('Location: ../pages/errorPage.php?error=noAuthorizationAccess');
     }
     
     $country =  trim($country);
@@ -48,8 +49,7 @@
             removeFromFavorites($db, $product->id);
             $buyer = $session->getUser();
 
-            uppdateBuyer($db,$product->id ,$user->id);
-
+            updateBuyer($db,$product->id ,$user->id);
         }
     }
     $db->commit();
@@ -120,7 +120,7 @@
 ?>
 
 <?php
-    function uppdateBuyer(PDO $db, int $item, string $buyer) {
+    function updateBuyer(PDO $db, int $item, string $buyer) {
 
 
         $stmt = $db->prepare('UPDATE Product 
@@ -129,4 +129,43 @@
                               ');
         $stmt->execute(array($buyer, $item));
     }
+?>
+
+<?php
+function sendMessage($product, $user) {
+    $db = getDatabaseConnection();
+    
+    // Try to find the existing chat
+    $stmt = $db->prepare('
+        SELECT idChat
+        FROM Chat
+        WHERE product = ? AND possibleBuyer = ?
+    ');
+    $stmt->execute(array($product->id, $user->id));
+    $result = $stmt->fetch();
+    
+    if ($result) {
+        // Chat exists, get the chat ID
+        $chatId = $result["idChat"];
+    } else {
+        // Chat doesn't exist, create a new chat
+        $stmt = $db->prepare('
+            INSERT INTO Chat(product, possibleBuyer)
+            VALUES (?, ?)
+        ');
+        $stmt->execute(array($product->id, $user->id));
+        
+        // Get the new chat ID
+        $chatId = $db->lastInsertId();
+    }
+
+    // Add the message
+    date_default_timezone_set('Europe/Lisbon');
+    $date = date('Y-m-d H:i:s');
+    $stmt = $db->prepare('
+        INSERT INTO Messages (messageDate, sender, chat, content, seen) 
+        VALUES (?, ?, ?, ?, 0)
+    ');
+    $stmt->execute(array($date, $user->id, $chatId, "This is an automatic message: I've bought your product!"));
+}
 ?>

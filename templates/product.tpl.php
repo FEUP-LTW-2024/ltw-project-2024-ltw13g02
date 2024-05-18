@@ -216,18 +216,14 @@ require_once(__DIR__ . '/user.tpl.php');
                 <button class="next-button" onclick="changePhoto(1)"><i class="fa fa-angle-right fa-2x next-icon"></i></button>
             <?php } ?>
         </div>
-
-        <div class="product-info">
-            <div class="edits">
-                <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
+        <form id="editing-form" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
+            <div class="product-info edits">
                     <input type="hidden" name='csrf' value="<?=$session->getCSRF()?>">
                     <input type="hidden" name="product_id" value="<?php echo $idProduct; ?>">
                     <!--h2 id="product-page-name">< ?php echo $product->name; ?> </h2-->
-                    <h2><label for="prodName">Name:</label></h2>
-                    <h2><input type="text" id="prodName" name="prodName" value="<?php echo htmlspecialchars($product->name); ?>"></h2>
+                    <h2 id="product-page-name"><input type="text" id="product-name-input" name="prodName" value="<?php echo htmlspecialchars($product->name); ?>"></h2>
                     
-                    <h2><label for="price">Price:</label></h2>
-                    <h2><input type="text" id="price" name="price" value="<?php echo htmlspecialchars(strval($product->price)); ?>"></h2>
+                    <h2 id="product-page-price"><input type="text" id="price-input" name="price" value="<?php echo htmlspecialchars(strval($product->price)); ?>"></h2>
                     
                     <a href="" class="product-page-seller"><h2 class="product-page-seller"><?php echo $seller->name(); ?> </h2></a>
                     <a href="" class="product-page-stars"><h2 class="product-page-stars stars">
@@ -248,14 +244,14 @@ require_once(__DIR__ . '/user.tpl.php');
                             <h2 id="product-characteristic"> <?php echo $c ?> </h2>
                         <?php } ?>
                     </div>
-                    
-                    <h2><label for="prodDescription">Description:</label></h2>
-                    <h2><textarea id="prodDescription" name="prodDescription"><?php echo htmlspecialchars($product->description); ?></textarea></h2>
-                    
-                    <button type="submit">Submit</button>
-                </form>
+                    <div id="product-page-description">
+                        <h2><label for="prodDescription">Description:</label></h2>
+                        <h2><textarea id="prodDescription" name="prodDescription"><?php echo htmlspecialchars($product->description); ?></textarea></h2>
+                    </div>
+                    <button type="submit" class="button">Submit</button>
+                </div>
             </div>
-        </div>
+        </form>
     </div>
     <?php 
 } ?>
