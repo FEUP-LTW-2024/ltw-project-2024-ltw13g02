@@ -383,6 +383,10 @@ footer {
     justify-content: flex-end;
 }
 
+.other-container {
+    display: flex;
+}
+
 .message-container .message-status {
     margin-right: 10px;
     padding-top: 55px;

@@ -294,30 +294,37 @@ li:hover a {
     flex-direction: column-reverse;
 }
 
-.column-of-messages .own-message {
-    box-sizing: border-box;
-    padding: 0.5rem 1rem;
-    margin: 1rem 1rem 1rem auto;
-    border-radius: 1.125rem 1.125rem 0 1.125rem;
-    background: #333;
-    color: white;
-    min-height: 2.25rem;
-    width: fit-content;
-    max-width: 66%;
-    box-shadow: 0 0 2rem rgba(0, 0, 0, 0.075), 0rem 1rem 1rem -1rem rgba(0, 0, 0, 0.1);
-}
-
-.column-of-messages .other-message {
+.column-of-messages .message-tile {
     box-sizing: border-box;
     padding: 0.5rem 1rem;
     margin: 1rem;
-    background: #FFF;
-    border-radius: 1.125rem 1.125rem 1.125rem 0;
-    min-height: 2.25rem;
-    width: fit-content;
+    border-radius: 1.125rem;
+    min-height: 69px;
     max-width: 66%;
+    height: fit-content;
+    width: fit-content;
+    min-width: 25px;
     box-shadow: 0 0 2rem rgba(0, 0, 0, 0.075), 0rem 1rem 1rem -1rem rgba(0, 0, 0, 0.1);
 }
+
+.column-of-messages .own-message {
+    background: #333;
+    color: white;
+    margin-left: auto; /* Align own messages to the right */
+    border-radius: 1.125rem 1.125rem 0 1.125rem;
+}
+
+.column-of-messages .other-message {
+    background: #ededed;
+    border-radius: 1.125rem 1.125rem 1.125rem 0;
+}
+
+.m-content {
+    max-width: 500px; /* Fixed width for the text container */
+    min-width: 25px;
+    word-wrap: break-word; /* Break words if necessary */
+}
+
 
 .time {
     font-family: "Didact Gothic", sans-serif;
@@ -548,6 +555,7 @@ footer {
 }
 
 #no-favs {
+    margin-top: 50px;
     text-align: center;
 }
 

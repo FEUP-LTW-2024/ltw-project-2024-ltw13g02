@@ -51,7 +51,7 @@ require_once(__DIR__ . '/../database/product.class.php');
             <?php if ($message->sender === $session->getUser()->id) { ?>
                     <div class="message-container">
                         <div class="message-tile message own-message">
-                            <p><?php echo $message->content; ?></p>
+                            <p class="m-content"><?php echo $message->content; ?></p>
                         </div>
                         <h2 class="message-status <?php echo $message->seen ? "fa fa-check-circle" : "fa fa-check-circle-o"; ?>"></h2>
                     </div>
@@ -65,8 +65,10 @@ require_once(__DIR__ . '/../database/product.class.php');
                     <?php } 
                 } else { 
                     ?>
-                    <div class="message-tile message other-message">
-                        <p><?php echo $message->content;?></p>
+                    <div class="other-container">
+                        <div class="message-tile message other-message">
+                            <p class="m-content"><?php echo $message->content;?></p>
+                        </div>
                     </div>
                     <?php
                     if ($key < count($messages) - 1 && strtotime($message->messageDate) - strtotime($messages[$key + 1]->messageDate) < 3600) {

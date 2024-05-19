@@ -10,16 +10,20 @@
     require_once(__DIR__ . '/../templates/productsprint.tpl.php');
 
     
-    if (!$session->isLoggedIn()) { header('Location: /index.php'); } 
 
     drawHeader($session);
     $user = $session->getUser();
-
-    $favorites_ids = $user->getFavorites();
-    if ($favorites_ids === null) {?>
-        <h2 id="no-favs">You don't have favorites yet! </h2>
-        <?php }
-    else {
-        drawFavorites($favorites_ids);
+    if (!$session->isLoggedIn()) { ?>
+        <h2 id="no-favs">You need to sign up to add favorites! </h2>
+    <?php } else {
+        $favorites_ids = $user->getFavorites();
+        if ($favorites_ids === null) { ?>
+            <h2 id="no-favs">You don't have favorites yet! </h2>
+            <?php }
+        else {
+            drawFavorites($favorites_ids);
+        }
     }
+    
     drawFooter();
+?>
