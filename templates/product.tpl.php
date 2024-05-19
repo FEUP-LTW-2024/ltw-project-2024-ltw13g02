@@ -118,91 +118,97 @@ require_once(__DIR__ . '/user.tpl.php');
     <?php 
     } ?>
 
-<?php function drawNewProduct(Session $session, array $conditions, array $categories) { ?>
-    <link rel="stylesheet" href="../css/editProfile.css">
-    <div class="user-info">
-        <div class="info">
-            <?php $user = $session->getUser(); ?>
-            <h2><?php echo "New Product" ?></h2>
-            <br>
-            <form id="newProductForm" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
-                <input type="hidden" name='csrf' value="<?=$session->getCSRF()?>">
-                <label for="prodName">Product Name:</label>
-                <input type="text" id="prodName" name="prodName" required>
+<?php function drawNewProduct(Session $session, array $conditions, array $categories) { 
+    if ($session->isLoggedIn()) { ?>
+        <link rel="stylesheet" href="../css/editProfile.css">
+        <div class="user-info">
+            <div class="info">
+                <?php $user = $session->getUser(); ?>
+                <h2><?php echo "New Product" ?></h2>
+                <br>
+                <form id="newProductForm" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
+                    <input type="hidden" name='csrf' value="<?=$session->getCSRF()?>">
+                    <label for="prodName">Product Name:</label>
+                    <input type="text" id="prodName" name="prodName" required>
+                    
+                    <label for="prodDescription">Description:</label>
+                    <input type="text" id="prodDescription" name="prodDescription" required>
+                    
+                    <label for="price">Price:</label>
+                    <input type="text" id="price" name="price" required>
                 
-                <label for="prodDescription">Description:</label>
-                <input type="text" id="prodDescription" name="prodDescription" required>
-                
-                <label for="price">Price:</label>
-                <input type="text" id="price" name="price" required>
-            
-                <label for="condition">Condition:</label>
-                <select id="condition" name="condition" required>
-                    <option value="" disabled selected>Select Condition</option>
-                    <?php foreach ($conditions as $condition) { ?>
-                        <option value="<?php echo $condition['idCondition']; ?>"><?php echo htmlspecialchars($condition['condition']); ?></option>
-                    <?php } ?>
-                </select>
+                    <label for="condition">Condition:</label>
+                    <select id="condition" name="condition" required>
+                        <option value="" disabled selected>Select Condition</option>
+                        <?php foreach ($conditions as $condition) { ?>
+                            <option value="<?php echo $condition['idCondition']; ?>"><?php echo htmlspecialchars($condition['condition']); ?></option>
+                        <?php } ?>
+                    </select>
 
-                <label for="category">Category:</label>
-                <select id="category" name="category" onChange="updateCharacteristics()" required>
-                    <option value="" disabled selected>Select Category</option>
-                    <?php foreach ($categories as $category) { ?>
-                        <option value="<?php echo $category['idCategory']; ?>"><?php echo htmlspecialchars($category['category']); ?></option>
-                    <?php } ?>
-                </select>
+                    <label for="category">Category:</label>
+                    <select id="category" name="category" onChange="updateCharacteristics()" required>
+                        <option value="" disabled selected>Select Category</option>
+                        <?php foreach ($categories as $category) { ?>
+                            <option value="<?php echo $category['idCategory']; ?>"><?php echo htmlspecialchars($category['category']); ?></option>
+                        <?php } ?>
+                    </select>
 
-                <div id="characteristics">
-                    <label disabled>
-                        <option value="" disabled selected>Select Category First</option>
-                    </label>
-                </div>
-                
-                <label name="photosProd" for="photosProd">Photos:</label>
-                <input type="file" id="photosProd" name="photosProd[]" accept="image/*" multiple>
+                    <div id="characteristics">
+                        <label disabled>
+                            <option value="" disabled selected>Select Category First</option>
+                        </label>
+                    </div>
+                    
+                    <label name="photosProd" for="photosProd">Photos:</label>
+                    <input type="file" id="photosProd" name="photosProd[]" accept="image/*" multiple>
 
-                <input id="submitProd" type="submit" value="Submit">
-            </form>
-        </div>
-    </div> 
-    <script>
-    function updateCharacteristics() {
-        const categoryId = document.getElementById('category').value;
-        const characteristicsDiv = document.getElementById('characteristics');
+                    <input id="submitProd" type="submit" value="Submit">
+                </form>
+            </div>
+        </div> 
+        <script>
+        function updateCharacteristics() {
+            const categoryId = document.getElementById('category').value;
+            const characteristicsDiv = document.getElementById('characteristics');
 
-        // Clear existing characteristics
-        characteristicsDiv.innerHTML = '';
+            // Clear existing characteristics
+            characteristicsDiv.innerHTML = '';
 
-        fetch(`../actions/getCharacteristics.php?categoryId=${categoryId}`)
-            .then(response => response.json())
-            .then(data => {
-                data.forEach(type => {
-                    const label = document.createElement('label');
-                    label.textContent = type.type_name;
-                    characteristicsDiv.appendChild(label);
+            fetch(`../actions/getCharacteristics.php?categoryId=${categoryId}`)
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(type => {
+                        const label = document.createElement('label');
+                        label.textContent = type.type_name;
+                        characteristicsDiv.appendChild(label);
 
-                    const select = document.createElement('select');
-                    select.name = `characteristics[${type.idType}]`;
-                    select.className = 'characteristic';
-                    type.characteristics.forEach(characteristic => {
-                        const option = document.createElement('option');
-                        option.value = characteristic.idCharacteristic;
-                        option.textContent = characteristic.characteristic;
-                        select.appendChild(option);
+                        const select = document.createElement('select');
+                        select.name = `characteristics[${type.idType}]`;
+                        select.className = 'characteristic';
+                        type.characteristics.forEach(characteristic => {
+                            const option = document.createElement('option');
+                            option.value = characteristic.idCharacteristic;
+                            option.textContent = characteristic.characteristic;
+                            select.appendChild(option);
+                        });
+                        characteristicsDiv.appendChild(select);
                     });
-                    characteristicsDiv.appendChild(select);
                 });
-            });
-    }
-
-    document.getElementById('photosProd').addEventListener('change', function() {
-        if (this.files.length > 5) {
-            alert("You can only upload a maximum of 5 photos.");
-            this.value = ""; // Clear the input
         }
-    });
-    </script>
-<?php } ?>
+
+        document.getElementById('photosProd').addEventListener('change', function() {
+            if (this.files.length > 5) {
+                alert("You can only upload a maximum of 5 photos.");
+                this.value = ""; // Clear the input
+            }
+        });
+        </script>
+    <?php } else { ?>
+        <div id="info-to-user">
+            <h2 class="info-to-user">You need to sign up to add a product.</h2>
+        </div>
+    <?php }    
+} ?>
 
 
 <?php function drawEditProduct(Session $session, $idProduct) {
