@@ -8,7 +8,6 @@
 
   require_once(__DIR__ . '/../templates/common.tpl.php');
   require_once(__DIR__ . '/../templates/messages.tpl.php');
-  require_once(__DIR__ . '/../vendor/autoload.php');
 
 
   if ( !preg_match ("/^[a-zA-Z0-9\s]+$/", $_GET['chat'])) {
