@@ -14,7 +14,7 @@
     drawHeader($session);
     $user = $session->getUser();
     if (!$session->isLoggedIn()) { ?>
-        <h2 id="no-favs">You need to sign up to add favorites! </h2-->
+        <h2 id="no-favs">You need to sign up to add favorites! </h2>
     <?php } else {
         $favorites_ids = $user->getFavorites();
         if ($favorites_ids === null) { ?>
