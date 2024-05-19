@@ -11,6 +11,8 @@
 
   require_once(__DIR__ . '/../templates/common.tpl.php');
   require_once(__DIR__ . '/../templates/productsprint.tpl.php');
+  require_once(__DIR__ . '/../vendor/autoload.php');
+
 
 
   $db = getDatabaseConnection();
@@ -21,7 +23,9 @@
 
   if ($session->isLoggedIn()) {
     $recents = $session->getUser()->getRecent();
-    drawRecent($recents);
+    if ($recents != null) {
+      drawRecent($recents);
+    }
   }
 
   $recommended = getRecommended();
