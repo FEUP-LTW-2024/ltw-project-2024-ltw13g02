@@ -29,9 +29,15 @@ require_once(__DIR__ . '/../utils/elapsedTime.php');
                         $seller = $product->getSeller();
                         $buyer = getUserbyId($chat->possibleBuyer);
                         $photos = $product->getPhotos();
+
                         ?>
                         <div class="chat-product-photo-container">
-                            <img class="chat-productphoto" src="../images/products/<?php echo $photos[0]["photo"]; ?>" alt="Photo">
+                            <?php if(count($photos) > 0) { ?>
+                                <img class="chat-productphoto" src="../images/products/<?php echo $photos[0]["photo"]; ?>" alt="Photo">
+                            <?php } else { ?>
+                                <img class="chat-productphoto" src="../images/products/no_images_small.png" alt="Photo">
+                            <?php } ?>
+                            
                         </div>
                         <div class="chat-info">
                             <h2 class="with-user"><?php echo $user->id === $seller->id ? $buyer->name() : $seller->name(); ?></h2>

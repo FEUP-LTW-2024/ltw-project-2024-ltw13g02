@@ -217,32 +217,49 @@ function drawSmallProduct(Product $product, User $seller, ?User $user) {
 
     <a href="../pages/seller_page.php?user=<?=$seller->id?>" class="user_small_card">
         <?php if ($seller->photo != "Sem FF") { ?>
-                    <img class="user_small_pfp" src="../images/userProfile/<?=$seller->photo?>"> 
+            <img class="user_small_pfp" src="../images/userProfile/<?=$seller->photo?>"> 
         <?php } else { ?>
-                    <h2><i class="fa fa-user fa-1x user-icons"></i></h2>
+            <h2><i class="fa fa-user fa-1x user-icons"></i></h2>
         <?php } ?>
         <p><?=$seller->name() ?></p>
     </a>
 
-    <?php if (!isset($user)) { ?>
-                <a href="../pages/productPage.php?product=<?=$product->id?>"><img class="offer_img" src="../images/products/<?= $product->getPhotos()[0]['photo']?>"></a>
-    
-            <a class="offer_info" href="../pages/productPage.php?product=<?=$product->id?>">
-                <h4><?=substr($product->name, 0, 30) ?></h4>
-                <h5><?= $seller->city . ", " . $seller->getCountry()?></h5>
-                <p><?=$product->price?>€</p>
-             </a>
-    <?php } else if (isset($buyer)) {
+    <?php 
+    $productPhotos = $product->getPhotos();
+    $productImage = isset($productPhotos[0]['photo']) ? $productPhotos[0]['photo'] : null;
+
+    if (!isset($user)) { 
+        if ($productImage != null) { ?>
+            <a href="../pages/productPage.php?product=<?=$product->id?>"><img class="offer_img" src="../images/products/<?=$productImage?>"></a>
+        <?php } else { ?>
+            <a href="../pages/productPage.php?product=<?=$product->id?>"><img class="offer_img" src="../images/products/no_images_small.png"></a>
+        <?php } ?>
+           
+        <a class="offer_info" href="../pages/productPage.php?product=<?=$product->id?>">
+            <h4><?=substr($product->name, 0, 30) ?></h4>
+            <h5><?= $seller->city . ", " . $seller->getCountry()?></h5>
+            <p><?=$product->price?>€</p>
+        </a>
+    <?php } else if (isset($buyer)) { 
         $imagePageLink = !isset($product->buyer) ? "product={$product->id}" : "shipping={$product->getShipping()->id}"; ?>
-        <a href="../pages/shipmentPage.php?<?=$imagePageLink?>"><img class="offer_img" src="../images/products/<?= $product->getPhotos()[0]['photo']?>"></a>
-    
+        <?php if ($productImage != null) { ?>
+            <a href="../pages/shipmentPage.php?<?=$imagePageLink?>"><img class="offer_img" src="../images/products/<?=$productImage?>"></a>
+        <?php } else { ?>
+            <a href="../pages/shipmentPage.php?<?=$imagePageLink?>"><img class="offer_img" src="../images/products/no_images_small.png"></a>
+        <?php } ?>
+
         <a class="offer_info" href="../pages/shipmentPage.php?<?=$imagePageLink?>">
             <h4><?=substr($product->name, 0, 30) ?></h4>
             <h5><?= $seller->city . ", " . $seller->getCountry()?></h5>
             <p><?=$product->price?>€</p>
         </a>
-    <?php } else { ?>
-        <a href="../pages/myProduct.php?product=<?=$product->id?>"><img class="offer_img" src="../images/products/<?= $product->getPhotos()[0]['photo']?>"></a>
+    <?php } else { 
+        if ($productImage != null) { ?>
+            <a href="../pages/myProduct.php?product=<?=$product->id?>"><img class="offer_img" src="../images/products/<?=$productImage?>"></a>
+            <h2 echo <?=size($productPhotos)?>></h2>
+        <?php } else { ?>
+            <a href="../pages/myProduct.php?product=<?=$product->id?>"><img class="offer_img" src="../images/products/no_images_small.png"></a>
+        <?php } ?>
     
         <a class="offer_info" href="../pages/myProduct.php?product=<?=$product->id?>">
             <h4><?=substr($product->name, 0, 30) ?></h4>
@@ -252,3 +269,4 @@ function drawSmallProduct(Product $product, User $seller, ?User $user) {
     <?php } ?>
     
 <?php } ?>
+

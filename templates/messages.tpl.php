@@ -25,7 +25,11 @@ require_once(__DIR__ . '/../database/product.class.php');
         $photos = $product->getPhotos();
         ?>
         <a href="../pages/<?php echo $info['BId'] === $session->getUser()->id ? "chatsAsBuyerPage.php" : "chatsAsSellerPage.php" ?>"><i class="fa fa-angle-left fa-2x chat-back-button"></i></a>
-        <img class="chat-productphoto" src="../images/products/<?php echo $photos[0]["photo"]; ?>" alt="Photo">
+        <?php if(count($photos) > 0) { ?>
+            <img class="chat-productphoto" src="../images/products/<?php echo $photos[0]["photo"]; ?>" alt="Photo">
+        <?php } else { ?>
+            <img class="chat-productphoto" src="../images/products/no_images_small.png" alt="Photo">
+        <?php } ?>
         <div class="chat">
                 <?php if ($session->getUser()->id === $info['SId']) { ?>
                     <a href="../pages/seller_page.php?user=<?php echo $info['SId']; ?>"><h2 class="with-user"><?php echo $info['BFN'] . " " . $info['BLN']; ?></h2>
