@@ -1,6 +1,5 @@
 <?php
 require_once(__DIR__.'/../database/product.class.php');
-require_once(__DIR__ . '/../vendor/autoload.php');
 
 
 $types = getTypesofCategory($_GET['category']);
