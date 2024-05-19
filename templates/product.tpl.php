@@ -54,8 +54,8 @@ require_once(__DIR__ . '/user.tpl.php');
         <div class="product-info">
             <h2 id="product-page-name"><?php echo $product->name; ?> </h2>
             <h2 id="product-page-price"><?php echo $product->price; ?> € </h2>
-            <a href="" class="product-page-seller"><h2 class="product-page-seller"><?php echo $seller->name(); ?> </h2></a>
-            <a href="" class="product-page-stars"><h2 class="product-page-stars stars">
+            <a href="../pages/seller_page.php?user=<?=$seller->id?>" class="product-page-seller"><h2 class="product-page-seller"><?php echo $seller->name(); ?> </h2></a>
+            <a href="../pages/reviewsPage.php?user=<?=$seller->id?>" class="product-page-stars"><h2 class="product-page-stars stars">
                 <?php
                 $stars = $seller->getStarsFromReviews();
                 drawStars($stars);
@@ -102,8 +102,8 @@ require_once(__DIR__ . '/user.tpl.php');
         </div>
     </div>
     <script>
-        var currentIndex = 0;
-        var photos = <?php echo json_encode($photos); ?>;
+        let currentIndex = 0;
+        let photos = <?php echo json_encode($photos); ?>;
 
         function changePhoto(delta) {
             currentIndex += delta;
@@ -236,8 +236,8 @@ require_once(__DIR__ . '/user.tpl.php');
                     
                     <h2 id="product-page-price">Price: <input type="text" id="price-input" name="price" value="<?php echo htmlspecialchars(strval($product->price)); ?>"></h2>
                     
-                    <a href="" class="product-page-seller"><h2 class="product-page-seller"><?php echo $seller->name(); ?> </h2></a>
-                    <a href="" class="product-page-stars"><h2 class="product-page-stars stars">
+                    <a href="../pages/seller_page.php?user=<?=$seller->id?>" class="product-page-seller"><h2 class="product-page-seller"><?php echo $seller->name(); ?> </h2></a>
+                    <a href="../pages/reviewsPage.php?user=<?=$seller->id?>" class="product-page-stars"><h2 class="product-page-stars stars">
                         <?php
                         $stars = $seller->getStarsFromReviews();
                         drawStars($stars);
@@ -273,13 +273,13 @@ require_once(__DIR__ . '/user.tpl.php');
         </div>
     </div>    
     <script>
-        var currentIndex = 0;
-        var photos = <?php echo json_encode($photos); ?>;
+        let currentIndex = 0;
+        let photos = <?php echo json_encode($photos); ?>;
 
         function uploadPhoto(files) {
-            var photo = files[0];
-            var productId = "<?php echo $idProduct; ?>";
-            var photosCount = <?php echo count($photos); ?>;
+            let photo = files[0];
+            let productId = "<?php echo $idProduct; ?>";
+            let photosCount = <?php echo count($photos); ?>;
 
             // Check if the number of existing photos is less than 5
             if (photosCount >= 5) {
@@ -287,7 +287,7 @@ require_once(__DIR__ . '/user.tpl.php');
                 return; // Exit the function
             }
 
-            var formData = new FormData();
+            let formData = new FormData();
             formData.append('photo', photo);
             formData.append('product_id', productId);
 
@@ -321,10 +321,10 @@ require_once(__DIR__ . '/user.tpl.php');
         }
 
         function confirmDeletePhoto(index) {
-            var result = confirm("Are you sure you want to delete this photo?");
+            let result = confirm("Are you sure you want to delete this photo?");
             if (result) {
-                var idPhoto = photos[index]['idPhoto'];
-                var productId = "<?php echo $idProduct; ?>";
+                let idPhoto = photos[index]['idPhoto'];
+                let productId = "<?php echo $idProduct; ?>";
 
                 fetch('../actions/delete_photo.php', {
                     method: 'POST',

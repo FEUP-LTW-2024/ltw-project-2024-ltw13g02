@@ -414,6 +414,7 @@ footer {
     outline: solid;
     outline-color: lightblue;
     border-radius: 1em;
+    margin-left: 0.5em;
 
 }
 
@@ -421,8 +422,9 @@ footer {
     margin-right: 1em;
 }
 
-#Shopping_items #totalPayment {
+.totalPayment {
     display: flex;
+    margin: 10px 0;
 }
 
 .CartItem {
@@ -571,7 +573,6 @@ footer {
 }
 
 #filter {
-    /*width: 100%;*/    
     padding: 10px 0 0 20px;
 }
 
@@ -694,7 +695,7 @@ textarea {
     font-size: 20px;
 }
 
-.CartItem p, #totalPayment p{
+.CartItem p, .totalPayment p{
     font-family: "Didact Gothic", sans-serif;
     font-weight: 400;
     font-style: normal;

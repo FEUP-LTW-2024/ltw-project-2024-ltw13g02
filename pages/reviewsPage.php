@@ -26,6 +26,8 @@
   }
   ?> <script src="../javascript/reviews.js" defer></script> <?php
   $currentUser = $session->getUser();
+  $classification = $_GET['classification'];
+  if (!isset($classification) || !preg_match("/^[0-5]+$/",$classification)) {$classification=-1;}
   drawHeader($session);
   if ($currentUser->id === $user->id) { //Same user
     drawHamburguer($session, 0);
@@ -36,7 +38,7 @@
   }else{                                //NO account
     drawFilterBar($user); 
   }
-  if ($_GET['classification'] == -1) drawReviews($user, -1);
-  else drawReviews($user, $_GET['classification']);
+  if ($classification == -1) drawReviews($user, -1);
+  else drawReviews($user, $classification);
 
   drawFooter();

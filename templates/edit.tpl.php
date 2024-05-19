@@ -143,8 +143,8 @@ require_once(__DIR__ . '/../sessions/session.php');
             </form>
             <script>
                 function validatePassword() {
-                    var newPassword = document.getElementById("newPassword").value;
-                    var confirmPassword = document.getElementById("confirmPassword").value;
+                    let newPassword = document.getElementById("newPassword").value;
+                    let confirmPassword = document.getElementById("confirmPassword").value;
 
                     if (newPassword !== confirmPassword) {
                         alert("Passwords do not match.");

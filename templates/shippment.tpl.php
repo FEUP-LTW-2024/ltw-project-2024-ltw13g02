@@ -15,25 +15,38 @@
         <section id="ShippingProducts"> <?php
             foreach ($products as $product) {
                 drawShippingProduct($product);
-            } ?>
+            }
+            $ports = 0;
+            if ($shipping->buyerCountry !== $shipping->sellerCountry){
+                $ports = 5 * count($products);
+            }
+            ?>
             <div class="ShippingProduct">
-                <p>Total:</p>
+                <p>Order:</p>
+                <span><?=""?></span>
+                <p><?=$shipping->total-$ports?>€</p>
+            </div>
+            <div class="ShippingProduct">
+                <p>Ports:</p>
+                <span><?=""?></span>
+                <p><?=$ports?>€</p>
+            </div> 
+            <div class="ShippingProduct">
+                <p id="idTotal"><strong>Total:</p>
                 <span><?=""?></span>
                 <p><?=$shipping->total?>€</p>
-        </div> 
+            </div> 
         </section> <?php
     }
 ?>
 
 <?php
     function drawShippingProduct(Product $product) { ?>
-    <a href="../pages/productPage.php?product=<?=$product->id?>">
         <div class="ShippingProduct">
             <p><?=$product->name?>:</p>
             <span><?=""?></span>
             <p><?=$product->price?>€</p>
-        </div> 
-    </a> <?php
+        </div> <?php
     }
 
 ?>

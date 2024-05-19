@@ -114,7 +114,11 @@
         $stmt = $db->prepare(' UPDATE Shipping
                                 SET total = total + ?
                                 WHERE idShipping = ?');
-        $stmt->execute(array($product->price,$shippingId));
+        $price = $product->price;
+        if ($buyerAddressInfo->country !== $seller->getCountry()){
+            $price += 5;
+        }
+        $stmt->execute(array($price,$shippingId));
     }
 
 ?>

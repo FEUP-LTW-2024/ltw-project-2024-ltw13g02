@@ -21,7 +21,7 @@
                     $product = getProduct($item);
                     output_single_cart_item($product);
                 }
-                output_total_payment($items_ids);
+                output_payment($items_ids);
             ?>
             </section>
     <?php 
@@ -54,16 +54,15 @@
 ?>
 
 <?php
-    function output_total_payment($items){
-        $total = 0;
+    function output_payment($items){
+        $order = 0;
         foreach ($items as $item){
                 $product = getProduct($item);
-                $total += $product->price;
-            }  
-        ?>
-        <article id="totalPayment">
+                $order += $product->price;
+        } ?>
+        <article id="totalPay" class="totalPayment">
             <p>Total:</p>
-            <p><?= $total ?>€</p>
+            <p><?= $order ?>€</p>
         </article>
     <?php
     }
@@ -109,9 +108,14 @@
                             <div id="reference">Reference: 123456789</div>
                         </div>
                     </div>
-                </div>
-
-                <button id = "formSubmitButton" class="submitButton" type="button" onclick="submitClick()" value="Pay Now">Pay Now</button>
+                </div> <?php 
+                
+                $cartCountries = getProductsCountries($session->getUser()->getShoppingCart());
+                $cartCountriesJson = json_encode($cartCountries); 
+                $total = getProductsPrice($session->getUser()->getShoppingCart());
+                ?>
+                
+                <button id = "formSubmitButton" class="submitButton" type="button" onclick="submitClick(<?= htmlspecialchars($cartCountriesJson) ?>,<?=htmlspecialchars($total)?>)" value="Pay Now">Pay Now</button>
                 <div id="confirmationModal" class="modal hidden">
                     <div class="modal-content">
                         <p>Do you want to proceed to checkout?</p>
@@ -133,7 +137,7 @@
         <div class='address_field' id ='countryField'>
         Country:
         </div>
-            <select name='country'>
+            <select name='country' onclick>
                 <?php 
                     foreach ($countries as $country){ 
                         $user = $session->getUser();
@@ -150,4 +154,29 @@
 
 
     <?php }
+?>
+
+<?php
+    function getProductsCountries(array $productsIds) : array {
+        $countries = array();
+        $i = 0;
+        foreach ($productsIds as $productId) {
+            $product = getProduct($productId);
+            $countries[$i] = $product->getSeller()->getCountry();
+            $i += 1;
+        }
+        return $countries;
+    }
+?>
+
+<?php
+    function getProductsPrice(array $productsIds) : int {
+        $price = 0;
+        foreach ($productsIds as $productId) {
+            $product = getProduct($productId);
+            $price += $product->price;
+        }
+        return $price;
+    }
+
 ?>

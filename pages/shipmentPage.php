@@ -27,7 +27,7 @@ if (!isset($shipping)) {
 }
 $user = $session->getUser();
 
-if ($session->isLoggedIn() and $shipping->seller->id === $user->id) {
+if ($session->isLoggedIn() and (($shipping->seller->id === $user->id) or ($shipping->buyer->id === $user->id)) ) {
   drawHeader($session);
   ?>  <link rel="stylesheet" href="../css/shipping.css"> <?php
   drawShippingHeader($shipping->purchaseDate);
