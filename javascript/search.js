@@ -36,7 +36,7 @@ function myFunction() {
     let url = new URL("/utils/showProducts.php", baseUrl);
     url.searchParams.set('search',searchProducts.value);
     url.searchParams.set('category',category.value);
-    characteristicsListeners();
+    characteristicsListeners(url);
     url.searchParams.set('condition',condition.value);
     url.searchParams.set('minPrice',minPrice.value);
     url.searchParams.set('maxPrice',maxPrice.value);
@@ -80,7 +80,7 @@ function showCharacteristic() {
             if (xhttp.readyState === 4) {
                 if (xhttp.status === 200) {
                     document.getElementById("characteristics").innerHTML = this.responseText;
-                    characteristicsListeners();
+                    characteristicsListeners(url);
                 } else {
                     alert(`Error ${xhttp.status}: ${xhttp.statusText}`);
                 }
@@ -95,7 +95,7 @@ function showCharacteristic() {
     }
 }
 
-function characteristicsListeners() {
+function characteristicsListeners(url) {
     const characteristic1 = document.querySelector("#characteristic1");
     const characteristic2 = document.querySelector("#characteristic2");
     const characteristic3 = document.querySelector("#characteristic3");
