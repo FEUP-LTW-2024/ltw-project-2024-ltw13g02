@@ -219,7 +219,12 @@ class Product {
                 $final .= "<h2><i class='fa fa-user fa-1x user-icons'></i></h2>";
             }
             $final .= "<p>" .$user->name() . "</p></a>";
-            $final .= "<a href='../pages/productPage.php?product=$product->id'><img class='offer_img' src='../images/products/" . $product->getPhotos()[0]['photo']. "'></a>";
+            $final .= "<a href='../pages/productPage.php?product=$product->id'>";
+            if ($product->getPhotos() != null) {
+                $final .= "<img class='offer_img' src='../images/products/" . $product->getPhotos()[0]['photo']. "'></a>";
+            } else {
+                $final .= "<img class='offer_img' src='../images/products/no_images_small.png'></a>";
+            }
             $final .= "<a class='offer_info' href='../pages/productPage.php?product=$product->id'>";
             $final .= "<h4>" . substr($product->name, 0, 30) . "</h4>";
             $final .= "<h5>" . $user->city . ', ' . $user->getCountry() . "</h5>";
