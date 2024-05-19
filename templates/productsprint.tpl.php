@@ -20,59 +20,38 @@ function drawPath() {
 ?>
 <script src="../javascript/search.js" defer></script>
 <form id="filter" action="../pages/index.php" method="get">
-    <?php if ($category == NULL) { ?>
-        <select name="category" id="category" oninput="myFunction()">
-            <option value="">Category</option> 
-            <?php 
-                foreach($categories as $c){ 
-            ?>
-                    <option value="<?= $c['idCategory'] ?>"> 
-                        <?= $c['category'] ?>
-                    </option>    
-            <?php 
-                }
-            ?>
-        </select>
-    <?php }  else { 
-        ?> <input type="hidden" name="category" value="<?php echo $category; ?>"/> <?php
-            for ($i = 0; $i < count($types); $i++) {
-                $characteristics = getCharacteristicsofType($types[$i]['idType']); ?>
-                <select id="characteristic<?php echo $i + 1 ?>" name="characteristic<?php echo $i + 1 ?>" class="characteristic" oninput="myFunction()">
-                    <?php 
-                    echo $_GET["characteristic" . $i + 1] != NULL ? "<option value='" . $_GET["characteristic" . $i + 1] . "'>" . getCharacteristic($_GET["characteristic" . $i + 1]) . "</option> <option value=''>" . $types[$i]['type_name'] . "</option> " : "<option value=''>" . $types[$i]['type_name'] . "</option> ";
-                    foreach($characteristics as $c) { 
-                        if ($_GET["characteristic" . $i + 1] != NULL && $c['characteristic'] === getCharacteristic($_GET["characteristic" . $i + 1])) {
-                            continue;
-                        }
-                        else { ?>
-                        <option value="<?= $c['idCharacteristic'] ?>"> 
-                            <?= $c['characteristic'] ?>
-                        </option>    
-                    <?php }
-                    } ?>
-                </select>
-        <?php }
-        } ?>
+
+    <select name="category" id="category" oninput="myFunction()">
+        <option value="">Category</option> 
+        <?php 
+            foreach($categories as $c){ 
+        ?>
+                <option value="<?= $c['idCategory'] ?>"> 
+                    <?= $c['category'] ?>
+                </option>    
+        <?php 
+            }
+        ?>
+    </select>
+
     <select name="condition" id="condition" oninput="myFunction()">
         <?php 
-            echo $_GET["condition"] != NULL ? "<option value='" . $_GET["condition"] . "'>" . getCondition($_GET["condition"]) . "</option> <option value=''>Condition</option>" : "<option value=''>Condition</option>";
+            echo "<option value=''>Condition</option>";
             foreach($conditions as $c) { 
-                if ($_GET["condition"] != NULL && $c['condition'] === getCondition($_GET["condition"])) {
-                    continue;
-                }
-                else {
         ?>
                 <option value="<?= $c['idCondition'] ?>"> 
                     <?= $c['condition'] ?>
                 </option>    
         <?php 
-                }
             }
         ?>
     </select>
+
     <input type="text" oninput="myFunction()" class="price-filter" id="price-min" name="price-min" placeholder=" Min Price" value="<?= $_GET["price-min"] === NULL ? "" : $_GET["price-min"] ?>"/>
     <input type="text" oninput="myFunction()" class="price-filter" id="price-max" name="price-max" placeholder=" Max Price" value="<?= $_GET["price-max"] === NULL ? "" : $_GET["price-max"] ?>"/>
-    <!-- TODO <button id="go-search" class="button" type="submit">Search</button> -->
+
+    <div id="characteristics" class="hidden"></div>
+
 </form>
 <?php } ?>
 
