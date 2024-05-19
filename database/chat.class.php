@@ -17,7 +17,7 @@ class Chat {
         $this->messages = $this->getMessages();
     }
 
-    public function getPossibleBuyer(): string {
+    public function getPossibleBuyer(): User {
         return getUserbyId($this->possibleBuyer);
     }
 

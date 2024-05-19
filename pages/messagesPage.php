@@ -9,13 +9,16 @@
   require_once(__DIR__ . '/../templates/common.tpl.php');
   require_once(__DIR__ . '/../templates/messages.tpl.php');
 
-
   if ( !preg_match ("/^[a-zA-Z0-9\s]+$/", $_GET['chat'])) {
     header('Location: pages/index.php');
   }
 
+  $chat = getChat($_GET['chat']);
+  if ($chat->getPossibleBuyer()->id != $session->getUser()->id && $chat->getProduct()->getSeller()->id != $session->getUser()->id) {
+    header('Location: ../pages/errorPage.php?error=noAuthorizationAccess');
+  }
+
   if ($_POST['csrf'] == $_SESSION['csrf'] && $_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['message']) && !empty($_POST['message'])) {
-    $chat = getChat($_GET['chat']);
     $chat->addMessage($session->getUser()->id, $_POST['message']);
     header('Location: ' . $_SERVER['REQUEST_URI']);
     exit();
