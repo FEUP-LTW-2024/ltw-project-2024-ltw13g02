@@ -13,6 +13,7 @@
   require_once(__DIR__ . '/../templates/productsprint.tpl.php');
 
 
+
   $db = getDatabaseConnection();
   drawHeader($session);
 
@@ -21,7 +22,9 @@
 
   if ($session->isLoggedIn()) {
     $recents = $session->getUser()->getRecent();
-    drawRecent($recents);
+    if ($recents != null) {
+      drawRecent($recents);
+    }
   }
 
   $recommended = getRecommended();

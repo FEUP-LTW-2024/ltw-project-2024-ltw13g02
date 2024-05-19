@@ -3,6 +3,7 @@ require_once(__DIR__ . '/chat.class.php');
 require_once(__DIR__ . '/../database/connection.db.php');
 
 
+
 class User {
     public string $id;
     public string $firstName;
@@ -119,7 +120,6 @@ class User {
         for ($i = 0; $i < count($result); $i++) {
             $final[$i] = $result[count($result) - 1 - $i];
         }
-
         return $final;
     }
 
