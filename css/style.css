@@ -571,7 +571,6 @@ footer {
 }
 
 #filter {
-    height: 21px;
     /*width: 100%;*/    
     padding: 10px 0 0 20px;
 }
@@ -579,6 +578,10 @@ footer {
 #filter select {
     background-color: white;
 
+}
+
+#filter #characteristics .characteristic {
+    margin: 5px 5px 0 0;
 }
 
 .path {

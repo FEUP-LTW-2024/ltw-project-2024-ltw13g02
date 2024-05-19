@@ -18,13 +18,12 @@
 
   drawPath();
   drawSearchbar();
+
   if ($session->isLoggedIn()) {
-
-    $user = $session->getUser();
-    $recent_ids = $user->getRecent();
-
-    if (sizeof($recent_ids) > 0) {drawRecent($recent_ids); }
+    $recents = $session->getUser()->getRecent();
+    drawRecent($recents);
   }
+
   $recommended = getRecommended();
   drawRecommended($recommended);
   drawFooter();
