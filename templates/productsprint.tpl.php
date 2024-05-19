@@ -191,6 +191,28 @@ function drawArchive($archive_ids)
 ?>
 
 <?php
+function drawBought($bought_ids, $user)
+    { ?>
+        <section class="Products" id="Bought">
+            <h2>My Shopping</h2>
+            <div id="static_offer_container"> <?php 
+                foreach($bought_ids as $item_id)
+                {
+                    $product = getProduct($item_id);
+
+                    $seller = $product->getSeller();
+                    ?>
+                    <div class="sliding_offer"> <?php
+                        drawSmallProduct($product, $seller, $user);  ?>
+                    </div> <?php 
+                } ?>
+            </div>
+        </section>
+    <?php } 
+?>
+
+
+<?php
 function drawSmallProduct(Product $product, User $seller, ?User $user) { 
     $buyer = $product->getBuyer();
     ?>
@@ -236,7 +258,6 @@ function drawSmallProduct(Product $product, User $seller, ?User $user) {
     <?php } else { 
         if ($productImage != null) { ?>
             <a href="../pages/myProduct.php?product=<?=$product->id?>"><img class="offer_img" src="../images/products/<?=$productImage?>"></a>
-            <h2 echo <?=size($productPhotos)?>></h2>
         <?php } else { ?>
             <a href="../pages/myProduct.php?product=<?=$product->id?>"><img class="offer_img" src="../images/products/no_images_small.png"></a>
         <?php } ?>
