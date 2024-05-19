@@ -1,7 +1,6 @@
 <?php
 require_once(__DIR__ . '/chat.class.php');
 require_once(__DIR__ . '/../database/connection.db.php');
-require_once(__DIR__ . '/../vendor/autoload.php');
 
 
 
