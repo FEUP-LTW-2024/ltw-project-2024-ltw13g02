@@ -64,6 +64,7 @@ require_once(__DIR__ . '/../database/get_from_db.php');
             <label id="characteristicType" class="required">
                 <select name="type" required>
                     <option> Type of the characteristic...</option>
+                    <?php echo $types; ?>
                 </select>
             </label>
             <label id="newChar" class="required">
