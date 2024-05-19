@@ -123,6 +123,7 @@ function drawRecommended($recommended_ids) { ?>
             } ?>
         </div>
     </section>
+        </main>
 <?php }
 ?>
 
